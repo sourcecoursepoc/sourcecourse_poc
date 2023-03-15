@@ -8,8 +8,8 @@ import styles from "./index.module.css";
 const Home = () => {
   const { Content } = Layout;
   return (
-    <Space direction="vertical" className={styles.spaceStyle} size={[0, 48]}>
-      <Layout>
+    <Space direction="vertical" className={styles.space} size={[0, 48]}>
+      <Layout className={styles.layout}>
         <Header />
         <Content>
           <Row>
