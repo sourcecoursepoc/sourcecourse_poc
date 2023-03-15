@@ -3,15 +3,12 @@ import { Layout, Space, Col, Row } from "antd";
 import Header from "../components/header/header";
 import HomeLeftArea from "../components/homeLeftArea/homeLeftArea";
 import HomeRightArea from "../components/homeRightArea/homeRightArea";
+import styles from "./index.module.css";
 
 const Home = () => {
   const { Content } = Layout;
   return (
-    <Space
-      direction="vertical"
-      style={{ width: "100%", backgroundColor: "#fff" }}
-      size={[0, 48]}
-    >
+    <Space direction="vertical" className={styles.spaceStyle} size={[0, 48]}>
       <Layout>
         <Header />
         <Content>
