@@ -8,3 +8,20 @@
     height: 100%;
     background-color: white;
 }
+.menu{
+    background: lavender;
+    text-align: center;
+    padding: 0rem;
+    margin: 0rem 0rem 1rem 0rem;
+    height: 4rem;
+}
+.rows{
+    border-right:1px solid #b4b1b1;
+}
+.treeview{
+    text-align:center;
+    min-height: 500px;
+    color: #000;
+    border-right:1px solid #b4b1b1;
+    background-color:#fff;
+}
