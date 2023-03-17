@@ -2,8 +2,9 @@ import { Menu, Row, Col } from 'antd';
 import { Item } from 'rc-menu';
 import styles from "./schemas.module.css";
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
+
 // const { SubMenu } = Menu;
-export default function Schemamenu() {
+const SchemaMenu: React.FC = () => {
     return (
         <Menu className={styles.menu}>
             <Row>
@@ -17,7 +18,7 @@ export default function Schemamenu() {
                     <Item key="icon">icon</Item>
                 </Col>
                 <Col className={styles.closebutton}>
-                    <Item key="close">
+                    <Item key="close" >
                         <CloseOutlined />
                     </Item>
                 </Col>
@@ -26,3 +27,4 @@ export default function Schemamenu() {
 
     );
 }
+export default SchemaMenu;

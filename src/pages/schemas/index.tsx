@@ -3,6 +3,7 @@ import Header from "../../components/header/header";
 import styles from "./schemas.module.css";
 import TreeView from "./treeview";
 import SchemaMenu from "./schemamenu";
+import SchemaContent from "./content";
 const Schemas = () => {
   const { Content } = Layout;
   return (
@@ -15,7 +16,9 @@ const Schemas = () => {
             <Col span={6} className={styles.treeview}>
               <TreeView />
             </Col>
-            <Col span={16}>Right</Col>
+            <Col span={16}>
+             <SchemaContent/>
+            </Col>
           </Row>
         </Content>
       </Layout>
