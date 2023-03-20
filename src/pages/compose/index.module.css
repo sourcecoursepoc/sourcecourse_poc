@@ -1,0 +1,19 @@
+.textAreaRow{
+    margin-left: 5rem;
+    margin-bottom: 1rem;
+    
+}
+.contentStyle{
+    text-align:center;
+    min-height: 500px;
+    color: #000;
+    border-right:1px solid #b4b1b1;
+    background-color:#fff;
+    
+ }
+ .content{
+    margin-left: 5rem;
+    display: block;
+  width:100px;
+  height:100px;
+ }
