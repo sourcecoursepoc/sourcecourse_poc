@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import styles from "./header.module.css";
 
-const HeaderTop = () => {
+const HeaderTop: React.FunctionComponent = () => {
   const { Header } = Layout;
   return <Header className={styles.headerStyle} />;
 };
