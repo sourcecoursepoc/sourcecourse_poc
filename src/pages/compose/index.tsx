@@ -49,8 +49,8 @@ const Compose = () => {
               
             </Col>           
             <Col span={18}>  
+            
             <MainContent/>
- 
             </Col>
           </Row>
         </Content>

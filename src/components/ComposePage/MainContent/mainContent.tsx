@@ -1,12 +1,12 @@
 import { PlusCircleFilled } from '@ant-design/icons';
 import { Button, Layout, Row } from 'antd';
-import { Content } from 'antd/es/layout/layout';
 import React, { useState } from 'react'
 import ButtonComponent from '../buttons/buttons';
 import ModalBox from '../ModalBox/modalBox';
 import styles from "./mainContent.module.css";
 import MainIcons from './mainContentIcons';
 const MainContent = () => {
+  const { Content } = Layout;
   const [visible, setVisible] = useState(false);
 
   const showModal = () => {
@@ -27,6 +27,7 @@ const MainContent = () => {
         visible={visible}
         onCancel={handleCancel}
       />
+       
                    
     </Content>
 </Layout>

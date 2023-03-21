@@ -1,20 +1,16 @@
 
 
   .mybutton {
-   display: flex;
+  
    flex-direction: row;
-   justify-content: space-between;
    align-items: center;
    width: 30%;
    background-color: #7E60BC;
-   left: 0.7rem ;
    margin-left: 1rem;
     margin-bottom: 1rem;
     width: 7rem;
     font-size: 0.6rem;
     font-weight: 400;
-    padding-inline-end: 46px;
-    padding-inline-start: 34px;
     font-family:Arial, Helvetica, sans-serif;
     
    

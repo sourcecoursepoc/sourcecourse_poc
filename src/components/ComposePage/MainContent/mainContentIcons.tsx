@@ -1,7 +1,6 @@
 import Icon from '@ant-design/icons/lib/components/AntdIcon';
 import { Button, Col, Layout, Row } from 'antd';
 import { SizeType } from 'antd/es/config-provider/SizeContext';
-import { Content } from 'antd/es/layout/layout';
 import  { ReactNode} from 'react'
 import styles from "./mainContent.module.css";
 
@@ -11,6 +10,7 @@ interface MyComponentProps {
   
   }
 const MainIcons: React.FC<MyComponentProps>= ({icon})=> {
+  const { Content } = Layout;
   return (
     
    <Content >            
