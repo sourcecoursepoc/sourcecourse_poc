@@ -21,3 +21,17 @@ export const fetchDataReducer=(state=initialData,action: { type: string })=>{
             };
     }
 }
+
+export const fetchPipelineReducer=(state=initialData,action: { type: string })=>{
+    switch(action.type){
+        case fetchDataActionType.FETCH_PIPELINE:
+            return{
+                ...state,
+                dataList:{
+                    ...state.dataList,
+                    isFetching:true,
+                },
+                tableDataType:'',
+            };
+    }
+}
