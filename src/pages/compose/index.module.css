@@ -1,8 +1,30 @@
-.textAreaRow{
-    margin-left: 5rem;
-    margin-bottom: 1rem;
-    
+.space {
+    width: 100%;
+    height: 100%;
+    background-color: white;
 }
+
+.layout {
+    height: 100%;
+    background-color: white;
+}
+
+.buttonAreaBorder{
+    color: rgb(133, 130, 130);
+    border-bottom:1px solid #ccc;
+    background-color:#fff;
+    margin-bottom: 1rem;
+   max-width: 16.5rem;
+}
+.textAreaBorder{
+  
+    color: rgb(133, 130, 130);
+    border-bottom:1px solid #ccc;
+    background-color:#fff;
+   margin-bottom: 1rem;
+ 
+}
+
 .contentStyle{
     text-align:center;
     min-height: 500px;
@@ -17,3 +39,14 @@
   width:100px;
   height:100px;
  }
+ .sideButtons{
+    
+    min-height: 350px;
+    color: rgb(133, 130, 130);
+    border-right:1px solid #ccc;
+    background-color:#fff;
+   
+}
+.icon{
+   font-size: small;
+}
