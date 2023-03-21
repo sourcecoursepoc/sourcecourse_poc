@@ -8,9 +8,9 @@ const dataTemplate={
 const initialData={
     dataList:dataTemplate
 };
-export const fetchDataReducer=(state=initialData,action: { type: string })=>{
+export const fetchProjectReducer=(state=initialData,action: { type: string })=>{
     switch(action.type){
-        case fetchDataActionType.FETCH_DATA:
+        case fetchDataActionType.FETCH_PROJECT:
             return{
                 ...state,
                 dataList:{

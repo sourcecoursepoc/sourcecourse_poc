@@ -1,7 +1,7 @@
 export const fetchDataActionType = {
-    FETCH_DATA: 'FETCH_DATA',
-    FETCH_DATA_SUCCESS: 'FETCH_DATA_SUCCESS',
-    FETCH_DATA_FAILURE: 'FETCH_DATA_FAILURE',
+    FETCH_PROJECT: 'FETCH_PROJECT',
+    FETCH_PROJECT_SUCCESS: 'FETCH_PROJECT_SUCCESS',
+    FETCH_PROJECT_FAILURE: 'FETCH_PROJECT_FAILURE',
     FETCH_PIPELINE:'FETCH_PIPELINE',
     FETCH_PIPELINE_SUCCESS: 'FETCH_PIPELINE_SUCCESS',
     FETCH_PIPELINE_FAILURE: 'FETCH_PIPELINE_FAILURE',
@@ -9,39 +9,39 @@ export const fetchDataActionType = {
   };
   //action function to fetch project data
 
-  export interface IFetchDataAction {
-    type: typeof fetchDataActionType.FETCH_DATA;
+  export interface IFetchProjectAction {
+    type: typeof fetchDataActionType.FETCH_PROJECT;
     params:any;
   }
   
-  export interface IFetchDataSuccessAction {
-    type: typeof fetchDataActionType.FETCH_DATA_SUCCESS;
+  export interface IFetchProjectSuccessAction {
+    type: typeof fetchDataActionType.FETCH_PROJECT_SUCCESS;
     payload: any; 
   }
   
-  export interface IFetchDataFailureAction {
-    type: typeof fetchDataActionType.FETCH_DATA_FAILURE;
+  export interface IFetchProjectFailureAction {
+    type: typeof fetchDataActionType.FETCH_PROJECT_FAILURE;
     error:string;
   }
   
 
-  export const fetchDataType = (params: any): IFetchDataAction => {
+  export const fetchProjectType = (params: any): IFetchProjectAction => {
     return {
-      type: fetchDataActionType.FETCH_DATA,
+      type: fetchDataActionType.FETCH_PROJECT,
       params,
     };
   };
   
-  export const fetchDataTypeSuccess = (data: any): IFetchDataSuccessAction => {
+  export const fetchProjectTypeSuccess = (data: any): IFetchProjectSuccessAction => {
     return {
-      type: fetchDataActionType.FETCH_DATA_SUCCESS,
+      type: fetchDataActionType.FETCH_PROJECT_SUCCESS,
       payload: data,
     };
   };
   
-  export const fetchDataTypeFailure = (error: string): IFetchDataFailureAction => {
+  export const fetchProjectTypeFailure = (error: string): IFetchProjectFailureAction => {
     return {
-      type: fetchDataActionType.FETCH_DATA_FAILURE,
+      type: fetchDataActionType.FETCH_PROJECT_FAILURE,
       error,
     };
   };

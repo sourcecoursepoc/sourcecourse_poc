@@ -1,12 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
-import { fetchDataList,fetchPipelineList } from '@/services/dataService';
+import { fetchProjectList,fetchPipelineList } from '@/services/dataService';
 import {
-  IFetchDataAction,
-  IFetchDataSuccessAction,
-  IFetchDataFailureAction,
+  IFetchProjectAction,
+  IFetchProjectSuccessAction,
+  IFetchProjectFailureAction,
   fetchDataActionType,
-  fetchDataTypeFailure,
-  fetchDataTypeSuccess,
+  fetchProjectTypeFailure,
+  fetchProjectTypeSuccess,
   IFetchPipelineAction,
   IFetchPipelineSuccessAction,
   IFetchPipelineFailureAction,
@@ -14,13 +14,13 @@ import {
   fetchPipelineTypeSuccess,
 } from '../actions/fetchDataAction';
 
-export function* _fetchData(action: IFetchDataAction): Generator<any, void, unknown> {
-    const datum: any = yield call(fetchDataList, action.params); 
-    yield put(fetchDataTypeSuccess(datum));
+export function* _fetchProject(action: IFetchProjectAction): Generator<any, void, unknown> {
+    const datum: any = yield call(fetchProjectList, action.params); 
+    yield put(fetchProjectTypeSuccess(datum));
   }
   
-  export function* fetchData() {
-    yield takeLatest(fetchDataActionType.FETCH_DATA, _fetchData);
+  export function* fetchProject() {
+    yield takeLatest(fetchDataActionType.FETCH_PROJECT, _fetchProject);
   }
 
   export function* _fetchPipeline(action: IFetchPipelineAction): Generator<any, void, unknown> {
