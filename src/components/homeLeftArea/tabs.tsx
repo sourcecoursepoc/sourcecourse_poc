@@ -11,7 +11,7 @@ const TabsInTopBox: React.FC = () => (
     items={new Array(1).fill(null).map((_, i) => {
       const id = String(i + 1);
       return {
-        tabBarActiveTextColor:"#B2A4D4",
+        tabBarActiveTextColor:"#1890ff",
         label: `All Projects `,
         key: id,
      

@@ -27,14 +27,20 @@
 .subHeading{
     margin-top: -132px;
     margin-left: 17px;
-    color: gray;
+    color: #808080;
+    font-weight: 600;
     margin-right: 34px;
     height: 30px;
     width: 95%;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid #d9d9d9;
     text-align: left;
 }
 div.ant-card-body{
     margin-left: 83px;
     margin-right: -99px;
 }
+.dividerStyle{
+    color: #B2A4D4;
+}
+
+

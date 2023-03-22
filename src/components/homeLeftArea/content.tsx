@@ -1,9 +1,10 @@
 import React from "react";
-import { Layout, Row, Statistic, Col, Divider, Space, Card } from "antd";
+import { Layout, Row, Statistic, Col, Divider, Space, Card, Button } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
-import styles from "./project.module.css";
+import styles from "./content.module.css";
 
 import DashBoard from "./dashBoard";
+import InnerBox from "./innerBox";
 
 const { Content } = Layout;
 const ProjectContent: React.FC = () => {
@@ -19,14 +20,25 @@ const ProjectContent: React.FC = () => {
           </div>
         <div>
         <Space direction="horizontal">
-          <Card>
+            <InnerBox></InnerBox>
+            <InnerBox></InnerBox>
+            <InnerBox></InnerBox>
+            <InnerBox></InnerBox>
+            <InnerBox></InnerBox>
+            
+          {/* <Card>
             <Space direction="horizontal"></Space>
             <ShoppingCartOutlined></ShoppingCartOutlined>
             <Statistic title="gfdgsd" value={234}></Statistic>
-          </Card>
+          </Card> */}
         </Space>
         </div>
-        <div></div>
+        <div>
+            <Divider className={styles.dividerStyle}> </Divider>
+            <Button type="link"style={{ color:"#9179ca",
+        marginLeft:"94%",fontWeight:"600"}}>More</Button>
+            
+        </div>
       </Content>
       
     </Layout>

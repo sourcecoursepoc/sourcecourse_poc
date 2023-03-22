@@ -5,16 +5,17 @@ import { Divider, Row, Tabs } from "antd";
 import SearchBar from "./searchBox";
 import TabsInTopBox from "./tabs";
 import ProjectContent from "./content";
+import MyTabs from "./demoTab";
 
 const HomeLeftArea: React.FunctionComponent  = () => {
   return (
     <div className={styles.contentStyle}>
-      <div>
+      <div >
        
         <TopBox></TopBox>
         <Divider plain></Divider>
         <Row>  <SearchBar ></SearchBar>
-       <TabsInTopBox></TabsInTopBox></Row>
+       <MyTabs ></MyTabs></Row>
       <Row>
         <ProjectContent></ProjectContent>
       </Row>

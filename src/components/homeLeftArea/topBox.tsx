@@ -1,12 +1,13 @@
 import React from "react";
-import { Card, Col, Row, Divider } from "antd";
+import { Card, Col, Row,} from "antd";
 
-const TopBox = () => {
+
+const TopBox: React.FC = () =>  {
   const gridStyle = {
     width: "50%",
     textAlign: "center",
   };
-
+ 
   return (
     <Card
       style={{
@@ -14,36 +15,34 @@ const TopBox = () => {
         marginLeft: "60px",
         marginRight: "30px",
         marginTop: "30px",
-        borderBottom:"30px",
+        borderBottom: "30px",
         minWidth: 900,
         minHeight: 120,
-      
-        /* margin-left: 314px;
-        margin-right: -272px; */
         alignItems: "center",
         backgroundColor: "#B2A4D4",
       }}
     >
-      <Row gutter={50}>
-      <Col span={6}>
-          <Card
+      <Row gutter={16}>
+        <Col span={12}>
+       
+          
+        <Card
             style={{
-              width: 221,
-            
+              width: 275,
+              marginLeft: 330,
               height: 146,
             }}
             bordered={true}
-           
             type="inner"
-          >
-           
-          </Card>
-          </Col>
+          
+          >  </Card>
+        </Col>
 
-        <Col span={6}>
+        <Col span={12}>
           <Card
             style={{
               width: 150,
+              marginLeft: 116,
               alignItems: "center",
             }}
             bordered={true}
@@ -60,32 +59,6 @@ const TopBox = () => {
         </Col>
       </Row>
     </Card>
-
-    /* <Card
-    style={{
-        marginBottom:"10px",
-        marginLeft:"10px",
-        marginRight:"10%",
-     
-      minWidth:900,
-     minHeight: 120,
-      height:'50%',
-      alignItems:"center",
-      backgroundColor:"#B2A4D4"
-      
-    }}
-  >
-     
-      <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid hoverable={false} style={gridStyle}>
-      Content
-    </Card.Grid>
-    
-      <Card title="Card title" >
-        Card content
-      </Card>
-    
-  </Card> */
   );
 };
 export default TopBox;
