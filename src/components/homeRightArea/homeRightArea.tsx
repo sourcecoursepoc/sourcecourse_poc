@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./homeRightArea.module.css";
 
-const HomeRightArea = () => {
+const HomeRightArea: React.FunctionComponent = () => {
   return <div className={styles.siderStyle}>Right Area</div>;
 };
 
