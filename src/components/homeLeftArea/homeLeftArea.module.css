@@ -5,3 +5,10 @@
     border-right:1px solid #b4b1b1;
     background-color:#fff;
 }
+.topBoxStyle{
+    text-align: center;
+    min-height: 120;
+ line-height: '120px';
+  color: #fff;
+  background-color: #4f0669;
+}
