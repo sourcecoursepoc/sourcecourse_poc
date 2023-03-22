@@ -1,62 +1,108 @@
-import React from 'react';
 import { Tree } from 'antd';
+import { FolderOutlined, FileOutlined, DatabaseOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+
+interface TreeNode {
+  name: string;
+  key: string;
+  icon?: JSX.Element;
+  children?: TreeNode[];
+}
 
 const { TreeNode } = Tree;
 
-const data = [
-    {
-        title: 'Parent 1',
-        key: '0-0',
+const treeData: TreeNode[] = [
+  {
+    name: 'projects',
+    key: '0-0',
+    icon:<DatabaseOutlined />,
+    children: [
+      {
+        name: 'Tables',
+        key: '0-0-0',
+        icon: <FolderOutlined />,
         children: [
-            {
-                title: 'Child 1',
-                key: '0-0-1',
-
-            },
-            {
-                title: 'Child 2',
-                key: '0-0-2',
-            },
-            {
-                title: 'Child 3',
-                key: '0-0-3',
-            },
+          {
+            name: 'id',
+            key: '0-0-0-0',
+            icon: <FolderOutlined />,
+            children: [
+              {
+                name: 'name',
+                key: '0-0-0-0-0',
+                icon: <FileOutlined />,
+              },
+              {
+                name: 'status',
+                key: '0-0-0-0-1',
+                icon: <FileOutlined />,
+              },
+            ],
+          },
+          {
+            name: 'company',
+            key: '0-0-0-1',
+            icon: <FileOutlined />,
+          },
         ],
-    },
-    {
-        title: 'Parent 2',
-        key: '0-1',
+      },
+      {
+        name: 'item',
+        key: '0-0-1',
+        icon: <FileOutlined />,
         children: [
-            {
-                title: 'Child 4',
-                key: '0-1-1',
-            },
-            {
-                title: 'Child 5',
-                key: '0-1-2',
-            },
+          {
+            name: 'id',
+            key: '0-0-1-0',
+            icon: <FileOutlined />,
+          },
         ],
-    },
-    {
-        title: 'Parent 3',
-        key: '0-2',
-    },
+      },
+    ],
+  },
 ];
 
 const TreeView = () => {
-    return (
-        <Tree>
-            {data.map((item) => (
-                <TreeNode title={item.title} key={item.key}>
-                    {item.children && item.children.length > 0 &&
-                        item.children.map((child) => (
-                            <TreeNode title={child.title} key={child.key} />
-                        ))
-                    }
-                </TreeNode>
-            ))}
-        </Tree>
-    );
+  const [selectedData, setSelectedData] = useState<TreeNode | null>(null);
+
+  const onSelect = (selectedKeys: React.Key[], info: any) => {
+    const node = info.node.props;
+    setSelectedData({
+        name: node.name,
+      key: node.eventKey,
+      icon: node.icon,
+      children: node.children,
+    });
+    console.log(selectedData.name,"hhhhhh")
+  };
+
+  const renderTreeNodes = (nodes: TreeNode[]) => {
+    return nodes.map((node) => {
+      if (node.children && node.children.length > 0) {
+        return (
+          <TreeNode {...node} icon={node.icon} key={node.key} title={node.name}>
+            {renderTreeNodes(node.children)}
+          </TreeNode>
+        );
+      }
+      return <TreeNode {...node} icon={node.icon} key={node.key} title={node.name} />;
+    });
+  };
+
+  return (
+    <Tree showIcon  onSelect={onSelect}>
+      {renderTreeNodes(treeData)}
+    </Tree>
+  );
+};
+
+interface SelectedDataViewProps {
+  selectedData: TreeNode | null;
+}
+
+export const SelectedDataView = ({ selectedData }: SelectedDataViewProps) => {
+  console.log('Selected Data:', selectedData);
+  return null; 
 };
 
 export default TreeView;

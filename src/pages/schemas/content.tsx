@@ -1,8 +1,9 @@
 import React from 'react'
 import { Layout, Row, Col } from 'antd';
-import DisplayBox from './displaybox';
 import styles from "./content.module.css";
 import DescriptionBox from './descriptionbox';
+import DisplayBox from './displaybox';
+import { SelectedDataView } from './treeview';
 const { Content } = Layout;
 export default function SchemaContent() {
     return (
@@ -17,6 +18,7 @@ export default function SchemaContent() {
                 <Row className={styles.descriptionbox}>
                     <DescriptionBox />
                 </Row>
+                <SelectedDataView/>
             </Content>
         </Layout>
     )
