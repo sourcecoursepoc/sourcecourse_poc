@@ -14,7 +14,7 @@ const Schemas = () => {
         <Content>
           <Row>
             <Col span={6} className={styles.treeview}>
-              <TreeView />
+              <TreeView  />
             </Col>
             <Col span={16}>
              <SchemaContent/>
