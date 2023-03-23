@@ -1,13 +1,13 @@
 import React from "react";
-import { Card, Col, Row,} from "antd";
-
-
-const TopBox: React.FC = () =>  {
+import { Button, Card, Col, Row ,Divider} from "antd";
+import styles from "./topBox.module.css";
+import TopInnerBox from "./topBoxInnerBox";
+const TopBox: React.FC = () => {
   const gridStyle = {
     width: "50%",
     textAlign: "center",
   };
- 
+
   return (
     <Card
       style={{
@@ -24,18 +24,7 @@ const TopBox: React.FC = () =>  {
     >
       <Row gutter={16}>
         <Col span={12}>
-       
-          
-        <Card
-            style={{
-              width: 275,
-              marginLeft: 330,
-              height: 146,
-            }}
-            bordered={true}
-            type="inner"
-          
-          >  </Card>
+        <TopInnerBox></TopInnerBox>
         </Col>
 
         <Col span={12}>
@@ -43,19 +32,29 @@ const TopBox: React.FC = () =>  {
             style={{
               width: 150,
               marginLeft: 116,
+              height: 156,
               alignItems: "center",
             }}
+            
             bordered={true}
             cover={
               <img
                 alt="example"
                 src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                className={styles.img}
               />
             }
+          
             type="inner"
+            
           >
+             <Button type="link" href="/schemas" style={{ color: "black",    height: 47}}>
             Compose
+            
+          </Button>
+         
           </Card>
+         
         </Col>
       </Row>
     </Card>

@@ -7,7 +7,7 @@ import InnerBox from './innerBox';
 const DashBoard: React.FC = ({}) => (
 <div>
 <Space direction="horizontal">
-    <InnerBox></InnerBox>
+    {/* <InnerBox></InnerBox> */}
 {/*   <Card  >
    <Space direction="horizontal"></Space>
    <ShoppingCartOutlined></ShoppingCartOutlined>

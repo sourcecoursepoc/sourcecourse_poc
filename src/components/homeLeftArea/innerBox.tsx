@@ -1,33 +1,40 @@
 import React from "react";
-import { Row, Divider, Statistic } from "antd";
+import { Row,Col, Divider, Statistic } from "antd";
 import styles from './innerBox.module.css'
 import { icons } from "antd/es/image/PreviewGroup";
-import { title } from "process";
-const InnerBox = () => {
+interface MyStatisticProps {
+  prefix: JSX.Element;
+  title: string;
+  value: number;
+}
+export default function ({ prefix, title ,value}: MyStatisticProps) {
   return (
     <>
-      <div className={styles.outerbox}>
-        <div className={styles.innerleft}>
-          <Row
-            style={{
-              
-              height: "100px",
-              alignContent: "center",
-              padding: "11px",
-            }}
-          >
-        <Statistic></Statistic>
-          </Row>
-          <Row style={{ alignContent: "center", padding: "11px" }}>{/* schema */}</Row>
-        </div>
-        <div className={styles.innerright}>
-          <Row style={{ textAlign: "center", padding: "11px" }}>
-            <p>{/* items */}</p>
-          </Row>
-        </div>
+    <div className={styles.outerbox}>
+      <div className={styles.innerright}>
+        <Row className={styles.image}
+        ><Col>
+          <Statistic
+      prefix={prefix}
+      title={title}
+      value={value}
+     
+    />
+          </Col>
+      </Row>
+        <Row className={styles.imageName}>
+        <Col>schema</Col></Row>
       </div>
-    </>
+      <div className={styles.innerleft}>
+        <Row className={styles.items}><Col><p>300</p></Col></Row>
+      </div>
+    </div>
+</>
   );
 };
 
-export default InnerBox;
+
+
+
+
+

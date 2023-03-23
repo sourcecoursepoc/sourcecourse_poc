@@ -1,26 +1,58 @@
+#displaycard {
+  padding: 0.0625rem;
+  width: 15rem;
+  height: 5rem;
+  left: 1.5rem;
+  margin-right: 3rem;
+  width: 25%;
+  height: 0%;
+  left: 1%;
+  margin-left: 3%;
+  border: 0.0625rem solid black;
+}
+
 .outerbox {
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid #fff;
+  background-color:white;
+  border-radius: 0.3125rem;
+  border: 1px solid #fff;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-    width: 168px;
+  position: relative;
+  overflow: hidden;
+  width: 168px;
     height: 89px;
-    margin-top: 13px;
     margin-right: 12px;
     margin-left: 21px;
+  margin-left: 1rem;
+  display: flex;
+  margin-top: 13px;
+  justify-content: inherit;
+  align-items: center;
 }
- .innerleft {
-  height: 100px;
- 
-  width: 100px;
-  border-right: 1px solid #d9d9d9;
+.innerright {
+  height: 89px;
+    width: 22.375rem;
+  border-right: 0.0625rem solid rgb(207, 203, 203);
   display: flex;
   flex-direction: column;
 }
-/* .innerright {
- 
-  margin-left: 60px;
+.innerleft {
+  margin-left: 1rem;
 }
- */
+.image{
+  /* border-bottom: 0.0625rem solid rgb(207, 203, 203) ; */
+  height: 7.5rem;
+  align-content: center;
+  padding: 0.6875rem
+} 
+.imageName{ 
+   align-content: center;
+   padding: 0.6875rem;
+   height: 0.0625rem;
+  }
+  .items{
+  text-align: center;
+  padding: 0.6875rem
+}
+.statistics{
+  margin-right: -157;
+}

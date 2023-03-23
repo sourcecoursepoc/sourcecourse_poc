@@ -13,8 +13,9 @@ const HomeLeftArea: React.FunctionComponent  = () => {
       <div >
        
         <TopBox></TopBox>
-        <Divider plain></Divider>
-        <Row>  <SearchBar ></SearchBar>
+        <Row ><div className={styles.borderBottom}>
+          </div></Row>
+        <Row className={styles.searchbar}>  <SearchBar ></SearchBar>
        <MyTabs ></MyTabs></Row>
       <Row>
         <ProjectContent></ProjectContent>
