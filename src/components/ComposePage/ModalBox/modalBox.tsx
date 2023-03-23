@@ -15,10 +15,11 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
    onCancel={onCancel}
    footer={null}
    closable={false}
-   bodyStyle={{ height: '500px',top:'2rem'}} 
+   width={800}
+   bodyStyle={{ height: '75vh',top:'1rem',borderRadius:'5px'}} 
    
    >
-     <Row gutter={[16, 16]} > 
+     <Row  > 
         <Col span={12} className={styles.modelBoxBorder}>
          <SearchBar />
         </Col>

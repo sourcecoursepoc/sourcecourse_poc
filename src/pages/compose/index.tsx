@@ -4,7 +4,7 @@ import { Divider } from "antd";
 import ButtonComponent from "../../components/ComposePage/buttons/buttons";
 import TextArea from "../../components/ComposePage/TextArea/textArea";
 import styles from "./index.module.css";
-import { ApartmentOutlined, CloseOutlined, ClusterOutlined, ContainerFilled, CopyFilled, DeleteFilled, DeleteOutlined, GoldenFilled, HddFilled, PlusCircleFilled, SaveFilled, SaveOutlined, SettingFilled } from "@ant-design/icons";
+import { ApartmentOutlined, CloseOutlined, ClusterOutlined, ContainerFilled, CopyFilled, DeleteFilled, HddFilled, SaveFilled, SettingFilled } from "@ant-design/icons";
 import MainIcons from "../../components/ComposePage/MainContent/mainContentIcons";
 import MainContent from "../../components/ComposePage/MainContent/mainContent";
 
@@ -28,6 +28,7 @@ const Compose = () => {
           <Col span={1} className={styles.textAreaBorder} style={{borderRight:"1px solid #ccc"}}></Col>
             <Col span={7}  className={styles.buttonAreaBorder} >             
                 <Row >
+
                 <ButtonComponent text={"Delete"} icon={<DeleteFilled className={styles.icon}/>} size={"middle"} />
                 <ButtonComponent text="Clone" icon={<CopyFilled className={styles.icon}/>} size={"middle"}/>                                       
                 </Row>

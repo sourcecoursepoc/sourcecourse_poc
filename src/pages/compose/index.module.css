@@ -15,7 +15,12 @@
     background-color:#fff;
     margin-bottom: 1rem;
    max-width: 16.5rem;
+   flex-direction: row;  
 }
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
 .textAreaBorder{
   
     color: rgb(133, 130, 130);

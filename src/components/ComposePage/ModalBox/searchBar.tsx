@@ -13,8 +13,8 @@ const SearchBar=  () => {
           allowClear
          
          // enterButton={<SearchOutlined />}
-          size="middle"
-        
+          size="large"
+          
         />
       );
     }
