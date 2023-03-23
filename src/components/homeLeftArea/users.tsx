@@ -3,7 +3,7 @@ import { Row,Col, Divider, Statistic } from "antd";
 import styles from './innerBox.module.css'
 import { icons } from "antd/es/image/PreviewGroup";
 import { Image } from 'antd';
-import { ClusterOutlined } from "@ant-design/icons";
+import { CloudSyncOutlined, ClusterOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 export interface ChildComponentProps {
   image: string;
 }
@@ -23,7 +23,7 @@ export default function (/* props: ChildComponentProps  { prefix, title ,value}:
         
               
               
-               <ClusterOutlined style={{ fontSize: "45px" }} />
+       <UsergroupAddOutlined  style={{ fontSize: "45px" }} />
              
            {/*  
            <Statistic
@@ -35,14 +35,14 @@ export default function (/* props: ChildComponentProps  { prefix, title ,value}:
           </Col>
       </Row>
         <Row className={styles.imageName}>
-        <Col style={{marginLeft:"13px"}}>initial Load</Col></Row>
+        <Col style={{marginLeft:"13px"}}>Users</Col></Row>
       </div>
       <div className={styles.innerleft}>
         <Row className={styles.items}><Col style={{
                   fontWeight: 350,
                   fontSize: "2rem",
                   color:"gray"
-                  }}>36</Col></Row>
+                  }}>5</Col></Row>
       </div>
     </div>
 </>
