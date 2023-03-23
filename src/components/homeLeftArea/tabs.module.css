@@ -1,0 +1,19 @@
+
+    #ant-tabs-nav .ant-tabs-tab:hover {
+        background-color: yellow}
+    
+#ant-tabs-tab-btn {
+    color: #f1ff16!important} 
+    .tabStyle{
+        background-color: 'white';
+        color: 'white',
+    }
+    .tabStyle .ant-tabs-tab:hover {
+        color: #f1ff16!important}
+        #de{
+            color: #f1ff16!important
+        }
+        .my-tabpane {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+          }
