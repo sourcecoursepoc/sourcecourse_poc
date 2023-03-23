@@ -1,33 +1,37 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
-import { fetchProjectList,fetchPipelineList } from '@/services/dataService';
+import axios from "axios";
+import { all, call, put, takeLatest } from "redux-saga/effects";
+import { IPIPELINE } from "../actions/types";
 import {
-  IFetchProjectAction,
-  IFetchProjectSuccessAction,
-  IFetchProjectFailureAction,
-  fetchDataActionType,
-  fetchProjectTypeFailure,
-  fetchProjectTypeSuccess,
-  IFetchPipelineAction,
-  IFetchPipelineSuccessAction,
-  IFetchPipelineFailureAction,
-  fetchPipelineTypeFailure,
-  fetchPipelineTypeSuccess,
-} from '../actions/fetchDataAction';
+  fetchPipelineFailure,
+  fetchPipelineSuccess,
+} from "../actions/fetchDataAction";
+import { FETCH_PIPELINE_REQUEST } from "../actions/actionTypes";
 
-export function* _fetchProject(action: IFetchProjectAction): Generator<any, void, unknown> {
-    const datum: any = yield call(fetchProjectList, action.params); 
-    yield put(fetchProjectTypeSuccess(datum));
-  }
-  
-  export function* fetchProject() {
-    yield takeLatest(fetchDataActionType.FETCH_PROJECT, _fetchProject);
-  }
+const getPipelines = () =>
+  axios.get<IPIPELINE[]>("http://localhost:8000/pipeline");
 
-  export function* _fetchPipeline(action: IFetchPipelineAction): Generator<any, void, unknown> {
-    const datum: any = yield call(fetchPipelineList, action.params); 
-    yield put(fetchPipelineTypeSuccess(datum));
+/*
+  Worker Saga: Fired on FETCH_TODO_REQUEST action
+*/
+function* fetchPipelineSaga() {
+  try {
+    const response =yield call(getPipelines);
+    yield put(
+      fetchPipelineSuccess({
+        pipelines: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(
+      fetchPipelineFailure({
+        error: e.message,
+      })
+    );
   }
-  
-  export function* fetchPipeline() {
-    yield takeLatest(fetchDataActionType.FETCH_PIPELINE, _fetchPipeline);
-  }
+}
+
+function* pipelineSaga() {
+  yield all([takeLatest(FETCH_PIPELINE_REQUEST, fetchPipelineSaga)]);
+}
+
+export default pipelineSaga;

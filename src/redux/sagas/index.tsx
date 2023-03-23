@@ -1,6 +1,7 @@
-import { all } from 'redux-saga/effects';
-import  { fetchData } from './fetchDataActionSaga';
+import { all, fork } from "redux-saga/effects";
 
-export default function* rootSaga(){
-    yield all([fetchData]);
+import pipelineSaga from "../sagas/fetchDataActionSaga";
+
+export function* rootSaga() {
+  yield all([fork(pipelineSaga)]);
 }
