@@ -8,24 +8,19 @@ interface MyComponentProps {
     text: string; 
     icon: ReactNode;
     size:SizeType;
+    onClick: () => void;
 //buttonLabels: string[];
   }
-const ButtonComponent: React.FC<MyComponentProps>= ({text,icon,size}) => {
+const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick}) => {
 //  const [size, setSize] = useState<SizeType>('large'); // default is 'middle'
 
   return (
-    <>
-     {/*  {buttonLabels.map(label => (
-        <Button key={label} type="primary" shape="round" icon={icon} size={size} className={styles.mybutton}>
-          {label}
-        </Button>
-      ))} */} 
-    
-           <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} >
+    <>   
+           <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} onClick={onClick}>
             {text}
           </Button> 
          
     </>
   );
 };
-export default ButtonComponent
+export default Buttons

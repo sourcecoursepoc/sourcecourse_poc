@@ -1,12 +1,13 @@
 import { Layout, Space, Col, Row } from "antd";
 import Header from "../../components/header/header";
 import { Divider } from "antd";
-import ButtonComponent from "../../components/ComposePage/buttons/buttons";
 import TextArea from "../../components/ComposePage/TextArea/textArea";
 import styles from "./index.module.css";
-import { ApartmentOutlined, CloseOutlined, ClusterOutlined, ContainerFilled, CopyFilled, DeleteFilled, HddFilled, SaveFilled, SettingFilled } from "@ant-design/icons";
+import { ApartmentOutlined, ClusterOutlined, ContainerFilled, HddFilled, SettingFilled } from "@ant-design/icons";
 import MainIcons from "../../components/ComposePage/MainContent/mainContentIcons";
 import MainContent from "../../components/ComposePage/MainContent/mainContent";
+import ButtonComponent from "@/components/ComposePage/buttons/buttonComponent";
+
 
 
 const Compose = () => {
@@ -26,17 +27,7 @@ const Compose = () => {
               </Row>
             </Col>
           <Col span={1} className={styles.textAreaBorder} style={{borderRight:"1px solid #ccc"}}></Col>
-            <Col span={7}  className={styles.buttonAreaBorder} >             
-                <Row >
-
-                <ButtonComponent text={"Delete"} icon={<DeleteFilled className={styles.icon}/>} size={"middle"} />
-                <ButtonComponent text="Clone" icon={<CopyFilled className={styles.icon}/>} size={"middle"}/>                                       
-                </Row>
-                <Row >
-                <ButtonComponent text="Save" icon={<SaveFilled className={styles.icon} /> } size={"middle"}/>
-                <ButtonComponent text="Exit" icon={<CloseOutlined className={styles.icon}/>} size={"middle"}/>
-                </Row>             
-            </Col>
+           <ButtonComponent/>
           </Row>
        
           <Row  >
