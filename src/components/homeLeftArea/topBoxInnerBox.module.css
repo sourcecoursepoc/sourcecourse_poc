@@ -1,0 +1,85 @@
+#displaycard {
+    padding: 0.0625rem;
+    width: 15rem;
+    height: 5rem;
+    left: 1.5rem;
+    margin-right: 3rem;
+    width: 25%;
+    height: 0%;
+    left: 1%;
+    margin-left: 3%;
+    border: 0.0625rem solid black;
+  }
+  
+  .outerbox {
+    background-color:white;
+    border-radius: 0.3125rem;
+    border: 1px solid #fff;
+      box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    height: 156px;
+    width: 306px;
+    margin-left: 345px;
+    margin-right: 12px;
+      border-right-color: #fff;
+     
+    
+    display: flex;
+   
+    justify-content: inherit;
+    align-items: center;
+  }
+  .innerright {
+    height: 10.375rem;
+    width: 9.375rem;
+    border-right: 0.0625rem solid rgb(207, 203, 203);
+    display: flex;
+    flex-direction: column;
+  }
+  .innerleft {
+    margin-left: 3.75rem;
+  }
+  .image{
+    border-bottom: 0.0625rem solid rgb(207, 203, 203) ;
+    height: 7.5rem;
+    align-content: center;
+    padding: 0.6875rem
+  } 
+  .imageName{ 
+     align-content: center;
+     padding: 0.6875rem;
+     height: 0.0625rem;
+    }
+    .items{
+    text-align: center;
+    padding: 0.6875rem
+}
+.discover{
+    margin-left: 26px;
+    margin-top: 27px;
+}
+ .innerright1 {
+    height: 10.375rem;
+    width: 9.375rem;
+   
+    display: flex;
+    flex-direction: column;
+  }
+  .image1{
+    border-bottom: 0.0625rem solid rgb(207, 203, 203) ;
+    height: 5rem;
+    align-content: center;
+    padding: 0.6875rem
+  } 
+  .imageName1{ 
+     align-content: center;
+     padding: 0.6875rem;
+     height: 0.0625rem;
+    }
+    .schema{
+        font-weight: 350;
+        font-size: 26px;
+        margin-top: 47px;
+        color: #a19d9d;
+    }

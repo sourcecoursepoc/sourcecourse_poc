@@ -1,0 +1,40 @@
+.icon{
+    width:3rem;
+
+}
+.importButton{
+
+ 
+}
+.searchCol{
+    padding-left: 5px;
+    padding-right: 149px;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid black;
+}
+.modelBoxBorder{
+  
+    color: rgb(133, 130, 130);
+    border-bottom:1px solid #ccc;
+    background-color:#fff;
+   margin-bottom: 1rem;
+   padding-bottom: 1rem;
+ 
+}
+.modelBorder{
+  
+    color: rgb(133, 130, 130);
+    border-bottom:1px solid #ccc;
+    background-color:#fff;
+   margin-bottom: 1rem;
+   padding-bottom: 1rem;
+  
+   padding-left: 38%;
+}
+.treeview{
+    text-align:center;
+    min-height: 400px;
+    color: #000;
+    border-right:1px solid #b4b1b1;
+    background-color:#fff;
+}

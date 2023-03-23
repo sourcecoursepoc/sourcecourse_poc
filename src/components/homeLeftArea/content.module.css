@@ -1,0 +1,52 @@
+.layout {
+    height: 100%;
+    background-color: white;
+    border-radius: 6px;
+}
+.content{
+    height: 30%;
+    margin-left: 4rem;
+    width: 92%;
+    margin-top: 34px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+
+}
+.pinkbar{
+    background: linear-gradient(to right, #B2A4D4, #e96ad0bf);
+    padding: 0rem;
+    margin: 0rem 0rem 9rem 0rem;
+    height: 3rem;
+    border-radius: 2px;
+    border-radius: 6px;
+    text-decoration-color: white;
+    border-bottom-left-radius: 0px;
+border-bottom-right-radius: 0px;
+}
+.textStyle{
+    color: white;
+    margin-left: 10px;
+}
+.subHeading{
+    margin-top: -132px;
+    margin-left: 17px;
+    color: #808080;
+    font-weight: 600;
+    margin-right: 34px;
+    height: 30px;
+    width: 95%;
+    border-bottom: 1px solid #d9d9d9;
+    text-align: left;
+}
+div.ant-card-body{
+    margin-left: 83px;
+    margin-right: -99px;
+}
+.dividerStyle{
+    color: #B2A4D4;}
+.bottomDivider{
+    border-top: 1px solid #cbcbc5;
+    margin-top: 15px;
+}
+
+
