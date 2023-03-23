@@ -4,7 +4,7 @@ import Header from "../components/header/header";
 import HomeLeftArea from "../components/homeLeftArea/homeLeftArea";
 import HomeRightArea from "../components/homeRightArea/homeRightArea";
 import styles from "./index.module.css";
-import axios from "axios";
+
 import { useEffect } from "react";
 
 const Home: React.FunctionComponent = () => {
