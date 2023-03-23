@@ -9,13 +9,6 @@ import { useEffect } from "react";
 
 const Home: React.FunctionComponent = () => {
   const { Content } = Layout;
-
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/schemas")
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
-  });
   return (
     <Space direction="vertical" className={styles.space} size={[0, 48]}>
       <Layout className={styles.layout}>
