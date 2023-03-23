@@ -8,6 +8,8 @@ import InnerBox from "./innerBox";
 
 const { Content } = Layout;
 const ProjectContent: React.FC = () => {
+  const image: string = "http://dlib.org/dlib/october97/ibm/schema.gif";
+  const image1:string="http://www.google.comwww.aperfectworld.org/clipart/shapes/triangle11a.png"
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>
@@ -20,23 +22,23 @@ const ProjectContent: React.FC = () => {
           </div>
         <div>
         <Space direction="horizontal">
-            <InnerBox prefix={<UserOutlined />} title="Total Users" value={100}></InnerBox>
-            <InnerBox prefix={<UserOutlined />} title="Total Users" value={100}></InnerBox>
+          <InnerBox></InnerBox>
+          <InnerBox></InnerBox>
+          <InnerBox></InnerBox>
+          <InnerBox></InnerBox>
+          <InnerBox></InnerBox>
+          {/*  <InnerBox image={image}></InnerBox>
+           <InnerBox image={image1} ></InnerBox> */}
+           {/* <InnerBox prefix={<UserOutlined />} title="Total Users" value={100}></InnerBox>
             <InnerBox  prefix={<UserOutlined />} title="Total Users" value={100}></InnerBox>
             <InnerBox  prefix={<UserOutlined />} title="Total Users" value={100}></InnerBox>
-            <InnerBox  prefix={<UserOutlined />} title="Total Users" value={100}></InnerBox>
-           
-            
-          {/* <Card>
-            <Space direction="horizontal"></Space>
-            <ShoppingCartOutlined></ShoppingCartOutlined>
-            <Statistic title="gfdgsd" value={234}></Statistic>
-          </Card> */}
+            <InnerBox  prefix={<UserOutlined />} title="Total Users" value={100}></InnerBox>  */} 
         </Space>
         </div>
-        <div>
-            <Divider className={styles.dividerStyle}> </Divider>
-            <Button type="link" href="/schemas" style={{ color:"#9179ca",
+        
+        <div className={styles.bottomDivider}>
+           {/*  <Divider className={styles.dividerStyle}> </Divider> */}
+            <Button type="link" href="/compose" style={{ color:"#9179ca",
             marginLeft:"94%",fontWeight:"600"}}>More</Button>
             
         </div>

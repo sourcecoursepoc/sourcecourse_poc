@@ -1,7 +1,9 @@
 import React from 'react';
 import { Tabs } from 'antd';
 import styles from "./tabs.module.css";
+
 const TabsInTopBox: React.FC = () => (
+  
   <Tabs
   className={styles.tabStyle}
   

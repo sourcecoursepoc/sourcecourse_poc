@@ -12,9 +12,9 @@ const TopBox: React.FC = () => {
     <Card
       style={{
         marginBottom: "10px",
-        marginLeft: "60px",
+        marginLeft: "61px",
         marginRight: "30px",
-        marginTop: "30px",
+        marginTop: "16px",
         borderBottom: "30px",
         minWidth: 900,
         minHeight: 120,
@@ -23,15 +23,15 @@ const TopBox: React.FC = () => {
       }}
     >
       <Row gutter={16}>
-        <Col span={12}>
+        <Col span={10}>
         <TopInnerBox></TopInnerBox>
         </Col>
-
-        <Col span={12}>
+        <Col span={5}  style={{borderRight:"1px solid #9a9696"}}></Col>
+        <Col span={9}>
           <Card
             style={{
               width: 150,
-              marginLeft: 116,
+              marginLeft: 10,
               height: 156,
               alignItems: "center",
             }}
@@ -48,7 +48,7 @@ const TopBox: React.FC = () => {
             type="inner"
             
           >
-             <Button type="link" href="/schemas" style={{ color: "black",    height: 47}}>
+             <Button type="link" href="/compose" style={{ color: "black",    height: 47}}>
             Compose
             
           </Button>

@@ -9,7 +9,7 @@
     width: 92%;
     margin-top: 34px;
     border: 1px solid #ccc;
-    
+    border-radius: 6px;
 
 }
 .pinkbar{
@@ -17,12 +17,15 @@
     padding: 0rem;
     margin: 0rem 0rem 9rem 0rem;
     height: 3rem;
-    border-radius: 6px;
+    border-radius: 2px;
     border-radius: 6px;
     text-decoration-color: white;
+    border-bottom-left-radius: 0px;
+border-bottom-right-radius: 0px;
 }
 .textStyle{
     color: white;
+    margin-left: 10px;
 }
 .subHeading{
     margin-top: -132px;
@@ -40,7 +43,10 @@ div.ant-card-body{
     margin-right: -99px;
 }
 .dividerStyle{
-    color: #B2A4D4;
+    color: #B2A4D4;}
+.bottomDivider{
+    border-top: 1px solid #cbcbc5;
+    margin-top: 15px;
 }
 
 

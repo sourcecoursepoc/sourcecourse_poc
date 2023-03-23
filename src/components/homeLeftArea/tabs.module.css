@@ -13,3 +13,7 @@
         #de{
             color: #f1ff16!important
         }
+        .my-tabpane {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+          }

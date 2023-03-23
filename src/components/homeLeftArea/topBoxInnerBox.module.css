@@ -20,8 +20,9 @@
     overflow: hidden;
     height: 156px;
     width: 306px;
-    margin-left: 305px;
-      margin-right: 12px;
+    margin-left: 345px;
+    margin-right: 12px;
+      border-right-color: #fff;
      
     
     display: flex;
