@@ -1,6 +1,11 @@
-import { Tree } from 'antd';
-import { FolderOutlined, FileOutlined, DatabaseOutlined } from '@ant-design/icons';
-import { useState } from 'react';
+import { Tree, Button } from 'antd';
+import { FolderOutlined, FileOutlined, DatabaseOutlined, PlusOutlined, DownOutlined } from '@ant-design/icons';
+import { useState, useEffect } from 'react';
+// import { fetchSchemas } from "../../services/dataService"
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getErrorSelector, getPendingSelector, getSchemasSelector } from "../../redux/selector";
+import { fetchSchema_Data } from '../../redux/actions/schemasaction';
 
 interface TreeNode {
   name: string;
@@ -13,49 +18,46 @@ const { TreeNode } = Tree;
 
 const treeData: TreeNode[] = [
   {
-    name: 'projects',
+    name: 'General',
     key: '0-0',
-    icon:<DatabaseOutlined />,
+    icon: <DatabaseOutlined />,
     children: [
       {
-        name: 'Tables',
+        name: 'ITEM',
         key: '0-0-0',
         icon: <FolderOutlined />,
         children: [
           {
             name: 'id',
             key: '0-0-0-0',
-            icon: <FolderOutlined />,
-            children: [
-              {
+            icon: <FileOutlined />,
+            children: []
+          },
+          {
                 name: 'name',
                 key: '0-0-0-0-0',
                 icon: <FileOutlined />,
-              },
-              {
+                children: [],
+          },
+          {
                 name: 'status',
                 key: '0-0-0-0-1',
                 icon: <FileOutlined />,
-              },
-            ],
+                children: [],
           },
           {
             name: 'company',
             key: '0-0-0-1',
             icon: <FileOutlined />,
+            children: [],
           },
         ],
       },
       {
-        name: 'item',
+        name: 'ITEM_DETAILS',
         key: '0-0-1',
-        icon: <FileOutlined />,
+        icon: <FolderOutlined />,
         children: [
-          {
-            name: 'id',
-            key: '0-0-1-0',
-            icon: <FileOutlined />,
-          },
         ],
       },
     ],
@@ -63,24 +65,50 @@ const treeData: TreeNode[] = [
 ];
 
 const TreeView = () => {
-  const [selectedData, setSelectedData] = useState<TreeNode | null>(null);
+  const dispatch = useDispatch();
+  const pending = useSelector(getPendingSelector);
+  const schemas = useSelector(getSchemasSelector);
+  const error = useSelector(getErrorSelector);
 
+  useEffect(() => {
+    dispatch(fetchSchema_Data());
+  }, []);
+  console.log(schemas, "tree")
+  // const fetchData = async () => {
+  //   try {
+  //     const data = await fetchSchemas({});
+  //     console.log('Schemas Data:', data);
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // };
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);;
+  // const schemaData = fetchData();
+  // console.log(schemaData.data,"hhhh")
+
+  const [selectedData, setSelectedData] = useState<TreeNode | null>(null);
   const onSelect = (selectedKeys: React.Key[], info: any) => {
     const node = info.node.props;
     setSelectedData({
-        name: node.name,
+      name: node.name,
       key: node.eventKey,
       icon: node.icon,
       children: node.children,
     });
-    console.log(selectedData.name,"hhhhhh")
+    console.log(selectedData.name, "hhhhhh")
   };
 
   const renderTreeNodes = (nodes: TreeNode[]) => {
-    return nodes.map((node) => {
+    return nodes.map((node, index) => {
       if (node.children && node.children.length > 0) {
         return (
-          <TreeNode {...node} icon={node.icon} key={node.key} title={node.name}>
+          <TreeNode {...node} icon={node.icon} key={node.key} title={
+            <span>{node.name}
+              <span style={{ marginLeft: "20px", display: 'none', }}>{<PlusOutlined />}</span>
+            </span>
+          } switcherIcon={<DownOutlined />}>
             {renderTreeNodes(node.children)}
           </TreeNode>
         );
@@ -90,19 +118,9 @@ const TreeView = () => {
   };
 
   return (
-    <Tree showIcon  onSelect={onSelect}>
+    <Tree showIcon onSelect={onSelect}>
       {renderTreeNodes(treeData)}
     </Tree>
   );
 };
-
-interface SelectedDataViewProps {
-  selectedData: TreeNode | null;
-}
-
-export const SelectedDataView = ({ selectedData }: SelectedDataViewProps) => {
-  console.log('Selected Data:', selectedData);
-  return null; 
-};
-
 export default TreeView;

@@ -12,41 +12,64 @@
 }
 
 .outerbox {
-    background-color:white;
+    background-color: white;
     border-radius: 0.3125rem;
     border: 0.0625rem solid #ccc;
     box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    width: 15.625rem;
+    width: 16.925rem;
     height: 4.375rem;
-    margin-left: 1rem;
+    margin-left: 1.5rem;
     display: flex;
     justify-content: inherit;
     align-items: center;
-  }
-  .innerright {
+}
+
+.innerright {
     height: 4.375rem;
     width: 4.375rem;
     border-right: 0.0625rem solid rgb(207, 203, 203);
     display: flex;
     flex-direction: column;
-  }
-  .innerleft {
+}
+
+.innerleft {
     margin-left: 3.75rem;
-  }
-  .image{
-    border-bottom: 0.0625rem solid rgb(207, 203, 203) ;
+}
+
+.image {
+    margin-left: 15px;
+    margin-right: 5px;
+    border-bottom: 0.0625rem solid rgb(207, 203, 203);
     height: 7.5rem;
     align-content: center;
     padding: 0.6875rem
-  } 
-  .imageName{ 
-     align-content: center;
-     padding: 0.6875rem;
-     height: 0.0625rem;
-    }
-    .items{
+}
+
+.imageName {
+    align-content: center;
+    padding: 0.6875rem;
+    height: 0.0625rem;
+}
+
+.imageNameText {
+    font-size: 10px;
+    margin-left: 8px;
+}
+
+.items {
     text-align: center;
     padding: 0.6875rem
 }
+.description-box-label {
+    position: absolute;
+    top: -16px;
+    left: 16px;
+    padding: 0 8px;
+    background-color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+  }
+  

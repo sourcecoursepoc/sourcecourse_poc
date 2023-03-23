@@ -2,9 +2,9 @@ import React from 'react';
 import { Input } from 'antd';
 const { TextArea } = Input;
 const DescriptionBox: React.FC = () => (
-  <>
-    <TextArea />
-  </>
+    <>
+        <TextArea placeholder="Description" />
+    </>
 );
 
 export default DescriptionBox;
