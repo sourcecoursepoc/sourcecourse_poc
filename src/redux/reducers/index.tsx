@@ -1,6 +1,11 @@
-import { fetchDataReducer } from "./fetchDataActionReducer";
+import { combineReducers } from "redux";
 
-const rootReducer={
-    data:fetchDataReducer
-};
+import schemaReducer from "../reducers/schemaReducer";
+
+const rootReducer = combineReducers({
+    schema: schemaReducer,
+});
+
+export type AppState = ReturnType<typeof rootReducer>;
+
 export default rootReducer;
