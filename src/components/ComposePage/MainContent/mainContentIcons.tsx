@@ -17,7 +17,6 @@ const MainIcons: React.FC<MyComponentProps>= ({icon})=> {
             <Button icon={icon} size={"large"} style={{width:"3rem",height:"3.5rem",marginLeft:"6rem"}} >
             </Button>
            
-          
     </Content>
    
    )

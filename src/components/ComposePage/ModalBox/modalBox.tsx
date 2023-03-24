@@ -38,7 +38,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
           <TreeView onAddIconClick={handleAddIconClick}/>
         </Col>
         <Col span={12} style={{ borderTop: "1px solid #ccc", borderRight: "1px solid #ccc" }}>
-{schema}
+            {schema}
         </Col>
       </Row>
     </Modal>
