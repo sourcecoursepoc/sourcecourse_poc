@@ -10,12 +10,12 @@ const ButtonComponent= () => {
     <Col span={7}  className={styles.buttonAreaBorder} >             
                 <Row >
 
-                <Buttons text={"Delete"} icon={<DeleteFilled className={styles.icon}/>} size={"middle"} onClick={()=>{}} />
-                <Buttons text="Clone" icon={<CopyFilled className={styles.icon}/>} size={"middle"} onClick={()=>{}}/>                                       
+                <Buttons text={"Delete"} icon={<DeleteFilled className={styles.icon}/>} size={"middle"} onClick={()=>{}} href={""}/>
+                <Buttons text="Clone" icon={<CopyFilled className={styles.icon}/>} size={"middle"} onClick={()=>{}} href={""}/>                                       
                 </Row>
                 <Row >
-                <Buttons text="Save" icon={<SaveFilled className={styles.icon} /> } size={"middle"} onClick={()=>{}}/>
-                <Buttons text="Exit" icon={<CloseOutlined className={styles.icon}/>} size={"middle"} onClick={()=>{}}/>
+                <Buttons text="Save" icon={<SaveFilled className={styles.icon} /> } size={"middle"} onClick={()=>{}} href={""}/>
+                <Buttons text="Exit" icon={<CloseOutlined className={styles.icon}/>} size={"middle"} onClick={()=>{}} href={"/"}/>
                 </Row>             
             </Col>
   )

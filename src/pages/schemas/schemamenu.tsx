@@ -1,7 +1,7 @@
 import { Menu, Row, Col, Button } from 'antd';
 import { Item } from 'rc-menu';
 import styles from "./schemas.module.css";
-import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined, AppstoreAddOutlined, ApartmentOutlined, PartitionOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 // const { SubMenu } = Menu;
 const SchemaMenu: React.FC = () => {
@@ -12,10 +12,10 @@ const SchemaMenu: React.FC = () => {
                     <Item key="add" ><PlusOutlined /></Item>
                 </Col>
                 <Col className={styles.rows}>
-                    <Item key="icon">icon</Item>
+                    <Item key="icon"><PartitionOutlined /></Item>
                 </Col>
                 <Col className={styles.rows}>
-                    <Item key="icon">icon</Item>
+                    <Item key="icon"><AppstoreOutlined /></Item>
                 </Col>
                 <Col className={styles.closebutton}>
                     <Item key="close" >
