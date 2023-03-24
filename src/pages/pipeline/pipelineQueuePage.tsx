@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import styles from "./homeRightArea.module.css";
+import React, { useEffect } from "react";
+import styles from "./pipelineQueuePage.module.css";
 import { Layout, Row, Col, Progress, Button } from "antd";
 import {
   ClusterOutlined,
@@ -8,13 +7,12 @@ import {
   CloseCircleOutlined,
   DatabaseOutlined,
 } from "@ant-design/icons";
-import { getPipelineSelector } from "../../redux/selectors";
 import { useSelector, useDispatch } from "react-redux";
+import { getPipelineSelector } from "@/redux/selectors";
 import { fetchPipeline } from "@/redux/actions/fetchDataAction";
-import RootReducer from "@/redux/reducers";
 const { Content } = Layout;
 
-const HomeRightArea: React.FunctionComponent = () => {
+const QueuePage: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const pipelineList = useSelector(getPipelineSelector);
   console.log(pipelineList, "projectDataaaaaaaaaaaaa");
@@ -62,7 +60,6 @@ const HomeRightArea: React.FunctionComponent = () => {
             <Col span={4} style={{ borderLeft: "1px solid #ccc" }}>
               <Progress
                 type="circle"
-                strokeColor={"#ffb6c1"}
                 percent={pipeline.statusperecntage}
                 strokeWidth={8}
                 size={26}
@@ -73,14 +70,14 @@ const HomeRightArea: React.FunctionComponent = () => {
         <Row className={styles.lowerDivider}></Row>
         <Button
           type="link"
-          href="/pipeline"
-          style={{ color: "#7a63a9", marginLeft: "75%", fontWeight: "500" }}
+          href="/"
+          style={{ color: "#7a63a9", marginLeft: "90%", fontWeight: "500" }}
         >
-          View All
+          Home
         </Button>
       </Content>
     </Layout>
   );
 };
 
-export default HomeRightArea;
+export default QueuePage;
