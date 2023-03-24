@@ -1,37 +1,38 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects';
+import axios from "axios";
+import { all, call, put, takeLatest } from "redux-saga/effects";
+import { IPIPELINE } from "../actions/types";
 import { fetchProjectList, fetchPipelineList } from '@/services/dataService';
 import {
-  IFetchProjectAction,
-  IFetchProjectSuccessAction,
-  IFetchProjectFailureAction,
-  fetchDataActionType,
-  fetchProjectTypeFailure,
-  fetchProjectTypeSuccess,
-  IFetchPipelineAction,
-  IFetchPipelineSuccessAction,
-  IFetchPipelineFailureAction,
-  fetchPipelineTypeFailure,
-  fetchPipelineTypeSuccess,
-} from '../actions/fetchDataAction';
+  fetchPipelineFailure,
+  fetchPipelineSuccess,
+} from "../actions/fetchDataAction";
+import { FETCH_PIPELINE_REQUEST } from "../actions/actionTypes";
 
-export function* _fetchProject(action: IFetchProjectAction): Generator<any, void, unknown> {
-  const datum: any = yield call(fetchProjectList, action.params);
-  yield put(fetchProjectTypeSuccess(datum));
+const getPipelines = () =>
+  axios.get<IPIPELINE[]>("http://localhost:8000/pipeline");
+
+/*
+  Worker Saga: Fired on FETCH_TODO_REQUEST action
+*/
+function* fetchPipelineSaga() {
+  try {
+    const response =yield call(getPipelines);
+    yield put(
+      fetchPipelineSuccess({
+        pipelines: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(
+      fetchPipelineFailure({
+        error: e.message,
+      })
+    );
+  }
 }
 
-export function* fetchProject() {
-  yield takeLatest(fetchDataActionType.FETCH_PROJECT, _fetchProject);
+function* pipelineSaga() {
+  yield all([takeLatest(FETCH_PIPELINE_REQUEST, fetchPipelineSaga)]);
 }
 
-export function* _fetchPipeline(action: IFetchPipelineAction): Generator<any, void, unknown> {
-  const datum: any = yield call(fetchPipelineList, action.params);
-  yield put(fetchPipelineTypeSuccess(datum));
-}
-
-export function* fetchPipeline() {
-  yield takeLatest(fetchDataActionType.FETCH_PIPELINE, _fetchPipeline);
-}
-
-export default function* fetchDataActionSaga() {
-  yield all([fetchProject(), fetchPipeline()]);
-}
+export default pipelineSaga;
