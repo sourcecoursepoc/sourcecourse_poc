@@ -6,6 +6,7 @@ import HomeRightArea from "../components/homeRightArea/homeRightArea";
 import styles from "./index.module.css";
 
 import { useEffect } from "react";
+import Schemas from "./schemas";
 
 const Home: React.FunctionComponent = () => {
   const { Content } = Layout;
@@ -14,14 +15,15 @@ const Home: React.FunctionComponent = () => {
       <Layout className={styles.layout}>
         <Header />
         <Content>
-          <Row>
+          {/* <Schemas></Schemas>  */}
+     <Row>
             <Col span={16}>
               <HomeLeftArea />
             </Col>
             <Col span={8}>
               <HomeRightArea />
             </Col>
-          </Row>
+          </Row>  
         </Content>
       </Layout>
     </Space>

@@ -3,7 +3,7 @@ import { Layout, Row, Col } from 'antd';
 import styles from "./content.module.css";
 import DescriptionBox from './descriptionbox';
 import DisplayBox from './displaybox';
-import { SelectedDataView } from './treeview';
+import TagBox from './tagbox';
 const { Content } = Layout;
 export default function SchemaContent() {
     return (
@@ -18,7 +18,9 @@ export default function SchemaContent() {
                 <Row className={styles.descriptionbox}>
                     <DescriptionBox />
                 </Row>
-                <SelectedDataView/>
+                <Row>
+                    <TagBox/>
+                </Row>
             </Content>
         </Layout>
     )
