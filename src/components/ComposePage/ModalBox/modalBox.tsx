@@ -1,5 +1,5 @@
 import { Button, Col, Modal, Row } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 import SearchBar from './searchBar';
 import styles from './modalBox.module.css'
 import TreeView from '@/pages/schemas/treeview';
@@ -9,15 +9,20 @@ interface MyModalProps {
     onCancel: () => void;
   }
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
+
+/*   const [schemaNode, setSchemaNode] = useState<string | null>(null);
+   function handleAddIconClick(node:string) {
+    setSchemaNode(node);
+  }  */
   return (
+    <>
     <Modal
     visible={visible}
    onCancel={onCancel}
    footer={null}
    closable={false}
-   width={800}
-   bodyStyle={{ height: '75vh',top:'1rem',borderRadius:'5px'}} 
-   
+   width={800} 
+   className={styles.modal}
    >
      <Row  > 
         <Col span={12} className={styles.modelBoxBorder}>
@@ -29,13 +34,17 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
       </Row>
       <Row>
             <Col span={12} className={styles.treeview}>
-              <TreeView />
+            <TreeView/*  onAddIconClick={handleAddIconClick} */ />
+            
             </Col>
             <Col span={12} style={{borderTop:"1px solid #ccc",borderRight:"1px solid #ccc"}}>
-             
+         {/*    <p>{schemaNode}</p> */}
+          
             </Col>
           </Row>
-  </Modal>
+  </Modal> 
+
+  </>
   )
 }
 

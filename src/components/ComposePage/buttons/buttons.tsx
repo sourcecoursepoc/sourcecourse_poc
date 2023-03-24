@@ -9,14 +9,15 @@ interface MyComponentProps {
     icon: ReactNode;
     size:SizeType;
     onClick: () => void;
+    href:string;
 //buttonLabels: string[];
   }
-const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick}) => {
+const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick,href}) => {
 //  const [size, setSize] = useState<SizeType>('large'); // default is 'middle'
 
   return (
     <>   
-           <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} onClick={onClick}>
+           <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} onClick={onClick} href={href}>
             {text}
           </Button> 
          
