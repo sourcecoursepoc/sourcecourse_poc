@@ -1,14 +1,14 @@
 .innerBox{
     
-    height: 100px;
+    height: 6.25rem;
  
-  width: 100px;
-  border-right: 1px solid #d9d9d9;
+  width: 6.25rem;
+  border-right: 0.063rem solid #d9d9d9;
   display: flex;
   flex-direction: column;
 }
 .img{
     border-bottom:  0.0625rem solid rgb(207, 203, 203);
- padding-bottom: 17px;
+ padding-bottom: 1.063rem;
  
 }

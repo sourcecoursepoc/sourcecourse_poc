@@ -6,6 +6,7 @@ import SearchBar from "./searchBox";
 import TabsInTopBox from "./tabs";
 import ProjectContent from "./content";
 import MyTabs from "./demoTab";
+import ProjectContent1 from "./contentBox2";
 
 const HomeLeftArea: React.FunctionComponent  = () => {
   return (
@@ -19,6 +20,7 @@ const HomeLeftArea: React.FunctionComponent  = () => {
        <MyTabs ></MyTabs></Row>
       <Row>
         <ProjectContent></ProjectContent>
+        <ProjectContent1></ProjectContent1>
       </Row>
       
       </div>

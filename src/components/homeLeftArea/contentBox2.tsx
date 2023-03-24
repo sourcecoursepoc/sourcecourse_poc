@@ -20,7 +20,7 @@ import Group from "./group";
 import Schema from "./schema";
 
 const { Content } = Layout;
-const ProjectContent: React.FC = () => {
+const ProjectContent1: React.FC = () => {
   const image: string = "http://dlib.org/dlib/october97/ibm/schema.gif";
   const image1: string =
     "http://www.google.comwww.aperfectworld.org/clipart/shapes/triangle11a.png";
@@ -28,17 +28,18 @@ const ProjectContent: React.FC = () => {
     <Layout className={styles.layout}>
       <Content className={styles.content}>
         <Row className={styles.pinkbar}>
-          <p className={styles.textStyle}>SAMS Migration</p>
+          <p className={styles.textStyle}>Pricing Migration</p>
         </Row>
 
         <div className={styles.subHeading}>
-          Sams Migration project to transfer data from walmart to dataLake
+          Pricing Migration project to transfer data to target system
         </div>
         <div>
           <Space direction="horizontal">
             <Schema></Schema>
             <Group></Group>
             <Users></Users>
+
             <InnerBox></InnerBox>
             <Sync></Sync>
           </Space>
@@ -58,4 +59,4 @@ const ProjectContent: React.FC = () => {
     </Layout>
   );
 };
-export default ProjectContent;
+export default ProjectContent1;

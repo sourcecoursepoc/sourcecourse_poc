@@ -11,13 +11,13 @@ const TopBox: React.FC = () => {
   return (
     <Card
       style={{
-        marginBottom: "10px",
-        marginLeft: "61px",
-        marginRight: "30px",
-        marginTop: "16px",
-        borderBottom: "30px",
-        minWidth: 900,
-        minHeight: 120,
+        marginBottom: "0.625rem",
+        marginLeft: "3.813rem",
+        marginRight: "1.875rem",
+        marginTop: "1rem",
+        borderBottom: "1.875rem",
+        minWidth:"45.25rem",
+        minHeight: "7.5rem",
         alignItems: "center",
         backgroundColor: "#B2A4D4",
       }}
@@ -30,9 +30,9 @@ const TopBox: React.FC = () => {
         <Col span={9}>
           <Card
             style={{
-              width: 150,
-              marginLeft: 10,
-              height: 156,
+              width: "9.375rem",
+              marginLeft: "0.625rem",
+              height: "9.75rem",
               alignItems: "center",
             }}
             

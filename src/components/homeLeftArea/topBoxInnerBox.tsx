@@ -7,6 +7,7 @@ import { useDispatch, useSelector, Provider } from "react-redux";
 import { fetchProjectList, fetchPipelineList } from "@/services/dataService";
 
 import store from "@/redux/store";
+import { FullscreenExitOutlined } from "@ant-design/icons";
 const TopInnerBox: React.FC = () => {
   const dispatch = useDispatch();
   const projectData = useSelector((state: any) => state?.dataList);
@@ -16,17 +17,29 @@ const TopInnerBox: React.FC = () => {
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
           <Row className={styles.image}>
-            <Col>{/* image */}</Col>
+         
+            <Col></Col>
           </Row>
           <Row className={styles.imageName}>
             <Col>
-              <p className={styles.discover}>Discover</p>
+              <p className={styles.discover}>
+             <Button type="link" href="/schemas" style={{ color: "black",    height: 47}}>
+            Discover
+            
+          </Button></p>
             </Col>
           </Row>
         </div>
         <div className={styles.innerright1}>
           <Row className={styles.image1}>
-            <Col>{/* image */}</Col>
+            <Col  style={{
+                  fontWeight: 350,
+                  fontSize: "1.625rem",
+                  marginTop: "-0.188rem",
+                  color: "#a19d9d",
+                  
+                  marginLeft: "2rem",
+                }}>354</Col>
           </Row>
           <Row className={styles.imageName1}>
             <Col>
@@ -37,10 +50,10 @@ const TopInnerBox: React.FC = () => {
                 href="/schemas"
                 style={{
                   fontWeight: 350,
-                  fontSize: "26px",
-                  marginTop: "-3px",
+                  fontSize: "1.625rem",
+                  marginTop: "-0.188rem",
                   color: "#a19d9d",
-                  marginLeft: "-10px",
+                  marginLeft: "-0.625rem",
                 }}
               >
                 SCHEMA'S
