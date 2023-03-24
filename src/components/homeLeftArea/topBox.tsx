@@ -14,10 +14,10 @@ const TopBox: React.FC = () => {
         marginBottom: "0.625rem",
         marginLeft: "3.813rem",
         marginRight: "1.875rem",
-        marginTop: "1rem",
+        marginTop: "3rem",
         borderBottom: "1.875rem",
         minWidth:"45.25rem",
-        minHeight: "7.5rem",
+        minHeight: "6rem",
         alignItems: "center",
         backgroundColor: "#B2A4D4",
       }}
@@ -30,9 +30,9 @@ const TopBox: React.FC = () => {
         <Col span={9}>
           <Card
             style={{
-              width: "9.375rem",
+              width: "8rem",
               marginLeft: "0.625rem",
-              height: "9.75rem",
+              height: "9rem",
               alignItems: "center",
             }}
             
@@ -48,7 +48,7 @@ const TopBox: React.FC = () => {
             type="inner"
             
           >
-             <Button type="link" href="/compose" style={{ color: "black",    height: 47}}>
+             <Button type="link" href="/compose" style={{ color: "black",    height: 47,marginBottom:1}}>
             Compose
             
           </Button>

@@ -23,7 +23,7 @@ export default function () {
         <div className={styles.innerright}>
           <Row className={styles.image}>
             <Col>
-              <FullscreenExitOutlined style={{ fontSize: "45px" }} />
+              <FullscreenExitOutlined style={{ fontSize: "35px" }} />
             </Col>
           </Row>
           <Row className={styles.imageName}>

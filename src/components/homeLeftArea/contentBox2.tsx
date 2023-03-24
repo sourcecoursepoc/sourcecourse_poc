@@ -50,7 +50,7 @@ const ProjectContent1: React.FC = () => {
           <Button
             type="link"
             href="/compose"
-            style={{ color: "#9179ca", marginLeft: "94%", fontWeight: "600" }}
+            style={{ color: "#9179ca", marginLeft: "90%", fontWeight: "600" }}
           >
             More
           </Button>
