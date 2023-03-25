@@ -18,7 +18,7 @@ export default function SchemaContent() {
                     <DisplayBox text={"ONLINE"} iconName={"status"} icon={<SyncOutlined />}/>
                 </Row>
                 <Row className={styles.descriptionbox}>
-                    <DescriptionBox />
+                    <DescriptionBox value={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit vulputate tellus a dapibus. Phasellus volutpat turpis quis massa laoreet blandit. Integer pulvinar ligula at massa auctor, vel vehicula diam malesuada. In malesuada laoreet tellus, et vestibulum velit congue quis. In viverra neque at massa accumsan, id ornare urna bibendum. Quisque tempor vitae sem sed varius. Curabitur leo leo, scelerisque vitae lorem porttitor, efficitur scelerisque nulla. Praesent et luctus sapien."} />
                 </Row>
                 <Row>
                     <TagBox/>

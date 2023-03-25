@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from "redux";
+import { configureStore } from '@reduxjs/toolkit'
 import createSagaMiddleware from "redux-saga";
 // import logger from "redux-logger";
 
@@ -9,7 +10,7 @@ import { rootSaga } from "./sagas/index";
 const sagaMiddleware = createSagaMiddleware();
 
 // Mount it on the Store
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const store = configureStore({ reducer: rootReducer, middleware: (getMiddleWare) => [...getMiddleWare({ thunk: false, immutableCheck: false, serializableCheck: false }), sagaMiddleware] });
 
 // Run the saga
 sagaMiddleware.run(rootSaga);

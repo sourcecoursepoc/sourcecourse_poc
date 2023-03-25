@@ -1,19 +1,23 @@
 import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
+import { fetchSchemaSuccess, fetchSchemaFailure } from "../actions/schemasaction";
+import { ISchema, FetchSchemaRequest } from "../actions/schemaTypes";
+import { FETCH_SCHEMA_DATA } from "../actions/schemaActionTypes";
 
-import { fetchSchemaFailure, fetchSchemaSuccess, fetchSchema_Data } from "../actions/schemasaction";
-import { FETCH_SCHEMA_DATA, FETCH_SCHEMA_DATA_FAILURE, FETCH_SCHEMA_DATA_SUCCESS } from "../actions/schemaActionTypes";
-import { SchemaActions } from "../actions/types";
+const getSchema = () =>
+  axios.get<ISchema[]>("http://localhost:8000/schemas");
 
-const getSchemas = () =>
-  axios.get<SchemaActions[]>("http://localhost:8000/schemas");
+// console.log("get schemaaa",getSchema())
 
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */
-function* fetchSchemaSaga() {
+function* fetchSchemaSaga(params:FetchSchemaRequest) {
+  
+  console.log("saga call",params)
   try {
-    const response = yield call( getSchemas);
+    const response = yield call(getSchema);
+    console.log("respose saga", response);
     yield put(
       fetchSchemaSuccess({
         schemas: response.data,
