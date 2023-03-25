@@ -17,6 +17,7 @@
 }
 .rows{
     border-right:1px solid #b4b1b1;
+    width:5%;
 }
 .treeview{
     text-align:center;
@@ -26,7 +27,7 @@
     background-color:#fff;
 }
 .closebutton{
-    left:82%;
+    left:81%;
 }
 .button{
     color: #fff;
