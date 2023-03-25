@@ -1,9 +1,14 @@
 import React from 'react';
 import { Input, Row, Col } from 'antd';
 const { TextArea } = Input;
-const DescriptionBox: React.FC = () => (
+interface DescriptionBoxProps {
+    label: string;
+    value: string;
+  }
+const DescriptionBox: React.FC = ({value}) => (
+    
     <>
-        <TextArea placeholder="Description" />
+        <TextArea placeholder="Description" value={value} disabled/>
         {/* <Row style={{border:"1px solid", borderRadius:"5px",textAlign:"left"}}>
             <Col>
                 <p >

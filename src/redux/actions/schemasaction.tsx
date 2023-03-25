@@ -3,17 +3,11 @@ import {
   FETCH_SCHEMA_DATA_SUCCESS,
   FETCH_SCHEMA_DATA_FAILURE
 } from "./schemaActionTypes";
-import {
-  FetchSchemaFailurePayload,
-  FetchSchemaSuccessPayload,
-  FetchSchemaFailure,
-  FetchSchemaSuccess,
-  SchemaActions,
-  FetchSchema
-} from "./types";
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure } from "./schemaTypes";
 
-export const fetchSchema_Data = (): FetchSchema => ({
+export const fetchSchemaRequest = (params:string): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_DATA,
+  params,
 });
 
 export const fetchSchemaSuccess = (

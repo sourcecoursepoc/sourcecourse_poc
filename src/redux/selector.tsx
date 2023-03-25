@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-import { AppState } from "../redux/reducers/index";
+import { AppState } from "./reducers/index";
 
 const getPending = (state: AppState) => state.schema.pending;
 

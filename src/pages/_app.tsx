@@ -2,10 +2,11 @@ import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
 import React, { useEffect } from 'react';
 import { fetchProjectList, fetchPipelineList } from '@/services/dataService';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
 import { Provider } from "react-redux";
-import store from "../redux/store";
+import { createStore } from 'redux';
+import rootReducer from '../redux/reducers';
+import store from "../redux/store"
+
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -43,6 +44,8 @@ export default function App({ Component, pageProps }: AppProps) {
     };
     fetchPipeline();
   }, []);
+  // const store = createStore(rootReducer);
+
   return (
     <Provider store={store}>
       <Component {...pageProps} />
