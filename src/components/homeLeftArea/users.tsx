@@ -23,7 +23,7 @@ export default function (/* props: ChildComponentProps  { prefix, title ,value}:
         
               
               
-       <UsergroupAddOutlined  style={{ fontSize: "45px" }} />
+       <UsergroupAddOutlined  style={{ fontSize: "35px" }} />
              
            {/*  
            <Statistic

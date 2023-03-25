@@ -11,21 +11,24 @@ interface TreeNode {
   name: string;
   key: string;
   icon?: JSX.Element;
+  count: number;
   children?: TreeNode[];
 }
-
+type Props = { onAddIconClick: (node: string) => void; };
 const { TreeNode } = Tree;
 
 const treeData: TreeNode[] = [
   {
-    name: 'General',
+    name: 'IN_WT_TABLES',
     key: '0-0',
     icon: <DatabaseOutlined />,
+    count: 2,
     children: [
       {
         name: 'ITEM',
         key: '0-0-0',
         icon: <FolderOutlined />,
+        count: 3,
         children: [
           {
             name: 'id',
@@ -34,16 +37,16 @@ const treeData: TreeNode[] = [
             children: []
           },
           {
-                name: 'name',
-                key: '0-0-0-0-0',
-                icon: <FileOutlined />,
-                children: [],
+            name: 'name',
+            key: '0-0-0-0-0',
+            icon: <FileOutlined />,
+            children: [],
           },
           {
-                name: 'status',
-                key: '0-0-0-0-1',
-                icon: <FileOutlined />,
-                children: [],
+            name: 'status',
+            key: '0-0-0-0-1',
+            icon: <FileOutlined />,
+            children: [],
           },
           {
             name: 'company',
@@ -57,14 +60,13 @@ const treeData: TreeNode[] = [
         name: 'ITEM_DETAILS',
         key: '0-0-1',
         icon: <FolderOutlined />,
-        children: [
-        ],
+        children: [],
       },
     ],
   },
 ];
 
-const TreeView = () => {
+const TreeView = (props: Props) => {
   const dispatch = useDispatch();
   const pending = useSelector(getPendingSelector);
   const schemas = useSelector(getSchemasSelector);
@@ -73,20 +75,15 @@ const TreeView = () => {
   useEffect(() => {
     dispatch(fetchSchema_Data());
   }, []);
+
+  /* useEffect(() => {
+    const handleNodeClick = (nodeId: string) => {
+      dispatch(fetchSchema_Data(10002));
+    };
+  }, []) */
+  // console.log(schemas[0].id, "tree")
   console.log(schemas, "tree")
-  // const fetchData = async () => {
-  //   try {
-  //     const data = await fetchSchemas({});
-  //     console.log('Schemas Data:', data);
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // };
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);;
-  // const schemaData = fetchData();
-  // console.log(schemaData.data,"hhhh")
+  console.log(treeData, "treeData");
 
   const [selectedData, setSelectedData] = useState<TreeNode | null>(null);
   const onSelect = (selectedKeys: React.Key[], info: any) => {
@@ -95,18 +92,24 @@ const TreeView = () => {
       name: node.name,
       key: node.eventKey,
       icon: node.icon,
+      count: node.vount,
       children: node.children,
     });
-    console.log(selectedData.name, "hhhhhh")
+    
   };
+  const handleClick = () => {
+    const schemaNode = selectedData?.name;
+    props.onAddIconClick(schemaNode);
+  }
 
   const renderTreeNodes = (nodes: TreeNode[]) => {
     return nodes.map((node, index) => {
+
       if (node.children && node.children.length > 0) {
         return (
           <TreeNode {...node} icon={node.icon} key={node.key} title={
             <span>{node.name}
-              <span style={{ marginLeft: "20px", display: 'none', }}>{<PlusOutlined />}</span>
+              <span style={{ marginLeft: "20px",display:"none" }}>{<PlusOutlined onClick={() => { handleClick() }} />}</span>
             </span>
           } switcherIcon={<DownOutlined />}>
             {renderTreeNodes(node.children)}

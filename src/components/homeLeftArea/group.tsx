@@ -23,7 +23,7 @@ export default function () {
         <div className={styles.innerright}>
           <Row className={styles.image}>
             <Col>
-              <GroupOutlined style={{ fontSize: "45px" }} />
+              <GroupOutlined style={{ fontSize: "35px" }} />
             </Col>
           </Row>
           <Row className={styles.imageName}>

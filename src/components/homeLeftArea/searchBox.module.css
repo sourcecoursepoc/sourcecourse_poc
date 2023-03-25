@@ -1,9 +1,8 @@
-.searchStyle{
-    width: 19.563rem;
-    height: 3.438rem;
-    border-color: #918d8d;
-    align-content: center;
-    
-    margin-right: 55%;
-    margin-left: 3.813rem;
+.searchStyle {
+  width: 19.563rem;
+  height: 2.9rem;
+  border-color: #918d8d;
+  align-content: center;
+  margin-right: 25rem;
+  margin-left: 4rem;
 }

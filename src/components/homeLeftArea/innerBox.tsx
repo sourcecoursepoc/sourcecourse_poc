@@ -23,7 +23,7 @@ export default function (/* props: ChildComponentProps  { prefix, title ,value}:
         
               
               
-               <ClusterOutlined style={{ fontSize: "45px" }} />
+               <ClusterOutlined style={{ fontSize: "35px" }} />
              
            {/*  
            <Statistic
@@ -35,7 +35,7 @@ export default function (/* props: ChildComponentProps  { prefix, title ,value}:
           </Col>
       </Row>
         <Row className={styles.imageName}>
-        <Col style={{marginLeft:"13px"}}>initial Load</Col></Row>
+        <Col style={{marginLeft:"13px"}}> Load</Col></Row>
       </div>
       <div className={styles.innerleft}>
         <Row className={styles.items}><Col style={{

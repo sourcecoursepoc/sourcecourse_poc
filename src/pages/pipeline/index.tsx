@@ -1,6 +1,9 @@
+import React from "react";
+import QueuePage from "./pipelineQueuePage";
+
 const PipelineQueue = () => {
     return(
-        <h1>PipelineQueue Page</h1>
+    <QueuePage/>
     )
 }
 

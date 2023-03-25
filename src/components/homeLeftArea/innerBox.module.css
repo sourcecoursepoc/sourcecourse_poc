@@ -1,11 +1,9 @@
 #displaycard {
   padding: 0.0625rem;
-  width: 15rem;
+  width: 10rem;
   height: 5rem;
   left: 1.5rem;
   margin-right: 3rem;
-  width: 25%;
-  height: 0%;
   left: 1%;
   margin-left: 3%;
   border: 0.0625rem solid black;
@@ -18,8 +16,8 @@
     box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
-  width: 10.5rem;
-    height: 5.563rem;
+  width: 8rem;
+    height: fit-content;
     margin-right: 0.75rem;
     margin-left: 1.313rem;
   margin-left: 1rem;
@@ -29,7 +27,7 @@
   align-items: center;
 }
 .innerright {
-  height: 5.563rem;
+  height: 3rem;
     width: 22.375rem;
   border-right: 0.0625rem solid rgb(207, 203, 203);
   display: flex;
@@ -40,10 +38,10 @@
 }
 .image{
   /* border-bottom: 0.0625rem solid rgb(207, 203, 203) ; */
-  height: 7.5rem;
+  height: 4rem;
   align-content: center;
   padding: 0.6875;
-  margin-top: -1rem;
+  margin-top: 0rem;
 } 
 /* .imageName{ 
 
@@ -61,5 +59,6 @@
   margin-right: -157;
 }
 .icon{
-  width: 4.688rem;
+  width: 2rem;
+  height: -1rem;
 }

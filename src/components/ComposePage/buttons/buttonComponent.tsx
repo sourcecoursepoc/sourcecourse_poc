@@ -19,5 +19,4 @@ const ButtonComponent= () => {
             </Col>
   )
 }
-
 export default ButtonComponent

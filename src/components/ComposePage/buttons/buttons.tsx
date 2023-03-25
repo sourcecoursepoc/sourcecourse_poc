@@ -8,6 +8,7 @@ interface MyComponentProps {
     text: string; 
     icon: ReactNode;
     size:SizeType;
+    href:string;
     onClick: () => void;
     href:string;
 //buttonLabels: string[];
