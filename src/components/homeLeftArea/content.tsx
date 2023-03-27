@@ -9,38 +9,53 @@ import {
   Card,
   Button,
 } from "antd";
-import { UserOutlined } from "@ant-design/icons";
-import styles from "./content.module.css";
-import Link from "next/link";
-import DashBoard from "./dashBoard";
-import InnerBox from "./innerBox";
-import Sync from "./sync";
-import Users from "./users";
-import Group from "./group";
-import Schema from "./schema";
 
+import styles from "./content.module.css";
+
+import InnerBox from "./innerBox";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
+import { getProjectsSelector } from "@/redux/selector";
 const { Content } = Layout;
-const ProjectContent: React.FC = () => {
+
+interface MyComponentProps {
+  heading: string; 
+  projectDescription:string
+  
+//buttonLabels: string[];
+}
+const ProjectContent:  React.FC<MyComponentProps>= ({heading,projectDescription}) => {
   const image: string = "http://dlib.org/dlib/october97/ibm/schema.gif";
   const image1: string =
     "http://www.google.comwww.aperfectworld.org/clipart/shapes/triangle11a.png";
+    const dispatch = useDispatch();
+    const projectListData = useSelector(getProjectsSelector);
+    const listItems = [];
+    const projectArray=projectListData[0]?.projects[0]?.projectDetails;
+  
+    useEffect(() => {
+      dispatch(fetchProjectRequest());
+    }, []);
+    for (const item in projectArray) {
+     /*  console.log(`${item}: ${projectArray[item]}`); */
+     listItems.push(<InnerBox title={item} value={projectArray[item]}></InnerBox>);
+    }
   return (
+ 
     <Layout className={styles.layout}>
+      
       <Content className={styles.content}>
-        <Row className={styles.pinkbar}>
-          <p className={styles.textStyle}>SAMS Migration</p>
+       <Row className={styles.pinkbar}>
+          <p className={styles.textStyle}>{heading}</p>
         </Row>
-
-        <div className={styles.subHeading}>
-          Sams Migration project to transfer data from walmart to dataLake
+      <div className={styles.subHeading}>
+          {projectDescription}
         </div>
         <div>
           <Space direction="horizontal">
-            <Schema></Schema>
-            <Group></Group>
-            <Users></Users>
-            <InnerBox></InnerBox>
-            <Sync></Sync>
+          {listItems}
           </Space>
         </div>
 

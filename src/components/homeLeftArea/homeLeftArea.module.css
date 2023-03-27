@@ -1,6 +1,6 @@
 .contentStyle {
   text-align: center;
-  min-height: 31.25rem;
+  min-height: 16rem;
   color: #000;
   border-right: 0.063rem solid #b4b1b1;
   background-color: #fff;
@@ -19,7 +19,7 @@
     margin-top: 1.125rem;
 }
 .borderBottom {
-  margin-top: -0.188rem;
+  margin-top: 0.7rem;
   margin-left: 4rem;
   color: #808080;
   font-weight: 600;

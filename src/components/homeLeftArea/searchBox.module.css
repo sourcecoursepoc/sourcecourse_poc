@@ -1,8 +1,10 @@
 .searchStyle {
-  width: 19.563rem;
-  height: 2.9rem;
+  width: 16.563rem;
+  height: 2.5rem;
+
   border-color: #918d8d;
   align-content: center;
-  margin-right: 25rem;
-  margin-left: 4rem;
+  margin-right: 22rem;
+  margin-left: 3.6rem;
+  border-radius: 0.2rem;
 }
