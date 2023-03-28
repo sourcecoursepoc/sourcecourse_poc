@@ -5,14 +5,14 @@ import { AppState } from "./reducers/index";
 const getPending = (state: AppState) => state.schema.pending;
 
 const getSchemas = (state: AppState) => state.schema.schemas;
-
+const getProjects = (state: AppState) => state.project.projects;
 const getError = (state: AppState) => state.schema.error;
 
 const getDataBase = (state: AppState) => state.database.database;
 
 export const getDataBaseSelector = createSelector(getDataBase,(database)=>database)
 export const getSchemasSelector = createSelector(getSchemas, (schemas) => schemas);
-
+export const getProjectsSelector = createSelector(getProjects, (projects) => projects);
 export const getPendingSelector = createSelector(
   getPending,
   (pending) => pending

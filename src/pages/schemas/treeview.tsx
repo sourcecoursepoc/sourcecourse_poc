@@ -3,39 +3,44 @@ import { Tree } from 'antd';
 
 const { TreeNode } = Tree;
 
-interface ColumnProps {
-  name: string;
-  type: string;
-  isPrimary: boolean;
-  unique: boolean;
-  nullable: boolean;
-  consumed: string | boolean | number;
-  consumers: string[];
-  dataQuality: {
-    score: string;
-    description: string;
-  };
-}
+// interface ColumnProps {
+//   name: string;
+//   type: string;
+//   isPrimary: boolean;
+//   unique: boolean;
+//   nullable: boolean;
+//   consumed: string | boolean | number;
+//   consumers: string[];
+//   dataQuality: {
+//     score: string;
+//     description: string;
+//   };
+// }
 
-interface TableProps {
-  tableName: string;
-  columns: ColumnProps[];
-  rowCount: number;
-  size: string;
-  mindate: string;
-  maxdate: string;
-  yoycount: string;
-  momcount: string;
-}
+// interface TableProps {
+//   tableName: string;
+//   columns: ColumnProps[];
+//   rowCount: number;
+//   size: string;
+//   mindate: string;
+//   maxdate: string;
+//   yoycount: string;
+//   momcount: string;
+// }
 
-interface DBProps {
-  DBName: string;
-  Tables: TableProps[];
-}
+// interface DBProps {
+//   DBName: string;
+//   Tables: TableProps[];
+// }
 
-interface Props {
-  db: DBProps[];
-}
+// interface Props {
+//   db: DBProps[];
+// }
+
+const onSelect = (selectedKeys: React.Key[], info: any) => {
+  const node = info.node;
+  console.log(node, "node")
+};
 
 const renderColumns = (columns: ColumnProps[]) => {
   return columns.map((column: ColumnProps) => (
@@ -60,7 +65,7 @@ const renderDB = (db: DBProps[]) => {
 };
 
 const TreeView: React.FC<Props> = ({ db }) => {
-  return <Tree>{renderDB(db)}</Tree>;
+  return <Tree onSelect={onSelect}>{renderDB(db)}</Tree>;
 };
 
 export default TreeView;
