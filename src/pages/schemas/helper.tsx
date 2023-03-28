@@ -37,6 +37,7 @@ const findNode = (treeData: any[], key: string | number): any | null => {
 
 type ColumnProps = {
   name: string;
+  uid: string;
   type: string;
   isPrimary: boolean;
   unique: boolean;
@@ -46,6 +47,13 @@ type ColumnProps = {
   dataQuality: {
     score: string;
     description: string;
+  };
+  metadata: {
+    type: string,
+    isPrimary: boolean,
+    unique: boolean,
+    nullable: boolean,
+    defaultValue: string,
   };
 }
 

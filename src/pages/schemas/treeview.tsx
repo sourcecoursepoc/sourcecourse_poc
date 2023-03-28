@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tree } from 'antd';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { fetchDataBaseRequest } from '../../redux/actions/schemasaction';
+import { getDataBaseSelector } from '../../redux/selector';
+import Item from 'antd/es/list/Item';
 
 const { TreeNode } = Tree;
 
@@ -37,34 +42,87 @@ const { TreeNode } = Tree;
 //   db: DBProps[];
 // }
 
-const onSelect = (selectedKeys: React.Key[], info: any) => {
-  const node = info.node;
-  console.log(node, "node")
-};
-
-const renderColumns = (columns: ColumnProps[]) => {
-  return columns.map((column: ColumnProps) => (
-    <TreeNode title={`${column.name} (${column.type})`} key={column.name} />
-  ));
-};
-
-const renderTables = (tables: TableProps[]) => {
-  return tables.map((table: TableProps) => (
-    <TreeNode title={table.tableName} key={table.tableName} >
-      {renderColumns(table.columns)}
-    </TreeNode>
-  ));
-};
-
-const renderDB = (db: DBProps[]) => {
-  return db.map((item: DBProps) => (
-    <TreeNode title={item.DBName} key={item.DBName} >
-      {renderTables(item.Tables)}
-    </TreeNode>
-  ));
-};
+// const onSelect = (selectedKeys: React.Key[], info: any) => {
+//   const node = info.node;
+//   console.log(node.props as any, "node")
+// };
 
 const TreeView: React.FC<Props> = ({ db }) => {
+  const dispatch = useDispatch();
+  const data = useSelector(getDataBaseSelector);
+
+  useEffect(() => {
+    dispatch(fetchDataBaseRequest());
+
+  }, []);
+  // const data = useSelector((state: Props) => state.db);
+  const selectTables = (state: DBProps) => state.Tables;
+  const selectColumns = (state: TableProps) => state.columns;
+  const Tables = useSelector(selectTables);
+  const columns = useSelector(selectColumns);
+
+  const [selectedNode, setSelectedNode] = useState<DBProps | TableProps | ColumnProps | undefined>();
+
+  const onSelect = (keys: any, info: any) => {
+    console.log(info, "info")
+    const selectedKey = keys[0] as string;
+    console.log(selectedKey, "selectedKey")
+
+    const selectedNode = findNodeByKey(data, Tables, columns, selectedKey);
+    console.log(selectedNode, "infoselectedNode")
+
+
+    console.log(selectedNode ?.metadata, "metadata");
+
+    // Update the state with the selected node
+
+    setSelectedNode(findNodeByKey(data, Tables, columns, keys));
+  };
+  const findNodeByKey = (data: DBProps[], Tables: TableProps[], columns: ColumnProps[], key: string): DBProps | TableProps | ColumnProps | undefined => {
+    for (const node of data) {
+      if (node.uid === key) {
+        return node;
+      }
+      for (const table of node.Tables) {
+        if (table.uid === key) {
+          return table;
+        }
+        for (const column of table.columns) {
+          if (column.uid === key) {
+            return column;
+          }
+        }
+      }
+    }
+    return undefined;
+  };
+
+  const renderColumns = (columns: ColumnProps[] | undefined) => {
+    if (!columns) {
+      return null;
+    }
+
+    return columns.map((column: ColumnProps) => (
+      <TreeNode title={column.name} key={column.uid} />
+    ));
+  };
+
+
+  const renderTables = (tables: TableProps[]) => {
+    return tables.map((table: TableProps) => (
+      <TreeNode title={table.tableName} key={table.uid} >
+        {table.columns.length > 0 && renderColumns(table.columns)}
+      </TreeNode>
+    ));
+  };
+
+  const renderDB = (db: DBProps[]) => {
+    return db.map((item: DBProps) => (
+      <TreeNode title={item.DBName} key={item.uid} >
+        {Array.isArray(item.Tables) && item.Tables.length > 0 && renderTables(item.Tables)}
+      </TreeNode>
+    ));
+  };
   return <Tree onSelect={onSelect}>{renderDB(db)}</Tree>;
 };
 

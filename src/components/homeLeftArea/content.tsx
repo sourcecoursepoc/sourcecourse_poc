@@ -37,10 +37,13 @@ const ProjectContent: React.FC<MyComponentProps> = ({
   const projectListData = useSelector(getProjectsSelector);
   const listItems = [];
   const projectArray = projectListData[0]?.projects[0]?.projectDetails;
+  
+  console.log(projectArray,"projectArray");
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
+  
   for (const item in projectArray) {
     /*  console.log(`${item}: ${projectArray[item]}`); */
     listItems.push(
