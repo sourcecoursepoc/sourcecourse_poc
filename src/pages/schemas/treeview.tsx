@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Tree } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 import { getSchemasSelector, getErrorSelector, getPendingSelector } from '../../redux/selector';
 import { fetchSchemaRequest } from '../../redux/actions/schemasaction';
 import { useDispatch } from 'react-redux';
+import GroupsModalBox from '@/components/ComposePage/GroupsPage/ModalBox/groupsModalBox';
 
 interface MyNode {
   id: number;
@@ -13,9 +14,17 @@ interface MyNode {
   children?: MyNode[];
 }
 
+interface Item {
+  id: number;
+  label: string;
+}
 
 
 const MyTree: React.FC = () => {
+
+  const [selectedItems, setSelectedItems] = useState<Item[]>([]);
+
+
   const dispatch = useDispatch();
   const pending = useSelector(getPendingSelector);
   const schemas = useSelector(getSchemasSelector);
@@ -26,25 +35,33 @@ const MyTree: React.FC = () => {
     dispatch(fetchSchemaRequest("10002"));
   }, []);
 
-  const renderTreeNodes = (schemas: MyNode[]) =>
-    schemas.map((schema: MyNode) => {
-      if (schema.children) {
-        return (
-          <Tree.TreeNode title={schema.name} key={schema.id} switcherIcon={<DownOutlined />}>>
-            {renderTreeNodes(schema.children)}
-          </Tree.TreeNode>
-        );
-      }
+  function handleSelectItem(item: Item) {
+    setSelectedItems([...selectedItems, item]);
+  }
 
+
+  const renderTreeNodes = (schemas?: MyNode[]) =>
+  schemas?.map((schema: MyNode) => {
+    if (schema.children) {
       return (
-        <Tree.TreeNode title={schema.name} key={schema.id} switcherIcon={<DownOutlined />} />
+        <Tree.TreeNode title={schema.name} key={schema.id} switcherIcon={<DownOutlined />}>
+          {renderTreeNodes(schema.children)}
+        </Tree.TreeNode>
       );
-    });
+    }
+
+    return (
+      <Tree.TreeNode title={schema.name} key={schema.id} switcherIcon={<DownOutlined />} />
+    );
+  });
 
   return (
+    <>
     <Tree defaultExpandAll={true} >
       {renderTreeNodes(schemas)}
     </Tree>
+     {/* <GroupsModalBox selectedItems={selectedItems} /> */}
+     </>
   );
 };
 
