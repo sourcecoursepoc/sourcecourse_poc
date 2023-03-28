@@ -21,46 +21,46 @@ import { getProjectsSelector } from "@/redux/selector";
 const { Content } = Layout;
 
 interface MyComponentProps {
-  heading: string; 
-  projectDescription:string
-  
-//buttonLabels: string[];
+  heading: string;
+  projectDescription: string;
+
+  //buttonLabels: string[];
 }
-const ProjectContent:  React.FC<MyComponentProps>= ({heading,projectDescription}) => {
+const ProjectContent: React.FC<MyComponentProps> = ({
+  heading,
+  projectDescription,
+}) => {
   const image: string = "http://dlib.org/dlib/october97/ibm/schema.gif";
   const image1: string =
     "http://www.google.comwww.aperfectworld.org/clipart/shapes/triangle11a.png";
-    const dispatch = useDispatch();
-    const projectListData = useSelector(getProjectsSelector);
-    const listItems = [];
-    const projectArray=projectListData[0]?.projects[0]?.projectDetails;
-  
-    useEffect(() => {
-      dispatch(fetchProjectRequest());
-    }, []);
-    for (const item in projectArray) {
-     /*  console.log(`${item}: ${projectArray[item]}`); */
-     listItems.push(<InnerBox title={item} value={projectArray[item]}></InnerBox>);
-    }
+  const dispatch = useDispatch();
+  const projectListData = useSelector(getProjectsSelector);
+  const listItems = [];
+  const projectArray = projectListData[0]?.projects[0]?.projectDetails;
+
+  useEffect(() => {
+    dispatch(fetchProjectRequest());
+  }, []);
+  for (const item in projectArray) {
+    /*  console.log(`${item}: ${projectArray[item]}`); */
+    listItems.push(
+      <InnerBox title={item} value={projectArray[item]}></InnerBox>
+    );
+  }
   return (
- 
     <Layout className={styles.layout}>
-      
       <Content className={styles.content}>
-       <Row className={styles.pinkbar}>
+        <Row className={styles.pinkbar}>
           <p className={styles.textStyle}>{heading}</p>
         </Row>
-      <div className={styles.subHeading}>
-          {projectDescription}
-        </div>
+        <div className={styles.subHeading}>{projectDescription}</div>
         <div>
           <Space direction="horizontal">
-          {listItems}
+            <Row> {listItems}</Row>
           </Space>
         </div>
 
         <div className={styles.bottomDivider}>
-          {/*  <Divider className={styles.dividerStyle}> </Divider> */}
           <Button
             type="link"
             href="/compose"

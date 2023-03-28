@@ -11,27 +11,33 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
-const HomeLeftArea: React.FunctionComponent  = () => {
+const HomeLeftArea: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
- 
-  const projectArray=projectListData[0]?.projects;
+
+  const projectArray = projectListData[0]?.projects;
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
   return (
     <div className={styles.contentStyle}>
-      <div >
-     <TopBox></TopBox>
-        <Row ><div className={styles.borderBottom}>
-          </div></Row>
-    <Row className={styles.searchbar}>  <SearchBar ></SearchBar>
-        <MyTabs ></MyTabs></Row> 
+      <div>
+        <TopBox></TopBox>
+        <Row>
+          <div className={styles.borderBottom}></div>
+        </Row>
+        <Row className={styles.searchAndTabStyle}>
+          <SearchBar></SearchBar>
+          <MyTabs></MyTabs>
+        </Row>
         {projectArray?.map((item) => (
-      <Row className={styles.contentStyle}  key={item.projectId}>
-        <ProjectContent heading={item.projectName} projectDescription={item.projectDesc}></ProjectContent>
-      </Row>
-      ))}
+          <Row className={styles.contentStyle} key={item.projectId}>
+            <ProjectContent
+              heading={item.projectName}
+              projectDescription={item.projectDesc}
+            ></ProjectContent>
+          </Row>
+        ))}
       </div>
     </div>
   );

@@ -1,28 +1,28 @@
 .outerbox {
-    background-color: white;
-    /* margin-bottom: 11px; */
-    margin-top: 0.7rem;
-    border-radius: 0.3125rem;
-    border: 0.0625rem solid #ccc;
-    box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
-    position: relative;
-    overflow: hidden;
-    width: 7.925rem;
-    height: 6.375rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: inherit;
-    align-items: center;
-   /*  margin-left: 10.2rem; */
-  }
-  .innerrightTop{
-    width: 8rem;
-    border-bottom: 0.0625rem solid rgb(207, 203, 203);
-    height: 5.5rem;
-    display: flex;
-  }
-  .innerrightBottom{
-    width: 8rem;
-    height: 1.875rem;
-    display: flex;
-  }
+  background-color: white;
+  /* margin-bottom: 11px; */
+  margin-top: 0.7rem;
+  border-radius: 0.3125rem;
+  border: 0.0625rem solid #ccc;
+  box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 7.925rem;
+  height: 6.375rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: inherit;
+  align-items: center;
+  /*  margin-left: 10.2rem; */
+}
+.innerrightTop {
+  width: 8rem;
+  border-bottom: 0.0625rem solid rgb(207, 203, 203);
+  height: 5.5rem;
+  display: flex;
+}
+.innerrightBottom {
+  width: 8rem;
+  height: 1.875rem;
+  display: flex;
+}

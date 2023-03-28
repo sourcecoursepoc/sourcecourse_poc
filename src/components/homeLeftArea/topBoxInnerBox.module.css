@@ -23,7 +23,7 @@
   width: 14.925rem;
   height: 6.375rem;
   display: flex;
-  
+
   margin-left: 6rem;
   justify-content: inherit;
   align-items: center;
@@ -36,15 +36,15 @@
   display: flex;
   flex-direction: column;
 }
-.innerrightTop{
+.innerrightTop {
   width: 7.375rem;
   border-bottom: 0.0625rem solid rgb(207, 203, 203);
-  height:5.5rem;
+  height: 5.5rem;
 }
 .innerleft {
   height: 7.375rem;
   width: 7.375rem;
-  
+
   display: flex;
   flex-direction: column;
 }
@@ -55,7 +55,7 @@
   border-bottom: 0.0625rem solid rgb(207, 203, 203);
   height: 7.5rem;
   align-content: center;
-  padding: 0.6875rem
+  padding: 0.6875rem;
 }
 
 .imageName {
@@ -71,7 +71,7 @@
 
 .items {
   text-align: center;
-  padding: 0.6875rem
+  padding: 0.6875rem;
 }
 .description-box-label {
   position: absolute;
@@ -83,24 +83,22 @@
   font-weight: 500;
   color: #999;
 }
-.innerleftTop{
+.innerleftTop {
   height: 3.6875rem;
-  width:  7.375rem;
+  width: 7.375rem;
   border-bottom: 0.0625rem solid rgb(207, 203, 203);
 }
-.schemaStyle{
+.schemaStyle {
   font-weight: 350;
   font-size: 1.3rem;
   margin-top: -0.188rem;
   color: #a19d9d;
-  margin-left: -0.625rem;;
-
+  margin-left: -0.625rem;
 }
-.schemaNumber{
+.schemaNumber {
   font-weight: 350;
   font-size: 1.1rem;
   margin-top: 1.812rem;
   color: #a19d9d;
   margin-left: -0.625rem;
- 
 }

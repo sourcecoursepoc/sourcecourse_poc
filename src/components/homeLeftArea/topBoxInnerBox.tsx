@@ -10,8 +10,7 @@ import { getProjectsSelector } from "@/redux/selector";
 const TopInnerBox: React.FC = () => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
-  
-  
+
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
