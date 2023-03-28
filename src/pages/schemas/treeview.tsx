@@ -1,51 +1,66 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Tree } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
-import { useSelector } from 'react-redux';
-import { getSchemasSelector, getErrorSelector, getPendingSelector } from '../../redux/selector';
-import { fetchSchemaRequest } from '../../redux/actions/schemasaction';
-import { useDispatch } from 'react-redux';
 
-interface MyNode {
-  id: number;
+const { TreeNode } = Tree;
+
+interface ColumnProps {
   name: string;
   type: string;
-  children?: MyNode[];
+  isPrimary: boolean;
+  unique: boolean;
+  nullable: boolean;
+  consumed: string | boolean | number;
+  consumers: string[];
+  dataQuality: {
+    score: string;
+    description: string;
+  };
 }
 
+interface TableProps {
+  tableName: string;
+  columns: ColumnProps[];
+  rowCount: number;
+  size: string;
+  mindate: string;
+  maxdate: string;
+  yoycount: string;
+  momcount: string;
+}
 
+interface DBProps {
+  DBName: string;
+  Tables: TableProps[];
+}
 
-const MyTree: React.FC = () => {
-  const dispatch = useDispatch();
-  const pending = useSelector(getPendingSelector);
-  const schemas = useSelector(getSchemasSelector);
-  const error = useSelector(getErrorSelector);
-  console.log(schemas, "schemas")
-  useEffect(() => {
-    console.log("useEffect")
-    dispatch(fetchSchemaRequest("10002"));
-  }, []);
+interface Props {
+  db: DBProps[];
+}
 
-  const renderTreeNodes = (schemas: MyNode[]) =>
-    schemas.map((schema: MyNode) => {
-      if (schema.children) {
-        return (
-          <Tree.TreeNode title={schema.name} key={schema.id} switcherIcon={<DownOutlined />}>>
-            {renderTreeNodes(schema.children)}
-          </Tree.TreeNode>
-        );
-      }
-
-      return (
-        <Tree.TreeNode title={schema.name} key={schema.id} switcherIcon={<DownOutlined />} />
-      );
-    });
-
-  return (
-    <Tree defaultExpandAll={true} >
-      {renderTreeNodes(schemas)}
-    </Tree>
-  );
+const renderColumns = (columns: ColumnProps[]) => {
+  return columns.map((column: ColumnProps) => (
+    <TreeNode title={`${column.name} (${column.type})`} key={column.name} />
+  ));
 };
 
-export default MyTree;
+const renderTables = (tables: TableProps[]) => {
+  return tables.map((table: TableProps) => (
+    <TreeNode title={table.tableName} key={table.tableName} >
+      {renderColumns(table.columns)}
+    </TreeNode>
+  ));
+};
+
+const renderDB = (db: DBProps[]) => {
+  return db.map((item: DBProps) => (
+    <TreeNode title={item.DBName} key={item.DBName} >
+      {renderTables(item.Tables)}
+    </TreeNode>
+  ));
+};
+
+const TreeView: React.FC<Props> = ({ db }) => {
+  return <Tree>{renderDB(db)}</Tree>;
+};
+
+export default TreeView;

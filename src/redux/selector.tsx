@@ -8,6 +8,9 @@ const getSchemas = (state: AppState) => state.schema.schemas;
 
 const getError = (state: AppState) => state.schema.error;
 
+const getDataBase = (state: AppState) => state.database.database;
+
+export const getDataBaseSelector = createSelector(getDataBase,(database)=>database)
 export const getSchemasSelector = createSelector(getSchemas, (schemas) => schemas);
 
 export const getPendingSelector = createSelector(
