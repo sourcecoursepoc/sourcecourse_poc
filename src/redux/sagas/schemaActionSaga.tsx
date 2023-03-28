@@ -7,7 +7,6 @@ import { FETCH_SCHEMA_SCHEMADATA, FETCH_SCHEMA_DATABASE } from "../actions/schem
 const getSchema = (requestParams: any) =>
   axios.get<ISchema[]>("http://localhost:8000/schemas?id=" + requestParams);
 
-// console.log("get schemaaa",getSchema())
 
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
@@ -17,7 +16,6 @@ function* fetchSchemaSaga(requestParams: FetchSchemaRequest) {
   console.log("saga call", requestParams)
   try {
     const response = yield call(() => getSchema(requestParams.params));
-    console.log("respose saga", response);
     yield put(
       fetchSchemaSuccess({
         schemas: response.data,
