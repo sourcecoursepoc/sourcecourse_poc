@@ -17,6 +17,7 @@ const getPipelines = () =>
 function* fetchPipelineSaga() {
   try {
     const response =yield call(getPipelines);
+    console.log(response)
     yield put(
       fetchPipelineSuccess({
         pipelines: response.data,
