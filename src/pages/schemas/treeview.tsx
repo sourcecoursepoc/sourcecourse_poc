@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Tree } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { fetchDataBaseRequest } from '../../redux/actions/schemasaction';
-import { getDataBaseSelector } from '../../redux/selector';
+import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
+import { getDataBaseSelector, getSelectedArraySelector } from '../../redux/selector';
 import Item from 'antd/es/list/Item';
 
 const { TreeNode } = Tree;
@@ -60,23 +60,28 @@ const TreeView: React.FC<Props> = ({ db }) => {
   const selectColumns = (state: TableProps) => state.columns;
   const Tables = useSelector(selectTables);
   const columns = useSelector(selectColumns);
+  const selcectData = useSelector(getSelectedArraySelector);
 
-  const [selectedNode, setSelectedNode] = useState<DBProps | TableProps | ColumnProps | undefined>();
+  console.log(selcectData, "aaaaaaaaaaaaaaaaaaaaa")
 
+  const [selectedNode, setSelectedNode] = useState<DBProps | TableProps | ColumnProps | undefined>([]);
+  console.log("useEffect")
   const onSelect = (keys: any, info: any) => {
     console.log(info, "info")
     const selectedKey = keys[0] as string;
     console.log(selectedKey, "selectedKey")
 
-    const selectedNode = findNodeByKey(data, Tables, columns, selectedKey);
-    console.log(selectedNode, "infoselectedNode")
-
-
+    const selectedObj = findNodeByKey(data, Tables, columns, selectedKey);
+    console.log(selectedObj, "infoselectedNode")
     console.log(selectedNode ?.metadata, "metadata");
 
     // Update the state with the selected node
-
-    setSelectedNode(findNodeByKey(data, Tables, columns, keys));
+    // if (selectedObj !== undefined) {
+    //   setSelectedNode(selectedNode.push(selectedObj));
+    //   console.log(selectedObj, "object")
+    //   // dispatch(addArray(selectedNode));
+    //   console.log(selectedNode, "infoselectedNode")
+    // }
   };
   const findNodeByKey = (data: DBProps[], Tables: TableProps[], columns: ColumnProps[], key: string): DBProps | TableProps | ColumnProps | undefined => {
     for (const node of data) {

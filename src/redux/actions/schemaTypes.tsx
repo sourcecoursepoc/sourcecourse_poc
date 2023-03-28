@@ -4,7 +4,8 @@ import {
     FETCH_SCHEMA_SCHEMADATA_SUCCESS,
     FETCH_SCHEMA_DATABASE,
     FETCH_SCHEMA_DATABASE_FAILURE,
-    FETCH_SCHEMA_DATABASE_SUCCESS
+    FETCH_SCHEMA_DATABASE_SUCCESS,
+    ADD_ARRAY
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -49,39 +50,40 @@ export type SchemaActions =
 
 
 
-    // interface ColumnProps {
-    //     name: string;
-    //     type: string;
-    //     isPrimary: boolean;
-    //     unique: boolean;
-    //     nullable: boolean;
-    //     consumed: string | boolean | number;
-    //     consumers: string[];
-    //     dataQuality: {
-    //       score: string;
-    //       description: string;
-    //     };
-    //   }
-      
-    //   interface DBTable {
-    //     tableName: string;
-    //     columns: ColumnProps[];
-    //     rowCount: number;
-    //     size: string;
-    //     mindate: string;
-    //     maxdate: string;
-    //     yoycount: string;
-    //     momcount: string;
-    //   }
-      
-    //   interface IDataBase {
-    //     DBName: string;
-    //     Tables: TableProps[];
-    //   }
+// interface ColumnProps {
+//     name: string;
+//     type: string;
+//     isPrimary: boolean;
+//     unique: boolean;
+//     nullable: boolean;
+//     consumed: string | boolean | number;
+//     consumers: string[];
+//     dataQuality: {
+//       score: string;
+//       description: string;
+//     };
+//   }
+
+//   interface DBTable {
+//     tableName: string;
+//     columns: ColumnProps[];
+//     rowCount: number;
+//     size: string;
+//     mindate: string;
+//     maxdate: string;
+//     yoycount: string;
+//     momcount: string;
+//   }
+
+//   interface IDataBase {
+//     DBName: string;
+//     Tables: TableProps[];
+//   }
 export interface DataBaseState {
     pending: boolean;
     database: DBProps[];
     error: string | null;
+    myArray: any[];
 }
 
 export interface FetchDataBaseSuccessPayload {
@@ -110,4 +112,15 @@ export type FetchDataBaseFailure = {
 export type DataBaseActions =
     | FetchDataBaseRequest
     | FetchDataBaseSuccess
-    | FetchDataBaseFailure;
+    | FetchDataBaseFailure
+    | AddArrayAction
+    ;
+
+
+
+
+export interface AddArrayAction {
+    type: typeof ADD_ARRAY;
+    payload: any;
+    
+}

@@ -4,11 +4,12 @@ import {
   FETCH_SCHEMA_SCHEMADATA_FAILURE,
   FETCH_SCHEMA_DATABASE,
   FETCH_SCHEMA_DATABASE_SUCCESS,
-  FETCH_SCHEMA_DATABASE_FAILURE
+  FETCH_SCHEMA_DATABASE_FAILURE,
+  ADD_ARRAY
 } from "./schemaActionTypes";
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, } from "./schemaTypes";
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, AddArrayAction } from "./schemaTypes";
 
-export const fetchSchemaRequest = (params:number): FetchSchemaRequest => ({
+export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
   params,
 });
@@ -44,3 +45,9 @@ export const fetchDataBaseFailure = (
   type: FETCH_SCHEMA_DATABASE_FAILURE,
   payload,
 });
+export const addArray = (payload: any): AddArrayAction => ({
+  type: ADD_ARRAY,
+  payload,
+  
+});
+

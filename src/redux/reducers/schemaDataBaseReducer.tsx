@@ -1,7 +1,8 @@
 import {
     FETCH_SCHEMA_DATABASE,
     FETCH_SCHEMA_DATABASE_FAILURE,
-    FETCH_SCHEMA_DATABASE_SUCCESS
+    FETCH_SCHEMA_DATABASE_SUCCESS,
+    ADD_ARRAY
 } from "../actions/schemaActionTypes";
 import { DataBaseState, DataBaseActions } from "../actions/schemaTypes";
 
@@ -9,7 +10,10 @@ const initialDataBaseState: DataBaseState = {
     pending: false,
     database: [],
     error: null,
+    myArray: [],
+
 };
+
 
 export default (state = initialDataBaseState, action: DataBaseActions) => {
     switch (action.type) {
@@ -32,6 +36,16 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
                 database: [],
                 error: action.payload.error,
             };
+        case ADD_ARRAY:
+            if (Array.isArray(action.payload)) {
+                console.log(action.payload, "payload")
+                return {
+                    ...state,
+                    myArray: [...state.myArray, ...action.payload]
+                };
+            } else {
+                // Handle non-iterable payload, e.g. throw an error or log a warning
+            }
         default:
             return {
                 ...state,
