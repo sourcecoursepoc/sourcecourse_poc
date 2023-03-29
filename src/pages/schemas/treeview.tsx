@@ -7,45 +7,6 @@ import { getDataBaseSelector, getSelectedArraySelector } from '../../redux/selec
 
 const { TreeNode } = Tree;
 
-// interface ColumnProps {
-//   name: string;
-//   type: string;
-//   isPrimary: boolean;
-//   unique: boolean;
-//   nullable: boolean;
-//   consumed: string | boolean | number;
-//   consumers: string[];
-//   dataQuality: {
-//     score: string;
-//     description: string;
-//   };
-// }
-
-// interface TableProps {
-//   tableName: string;
-//   columns: ColumnProps[];
-//   rowCount: number;
-//   size: string;
-//   mindate: string;
-//   maxdate: string;
-//   yoycount: string;
-//   momcount: string;
-// }
-
-// interface DBProps {
-//   DBName: string;
-//   Tables: TableProps[];
-// }
-
-// interface Props {
-//   db: DBProps[];
-// }
-
-// const onSelect = (selectedKeys: React.Key[], info: any) => {
-//   const node = info.node;
-//   console.log(node.props as any, "node")
-// };
-
 const TreeView: React.FC<Props> = ({ db }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
@@ -54,7 +15,6 @@ const TreeView: React.FC<Props> = ({ db }) => {
     dispatch(fetchDataBaseRequest());
 
   }, []);
-  // const data = useSelector((state: Props) => state.db);
   const selectTables = (state: DBProps) => state.Tables;
   const selectColumns = (state: TableProps) => state.columns;
   const Tables = useSelector(selectTables);

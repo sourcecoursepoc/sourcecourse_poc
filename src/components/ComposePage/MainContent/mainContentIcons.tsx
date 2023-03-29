@@ -7,14 +7,15 @@ import styles from "./mainContent.module.css";
 interface MyComponentProps {
    // size:SizeType;
     icon: ReactNode;
+    onClick: () => void;
   
   }
-const MainIcons: React.FC<MyComponentProps>= ({icon})=> {
+const MainIcons: React.FC<MyComponentProps>= ({icon,onClick})=> {
   const { Content } = Layout;
   return (
     
    <Content >            
-            <Button icon={icon} size={"large"} style={{width:"3rem",height:"3.5rem",marginLeft:"6rem"}} >
+            <Button icon={icon} size={"large"} style={{width:"3rem",height:"3.5rem",marginLeft:"6rem"}} onClick={onClick}>
             </Button>
            
     </Content>
