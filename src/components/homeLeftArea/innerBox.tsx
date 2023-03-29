@@ -15,7 +15,6 @@ export interface ChildComponentProps {
 }
 interface MyStatisticProps {
   title: string;
-
   value: number;
 }
 export default function ({ title, value }: MyStatisticProps) {

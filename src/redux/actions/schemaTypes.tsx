@@ -1,7 +1,11 @@
 import {
-    FETCH_SCHEMA_DATA,
-    FETCH_SCHEMA_DATA_FAILURE,
-    FETCH_SCHEMA_DATA_SUCCESS
+    FETCH_SCHEMA_SCHEMADATA,
+    FETCH_SCHEMA_SCHEMADATA_FAILURE,
+    FETCH_SCHEMA_SCHEMADATA_SUCCESS,
+    FETCH_SCHEMA_DATABASE,
+    FETCH_SCHEMA_DATABASE_FAILURE,
+    FETCH_SCHEMA_DATABASE_SUCCESS,
+    ADD_ARRAY
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -25,17 +29,17 @@ export interface FetchSchemaFailurePayload {
 }
 
 export interface FetchSchemaRequest {
-    type: typeof FETCH_SCHEMA_DATA;
-    params:string;
+    type: typeof FETCH_SCHEMA_SCHEMADATA;
+    params: number;
 }
 
 export type FetchSchemaSuccess = {
-    type: typeof FETCH_SCHEMA_DATA_SUCCESS;
+    type: typeof FETCH_SCHEMA_SCHEMADATA_SUCCESS;
     payload: FetchSchemaSuccessPayload;
 };
 
 export type FetchSchemaFailure = {
-    type: typeof FETCH_SCHEMA_DATA_FAILURE;
+    type: typeof FETCH_SCHEMA_SCHEMADATA_FAILURE;
     payload: FetchSchemaFailurePayload;
 };
 
@@ -43,3 +47,80 @@ export type SchemaActions =
     | FetchSchemaRequest
     | FetchSchemaSuccess
     | FetchSchemaFailure;
+
+
+
+// interface ColumnProps {
+//     name: string;
+//     type: string;
+//     isPrimary: boolean;
+//     unique: boolean;
+//     nullable: boolean;
+//     consumed: string | boolean | number;
+//     consumers: string[];
+//     dataQuality: {
+//       score: string;
+//       description: string;
+//     };
+//   }
+
+//   interface DBTable {
+//     tableName: string;
+//     columns: ColumnProps[];
+//     rowCount: number;
+//     size: string;
+//     mindate: string;
+//     maxdate: string;
+//     yoycount: string;
+//     momcount: string;
+//   }
+
+//   interface IDataBase {
+//     DBName: string;
+//     Tables: TableProps[];
+//   }
+export interface DataBaseState {
+    pending: boolean;
+    database: DBProps[];
+    error: string | null;
+    myArray: any[];
+}
+
+export interface FetchDataBaseSuccessPayload {
+    database: DBProps[];
+}
+
+export interface FetchDataBaseFailurePayload {
+    error: string;
+}
+
+export interface FetchDataBaseRequest {
+    type: typeof FETCH_SCHEMA_DATABASE;
+
+}
+
+export type FetchDataBaseSuccess = {
+    type: typeof FETCH_SCHEMA_DATABASE_SUCCESS;
+    payload: FetchDataBaseSuccessPayload;
+};
+
+export type FetchDataBaseFailure = {
+    type: typeof FETCH_SCHEMA_DATABASE_FAILURE;
+    payload: FetchDataBaseFailurePayload;
+};
+
+export type DataBaseActions =
+    | FetchDataBaseRequest
+    | FetchDataBaseSuccess
+    | FetchDataBaseFailure
+    | AddArrayAction
+    ;
+
+
+
+
+export interface AddArrayAction {
+    type: typeof ADD_ARRAY;
+    payload: any;
+    
+}
