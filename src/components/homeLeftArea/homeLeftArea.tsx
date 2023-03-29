@@ -17,9 +17,9 @@ const HomeLeftArea: React.FunctionComponent = () => {
   const projectArray = projectListData[0]?.projects;
   const [parentArray, setParentArray] = useState<string[]>([]);
   const handleArrayChange = (array: string[]) => {
-    parentArray.length=0;
-    setParentArray(array); 
-    
+    console.log("..array...", JSON.stringify(array));
+    parentArray.length = 0;
+    setParentArray(array);
   };
 
   useEffect(() => {
@@ -37,17 +37,18 @@ const HomeLeftArea: React.FunctionComponent = () => {
           <SearchBar searchArray={handleArrayChange}></SearchBar>
           <MyTabs></MyTabs>
         </Row>
-
+        {JSON.stringify(parentArray)}
         {parentArray?.map((item) => (
-          <>
-            <Row className={styles.contentStyle} key={item.projectId}>
-              {/*  {console.log("sashgscsc")} */}
-              <ProjectContent
-                heading={item.projectName}
-                projectDescription={item.projectDesc}
-              ></ProjectContent>
-            </Row>
-          </>
+          <Row
+            className={styles.contentStyle}
+            key={item.projectId + "projlist"}
+          >
+            {/*  {console.log("sashgscsc")} */}
+            <ProjectContent
+              heading={item.projectName}
+              projectDescription={item.projectDesc}
+            ></ProjectContent>
+          </Row>
         ))}
       </div>
     </div>

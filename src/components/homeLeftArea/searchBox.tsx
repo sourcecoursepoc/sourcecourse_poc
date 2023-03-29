@@ -10,10 +10,9 @@ import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
 import { addArray } from "../../redux/actions/actions";
 interface ChildProps {
-  searchArray: (array:string []) => void;
-  searchState:boolean
+  searchArray: (array: string[]) => void;
 }
-const SearchBar: React.FC<ChildProps> = ({ searchArray ,searchState}) => {
+const SearchBar: React.FC<ChildProps> = ({ searchArray }) => {
   const [array, setArray] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
@@ -23,24 +22,16 @@ const SearchBar: React.FC<ChildProps> = ({ searchArray ,searchState}) => {
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
-  
 
-  const searchItems = (searchValue:string) => {
-    console.log("searchValue",searchValue)
-   
+  const searchItems = (searchValue: string) => {
+    console.log("searchValue", searchValue);
+
     if (searchValue !== "") {
-      console.log("sssssssssssssss")
-      const filteredData = searchProjectNames?.filter((item) => {
-        console.log(item,"item")
-        if (
-          item?.projectName.toLowerCase().includes(searchValue.toLowerCase())
-        ) {
-          console.log("searchout", item);
-          array?.push(item);
-        /*   setSearchState(true) */
-          searchArray(array);
-        }
-      });
+      // console.log("sssssssssssssss");
+      const filteredData = searchProjectNames?.filter((item) =>
+        item?.projectName.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      searchArray(filteredData);
     } else {
     }
   };
