@@ -4,6 +4,7 @@ const { TextArea } = Input;
 interface DescriptionBoxProps {
     label: string;
     value: string;
+
   }
 const DescriptionBox: React.FC = ({value}) => (
     
