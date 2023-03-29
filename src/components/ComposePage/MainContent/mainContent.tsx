@@ -26,7 +26,7 @@ const MainContent = () => {
   return (
     <Layout className={styles.layout}>
     <Content className={styles.content}>
-        <Row className={styles.pinkbar} ><p className={styles.text}>Group</p></Row>
+        <Row className={styles.pinkbar} ><p className={styles.text}>Schema</p></Row>
         <Button icon={<PlusCircleFilled/>} style={{marginLeft:"0.5rem",width:"4rem",height:"3rem",color:"#7E60BC"}}
         onClick={showGroupsModal}
         ></Button>
