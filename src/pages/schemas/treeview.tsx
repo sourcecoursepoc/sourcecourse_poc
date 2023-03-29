@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
 import { getDataBaseSelector, getSelectedArraySelector } from '../../redux/selector';
-import Item from 'antd/es/list/Item';
 
 const { TreeNode } = Tree;
 
@@ -64,25 +63,28 @@ const TreeView: React.FC<Props> = ({ db }) => {
 
   console.log(selcectData, "aaaaaaaaaaaaaaaaaaaaa")
 
-  const [selectedNode, setSelectedNode] = useState<DBProps | TableProps | ColumnProps | undefined>([]);
-  console.log("useEffect")
+  const [selectedNode, setSelectedNode] = useState<any[]>([]);
+  console.log("useEffect");
+
   const onSelect = (keys: any, info: any) => {
-    console.log(info, "info")
+    console.log(info, "info");
+
     const selectedKey = keys[0] as string;
-    console.log(selectedKey, "selectedKey")
+    console.log(selectedKey, "selectedKey");
 
     const selectedObj = findNodeByKey(data, Tables, columns, selectedKey);
-    console.log(selectedObj, "infoselectedNode")
-    console.log(selectedNode ?.metadata, "metadata");
+    console.log(selectedObj, "selectedObj");
 
-    // Update the state with the selected node
-    // if (selectedObj !== undefined) {
-    //   setSelectedNode(selectedNode.push(selectedObj));
-    //   console.log(selectedObj, "object")
-    //   // dispatch(addArray(selectedNode));
-    //   console.log(selectedNode, "infoselectedNode")
-    // }
+    // Check if the selected object already exists in the array
+    const exists = selectedNode.some((node) => node ?.uid === selectedObj ?.uid);
+    if (selectedObj && !exists) {
+      setSelectedNode([...selectedNode, selectedObj]);
+      console.log(selectedObj.metadata, "metadata");
+      dispatch(addArray([...selectedNode, selectedObj]));
+      console.log(selectedNode, "selectedNode");
+    }
   };
+
   const findNodeByKey = (data: DBProps[], Tables: TableProps[], columns: ColumnProps[], key: string): DBProps | TableProps | ColumnProps | undefined => {
     for (const node of data) {
       if (node.uid === key) {
@@ -101,6 +103,7 @@ const TreeView: React.FC<Props> = ({ db }) => {
     }
     return undefined;
   };
+
 
   const renderColumns = (columns: ColumnProps[] | undefined) => {
     if (!columns) {
