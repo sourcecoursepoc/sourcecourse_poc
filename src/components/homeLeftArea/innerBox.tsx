@@ -23,8 +23,8 @@ export default function ({ title, value }: MyStatisticProps) {
     <>
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
-          {/*  <Row className={styles.image}> */}
-          {/*  <Col> */}
+            <Row className={styles.image}>
+          <Col> 
           {title === "initialLoad" && (
             <ClusterOutlined
               style={{ fontSize: "2rem", alignContent: "center" }}
@@ -42,12 +42,12 @@ export default function ({ title, value }: MyStatisticProps) {
           {title === "users" && (
             <UsergroupAddOutlined style={{ fontSize: "35px" }} />
           )}
-          {title === "user1" && (
+          {title === "users1" && (
             <UsergroupAddOutlined style={{ fontSize: "35px" }} />
-          )}
+          )} 
 
-          {/*  </Col> */}
-          {/*  </Row> */}
+          </Col> 
+           </Row> 
           <Row className={styles.imageName}>
             <Col
               style={{
