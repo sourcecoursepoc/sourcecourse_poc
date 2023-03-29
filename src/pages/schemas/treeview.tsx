@@ -40,7 +40,7 @@ const TreeView: React.FC<Props> = ({ db }) => {
     if (selectedObj && !exists) {
       setSelectedNode([...selectedNode, selectedObj]);
       console.log(selectedObj.metadata, "metadata");
-      dispatch(addArray([...selectedNode, selectedObj]));
+      dispatch(addArray([ selectedObj]));
       console.log(selectedNode, "selectedNode");
     }
   };
@@ -85,6 +85,9 @@ const TreeView: React.FC<Props> = ({ db }) => {
   };
 
   const renderDB = (db: DBProps[]) => {
+    if (!db) {
+      return null; 
+    }
     return db.map((item: DBProps) => (
       <TreeNode title={item.DBName} key={item.uid} >
         {Array.isArray(item.Tables) && item.Tables.length > 0 && renderTables(item.Tables)}
