@@ -39,10 +39,7 @@ const HomeLeftArea: React.FunctionComponent = () => {
         </Row>
         {JSON.stringify(parentArray)}
         {parentArray?.map((item) => (
-          <Row
-            className={styles.contentStyle}
-            key={item.projectId + "projlist"}
-          >
+          <Row className={styles.contentStyle} key={item.projectId}>
             {/*  {console.log("sashgscsc")} */}
             <ProjectContent
               heading={item.projectName}
