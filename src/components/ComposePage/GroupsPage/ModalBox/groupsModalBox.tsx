@@ -43,12 +43,12 @@ const GroupsModalBox: React.FC<MyModalProps > = ({
         <Col span={15} style={{ marginLeft: "-1rem", marginRight: "0.5rem",borderRight:"1px solid #ccc",marginBottom:"0.5rem" }}>
           <Row style={{ marginBottom: "0.5rem", width: "60%" }}>
             <Col span={24}>
-              <Input placeholder="Name" />
+              <Input placeholder="Name" style={{borderRadius:"3px"}}/>
             </Col>
           </Row>
           <Row style={{ marginBottom: "1rem", width: "95%" }}>
             <Col span={24}>
-              <Input placeholder="Description" />
+              <Input placeholder="Description" style={{borderRadius:"3px"}}/>
             </Col>
           </Row>
         </Col>
@@ -104,33 +104,23 @@ const GroupsModalBox: React.FC<MyModalProps > = ({
         <Col span={6} style={{ borderRight: "1px solid #ccc",height: "100%" }}>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} style={{ marginLeft: "-1rem" }}>
-              <SearchBar />
+              {/* <SearchBar /> */}
+              <Input defaultValue="Search" style={{ borderColor: "#ccc",borderRadius:"3px" }} />
             </Col>
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-              <MyTree onAddIconClick={handleAddIconClick} />
+              <MyTree /*onAddIconClick={handleAddIconClick}*/ />
             </Col>
           </Row>
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc",paddingLeft:"0.5rem" }}>
           <Row>
-            <div>
-              {/* {selectedItems && selectedItems.length > 0 ? (
-                <ul>
-                  {selectedItems.map((item) => (
-                    <li key={item.id}>{item.label}</li>
-                  ))}
-                </ul>
-              ) : (
-                <p>No items selected</p>
-              )} */}
-            </div>
           </Row>
         </Col>
         <Col span={10} style={{ marginTop: "0.5rem", paddingLeft: "0.5rem" }}>
           <Row className={styles.descriptionbox}>
-            <TextArea rows={2} placeholder="Notes" />
+            <TextArea rows={2} placeholder="Notes" style={{borderRadius:"3px"}}/>
           </Row>
           <Row
             style={{ borderBottom: "1px solid #ccc", marginTop: "-0.75rem" }}
@@ -138,7 +128,7 @@ const GroupsModalBox: React.FC<MyModalProps > = ({
             <p style={{ fontSize: "14px" }}>Transform</p>
           </Row>
           <Row style={{ marginTop: "0.5rem", width: "40%" }}>
-            <Input defaultValue="fullName" style={{ borderColor: "#ccc" }} />
+            <Input defaultValue="fullName" style={{ borderColor: "#ccc",borderRadius:"3px" }} />
           </Row>
         </Col>
       </Row>

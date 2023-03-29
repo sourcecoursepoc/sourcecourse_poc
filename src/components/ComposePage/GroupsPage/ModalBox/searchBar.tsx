@@ -11,10 +11,7 @@ const SearchBar=  () => {
         <Input.Search
           placeholder="Search"
           allowClear
-         
-         // enterButton={<SearchOutlined />}
           size="middle"
-          
         />
       );
     }
