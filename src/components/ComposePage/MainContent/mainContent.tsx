@@ -17,30 +17,18 @@ const MainContent = () => {
   const handleCancel = () => {
     setVisible(false);
   };
-  const showGroupsModal = () => {
-    setVisible(true);
-  };
-  const handleGroupsCancel = () => {
-    setVisible(false);
-  };
   return (
     <Layout className={styles.layout}>
     <Content className={styles.content}>
         <Row className={styles.pinkbar} ><p className={styles.text}>Schema</p></Row>
         <Button icon={<PlusCircleFilled/>} style={{marginLeft:"0.5rem",width:"4rem",height:"3rem",color:"#7E60BC"}}
-        onClick={showGroupsModal}
+        onClick={showModal}
         ></Button>
        
        <ModalBox
         visible={visible}
         onCancel={handleCancel}
-      />
-      <GroupsModalBox
-        visible={visible}
-        onCancel={handleGroupsCancel}
-      />
-       
-                   
+      />              
     </Content>
 </Layout>
   )
