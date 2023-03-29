@@ -5,21 +5,25 @@ import HomeLeftArea from "../components/homeLeftArea/homeLeftArea";
 import HomeRightArea from "../components/homeRightArea/homeRightArea";
 import styles from "./index.module.css";
 
-const Home = () => {
+import { useEffect } from "react";
+import Schemas from "./schemas";
+
+const Home: React.FunctionComponent = () => {
   const { Content } = Layout;
   return (
-    <Space direction="vertical" className={styles.spaceStyle} size={[0, 48]}>
-      <Layout>
+    <Space direction="vertical" className={styles.space} size={[0, 48]}>
+      <Layout className={styles.layout}>
         <Header />
         <Content>
-          <Row>
+          {/* <Schemas></Schemas>  */}
+     <Row>
             <Col span={16}>
               <HomeLeftArea />
             </Col>
             <Col span={8}>
               <HomeRightArea />
             </Col>
-          </Row>
+          </Row>  
         </Content>
       </Layout>
     </Space>

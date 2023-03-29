@@ -1,0 +1,104 @@
+#displaycard {
+  padding: 0.0625rem;
+  width: 15rem;
+  height: 5rem;
+  left: 1.5rem;
+  margin-right: 3rem;
+  width: 25%;
+  height: 0%;
+  left: 1%;
+  margin-left: 3%;
+  border: 0.0625rem solid black;
+}
+
+.outerbox {
+  background-color: white;
+  /* margin-bottom: 11px; */
+  margin-top: 0.7rem;
+  border-radius: 0.3125rem;
+  border: 0.0625rem solid #ccc;
+  box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  width: 14.925rem;
+  height: 6.375rem;
+  display: flex;
+
+  margin-left: 6rem;
+  justify-content: inherit;
+  align-items: center;
+}
+
+.innerright {
+  height: 7.375rem;
+  width: 7.375rem;
+  border-right: 0.0625rem solid rgb(207, 203, 203);
+  display: flex;
+  flex-direction: column;
+}
+.innerrightTop {
+  width: 7.375rem;
+  border-bottom: 0.0625rem solid rgb(207, 203, 203);
+  height: 5.5rem;
+}
+.innerleft {
+  height: 7.375rem;
+  width: 7.375rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.image {
+  margin-left: 15px;
+  margin-right: 5px;
+  border-bottom: 0.0625rem solid rgb(207, 203, 203);
+  height: 7.5rem;
+  align-content: center;
+  padding: 0.6875rem;
+}
+
+.imageName {
+  align-content: center;
+  padding: 0.6875rem;
+  height: 0.0625rem;
+}
+
+.imageNameText {
+  font-size: 10px;
+  margin-left: 8px;
+}
+
+.items {
+  text-align: center;
+  padding: 0.6875rem;
+}
+.description-box-label {
+  position: absolute;
+  top: -16px;
+  left: 16px;
+  padding: 0 8px;
+  background-color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  color: #999;
+}
+.innerleftTop {
+  height: 3.6875rem;
+  width: 7.375rem;
+  border-bottom: 0.0625rem solid rgb(207, 203, 203);
+}
+.schemaStyle {
+  font-weight: 350;
+  font-size: 1.3rem;
+  margin-top: -0.188rem;
+  color: #a19d9d;
+  margin-left: -0.625rem;
+}
+.schemaNumber {
+  font-weight: 350;
+  font-size: 1.1rem;
+  margin-top: 1.812rem;
+  color: #a19d9d;
+  margin-left: -0.625rem;
+}

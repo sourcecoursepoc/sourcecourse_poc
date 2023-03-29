@@ -1,10 +1,9 @@
 .headerStyle{
     text-align: center;
     color: #fff;
-    height: 54;
-    padding: 0px;
-    margin: 0px;
-    line-height: 64px;
+    padding: 0rem;
+    /* margin: 0rem 0rem 1rem 0rem; */
+    height: 4rem;
     background-color: #7E60BC;
-    margin-bottom: 2em;
+    /* margin-bottom: 1rem; */
 }

@@ -1,0 +1,23 @@
+
+.textAreaBorder {
+    color: rgb(133, 130, 130);
+    border-bottom: 1px solid #ccc ;
+    background-color: #fff;
+    margin-bottom: 1rem;
+  }
+  .rowTextStyle {
+    color: rgb(77, 72, 72);
+    text-align: left;
+    padding-left: 0.5rem;
+    font-size: 12px;
+  }
+  .descriptionbox{
+    margin-top:0.5rem;
+    border-radius: 2px;
+    width: 100%;
+    /* height: 10rem; */
+}
+  
+  
+
+  
