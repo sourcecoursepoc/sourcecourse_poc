@@ -13,7 +13,13 @@ const TopBoxRight: React.FC = () => {
           <Button
             type="link"
             href="/compose"
-            style={{ color: "black", marginLeft: "1rem" }}
+            className={styles.Button}
+            style={{
+              color: "black",
+              width: "8rem",
+              borderTopRightRadius: "0px",
+              borderTopLeftRadius: "0px",
+            }}
           >
             Compose{" "}
           </Button>

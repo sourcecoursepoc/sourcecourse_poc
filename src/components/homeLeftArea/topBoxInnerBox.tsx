@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
-
+import Schemas from './../../components/homeLeftArea/Schemas.png';
 const TopInnerBox: React.FC = () => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
@@ -18,11 +18,19 @@ const TopInnerBox: React.FC = () => {
     <>
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
-          <div className={styles.innerrightTop}></div>
+          <div className={styles.innerrightTop}>
+        <img src="Shemas.png" alt=""></img>
+          </div>
           <Button
             type="link"
             href="/schemas"
-            style={{ color: "black", height: 47 }}
+            className={styles.Button}
+            style={{
+              color: "black",
+              height: 47,
+              borderTopRightRadius: "0px",
+              borderTopLeftRadius: "0px",
+            }}
           >
             Discover
           </Button>

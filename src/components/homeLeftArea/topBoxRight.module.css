@@ -1,3 +1,6 @@
+.Button:hover {
+  background-color: #9e2b87bf; /* replace XXXXXX with the color you want */
+}
 .outerbox {
   background-color: white;
   /* margin-bottom: 11px; */
