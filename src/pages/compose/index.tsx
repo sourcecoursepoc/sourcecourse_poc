@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, Space, Col, Row } from "antd";
+import { Layout, Space, Col, Row, Image } from "antd";
 import Header from "../../components/header/header";
 import { Divider } from "antd";
 import styles from "./index.module.css";

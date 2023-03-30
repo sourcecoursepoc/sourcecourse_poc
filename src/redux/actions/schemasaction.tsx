@@ -5,9 +5,10 @@ import {
   FETCH_SCHEMA_DATABASE,
   FETCH_SCHEMA_DATABASE_SUCCESS,
   FETCH_SCHEMA_DATABASE_FAILURE,
-  ADD_ARRAY
+  ADD_ARRAY,
+  REMOVE_NODE
 } from "./schemaActionTypes";
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, AddArrayAction } from "./schemaTypes";
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, AddArrayAction, RemoveNodeAction } from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -50,4 +51,11 @@ export const addArray = (payload: any): AddArrayAction => ({
   payload,
   
 });
+export function removeNode(uid: string): RemoveNodeAction {
+  console.log("uiddddd",uid)
+  return {
+    type: REMOVE_NODE,
+    payload: { uid},
+  };
+}
 

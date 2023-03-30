@@ -8,7 +8,6 @@ import { fetchProjectFailure, fetchProjectSuccess } from "../actions/fetchProjec
 
 const getProjects = () =>
   axios.get<IPROJECT[]>("http://localhost:8000/projects");
-console.log(getProjects)
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */

@@ -6,6 +6,7 @@ import TreeView from "../../../pages/schemas/treeview";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getDataBaseSelector, getSelectedArraySelector } from "@/redux/selector";
+import { removeNode } from "@/redux/actions/schemasaction";
  //import { fetchDataBaseRequest } from "../../../redux/actions/schemasaction";
 //import { addNode } from '../../redux/actions/schemasaction';
 
@@ -29,6 +30,9 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
     handleExport()
     onCancel()
   }
+  const handleRemove = (uid: string) => {
+    dispatch(removeNode(uid));
+  };
    const database = useSelector(getDataBaseSelector);
    console.log("dataaaaa",selcectData)
  
@@ -40,7 +44,8 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
         footer={null}
         closable={false}
         width={800}
-        bodyStyle={{ height: "75vh", top: "1rem", borderRadius: "5px" }}
+        
+        bodyStyle={{ top: "1rem", borderRadius: "5px" ,height: 'auto', overflow: 'auto' }}
       >
         <Row>
           <Col span={12} className={styles.modelBoxBorder}>
@@ -51,7 +56,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
               type="primary"
               style={{
                 background: "#7E60BC",
-                width: "6rem",
+                width: "5rem",
                 borderRadius: "1px",
                 height: "2rem",
               }}
@@ -61,7 +66,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
             </Button>
           </Col>
         </Row>
-        <Row>
+        <Row >
           <Col span={12} className={styles.treeview}>
             <TreeView db={database} />
           </Col>
@@ -70,6 +75,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
             style={{
               borderTop: "1px solid #ccc",
               borderRight: "1px solid #ccc",
+             
             }}
           >
            {selcectData.map((node:any) => (
@@ -81,7 +87,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
 
                <Col span={1} >
               <Button style={{border:'none',color:'red',background:'white',fontWeight:"normal"}}
-              
+              onClick={() => handleRemove(node.uid)}
               >Remove</Button>
               </Col> </Row>
                 <Row className={styles.lowerDivider}></Row></>

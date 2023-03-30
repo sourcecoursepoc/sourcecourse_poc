@@ -25,8 +25,6 @@ const MainContent = () => {
   const handleCancel = () => {
     setVisible(false);
   };
-  
-
   return (
     <>
     <Layout className={styles.layout}>
@@ -37,13 +35,11 @@ const MainContent = () => {
         onCancel={handleCancel}
         onExport={handleExport} 
       />
-       <Row >
-       
-          {selectedValues.map((value,key) => (
-            <DisplayBox key={value} text={value.tableName} iconName={"server"} icon={<ApartmentOutlined />}  />    
-             // <DisplaySchemaBox key={value} text={value.tableName} attribute={"Attribute / 5"} icon={<ApartmentOutlined />}/>     
-          ))}
-      
+       <Row >     
+          {selectedValues.map((value) => (
+         //   <DisplayBox key={value} text={value.tableName} iconName={"server"} icon={<ApartmentOutlined />}  />    
+              <DisplaySchemaBox key={value} text={value.tableName} attribute={"Attribute / 5"} icon={<ApartmentOutlined style={{fontSize:'2rem',color:'grey'}}/>}/>     
+          ))}     
        </Row>
        <Row style={{marginTop:'1rem'}}>
         <Button icon={<PlusCircleFilled/>} style={{marginLeft:"1.5rem",width:"4rem",height:"3rem",color:"#7E60BC"}}

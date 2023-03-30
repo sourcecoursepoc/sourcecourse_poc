@@ -85,8 +85,8 @@ const TreeView: React.FC<Props> = ({ db }) => {
   };
 
   const renderDB = (db: DBProps[]) => {
-    if(!db){
-      return null;
+    if (!db) {
+      return null; 
     }
     return db.map((item: DBProps) => (
       <TreeNode title={item.DBName} key={item.uid} >

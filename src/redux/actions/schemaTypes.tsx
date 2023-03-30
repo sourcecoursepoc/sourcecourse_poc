@@ -5,7 +5,8 @@ import {
     FETCH_SCHEMA_DATABASE,
     FETCH_SCHEMA_DATABASE_FAILURE,
     FETCH_SCHEMA_DATABASE_SUCCESS,
-    ADD_ARRAY
+    ADD_ARRAY,
+    REMOVE_NODE
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -114,6 +115,7 @@ export type DataBaseActions =
     | FetchDataBaseSuccess
     | FetchDataBaseFailure
     | AddArrayAction
+    |RemoveNodeAction
     ;
 
 
@@ -124,3 +126,7 @@ export interface AddArrayAction {
     payload: any;
     
 }
+export interface RemoveNodeAction  {
+    type:typeof REMOVE_NODE;
+    payload:  { uid: string }; // The ID of the node to remove
+  }
