@@ -10,8 +10,8 @@ const MyTabs = () => {
   };
 
   return (
-    <Tabs defaultActiveKey="1" style={tabsStyle}>
-      <TabPane tab="All projects " key="1"></TabPane>
+    <Tabs defaultActiveKey="1" >
+      <TabPane tab="All projects " key="1" style={{ marginTop:" -15px" }}></TabPane>
     </Tabs>
   );
 };
