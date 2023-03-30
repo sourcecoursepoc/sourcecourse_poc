@@ -2,25 +2,29 @@
     height: 100%;
     background-color: white;
 }
-.content{
-    height: 90%;
+
+.content {
+    height: 100%;
     margin-left: 1rem;
     width: 109%;
     border: 1px solid #ccc;
 }
-.pinkbar{
+
+.pinkbar {
     background: linear-gradient(to right, #c3428d, #FFFFFF);
     padding: 0rem;
     margin: 0rem 0rem 1rem 0rem;
     height: 3rem;
 }
-.descriptionbox{
-    margin-top:2rem;
+
+.descriptionbox {
+    margin-top: 2rem;
     margin-left: 1rem;
     width: 96%;
     height: 8rem;
 }
-.displayBoxContainer .displayCard > div{
+
+.displayBoxContainer .displayCard>div {
     padding: 1px;
     width: 15rem;
     height: 5rem;
@@ -31,4 +35,14 @@
     left: 1%;
     margin-left: 3%;
     border: 1px solid black;
+}
+
+.saveButton {
+    padding: 1.25rem;
+    flex-direction: row-reverse;
+}
+.button{
+    width: 6.25rem;
+    background: green;
+    font-size: 1rem;
 }

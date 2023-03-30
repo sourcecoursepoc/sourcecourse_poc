@@ -3,7 +3,8 @@ import { Tree } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
-import { getDataBaseSelector, getSelectedArraySelector } from '../../redux/selector';
+import { getDataBaseSelector } from '../../redux/selector';
+import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined } from '@ant-design/icons';
 
 const { TreeNode } = Tree;
 
@@ -19,31 +20,21 @@ const TreeView: React.FC<Props> = ({ db }) => {
   const selectColumns = (state: TableProps) => state.columns;
   const Tables = useSelector(selectTables);
   const columns = useSelector(selectColumns);
-  const selcectData = useSelector(getSelectedArraySelector);
-
-  console.log(selcectData, "aaaaaaaaaaaaaaaaaaaaa")
 
   const [selectedNode, setSelectedNode] = useState<any[]>([]);
-  console.log("useEffect");
 
   const onSelect = (keys: any, info: any) => {
-    console.log(info, "info");
 
     const selectedKey = keys[0] as string;
-    console.log(selectedKey, "selectedKey");
-
-    const selectedObj = findNodeByKey(data, Tables, columns, selectedKey);
-    console.log(selectedObj, "selectedObj");
-
+    const selectedObj: any = findNodeByKey(data, Tables, columns, selectedKey);
     // Check if the selected object already exists in the array
-    const exists = selectedNode.some((node) => node ?.uid === selectedObj ?.uid);
+    const exists = selectedNode && selectedObj && selectedNode.filter(Boolean).some((node) => node.uid === selectedObj.uid);
     if (selectedObj && !exists) {
-      setSelectedNode([...selectedNode, selectedObj]);
-      console.log(selectedObj.metadata, "metadata");
-      dispatch(addArray([...selectedNode, selectedObj]));
-      console.log(selectedNode, "selectedNode");
+      setSelectedNode([selectedObj]);
+      dispatch(addArray([selectedObj]));
     }
   };
+
 
   const findNodeByKey = (data: DBProps[], Tables: TableProps[], columns: ColumnProps[], key: string): DBProps | TableProps | ColumnProps | undefined => {
     for (const node of data) {
@@ -69,16 +60,19 @@ const TreeView: React.FC<Props> = ({ db }) => {
     if (!columns) {
       return null;
     }
-
     return columns.map((column: ColumnProps) => (
-      <TreeNode title={column.name} key={column.uid} />
+      <TreeNode title={column.name} key={column.uid} icon={<FolderOutlined />}
+      />
     ));
   };
 
 
   const renderTables = (tables: TableProps[]) => {
     return tables.map((table: TableProps) => (
-      <TreeNode title={table.tableName} key={table.uid} >
+      <TreeNode title={table.tableName} key={table.uid}
+        icon={<PartitionOutlined />}
+        switcherIcon={table.columns.length > 0 ? <DownOutlined /> : undefined}
+      >
         {table.columns.length > 0 && renderColumns(table.columns)}
       </TreeNode>
     ));
@@ -86,12 +80,15 @@ const TreeView: React.FC<Props> = ({ db }) => {
 
   const renderDB = (db: DBProps[]) => {
     return db.map((item: DBProps) => (
-      <TreeNode title={item.DBName} key={item.uid} >
+      <TreeNode title={item.DBName} key={item.uid}
+        icon={<DatabaseOutlined />}
+        switcherIcon={Array.isArray(item.Tables) && item.Tables.length > 0 ? <DownOutlined /> : undefined}
+      >
         {Array.isArray(item.Tables) && item.Tables.length > 0 && renderTables(item.Tables)}
       </TreeNode>
     ));
   };
-  return <Tree onSelect={onSelect}>{renderDB(db)}</Tree>;
+  return <Tree onSelect={onSelect} style={{ fontSize: "20px" }}>{renderDB(db)}</Tree>;
 };
 
 export default TreeView;
