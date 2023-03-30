@@ -47,38 +47,7 @@ export type SchemaActions =
     | FetchSchemaRequest
     | FetchSchemaSuccess
     | FetchSchemaFailure;
-
-
-
-// interface ColumnProps {
-//     name: string;
-//     type: string;
-//     isPrimary: boolean;
-//     unique: boolean;
-//     nullable: boolean;
-//     consumed: string | boolean | number;
-//     consumers: string[];
-//     dataQuality: {
-//       score: string;
-//       description: string;
-//     };
-//   }
-
-//   interface DBTable {
-//     tableName: string;
-//     columns: ColumnProps[];
-//     rowCount: number;
-//     size: string;
-//     mindate: string;
-//     maxdate: string;
-//     yoycount: string;
-//     momcount: string;
-//   }
-
-//   interface IDataBase {
-//     DBName: string;
-//     Tables: TableProps[];
-//   }
+    
 export interface DataBaseState {
     pending: boolean;
     database: DBProps[];
