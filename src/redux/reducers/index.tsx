@@ -4,10 +4,12 @@ import schemaReducer from "../reducers/schemaReducer";
 import projectReducer from "./projectReducer";
 
 import schemaDataBaseReducer from "./schemaDataBaseReducer";
+import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 const rootReducer = combineReducers({
     pipeline:fetchPipelineReducer,
     schema: schemaReducer,
     database:schemaDataBaseReducer,
+    groupdataDatabase:groupdataDatabaseReducer,
     project:projectReducer
 
 });

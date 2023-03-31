@@ -1,7 +1,7 @@
 import { Button, Input, Row } from "antd";
 import styles from "./searchBox.module.css";
 const { Search } = Input;
-import { SearchOutlined, UserOutlined } from "@ant-design/icons";
+
 import { Tooltip } from "antd";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,10 +9,12 @@ import { useEffect } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
 import { addArray } from "../../redux/actions/actions";
-interface ChildProps {
-  searchArray: (array: string[]) => void;
+interface Props  {
+  searchArray: (checked: boolean,array: string[]) => void;
+
 }
-const SearchBar: React.FC<ChildProps> = ({ searchArray }) => {
+const SearchBar: React.FC<Props > = (props: Props) => {
+  const { searchArray } = props;
   const [array, setArray] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
@@ -23,17 +25,17 @@ const SearchBar: React.FC<ChildProps> = ({ searchArray }) => {
     dispatch(fetchProjectRequest());
   }, []);
 
-  const searchItems = (searchValue: string) => {
+  const searchItems = (searchValue: string,event: React.ChangeEvent<HTMLInputElement>) => {
     console.log("searchValue", searchValue);
-
+    const isChecked = event?.target?.checked;
     if (searchValue !== "") {
       // console.log("sssssssssssssss");
       const filteredData = searchProjectNames?.filter((item) =>
         item?.projectName.toLowerCase().includes(searchValue.toLowerCase())
       );
-      searchArray(filteredData);
-    } else {
-    }
+     
+      searchArray(isChecked,filteredData);
+    } 
   };
 
   return (

@@ -5,6 +5,9 @@ import {
     FETCH_SCHEMA_DATABASE,
     FETCH_SCHEMA_DATABASE_FAILURE,
     FETCH_SCHEMA_DATABASE_SUCCESS,
+    FETCH_GROUPDATA_DATABASE,
+    FETCH_GROUPDATA_DATABASE_FAILURE,
+    FETCH_GROUPDATA_DATABASE_SUCCESS,
     ADD_ARRAY
 } from "./schemaActionTypes";
 
@@ -63,6 +66,8 @@ export interface FetchDataBaseFailurePayload {
     error: string;
 }
 
+
+
 export interface FetchDataBaseRequest {
     type: typeof FETCH_SCHEMA_DATABASE;
 
@@ -86,6 +91,44 @@ export type DataBaseActions =
     ;
 
 
+
+    
+export interface GroupdataDataBaseState {
+    pending: boolean;
+    groupdataDatabase: TableProps[];
+    error: string | null;
+    myArray: any[];
+}
+
+export interface FetchGroupdataDataBaseSuccessPayload {
+    groupdataDatabase: TableProps[];
+}
+
+export interface FetchGroupdataDataBaseFailurePayload {
+    error: string;
+}
+
+export interface FetchGroupdataDataBaseRequest {
+    type: typeof FETCH_GROUPDATA_DATABASE;
+
+}
+
+export type FetchGroupdataDataBaseSuccess = {
+    type: typeof FETCH_GROUPDATA_DATABASE_SUCCESS;
+    payload: FetchGroupdataDataBaseSuccessPayload;
+};
+
+export type FetchGroupdataDataBaseFailure = {
+    type: typeof FETCH_GROUPDATA_DATABASE_FAILURE;
+    payload: FetchGroupdataDataBaseFailurePayload;
+};
+
+export type GroupdataDataBaseActions =
+    | FetchGroupdataDataBaseRequest
+    | FetchGroupdataDataBaseSuccess
+    | FetchGroupdataDataBaseFailure
+    | AddArrayAction
+    ;
 
 
 export interface AddArrayAction {

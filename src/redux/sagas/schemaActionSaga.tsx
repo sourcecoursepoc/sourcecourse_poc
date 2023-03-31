@@ -1,7 +1,7 @@
 import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { fetchSchemaSuccess, fetchSchemaFailure, fetchDataBaseSuccess, fetchDataBaseFailure } from "../actions/schemasaction";
-import { ISchema, FetchSchemaRequest, IDataBase } from "../actions/schemaTypes";
+import { ISchema, FetchSchemaRequest, } from "../actions/schemaTypes";
 import { FETCH_SCHEMA_SCHEMADATA, FETCH_SCHEMA_DATABASE } from "../actions/schemaActionTypes";
 
 const getSchema = (requestParams: any) =>
@@ -32,7 +32,7 @@ function* fetchSchemaSaga(requestParams: FetchSchemaRequest) {
 
 
 const getDatabase = () =>
-  axios.get<IDataBase[]>("http://localhost:8000/tables");
+  axios.get<DBProps[]>("http://localhost:8000/tables");
 
 // console.log("get schemaaa",getSchema())
 

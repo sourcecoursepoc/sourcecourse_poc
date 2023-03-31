@@ -1,27 +1,82 @@
 import React from 'react'
-import { Layout, Row, Col } from 'antd';
+import { Layout, Row, Button } from 'antd';
 import styles from "./content.module.css";
 import DescriptionBox from './descriptionbox';
 import DisplayBox from './displaybox';
 import TagBox from './tagbox';
-import { DatabaseOutlined, ApartmentOutlined, SyncOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
+import { getSelectedArraySelector } from '../../redux/selector';
+import { useTranslation } from 'react-i18next';
+
+
 const { Content } = Layout;
 
 export default function SchemaContent() {
+
+    const selcectedData = useSelector(getSelectedArraySelector);
+
+    const selectedMetaData = selcectedData.map(node => node.metadata);
+    const Description = selcectedData.map(node => node.description);
+
+    const descriptionLastIndex = Description.length - 1;
+    const descriptionLastItem = Description[descriptionLastIndex]
+
+    const lastIndex = selectedMetaData.length - 1;
+    const lastItem = selectedMetaData[lastIndex];
+
+    const listItems: any = [];
+    for (const item in lastItem) {
+        listItems.push(
+            <DisplayBox title={item} value={lastItem[item]}></DisplayBox>
+        );
+    }
+
+    const { t } = useTranslation();
+
+    const obj = {
+        "totaltables": "total",
+        "key2": "value2",
+        "key3": "value3"
+    };
+
+    const capitalize = (str: string) => {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+    };
+
+    const capitalizeWords = (str: string) => {
+        return str.split(' ').map(capitalize).join(' ');
+    };
+
+    const capitalizedObj = {};
+
+    for (const key in obj) {
+        if (obj.hasOwnProperty(key)) {
+            const capitalizedKey = capitalizeWords(t(key));
+            const capitalizedValue = capitalizeWords(t(obj[key]));
+            capitalizedObj[capitalizedKey] = capitalizedValue;
+        }
+    }
+
+    console.log(capitalizedObj, "capitalizedObj");
+
+
     return (
         <Layout className={styles.layout}>
             <Content className={styles.content}>
                 <Row className={styles.pinkbar} />
                 <Row gutter={[16, 16]}>
-                    <DisplayBox text={"IN_WT_TABLES"} iconName={"server"} icon={<DatabaseOutlined />}/>
-                    <DisplayBox text={"8"} iconName={"schemas"} icon={<ApartmentOutlined />}/>
-                    <DisplayBox text={"ONLINE"} iconName={"status"} icon={<SyncOutlined />}/>
+
+                    {listItems}
+
                 </Row>
                 <Row className={styles.descriptionbox}>
-                    <DescriptionBox value={"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean blandit vulputate tellus a dapibus. Phasellus volutpat turpis quis massa laoreet blandit. Integer pulvinar ligula at massa auctor, vel vehicula diam malesuada. In malesuada laoreet tellus, et vestibulum velit congue quis. In viverra neque at massa accumsan, id ornare urna bibendum. Quisque tempor vitae sem sed varius. Curabitur leo leo, scelerisque vitae lorem porttitor, efficitur scelerisque nulla. Praesent et luctus sapien."} />
+                    <DescriptionBox value={descriptionLastItem} />
                 </Row>
                 <Row>
-                    <TagBox/>
+                    <TagBox />
+                </Row>
+                <Row className={styles.saveButton}>
+                    <Button className={styles.button}>Save</Button>
                 </Row>
             </Content>
         </Layout>

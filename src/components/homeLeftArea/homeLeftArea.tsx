@@ -3,7 +3,7 @@ import styles from "./homeLeftArea.module.css";
 import TopBox from "./topBox";
 import { Divider, Row, Tabs } from "antd";
 import SearchBar from "./searchBox";
-import TabsInTopBox from "./tabs";
+
 import ProjectContent from "./content";
 import MyTabs from "./demoTab";
 
@@ -16,9 +16,17 @@ const HomeLeftArea: React.FunctionComponent = () => {
   const projectListData = useSelector(getProjectsSelector);
   const projectArray = projectListData[0]?.projects;
   const [parentArray, setParentArray] = useState<string[]>([]);
-  const handleArrayChange = (array: string[]) => {
+  const [isTabClicked, setIsTabClicked] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleArrayChange = (checked: boolean, array: string[]) => {
     console.log("..array...", JSON.stringify(array));
+    setIsTabClicked(false);
+    console.log("..checked..", checked);
+    checked = true;
+    console.log("..checked..", checked);
     parentArray.length = 0;
+    setIsChecked(checked);
     setParentArray(array);
   };
 
@@ -26,6 +34,10 @@ const HomeLeftArea: React.FunctionComponent = () => {
     dispatch(fetchProjectRequest());
   }, []);
 
+  const handleTabClick = () => {
+    setIsChecked(false);
+    setIsTabClicked(true);
+  };
   return (
     <div className={styles.contentStyle}>
       <div>
@@ -35,18 +47,48 @@ const HomeLeftArea: React.FunctionComponent = () => {
         </Row>
         <Row className={styles.searchAndTabStyle}>
           <SearchBar searchArray={handleArrayChange}></SearchBar>
-          <MyTabs></MyTabs>
+          <MyTabs onTabClick={handleTabClick}></MyTabs>
         </Row>
-        {JSON.stringify(parentArray)}
-        {parentArray?.map((item) => (
-          <Row className={styles.contentStyle} key={item.projectId}>
-            {/*  {console.log("sashgscsc")} */}
-            <ProjectContent
-              heading={item.projectName}
-              projectDescription={item.projectDesc}
-            ></ProjectContent>
-          </Row>
-        ))}
+        {!isChecked && !isTabClicked
+          ? parentArray?.map((item) => (
+              <Row className={styles.contentStyle} key={item.projectId}>
+                <ProjectContent
+                  heading={item.projectName}
+                  projectDescription={item.projectDesc}
+                ></ProjectContent>
+              </Row>
+            ))
+          : []}
+        {
+          isChecked
+            ? parentArray?.map((item) => (
+                <Row className={styles.contentStyle} key={item.projectId}>
+                  <ProjectContent
+                    heading={item.projectName}
+                    projectDescription={item.projectDesc}
+                  ></ProjectContent>
+                </Row>
+              ))
+            : projectArray?.map((item) => (
+                <Row className={styles.contentStyle} key={item.projectId}>
+                  <ProjectContent
+                    heading={item.projectName}
+                    projectDescription={item.projectDesc}
+                  ></ProjectContent>
+                </Row>
+              )) /* ([]) */
+        }
+
+        {isTabClicked
+          ? projectArray?.map((item) => (
+              <Row className={styles.contentStyle} key={item.projectId}>
+                <ProjectContent
+                  heading={item.projectName}
+                  projectDescription={item.projectDesc}
+                ></ProjectContent>
+              </Row>
+            ))
+          : []}
       </div>
     </div>
   );
