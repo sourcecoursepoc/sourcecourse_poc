@@ -16,17 +16,13 @@ const HomeLeftArea: React.FunctionComponent = () => {
   const projectListData = useSelector(getProjectsSelector);
   const projectArray = projectListData[0]?.projects;
   const [parentArray, setParentArray] = useState<string[]>([]);
-  const [isTabClicked, setIsTabClicked] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
+  const [isTabClicked, setIsTabClicked] = useState(true);
+  const [isSearch, setIsSearch] = useState(false);
 
-  const handleArrayChange = (checked: boolean, array: string[]) => {
-    console.log("..array...", JSON.stringify(array));
-    setIsTabClicked(false);
-    console.log("..checked..", checked);
-    checked = true;
-    console.log("..checked..", checked);
-    parentArray.length = 0;
-    setIsChecked(checked);
+  const handleArrayChange = (array: string[], isClicked: boolean) => {
+    console.log(isClicked,"parent component search")
+    setIsSearch(isClicked);
+    setIsTabClicked(false)
     setParentArray(array);
   };
 
@@ -34,9 +30,10 @@ const HomeLeftArea: React.FunctionComponent = () => {
     dispatch(fetchProjectRequest());
   }, []);
 
-  const handleTabClick = () => {
-    setIsChecked(false);
-    setIsTabClicked(true);
+  const handleBooleanValueChange = (value: boolean) => {
+    setIsTabClicked(value);
+    setIsSearch(false)
+    console.log(isTabClicked, "in home left are");
   };
   return (
     <div className={styles.contentStyle}>
@@ -47,9 +44,10 @@ const HomeLeftArea: React.FunctionComponent = () => {
         </Row>
         <Row className={styles.searchAndTabStyle}>
           <SearchBar searchArray={handleArrayChange}></SearchBar>
-          <MyTabs onTabClick={handleTabClick}></MyTabs>
+          <MyTabs onBooleanValueChange={handleBooleanValueChange}></MyTabs>
         </Row>
-        {!isChecked && !isTabClicked
+        
+        {isSearch
           ? parentArray?.map((item) => (
               <Row className={styles.contentStyle} key={item.projectId}>
                 <ProjectContent
@@ -58,28 +56,9 @@ const HomeLeftArea: React.FunctionComponent = () => {
                 ></ProjectContent>
               </Row>
             ))
-          : []}
-        {
-          isChecked
-            ? parentArray?.map((item) => (
-                <Row className={styles.contentStyle} key={item.projectId}>
-                  <ProjectContent
-                    heading={item.projectName}
-                    projectDescription={item.projectDesc}
-                  ></ProjectContent>
-                </Row>
-              ))
-            : projectArray?.map((item) => (
-                <Row className={styles.contentStyle} key={item.projectId}>
-                  <ProjectContent
-                    heading={item.projectName}
-                    projectDescription={item.projectDesc}
-                  ></ProjectContent>
-                </Row>
-              )) /* ([]) */
-        }
+          :[]}
 
-        {isTabClicked
+        {isTabClicked &&!isSearch
           ? projectArray?.map((item) => (
               <Row className={styles.contentStyle} key={item.projectId}>
                 <ProjectContent
