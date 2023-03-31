@@ -2,23 +2,24 @@ import React, { ReactNode } from "react";
 import { Card, Row, Col, Divider } from "antd";
 import styles from "./displaySchema.module.css";
 import { DeleteFilled } from "@ant-design/icons";
+import { useSelector } from "react-redux";
+import { getSelectedArraySelector } from "@/redux/selector";
+import { useDispatch } from "react-redux";
+import { removeNode } from "@/redux/actions/schemasaction";
 
 interface MyComponentProps {
   text: string;
   attribute: string;
   icon: ReactNode;
+  uid: string; // new prop for the uid of the node
+  handleRemove: (uid: string) => void;
 }
+const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon,uid,handleRemove }) => {
 
-const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon }) => {
-  
-  //const selcectedMetaData = useSelector(getSelectedArraySelector);
-  //const selectedMetaData = selcectedMetaData.map(node => node.metadata);
- // console.log(selectedMetaData, "selectedMetaDataselectedMetaDataselectedMetaData");
   return (
     <>
       <div className={styles.outerbox}>
-        <div className={styles.innerright}>
-         
+        <div className={styles.innerright}>        
           <Col className={styles.image}>
               {icon}
             </Col>
@@ -27,9 +28,9 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon })
           <Row className={styles.items}><Col style={{width:'90%',fontSize:'1rem',textAlign:'justify',height:'auto'}}>
             {text}</Col>
           <Col style={{paddingLeft:'10px'}}>
-         <DeleteFilled style={{color:"red",height:'auto'}} />
-          </Col>
-          
+         <DeleteFilled style={{color:"red",height:'auto'}}
+          onClick={() => handleRemove(uid)}/>
+          </Col>         
           </Row>
           <Row className={styles.imageName}>
             <Col className={styles.imageNameText}>
@@ -38,7 +39,6 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon })
             </Col></Row>
         </div>
       </div>
-
     </>
   );
 };

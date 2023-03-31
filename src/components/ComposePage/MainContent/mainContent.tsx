@@ -8,13 +8,21 @@ import styles from "./mainContent.module.css";
 import MainIcons from './mainContentIcons';
 import DisplayBox from '@/pages/schemas/displaybox';
 import DisplaySchemaBox from './displaySchema';
-//import { getDataBaseSelector, getSelectedArraySelector } from "@/redux/selector";
-//import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
+import { getSelectedArraySelector } from '@/redux/selector';
+import { useDispatch } from 'react-redux';
+import { removeNode } from '@/redux/actions/schemasaction';
 
 const MainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
   const [selectedValues, setSelectedValues] = useState<any[]>([]);
+  const selcectData = useSelector(getSelectedArraySelector);
+  const dispatch = useDispatch();
+  const handleRemove = (uid: string) => {
+    console.log("uid in main content",uid)
+    dispatch(removeNode(uid));
+  };
 
   const handleExport = (selectedData: any[]) => {
     setSelectedValues(selectedData);
@@ -36,9 +44,11 @@ const MainContent = () => {
         onExport={handleExport} 
       />
        <Row >     
-          {selectedValues.map((value) => (
-         //   <DisplayBox key={value} text={value.tableName} iconName={"server"} icon={<ApartmentOutlined />}  />    
-              <DisplaySchemaBox key={value} text={value.tableName} attribute={"Attribute / 5"} icon={<ApartmentOutlined style={{fontSize:'2rem',color:'grey'}}/>}/>     
+          {selcectData.map((node) => ( 
+              <DisplaySchemaBox key={node} text={node.tableName} uid={node.uid} 
+              attribute={"Attribute / 5"} icon={<ApartmentOutlined style={{fontSize:'2rem',color:'grey'}}/>} 
+              handleRemove={handleRemove}
+              />     
           ))}     
        </Row>
        <Row style={{marginTop:'1rem'}}>

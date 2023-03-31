@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
 import { getDataBaseSelector } from '../../redux/selector';
-import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined } from '@ant-design/icons';
+import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined, PlusOutlined } from '@ant-design/icons';
 
 const { TreeNode } = Tree;
 
@@ -71,7 +71,11 @@ const TreeView: React.FC<Props> = ({ db }) => {
     return tables.map((table: TableProps) => (
       <TreeNode title={table.tableName} key={table.uid}
         icon={<PartitionOutlined />}
-        switcherIcon={table.columns.length > 0 ? <DownOutlined /> : undefined}
+      /*   switcherIcon={[
+          table.columns.length > 0 ? <DownOutlined /> : undefined,
+          <PlusOutlined key="plus-icon" style={{ marginLeft: "20px" }}/>,
+        ]} */
+        switcherIcon={table.columns.length > 0 ? <DownOutlined /> : undefined }
       >
         {table.columns.length > 0 && renderColumns(table.columns)}
       </TreeNode>
@@ -86,6 +90,14 @@ const TreeView: React.FC<Props> = ({ db }) => {
       <TreeNode title={item.DBName} key={item.uid}
         icon={<DatabaseOutlined />}
         switcherIcon={Array.isArray(item.Tables) && item.Tables.length > 0 ? <DownOutlined /> : undefined}
+    /*    switcherIcon={
+        Array.isArray(item.Tables) && item.Tables.length > 0
+          ? [
+              <DownOutlined key="down-icon" />,
+              <PlusOutlined key="plus-icon"  />,
+            ]
+          : [<PlusOutlined key="plus-icon" />]
+      } */
       >
         {Array.isArray(item.Tables) && item.Tables.length > 0 && renderTables(item.Tables)}
       </TreeNode>

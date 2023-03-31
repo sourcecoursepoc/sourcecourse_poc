@@ -10,7 +10,7 @@ interface MyComponentProps {
     size:SizeType;
     href:string;
     onClick: () => void;
-    href:string;
+    
 //buttonLabels: string[];
   }
 const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick,href}) => {
@@ -18,10 +18,9 @@ const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick,href}) => {
 
   return (
     <>   
-           <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} onClick={onClick} href={href}>
+           <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} onClick={onClick} href={href} >
             {text}
-          </Button> 
-         
+          </Button>          
     </>
   );
 };

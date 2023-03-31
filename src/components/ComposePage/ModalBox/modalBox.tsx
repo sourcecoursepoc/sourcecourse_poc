@@ -45,7 +45,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
         closable={false}
         width={800}
         
-        bodyStyle={{ top: "1rem", borderRadius: "5px" ,height: 'auto', overflow: 'auto' }}
+        bodyStyle={{  borderRadius: "5px" ,height: 'auto' }}
       >
         <Row>
           <Col span={12} className={styles.modelBoxBorder}>
@@ -91,8 +91,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
               >Remove</Button>
               </Col> </Row>
                 <Row className={styles.lowerDivider}></Row></>
-                ))}
-         
+                ))}       
           </Col>
         </Row>
       </Modal>

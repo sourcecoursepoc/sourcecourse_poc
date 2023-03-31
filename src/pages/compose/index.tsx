@@ -35,6 +35,7 @@ const Compose = () => {
         return null;
     }
   };
+ 
   return (
     <Space direction="vertical" className={styles.space} size={[0, 48]}>
       <Layout className={styles.layout}>
@@ -51,12 +52,18 @@ const Compose = () => {
           </Row>
 
           <Row>
-            <Col span={3} className={styles.sideButtons}>
-            <MainIcons icon={<HddFilled />} onClick={() => handleIconClick('HddFilled')} />
-        <MainIcons icon={<ContainerFilled />} onClick={() => handleIconClick('ContainerFilled')} />
+            <Col  className={styles.sideButtons}>
+      <Image src="/Schemas.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}onClick={() => handleIconClick('HddFilled')}/> <br/>
+      <Image src="/DB.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image src="/Initial Load.png"style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image src="/sync.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image src="/DB.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/>
+     
+      {/*  <MainIcons icon={<HddFilled />} onClick={() => handleIconClick('HddFilled')} />
+       <MainIcons icon={<ContainerFilled />} onClick={() => handleIconClick('ContainerFilled')} />
         <MainIcons icon={<ApartmentOutlined />} onClick={() => handleIconClick('ApartmentOutlined')} />
         <MainIcons icon={<ClusterOutlined />} onClick={() => handleIconClick('ClusterOutlined')} />
-        <MainIcons icon={<SettingFilled />} onClick={() => handleIconClick('SettingFilled')} />
+        <MainIcons icon={<SettingFilled />} onClick={() => handleIconClick('SettingFilled')} /> */}
             </Col>
            
             <Col span={18}>
