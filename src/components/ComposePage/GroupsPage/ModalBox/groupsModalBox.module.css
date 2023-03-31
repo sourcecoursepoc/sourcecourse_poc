@@ -1,20 +1,19 @@
-
 .textAreaBorder {
-    color: rgb(133, 130, 130);
-    border-bottom: 1px solid #ccc ;
-    background-color: #fff;
-    margin-bottom: 1rem;
-  }
-  .rowTextStyle {
-    color: rgb(77, 72, 72);
-    text-align: left;
-    padding-left: 0.5rem;
-    font-size: 12px;
-  }
-  .descriptionbox{
-    margin-top:0.5rem;
-    border-radius: 2px;
-    width: 100%;
+  color: rgb(133, 130, 130);
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  margin-bottom: 1rem;
+}
+.rowTextStyle {
+  color: rgb(77, 72, 72);
+  text-align: left;
+  padding-left: 0.5rem;
+  font-size: 12px;
+}
+.descriptionbox {
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  width: 100%;
 }
 .lowerDivider {
   border-bottom: 0.0625rem solid #ccc;
@@ -23,10 +22,37 @@
   color: rgb(77, 72, 72);
   text-align: left;
   font-size: 14px;
-
+}
+.icon {
+  font-size: small;
 }
 
-  
-  
-
-  
+.attributesbutton {
+  align-items: center;
+  background-color: #7e60bc;
+  margin-left: 0.5rem;
+  margin-right: 0.25rem;
+  margin-top: 0.5rem;
+  width: 6rem;
+  height: 2rem;
+  font-size: 0.6rem;
+  color: #fff;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-block: 4px;
+  border-radius: 3px;
+}
+.pipelinebutton {
+  align-items: center;
+  background-color: #7e60bc;
+  margin-left: 8rem;
+  margin-top: 0.25rem;
+  width: 8rem;
+  height: 2rem;
+  font-size: 0.6rem;
+  color: #fff;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-block: 4px;
+  border-radius: 30px;
+}
