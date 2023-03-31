@@ -18,12 +18,6 @@ const Schemas = () => {
     dispatch(fetchDataBaseRequest());
 
   }, []);
-  // console.log(database[0].metadata, "database")
-  // const metaData = database[0].metadata;
-
-  // console.log(metaData, "meta")
-  const metadataArray = database.flatMap(obj => obj.Tables.map(table => table.metadata));
-  console.log(metadataArray,"meta");
 
   const { Content } = Layout;
   return (
