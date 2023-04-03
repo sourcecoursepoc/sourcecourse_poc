@@ -9,11 +9,10 @@ import { useEffect } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
 import { addArray } from "../../redux/actions/actions";
-interface Props  {
-  searchArray: (checked: boolean,array: string[]) => void;
-
+interface ChildProps {
+  searchArray: (array: string[], isClicked: boolean) => void;
 }
-const SearchBar: React.FC<Props > = (props: Props) => {
+function SearchBar(props: ChildProps) {
   const { searchArray } = props;
   const [array, setArray] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -25,17 +24,19 @@ const SearchBar: React.FC<Props > = (props: Props) => {
     dispatch(fetchProjectRequest());
   }, []);
 
-  const searchItems = (searchValue: string,event: React.ChangeEvent<HTMLInputElement>) => {
+  const searchItems = (searchValue: string) => {
     console.log("searchValue", searchValue);
-    const isChecked = event?.target?.checked;
     if (searchValue !== "") {
-      // console.log("sssssssssssssss");
       const filteredData = searchProjectNames?.filter((item) =>
         item?.projectName.toLowerCase().includes(searchValue.toLowerCase())
       );
-     
-      searchArray(isChecked,filteredData);
-    } 
+      searchArray(filteredData, true);
+    }
+  };
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setSearchInput(value);
+    searchItems(value);
   };
 
   return (
@@ -45,8 +46,9 @@ const SearchBar: React.FC<Props > = (props: Props) => {
         placeholder="Search"
         style={{ height: "4rem" }}
         onSearch={(e) => searchItems(e)}
+        onChange={handleInputChange}
       />
     </>
   );
-};
+}
 export default SearchBar;

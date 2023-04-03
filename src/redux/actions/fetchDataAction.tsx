@@ -11,6 +11,7 @@ import {
   PipelineActions,
   FetchPipelineRequest,
 } from "./types";
+
 export const fetchPipeline = (): FetchPipelineRequest => ({
   type:  FETCH_PIPELINE_REQUEST,
 });
@@ -20,3 +21,4 @@ export const fetchPipelineSuccess = (
 export const fetchPipelineFailure = (
   payload: FetchPipelineFailurePayload
 ): FetchPipelineFailure => ({ type: FETCH_PIPELINE_FAILURE, payload });
+
