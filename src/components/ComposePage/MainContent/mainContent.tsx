@@ -1,6 +1,6 @@
 import { ApartmentOutlined, DatabaseOutlined, PlusCircleFilled } from '@ant-design/icons';
 import { Button, Layout, Row } from 'antd';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ButtonComponent from '../buttons/buttons';
 import ModalBox from '../ModalBox/modalBox';
 import GroupsModalBox from '../GroupsPage/ModalBox/groupsModalBox';
@@ -17,7 +17,8 @@ const MainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
   const [selectedValues, setSelectedValues] = useState<any[]>([]);
-  const selcectData = useSelector(getSelectedArraySelector);
+  const selcectData = useSelector(getSelectedArraySelector); 
+
   const dispatch = useDispatch();
   const handleRemove = (uid: string) => {
     console.log("uid in main content",uid)
@@ -43,13 +44,17 @@ const MainContent = () => {
         onCancel={handleCancel}
         onExport={handleExport} 
       />
-       <Row >     
+       <Row >   
+      
+
+         
           {selcectData.map((node) => ( 
               <DisplaySchemaBox key={node} text={node.tableName} uid={node.uid} 
-              attribute={"Attribute / 5"} icon={<ApartmentOutlined style={{fontSize:'2rem',color:'grey'}}/>} 
-              handleRemove={handleRemove}
+              attribute={"ATTRIBUTES / "} icon={<ApartmentOutlined style={{fontSize:'2rem',color:'grey'}}/>} 
+              handleRemove={handleRemove} lengthOfColums={node.columns.length}
               />     
           ))}     
+
        </Row>
        <Row style={{marginTop:'1rem'}}>
         <Button icon={<PlusCircleFilled/>} style={{marginLeft:"1.5rem",width:"4rem",height:"3rem",color:"#7E60BC"}}

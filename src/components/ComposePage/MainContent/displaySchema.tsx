@@ -13,8 +13,9 @@ interface MyComponentProps {
   icon: ReactNode;
   uid: string; // new prop for the uid of the node
   handleRemove: (uid: string) => void;
+  lengthOfColums:any;
 }
-const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon,uid,handleRemove }) => {
+const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon,uid,handleRemove,lengthOfColums }) => {
 
   return (
     <>
@@ -34,7 +35,7 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon,ui
           </Row>
           <Row className={styles.imageName}>
             <Col className={styles.imageNameText}>
-              <p >{attribute}
+              <p >{attribute}{lengthOfColums}
               </p>
             </Col></Row>
         </div>
