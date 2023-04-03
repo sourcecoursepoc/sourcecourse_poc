@@ -7,6 +7,7 @@ import GroupsModalBox from "../GroupsPage/ModalBox/groupsModalBox";
 import styles from "../MainContent/mainContent.module.css";
 import MainIcons from "../../../components/ComposePage/MainContent/mainContentIcons";
 
+
 const GroupsMainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
@@ -33,7 +34,7 @@ const GroupsMainContent = () => {
           }}
           onClick={showGroupsModal}
         ></Button>
-        <GroupsModalBox visible={visible} onCancel={handleGroupsCancel} />
+        <GroupsModalBox visible={visible} onCancel={handleGroupsCancel}  />
       </Content>
     </Layout>
   );
