@@ -1,4 +1,5 @@
 import React from "react";
+import { Transcription } from './transcriptionFile';
 import {
   Layout,
   Row,
@@ -30,24 +31,24 @@ const ProjectContent: React.FC<MyComponentProps> = ({
   heading,
   projectDescription,
 }) => {
-  const image: string = "http://dlib.org/dlib/october97/ibm/schema.gif";
-  const image1: string =
-    "http://www.google.comwww.aperfectworld.org/clipart/shapes/triangle11a.png";
+
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
-  const listItems = [];
+  const listItems: any = [];
   const projectArray = projectListData[0]?.projects[0]?.projectDetails;
-  
-  console.log(projectArray,"projectArray");
+  // console.log("projectArray",projectArray)
+  const transcriptList = Transcription(projectArray);
+  // console.log("transcriptList",transcriptList)
+
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
   
-  for (const item in projectArray) {
-    /*  console.log(`${item}: ${projectArray[item]}`); */
+  for (const item in transcriptList) {
+    // console.log(`${item}: ${transcriptList[item]}`);
     listItems.push(
-      <InnerBox title={item} value={projectArray[item]}></InnerBox>
+      <InnerBox title={item} value={transcriptList[item]}></InnerBox>
     );
   }
   return (
