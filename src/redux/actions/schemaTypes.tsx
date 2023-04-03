@@ -50,6 +50,7 @@ export type SchemaActions =
     | FetchSchemaRequest
     | FetchSchemaSuccess
     | FetchSchemaFailure;
+ 
     
 export interface DataBaseState {
     pending: boolean;
