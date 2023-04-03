@@ -7,12 +7,13 @@ import TagBox from './tagbox';
 import { useSelector } from 'react-redux';
 import { getSelectedArraySelector } from '../../redux/selector';
 import { useTranslation } from 'react-i18next';
+import { Transcription } from './transcriptionFile';
 
 
 const { Content } = Layout;
 
 export default function SchemaContent() {
-
+    // console.log(transcriptList,"transcriptListtranscriptList")
     const selcectedData = useSelector(getSelectedArraySelector);
 
     const selectedMetaData = selcectedData.map(node => node.metadata);
@@ -23,42 +24,14 @@ export default function SchemaContent() {
 
     const lastIndex = selectedMetaData.length - 1;
     const lastItem = selectedMetaData[lastIndex];
+    const transcriptList = Transcription(lastItem);
 
     const listItems: any = [];
-    for (const item in lastItem) {
+    for (const item in transcriptList) {
         listItems.push(
-            <DisplayBox title={item} value={lastItem[item]}></DisplayBox>
+            <DisplayBox title={item} value={transcriptList[item]}></DisplayBox>
         );
     }
-
-    const { t } = useTranslation();
-
-    const obj = {
-        "totaltables": "total",
-        "key2": "value2",
-        "key3": "value3"
-    };
-
-    const capitalize = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1);
-    };
-
-    const capitalizeWords = (str: string) => {
-        return str.split(' ').map(capitalize).join(' ');
-    };
-
-    const capitalizedObj = {};
-
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            const capitalizedKey = capitalizeWords(t(key));
-            const capitalizedValue = capitalizeWords(t(obj[key]));
-            capitalizedObj[capitalizedKey] = capitalizedValue;
-        }
-    }
-
-    console.log(capitalizedObj, "capitalizedObj");
-
 
     return (
         <Layout className={styles.layout}>
