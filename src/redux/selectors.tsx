@@ -8,8 +8,10 @@ const getPipelines = (state: AppState) => state.pipeline.pipelines;
 
 const getError = (state: AppState) => state.pipeline.error;
 
-export const getPipelineSelector = createSelector(getPipelines, (pipelines) => pipelines);
-
+export const getPipelineSelector = createSelector(
+  getPipelines,
+  (pipelines) => pipelines
+);
 
 export const getPendingSelector = createSelector(
   getPending,

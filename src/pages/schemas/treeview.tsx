@@ -8,7 +8,7 @@ import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined } fro
 
 const { TreeNode } = Tree;
 
-const TreeView: React.FC<Props> = ({ db }) => {
+const TreeView: React.FC<Props|TableProp > = ({ db,tableDb }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
 
@@ -79,9 +79,6 @@ const TreeView: React.FC<Props> = ({ db }) => {
   };
 
   const renderDB = (db: DBProps[]) => {
-    if (!db) {
-      return null; 
-    }
     return db.map((item: DBProps) => (
       <TreeNode title={item.DBName} key={item.uid}
         icon={<DatabaseOutlined />}
