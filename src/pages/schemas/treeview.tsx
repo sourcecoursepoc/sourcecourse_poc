@@ -45,8 +45,6 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
       dispatch(addArray([selectedObj]));
     }
   };
-
-
   const findNodeByKey = (data: DBProps[], Tables: TableProps[], columns: ColumnProps[], key: string): DBProps | TableProps | ColumnProps | undefined => {
     for (const node of data) {
       if (node.uid === key) {
@@ -66,7 +64,7 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
     return undefined;
   };
 
-console.log(selectedNode,"selectedNode")
+  console.log(selectedNode, "selectedNode")
   const renderColumns = (columns: ColumnProps[] | undefined) => {
     if (!columns) {
       return null;
@@ -76,8 +74,6 @@ console.log(selectedNode,"selectedNode")
       />
     ));
   };
-
-
   const renderTables = (tables: TableProps[]) => {
     return tables.map((table: TableProps) => (
       <TreeNode title={<span>

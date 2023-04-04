@@ -11,7 +11,8 @@ import {
     ADD_ARRAY,
     POST_GROUPDATA_DATABASE,
     POST_GROUPDATA_DATABASE_SUCCESS,
-    POST_GROUPDATA_DATABASE_FAILURE
+    POST_GROUPDATA_DATABASE_FAILURE,
+    REMOVE_NODE
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -92,6 +93,7 @@ export type DataBaseActions =
     | FetchDataBaseSuccess
     | FetchDataBaseFailure
     | AddArrayAction
+    |RemoveNodeAction
     ;
 
 
@@ -132,6 +134,10 @@ export interface AddArrayAction {
     payload: any;
 
 }
+export interface RemoveNodeAction  {
+    type:typeof REMOVE_NODE;
+    payload:  { uid: string }; // The ID of the node to remove
+  }
 
 
 export type GroupdataDataBaseActions =

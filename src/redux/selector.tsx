@@ -10,6 +10,7 @@ const getDataBase = (state: AppState) => state.database.database;
 const getGroupdataDataBase = (state: AppState) => state.groupdataDatabase.groupdataDatabase;
 const getSelectedArray = (state: AppState) => state.database.myArray;
 
+
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getDataBaseSelector = createSelector(getDataBase, (database) => database)
 export const getGroupdataDataBaseSelector = createSelector(getGroupdataDataBase, (groupdataDatabase) => groupdataDatabase)

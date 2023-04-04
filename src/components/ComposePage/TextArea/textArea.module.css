@@ -3,3 +3,11 @@
  border-radius: 1px;
  height: 2rem;
  }
+ .textAreaBorder{
+  
+    color: rgb(133, 130, 130);
+    border-bottom:1px solid #ccc;
+    background-color:#fff;
+   margin-bottom: 1rem;
+ 
+}

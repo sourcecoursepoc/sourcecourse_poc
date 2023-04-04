@@ -1,20 +1,26 @@
-import { Input } from 'antd'
+import { Col, Input, Row } from 'antd'
 import React from 'react';
 import styles from './textArea.module.css';
 
-interface MyComponentProps {
-    placeholder: string; 
-   
-    
-  }
-const TextArea = ({ placeholder}:MyComponentProps) => {
+
+const TextAreaComponent = () => {
   return (
-    <Input 
-      placeholder={placeholder}
-      className={styles.customTextArea}
-     
-    />
+<Col span={15} style={{marginLeft:"5rem"}} className={styles.textAreaBorder}  >
+              <Row style={{marginBottom:"1rem",width:"50%"}} >
+              <Input 
+      placeholder="Name"
+      className={styles.customTextArea}    
+    />         
+              </Row>
+              <Row style={{marginBottom:"1rem",width:"100%"}} >
+              <Input 
+      placeholder="Description"
+      className={styles.customTextArea}   
+    />           
+              </Row>
+            </Col>
   )
 }
 
-export default TextArea
+export default TextAreaComponent
+

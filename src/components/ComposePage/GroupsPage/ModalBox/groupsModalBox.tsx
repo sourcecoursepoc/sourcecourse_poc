@@ -1,14 +1,16 @@
-import TableTree from "@/pages/schemas/tableTree";
-import TreeView from "@/pages/schemas/treeview";
-import { fetchDataBaseRequest, fetchGroupDataRequest } from "@/redux/actions/schemasaction";
+import {
+  fetchDataBaseRequest,
+  fetchGroupDataRequest,
+} from "@/redux/actions/schemasaction";
 import {
   getDataBaseSelector,
   getGroupdataDataBaseSelector,
-  getSelectedArraySelector
+  getSelectedArraySelector,
 } from "@/redux/selector";
 import { Col, Input, Modal, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import TreeView from "../../../../pages/schemas/treeview";
 import styles from "../ModalBox/groupsModalBox.module.css";
 import AttributeButton from "./attributeButton";
 import GroupsModalBoxButtons from "./groupsModalBoxButtons";
@@ -18,16 +20,14 @@ import MiddleIcons from "./middleIcons";
 interface MyModalProps {
   visible?: boolean;
   onCancel?: () => void;
-  //tableDb?: TableProps[];
 }
 
-const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel}) => {
+const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
   const [schema, setSchema] = useState<string | null>(null);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabase = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
-
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
@@ -83,26 +83,30 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel}) => {
           <GroupsModalBoxButtons />
         </Col>
       </Row>
-      <Row style={{ height: "29rem",width:"60rem" }}>
+      <Row style={{ height: "29rem", width: "60rem" }}>
         <Col span={6} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
-          <Row style={{ marginTop: "1rem",width:"14rem" }}>
+          <Row style={{ marginTop: "1rem", width: "14rem" }}>
             <Col span={24} style={{ marginLeft: "0.15rem" }}>
               {/* <SearchBar /> */}
               <Input
                 placeholder="Search"
-                style={{ borderColor: "#ccc", borderRadius: "3px",width:"40" }}
+                style={{
+                  borderColor: "#ccc",
+                  borderRadius: "3px",
+                  width: "40",
+                }}
               />
             </Col>
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-            {groupdataDatabase && <TreeView db={database}/>}
+              {groupdataDatabase && <TreeView db={groupdataDatabase} />}
             </Col>
           </Row>
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
           <AttributeButton />
-          {selcectData.map((node,index) => (
+          {selcectData.map((node, index) => (
             <>
               <div
                 style={{
@@ -132,8 +136,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel}) => {
           ))}
         </Col>
         {/* third partition area */}
-          <GroupsThirdSide/>
-       
+        <GroupsThirdSide />
       </Row>
     </Modal>
   );

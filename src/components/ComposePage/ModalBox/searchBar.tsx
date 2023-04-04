@@ -1,24 +1,15 @@
 import { SearchOutlined } from '@ant-design/icons';
-import { Input } from 'antd';
+import { Input, Tooltip } from 'antd';
 import React from 'react'
-import styles from './searcBar.module.css'
+import styles from './modalBox.module.css'
 
 
 const SearchBar=  () => {
   
-    
       return (
-        <Input.Search
-          placeholder="Search"
-          allowClear
-         
-         // enterButton={<SearchOutlined />}
-          size="large"
-          
-        />
+        <Input className={styles.searchStyle} placeholder="Search"    size="large"
+        suffix={ <Tooltip> <SearchOutlined /></Tooltip>}
+ />    
       );
     }
-  
-
-
 export default SearchBar

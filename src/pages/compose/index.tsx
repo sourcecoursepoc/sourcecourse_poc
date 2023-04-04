@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Layout, Space, Col, Row } from "antd";
+import { Layout, Space, Col, Row, Image } from "antd";
 import Header from "../../components/header/header";
 import { Divider } from "antd";
-import TextArea from "../../components/ComposePage/TextArea/textArea";
 import styles from "./index.module.css";
 import {
   ApartmentOutlined,
@@ -14,7 +13,9 @@ import {
 import MainIcons from "../../components/ComposePage/MainContent/mainContentIcons";
 import MainContent from "../../components/ComposePage/MainContent/mainContent";
 import ButtonComponent from "@/components/ComposePage/buttons/buttonComponent";
+
 import GroupsMainContent from '@/components/ComposePage/GroupsPage/groupsMainContent';
+import TextAreaComponent from '@/components/ComposePage/TextArea/textArea';
 
 const Compose = () => {
   const { Content } = Layout;
@@ -34,24 +35,14 @@ const Compose = () => {
         return null;
     }
   };
+ 
   return (
     <Space direction="vertical" className={styles.space} size={[0, 48]}>
       <Layout className={styles.layout}>
         <Header />
         <Content style={{ marginTop: "1rem" }}>
           <Row>
-            <Col
-              span={15}
-              style={{ marginLeft: "5rem" }}
-              className={styles.textAreaBorder}
-            >
-              <Row style={{ marginBottom: "1rem", width: "50%" }}>
-                <TextArea placeholder="Name" />{" "}
-              </Row>
-              <Row style={{ marginBottom: "1rem", width: "100%" }}>
-                <TextArea placeholder="Description" />{" "}
-              </Row>
-            </Col>
+           <TextAreaComponent/>
             <Col
               span={1}
               className={styles.textAreaBorder}
@@ -61,12 +52,18 @@ const Compose = () => {
           </Row>
 
           <Row>
-            <Col span={3} className={styles.sideButtons}>
-            <MainIcons icon={<HddFilled />} onClick={() => handleIconClick('HddFilled')} />
-        <MainIcons icon={<ContainerFilled />} onClick={() => handleIconClick('ContainerFilled')} />
+            <Col  className={styles.sideButtons}>
+      <Image src="/Schemas.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}onClick={() => handleIconClick('HddFilled')}/> <br/>
+      <Image src="/DB.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image src="/Initial Load.png"style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image src="/sync.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image src="/DB.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/>
+     
+      {/*  <MainIcons icon={<HddFilled />} onClick={() => handleIconClick('HddFilled')} />
+       <MainIcons icon={<ContainerFilled />} onClick={() => handleIconClick('ContainerFilled')} />
         <MainIcons icon={<ApartmentOutlined />} onClick={() => handleIconClick('ApartmentOutlined')} />
         <MainIcons icon={<ClusterOutlined />} onClick={() => handleIconClick('ClusterOutlined')} />
-        <MainIcons icon={<SettingFilled />} onClick={() => handleIconClick('SettingFilled')} />
+        <MainIcons icon={<SettingFilled />} onClick={() => handleIconClick('SettingFilled')} /> */}
             </Col>
            
             <Col span={18}>

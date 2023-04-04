@@ -5,15 +5,18 @@ import {
   FETCH_SCHEMA_DATABASE,
   FETCH_SCHEMA_DATABASE_SUCCESS,
   FETCH_SCHEMA_DATABASE_FAILURE,
+  ADD_ARRAY,
+  REMOVE_NODE,
   FETCH_GROUPDATA_DATABASE,
   FETCH_GROUPDATA_DATABASE_FAILURE,
   FETCH_GROUPDATA_DATABASE_SUCCESS,
-  ADD_ARRAY,
   POST_GROUPDATA_DATABASE,
   POST_GROUPDATA_DATABASE_SUCCESS,
   POST_GROUPDATA_DATABASE_FAILURE
 } from "./schemaActionTypes";
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes } from "./schemaTypes";
+  
+ 
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -78,6 +81,13 @@ export const addArray = (payload: any): AddArrayAction => ({
   payload,
 
 });
+export function removeNode(uid: string): RemoveNodeAction {
+  console.log("uiddddd",uid)
+  return {
+    type: REMOVE_NODE,
+    payload: { uid},
+  };
+}
 
 // Post Action
 
