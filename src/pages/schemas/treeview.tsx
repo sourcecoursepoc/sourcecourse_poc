@@ -8,7 +8,8 @@ import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined } fro
 
 const { TreeNode } = Tree;
 
-const TreeView: React.FC<Props | TableProp> = ({ db, tableDb }) => {
+const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
+  console.log("tableeeeeeee", tableDb);
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
 
@@ -24,7 +25,6 @@ const TreeView: React.FC<Props | TableProp> = ({ db, tableDb }) => {
   const [selectedNode, setSelectedNode] = useState<any[]>([]);
 
   const onSelect = (keys: any, info: any) => {
-
     const selectedKey = keys[0] as string;
     const selectedObj: any = findNodeByKey(data, Tables, columns, selectedKey);
     // Check if the selected object already exists in the array
@@ -82,6 +82,9 @@ const TreeView: React.FC<Props | TableProp> = ({ db, tableDb }) => {
   };
 
   const renderDB = (db: DBProps[]) => {
+    if (!db) {
+      return null;
+    }
     return db.map((item: DBProps) => (
       <TreeNode key={item.uid}
         title={<span>

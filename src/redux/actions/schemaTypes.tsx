@@ -54,6 +54,7 @@ export type SchemaActions =
     | FetchSchemaSuccess
     | FetchSchemaFailure;
 
+    
 export interface DataBaseState {
     pending: boolean;
     database: DBProps[];

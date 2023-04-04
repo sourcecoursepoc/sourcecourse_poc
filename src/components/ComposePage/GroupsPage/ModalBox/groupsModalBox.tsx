@@ -1,31 +1,28 @@
-import { fetchPipeline } from "@/redux/actions/fetchDataAction";
-import { fetchDataBaseRequest } from "@/redux/actions/schemasaction";
+import TableTree from "@/pages/schemas/tableTree";
+import TreeView from "@/pages/schemas/treeview";
+import { fetchDataBaseRequest, fetchGroupDataRequest } from "@/redux/actions/schemasaction";
 import {
   getDataBaseSelector,
   getGroupdataDataBaseSelector,
-  getSelectedArraySelector,
+  getSelectedArraySelector
 } from "@/redux/selector";
-import { getPipelineSelector } from "@/redux/selectors";
-import { InfoCircleOutlined } from "@ant-design/icons";
-import { Col, Input, Modal, Row, Select, Tooltip } from "antd";
+import { Col, Input, Modal, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TreeView from "../../../../pages/schemas/treeview";
 import styles from "../ModalBox/groupsModalBox.module.css";
 import AttributeButton from "./attributeButton";
 import GroupsModalBoxButtons from "./groupsModalBoxButtons";
 import GroupsThirdSide from "./groupsThirdSide";
-import InfoCircleOutlinedFunction from "./infoCircleOutlined";
 import MiddleIcons from "./middleIcons";
 
 interface MyModalProps {
   visible?: boolean;
   onCancel?: () => void;
+  //tableDb?: TableProps[];
 }
 
-const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
+const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel}) => {
   const [schema, setSchema] = useState<string | null>(null);
-
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabase = useSelector(getGroupdataDataBaseSelector);
@@ -34,6 +31,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
+    dispatch(fetchGroupDataRequest());
   }, []);
 
   function handleAddIconClick(node: string) {
@@ -98,7 +96,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-              <TreeView db={database} />
+            {groupdataDatabase && <TreeView db={database}/>}
             </Col>
           </Row>
         </Col>

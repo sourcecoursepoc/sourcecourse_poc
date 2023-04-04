@@ -1,12 +1,9 @@
 import React from "react";
-import { Row, Col, Divider, Statistic } from "antd";
+import { Row, Col } from "antd";
 import styles from "./innerBox.module.css";
-import { icons } from "antd/es/image/PreviewGroup";
+
 import { Image } from "antd";
 import {
-  CloudSyncOutlined,
-  ClusterOutlined,
-  FullscreenExitOutlined,
   GroupOutlined,
   UsergroupAddOutlined,
 } from "@ant-design/icons";
@@ -24,7 +21,7 @@ export default function ({ title, value }: MyStatisticProps) {
         <div className={styles.innerright}>
           <Row className={styles.image}>
             <Col>
-              {title === "initialLoad" && (
+              {title === "Initial Load" && (
                 <Image
                 src="/Initial Load.png"
                 style={{
@@ -36,10 +33,10 @@ export default function ({ title, value }: MyStatisticProps) {
            
               />
               )}
-              {title === "groups" && (
+              {title === "Groups" && (
                 <GroupOutlined style={{ fontSize: "35px" }}></GroupOutlined>
               )}
-              {title === "schema" && (
+              {title === "Schema" && (
                 <Image
                   src="/Schemas.png"
                   style={{
@@ -50,7 +47,7 @@ export default function ({ title, value }: MyStatisticProps) {
                   }}
                 />
               )}
-              {title === "sync" && (
+              {title === "Sync" && (
                 <Image
                 src="/sync.png"
                 style={{
@@ -62,19 +59,17 @@ export default function ({ title, value }: MyStatisticProps) {
     
               />
               )}
-              {title === "users" && (
+              {title === "Users" && (
                 <UsergroupAddOutlined style={{ fontSize: "35px" }} />
               )}
-              {title === "users1" && (
-                <UsergroupAddOutlined style={{ fontSize: "35px" }} />
-              )}
+             
             </Col>
           </Row>
           <Row className={styles.imageName}>
             <Col
               style={{
                 marginLeft: "1rem",
-                fontSize: "0.7rem",
+                fontSize: "0.6rem",
                 marginRight: "0.5rem",
               }}
             >
