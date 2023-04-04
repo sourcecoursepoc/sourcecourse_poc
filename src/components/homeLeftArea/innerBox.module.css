@@ -25,6 +25,7 @@
   margin-top: 0.813rem;
   justify-content: inherit;
   align-items: center;
+  min-height: 3.1rem;
 }
 .innerright {
   height: fit-content;

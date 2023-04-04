@@ -5,12 +5,14 @@ import {
     FETCH_SCHEMA_DATABASE,
     FETCH_SCHEMA_DATABASE_FAILURE,
     FETCH_SCHEMA_DATABASE_SUCCESS,
-    ADD_ARRAY,
-    REMOVE_NODE,
     FETCH_GROUPDATA_DATABASE,
     FETCH_GROUPDATA_DATABASE_FAILURE,
     FETCH_GROUPDATA_DATABASE_SUCCESS,
-  
+    ADD_ARRAY,
+    POST_GROUPDATA_DATABASE,
+    POST_GROUPDATA_DATABASE_SUCCESS,
+    POST_GROUPDATA_DATABASE_FAILURE,
+    REMOVE_NODE
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -52,6 +54,7 @@ export type SchemaActions =
     | FetchSchemaRequest
     | FetchSchemaSuccess
     | FetchSchemaFailure;
+
     
 export interface DataBaseState {
     pending: boolean;
@@ -95,7 +98,7 @@ export type DataBaseActions =
 
 
 
-    
+
 export interface GroupdataDataBaseState {
     pending: boolean;
     groupdataDatabase: TableProps[];
@@ -126,6 +129,17 @@ export type FetchGroupdataDataBaseFailure = {
     payload: FetchGroupdataDataBaseFailurePayload;
 };
 
+export interface AddArrayAction {
+    type: typeof ADD_ARRAY;
+    payload: any;
+
+}
+export interface RemoveNodeAction  {
+    type:typeof REMOVE_NODE;
+    payload:  { uid: string }; // The ID of the node to remove
+  }
+
+
 export type GroupdataDataBaseActions =
     | FetchGroupdataDataBaseRequest
     | FetchGroupdataDataBaseSuccess
@@ -133,13 +147,29 @@ export type GroupdataDataBaseActions =
     | AddArrayAction
     ;
 
+// Post schemas tags and descriprion
 
-export interface AddArrayAction {
-    type: typeof ADD_ARRAY;
-    payload: any;
-    
+export interface PostDataState {
+    loading: boolean;
+    success: boolean;
+    error: string | null;
 }
-export interface RemoveNodeAction  {
-    type:typeof REMOVE_NODE;
-    payload:  { uid: string }; // The ID of the node to remove
-  }
+
+export interface PostDataRequestAction {
+    type: typeof POST_GROUPDATA_DATABASE;
+}
+
+export interface PostDataSuccessAction {
+    type: typeof POST_GROUPDATA_DATABASE_SUCCESS;
+}
+
+export interface PostDataFailureAction {
+    type: typeof POST_GROUPDATA_DATABASE_FAILURE;
+    payload: string;
+}
+
+export type PostDataActionTypes =
+    | PostDataRequestAction
+    | PostDataSuccessAction
+    | PostDataFailureAction;
+

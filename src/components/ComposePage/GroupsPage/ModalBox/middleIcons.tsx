@@ -5,13 +5,15 @@ import styles from "../ModalBox/groupsModalBox.module.css";
 const MiddleIcons = ({index}) => {
   return (
     <Space size={8} style={{ marginRight: "0.5rem" }}>
-
-      {index > 0 && (
+    {index > 0 && (
       <UpOutlined style={{ marginTop: "1rem", fontSize: "10px" }} />
     )}
-    <DownOutlined style={{ marginTop: "1rem", fontSize: "10px" }} />
+    {/* //array.length-1 */}
+    {index < - 1 ? null : (
+      <DownOutlined style={{ marginTop: "1rem", fontSize: "10px" }} />
+    )}
     <DeleteFilled style={{ color: "red", marginTop: "1rem" }} />
-    </Space>
+  </Space>
   );
 };
 
