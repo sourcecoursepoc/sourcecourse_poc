@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Tree } from 'antd';
+import { Tree, Image } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
@@ -8,8 +8,8 @@ import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined } fro
 
 const { TreeNode } = Tree;
 
-const TreeView: React.FC<Props|TableProps[] > = ({ db,tableDb }) => {
-  console.log("tableeeeeeee",tableDb);
+const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
+  console.log("tableeeeeeee", tableDb);
   const dispatch = useDispatch();
   const data = useSelector(getGroupdataDataBaseSelector);
 
@@ -66,10 +66,13 @@ const TreeView: React.FC<Props|TableProps[] > = ({ db,tableDb }) => {
   };
 
 
- const renderTables = (tables: TableProps[]) => {
+  const renderTables = (tables: TableProps[]) => {
     return tables.map((table: TableProps) => (
-      <TreeNode title={table.tableName} key={table.uid}
-        icon={<PartitionOutlined />}
+      <TreeNode title={<span>
+        <Image src="/Schemas.png" style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+        </Image>
+        {table.tableName}
+      </span>} key={table.uid}
         switcherIcon={table.columns.length > 0 ? <DownOutlined /> : undefined}
       >
         {table.columns.length > 0 && renderColumns(table.columns)}
@@ -77,7 +80,7 @@ const TreeView: React.FC<Props|TableProps[] > = ({ db,tableDb }) => {
     ));
   };
 
-  const renderDB = (db: DBProps[] ) => {
+  const renderDB = (db: DBProps[]) => {
     if (!db) {
       return null;
     }
@@ -99,7 +102,7 @@ const TreeView: React.FC<Props|TableProps[] > = ({ db,tableDb }) => {
     ));
     
   };
-  return <Tree onSelect={onSelect} style={{ fontSize: "20px" }}>{renderDB(db)}</Tree>;
+  return <Tree onSelect={onSelect} style={{ fontSize: "20px" }} showIcon>{renderDB(db)}</Tree>;
 };
 
 export default TreeView;
