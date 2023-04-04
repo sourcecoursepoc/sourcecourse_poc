@@ -1,5 +1,9 @@
+import { Button } from 'antd';
+import { SizeType } from 'antd/es/config-provider/SizeContext';
+
+
 import React, { ReactNode, useState } from 'react';
-import { Button, Radio, Space, Divider,SizeType } from 'antd';
+//import { Button, Radio, Space, Divider,SizeType } from 'antd';
 //import type { SizeType } from 'antd/es/config-provider/SizeContext';
 import styles from './buttonStyle.module.css';
 
@@ -13,7 +17,6 @@ interface MyComponentProps {
 //buttonLabels: string[];
   }
 const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick,href},style) => {
-//  const [size, setSize] = useState<SizeType>('large'); // default is 'middle'
 
   return (
     <>   
