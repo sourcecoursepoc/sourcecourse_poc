@@ -2,9 +2,11 @@ import {
     FETCH_SCHEMA_DATABASE,
     FETCH_SCHEMA_DATABASE_FAILURE,
     FETCH_SCHEMA_DATABASE_SUCCESS,
-    ADD_ARRAY
+    ADD_ARRAY,
+    POST_GROUPDATA_DATABASE_FAILURE,
+    POST_GROUPDATA_DATABASE_SUCCESS
 } from "../actions/schemaActionTypes";
-import { DataBaseState, DataBaseActions } from "../actions/schemaTypes";
+import { DataBaseState, DataBaseActions, PostDataActionTypes, PostDataState } from "../actions/schemaTypes";
 
 const initialDataBaseState: DataBaseState = {
     pending: false,
@@ -52,3 +54,25 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
             };
     }
 };
+
+// reducer.ts
+
+const initialState: PostDataState = {
+    loading: false,
+    success: false,
+    error: null,
+};
+
+export const postDataReducer = (state = initialState, action: PostDataActionTypes): PostDataState => {
+    switch (action.type) {
+        case POST_GROUPDATA_DATABASE_FAILURE:
+            return { ...state, loading: true };
+        case POST_GROUPDATA_DATABASE_SUCCESS:
+            return { ...state, loading: false, success: true };
+        case POST_GROUPDATA_DATABASE_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
+    }
+};
+
