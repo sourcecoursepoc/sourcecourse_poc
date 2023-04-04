@@ -7,9 +7,17 @@ const TopBoxRight: React.FC = () => {
     <>
       <div className={styles.outerbox}>
         <div className={styles.innerrightTop}>
-          <Image src="./compose.png"  style={{height:"2.5rem",marginTop:"1.1rem",marginLeft:"2.3rem",width:"3.6rem"}}></Image>
+          <Image
+            src="./compose.png"
+            style={{
+              height: "2.5rem",
+              marginTop: "1.1rem",
+              marginLeft: "2.3rem",
+              width: "3.6rem",
+            }}
+          ></Image>
         </div>
-           <div className={styles.innerrightBottom}>
+        <div className={styles.innerrightBottom}>
           {" "}
           <Button
             type="link"
