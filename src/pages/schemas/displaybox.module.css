@@ -26,8 +26,8 @@
 }
 
 .image {
-    margin-left: 8px;
-    margin-right: 8px;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
     border-bottom: 0.0625rem solid rgb(207, 203, 203);
     height: 3.5rem;
     align-content: center;
@@ -41,7 +41,7 @@
 }
 
 .imageNameText {
-    font-size: 10px;
+    font-size: 0.625rem;
     font-family: monospace;
     color: gray;
     height: "fit-content"
@@ -53,20 +53,20 @@
 
 .description-box-label {
     position: absolute;
-    top: -16px;
-    left: 16px;
-    padding: 0 8px;
+    top: -1rem;
+    left: 1rem;
+    padding: 0 o.5rem;
     background-color: #fff;
-    font-size: 14px;
+    font-size: 0.875rem;
     font-weight: 500;
     color: #999;
 }
 
 .styeText {
-    font-size: 16px;
+    font-size: 1rem;
     text-align: center;
     font-weight: 450;
     font-family: system-ui;
     color: gray;
-    margin-left: -18px;
+    margin-left: -1.125rem;
 }

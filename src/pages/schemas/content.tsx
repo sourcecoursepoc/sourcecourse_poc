@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Layout, Row, Col } from 'antd';
 import styles from "./content.module.css";
 import DescriptionBox from './descriptionbox';
@@ -21,7 +21,6 @@ export default function SchemaContent() {
     const selectedMetaDataLastIndex = selectedMetaData.length - 1;
     const selectedMetaDataLastItem = selectedMetaData[selectedMetaDataLastIndex];
     const selcectedDataLastElement = selcectedData.slice(-1)[0];
-
 
     let selectedValueName = '';
 

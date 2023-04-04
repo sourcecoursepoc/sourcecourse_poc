@@ -12,7 +12,6 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
 
-
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
   }, []);
@@ -64,7 +63,6 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
     return undefined;
   };
 
-  console.log(selectedNode, "selectedNode")
   const renderColumns = (columns: ColumnProps[] | undefined) => {
     if (!columns) {
       return null;

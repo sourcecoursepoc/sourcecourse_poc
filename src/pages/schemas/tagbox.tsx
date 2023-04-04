@@ -29,7 +29,6 @@ const TagBox = () => {
 
     return (
         <>
-            {/* <div style={{ display: 'flex', flexWrap: 'wrap', border: "1px solid", width: "100%" }}> */}
             <Row className={styles.tagBox}>
                 {tags.map((tag) => (
                     <Tag
@@ -48,11 +47,9 @@ const TagBox = () => {
                     onPressEnter={handleInputConfirm}
                     onBlur={handleInputConfirm}
                     placeholder="Tags"
-                    style={{ width: "100%" }}
                     className={styles.inputBox}
                 />
             </Row>
-            {/* </div> */}
         </>
     );
 };
