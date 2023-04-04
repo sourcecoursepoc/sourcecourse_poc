@@ -51,6 +51,9 @@ type TableProps = {
   }
   columns: ColumnProps[];
 }
+type TableProp={
+  tableDb:TableProps[];
+}
 
 type DBProps = {
   DBName: string;

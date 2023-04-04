@@ -1,12 +1,12 @@
 import React from "react";
-import { Row, Col, Divider, Statistic, Button } from "antd";
+import { Row, Col, Divider, Statistic, Button, Image } from "antd";
 import styles from "./topBoxInnerBox.module.css";
 import { icons } from "antd/es/image/PreviewGroup";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
-import Schemas from './../../components/homeLeftArea/Schemas.png';
+
 const TopInnerBox: React.FC = () => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
@@ -19,7 +19,7 @@ const TopInnerBox: React.FC = () => {
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
           <div className={styles.innerrightTop}>
-        <img src="Shemas.png" alt=""></img>
+            <Image src="/Schemas.png"  style={{height:"3rem",marginTop:"1.1rem"}}></Image> 
           </div>
           <Button
             type="link"

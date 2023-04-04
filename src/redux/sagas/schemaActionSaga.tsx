@@ -1,7 +1,7 @@
 import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { fetchSchemaSuccess, fetchSchemaFailure, fetchDataBaseSuccess, fetchDataBaseFailure } from "../actions/schemasaction";
-import { ISchema, FetchSchemaRequest, IDataBase } from "../actions/schemaTypes";
+import { fetchSchemaSuccess, fetchSchemaFailure, fetchDataBaseSuccess, fetchDataBaseFailure, postDataRequest, postDataSuccess, postDataFailure } from "../actions/schemasaction";
+import { ISchema, FetchSchemaRequest, } from "../actions/schemaTypes";
 import { FETCH_SCHEMA_SCHEMADATA, FETCH_SCHEMA_DATABASE } from "../actions/schemaActionTypes";
 
 const getSchema = (requestParams: any) =>
@@ -9,7 +9,7 @@ const getSchema = (requestParams: any) =>
 
 
 /*
-  Worker Saga: Fired on FETCH_TODO_REQUEST action
+  Worker Saga: Fired on FETCH_SCHEMA_REQUEST action
 */
 function* fetchSchemaSaga(requestParams: FetchSchemaRequest) {
 
@@ -32,12 +32,10 @@ function* fetchSchemaSaga(requestParams: FetchSchemaRequest) {
 
 
 const getDatabase = () =>
-  axios.get<IDataBase[]>("http://localhost:8000/tables");
-
-// console.log("get schemaaa",getSchema())
+  axios.get<DBProps[]>("http://localhost:8000/tables");
 
 /*
-  Worker Saga: Fired on FETCH_TODO_REQUEST action
+  Worker Saga: Fired on FETCH_DATABASE_REQUEST action
 */
 function* fetchDataBaseSaga() {
   try {
@@ -55,10 +53,43 @@ function* fetchDataBaseSaga() {
       })
     );
   }
-}
+};
+
+//Post Data
+
+const API_URL = 'https://example.com/api';
+
+export const postData = async (data: any) => {
+  const response = await fetch(`${API_URL}/post-data`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  const responseData = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseData.message || 'Failed to post data.');
+  }
+
+  return responseData;
+};
+
+export const postFormData = (data: any) => async (dispatch: any) => {
+  try {
+    dispatch(postDataRequest());
+    await postData(data);
+    dispatch(postDataSuccess());
+  } catch (error) {
+    dispatch(postDataFailure(error.message));
+  }
+};
+
 
 /*
-  Starts worker saga on latest dispatched `FETCH_TODO_REQUEST` action.
+  Starts worker saga on latest dispatched `FETCH_SCHEMA_REQUEST` action.
   Allows concurrent increments.
 */
 

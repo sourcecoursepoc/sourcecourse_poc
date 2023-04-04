@@ -16,7 +16,6 @@ const Schemas = () => {
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
-
   }, []);
 
   const { Content } = Layout;

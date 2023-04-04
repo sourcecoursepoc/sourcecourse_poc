@@ -6,9 +6,19 @@ import {
   FETCH_SCHEMA_DATABASE_SUCCESS,
   FETCH_SCHEMA_DATABASE_FAILURE,
   ADD_ARRAY,
-  REMOVE_NODE
+  REMOVE_NODE,
+  FETCH_GROUPDATA_DATABASE,
+  FETCH_GROUPDATA_DATABASE_FAILURE,
+  FETCH_GROUPDATA_DATABASE_SUCCESS,
+
+  POST_GROUPDATA_DATABASE,
+  POST_GROUPDATA_DATABASE_SUCCESS,
+  POST_GROUPDATA_DATABASE_FAILURE
 } from "./schemaActionTypes";
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, AddArrayAction, RemoveNodeAction } from "./schemaTypes";
+
+  
+ 
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -46,10 +56,32 @@ export const fetchDataBaseFailure = (
   type: FETCH_SCHEMA_DATABASE_FAILURE,
   payload,
 });
+
+
+export const fetchGroupDataRequest = (): FetchGroupdataDataBaseRequest => ({
+  type: FETCH_GROUPDATA_DATABASE,
+});
+
+
+export const fetchGroupDataSuccess = (
+  payload: FetchGroupdataDataBaseSuccessPayload
+): FetchGroupdataDataBaseSuccess => ({
+  type: FETCH_GROUPDATA_DATABASE_SUCCESS,
+  payload,
+});
+
+export const fetchGroupDataFailure = (
+  payload: FetchGroupdataDataBaseFailurePayload
+): FetchGroupdataDataBaseFailure => ({
+  type: FETCH_GROUPDATA_DATABASE_FAILURE,
+  payload,
+});
+
+
 export const addArray = (payload: any): AddArrayAction => ({
   type: ADD_ARRAY,
   payload,
-  
+
 });
 export function removeNode(uid: string): RemoveNodeAction {
   console.log("uiddddd",uid)
@@ -58,4 +90,16 @@ export function removeNode(uid: string): RemoveNodeAction {
     payload: { uid},
   };
 }
+
+// Post Action
+
+export const postDataRequest = (): PostDataActionTypes => ({ type: POST_GROUPDATA_DATABASE });
+
+export const postDataSuccess = (): PostDataActionTypes => ({ type: POST_GROUPDATA_DATABASE_SUCCESS });
+
+export const postDataFailure = (error: string): PostDataActionTypes => ({
+  type: POST_GROUPDATA_DATABASE_FAILURE,
+  payload: error,
+});
+
 

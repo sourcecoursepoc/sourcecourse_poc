@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Col, Divider, Input, Modal, Row } from "antd";
 import Buttons from "../../buttons/buttons";
 import styles from "../ModalBox/groupsModalBox.module.css";
-import { CloseOutlined, CopyFilled, DeleteFilled, SaveFilled } from "@ant-design/icons";
+import { CloseOutlined, CopyFilled, DeleteFilled, SaveFilled,BranchesOutlined } from "@ant-design/icons";
 
 const GroupsModalBoxuttons = () => {
     return (
@@ -43,6 +43,9 @@ const GroupsModalBoxuttons = () => {
                 onClick={() => {}}
                 href={"/"}
               />
+            </Col>
+            <Col span={6} >
+              <Button icon={<BranchesOutlined className={styles.icon} />} className={styles.pipelinebutton}>Create Pipeline</Button>
             </Col>
           </Row>
           </>
