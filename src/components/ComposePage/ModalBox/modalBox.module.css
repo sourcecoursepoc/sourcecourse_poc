@@ -38,3 +38,32 @@
     border-right:1px solid #b4b1b1;
     background-color:#fff;
 }
+.modal
+{
+   top: 1rem;
+   border-radius: 1px ;
+   
+}
+.modal .ant-modal-content{
+    border-radius: 1px ;
+}
+.searchStyle{
+     width: 250px;   
+     height: 2.5rem;  
+     border-color: #918d8d;  
+     align-content: center;
+    border-radius: 1px  #ccc;
+     margin-left:0.5rem;   
+    }
+    .lowerDivider {
+         border-bottom: 0.0625rem solid #ccc;  
+        }
+        
+        .rowTextStyle { 
+        color: rgb(77, 72, 72);
+        
+     text-align: left;
+        
+         font-size: 14px;
+        
+        }
