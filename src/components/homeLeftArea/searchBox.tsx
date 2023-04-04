@@ -14,7 +14,6 @@ interface ChildProps {
 }
 function SearchBar(props: ChildProps) {
   const { searchArray } = props;
-  const [array, setArray] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
   const searchData = useSelector(getProjectsSelector);
