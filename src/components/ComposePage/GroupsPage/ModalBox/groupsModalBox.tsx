@@ -16,6 +16,7 @@ import AttributeButton from "./attributeButton";
 import GroupsModalBoxButtons from "./groupsModalBoxButtons";
 import GroupsThirdSide from "./groupsThirdSide";
 import MiddleIcons from "./middleIcons";
+import { removeNode } from '@/redux/actions/schemasaction';
 
 interface MyModalProps {
   visible?: boolean;
@@ -34,6 +35,11 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
     dispatch(fetchGroupDataRequest());
   }, []);
 
+  const handleRemove = (uid: string) => {
+ console.log("uid in main content",uid)
+     dispatch(removeNode(uid));
+     };
+     
   function handleAddIconClick(node: string) {
     setSchema(node);
   }
@@ -129,7 +135,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
                     )}
                   </Col>
                 </Row>
-                <MiddleIcons index={index} />
+                <MiddleIcons index={index} handleRemove={handleRemove}/>
               </div>
               <Row className={styles.lowerDivider}></Row>
             </>

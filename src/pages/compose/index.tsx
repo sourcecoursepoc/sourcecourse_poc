@@ -53,11 +53,11 @@ const Compose = () => {
 
           <Row>
             <Col  className={styles.sideButtons}>
-      <Image src="/Schemas.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}onClick={() => handleIconClick('HddFilled')}/> <br/>
-      <Image src="/DB.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
-      <Image src="/Initial Load.png"style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
-      <Image src="/sync.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
-      <Image src="/DB.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/>
+      <Image preview={false} src="/Schemas.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}onClick={() => handleIconClick('HddFilled')}/> <br/>
+      <Image preview={false} src="/DB.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}} onClick={() => handleIconClick('ContainerFilled')}/><br/>
+      <Image preview={false} src="/Initial Load.png"style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image preview={false} src="/sync.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
+      <Image preview={false} src="/DB.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/>
      
       {/*  <MainIcons icon={<HddFilled />} onClick={() => handleIconClick('HddFilled')} />
        <MainIcons icon={<ContainerFilled />} onClick={() => handleIconClick('ContainerFilled')} />

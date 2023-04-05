@@ -51,7 +51,7 @@ const MainContent = () => {
           {selcectData.map((node) => ( 
               <DisplaySchemaBox key={node} text={node.tableName} uid={node.uid} 
               attribute={"ATTRIBUTES / "} icon={<ApartmentOutlined style={{fontSize:'2rem',color:'grey'}}/>} 
-              handleRemove={handleRemove} lengthOfColums={node.columns.length}
+              handleRemove={handleRemove} lengthOfColums={node?.columns?.length}
               />     
           ))}     
 
