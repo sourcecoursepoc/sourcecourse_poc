@@ -14,29 +14,29 @@ interface ChildProps {
 }
 function SearchBar(props: ChildProps) {
   const { searchArray } = props;
-  const [array, setArray] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
   const dispatch = useDispatch();
   const searchData = useSelector(getProjectsSelector);
-  const searchProjectNames = searchData[0]?.projects;
-
-  useEffect(() => {
+  const searchArrayData = searchData[0]?.projects;
+  const [searchInput, setSearchInput] = useState("");
+ 
+useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
 
-  const searchItems = (searchValue: string) => {
+  const handleSearchItems = (searchValue: string) => {
     console.log("searchValue", searchValue);
     if (searchValue !== "") {
-      const filteredData = searchProjectNames?.filter((item) =>
+      const filteredData = searchArrayData?.filter((item) =>
         item?.projectName.toLowerCase().includes(searchValue.toLowerCase())
       );
       searchArray(filteredData, true);
     }
   };
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setSearchInput(value);
-    searchItems(value);
+    handleSearchItems(value);
   };
 
   return (
@@ -45,8 +45,9 @@ function SearchBar(props: ChildProps) {
         className={styles.searchStyle}
         placeholder="Search"
         style={{ height: "4rem" }}
-        onSearch={(e) => searchItems(e)}
+        onSearch={(e) => handleSearchItems(e)}
         onChange={handleInputChange}
+        size="large"
       />
     </>
   );

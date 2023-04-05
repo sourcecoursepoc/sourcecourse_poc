@@ -19,22 +19,21 @@ const HomeLeftArea: React.FunctionComponent = () => {
   const [isTabClicked, setIsTabClicked] = useState(true);
   const [isSearch, setIsSearch] = useState(false);
 
-  const handleArrayChange = (array: string[], isClicked: boolean) => {
-    console.log(isClicked,"parent component search")
-    setIsSearch(isClicked);
-    setIsTabClicked(false)
-    setParentArray(array);
-  };
-
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
 
+  const handleArrayChange = (array: string[], isClicked: boolean) => {
+    setIsSearch(isClicked);
+    setIsTabClicked(false);
+    setParentArray(array);
+  };
+
   const handleBooleanValueChange = (value: boolean) => {
     setIsTabClicked(value);
-    setIsSearch(false)
-    console.log(isTabClicked, "in home left are");
+    setIsSearch(false);
   };
+
   return (
     <div className={styles.contentStyle}>
       <div>
@@ -46,7 +45,7 @@ const HomeLeftArea: React.FunctionComponent = () => {
           <SearchBar searchArray={handleArrayChange}></SearchBar>
           <MyTabs onBooleanValueChange={handleBooleanValueChange}></MyTabs>
         </Row>
-        
+
         {isSearch
           ? parentArray?.map((item) => (
               <Row className={styles.contentStyle} key={item.projectId}>
@@ -56,9 +55,9 @@ const HomeLeftArea: React.FunctionComponent = () => {
                 ></ProjectContent>
               </Row>
             ))
-          :[]}
+          : []}
 
-        {isTabClicked &&!isSearch
+        {isTabClicked && !isSearch
           ? projectArray?.map((item) => (
               <Row className={styles.contentStyle} key={item.projectId}>
                 <ProjectContent

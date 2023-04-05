@@ -3,18 +3,15 @@ import { Row, Col } from "antd";
 import styles from "./innerBox.module.css";
 
 import { Image } from "antd";
-import {
-  GroupOutlined,
-  UsergroupAddOutlined,
-} from "@ant-design/icons";
+import { GroupOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 export interface ChildComponentProps {
   image: string;
 }
-interface MyStatisticProps {
+interface InnerBoxProps {
   title: string;
   value: number;
 }
-export default function ({ title, value }: MyStatisticProps) {
+export default function ({ title, value }: InnerBoxProps) {
   return (
     <>
       <div className={styles.outerbox}>
@@ -23,15 +20,13 @@ export default function ({ title, value }: MyStatisticProps) {
             <Col>
               {title === "Initial Load" && (
                 <Image
-                src="/Initial Load.png"
-                style={{
-                  width: "4.97rem",
-                  marginBottom: "-0.2rem",
-                  marginLeft: "-1.5rem",
-                  
-                }}
-           
-              />
+                  src="/Initial Load.png"
+                  style={{
+                    width: "4.97rem",
+                    marginBottom: "-0.2rem",
+                    marginLeft: "-1.5rem",
+                  }}
+                />
               )}
               {title === "Groups" && (
                 <GroupOutlined style={{ fontSize: "35px" }}></GroupOutlined>
@@ -49,20 +44,18 @@ export default function ({ title, value }: MyStatisticProps) {
               )}
               {title === "Sync" && (
                 <Image
-                src="/sync.png"
-                style={{
-                  height: "1.9rem",
-                  marginBottom: "0.1rem",
-                  marginLeft: "-0.8rem",
-                  marginTop: "0.1rem",
-                }}
-    
-              />
+                  src="/sync.png"
+                  style={{
+                    height: "1.9rem",
+                    marginBottom: "0.1rem",
+                    marginLeft: "-0.8rem",
+                    marginTop: "0.1rem",
+                  }}
+                />
               )}
               {title === "Users" && (
                 <UsergroupAddOutlined style={{ fontSize: "35px" }} />
               )}
-             
             </Col>
           </Row>
           <Row className={styles.imageName}>
