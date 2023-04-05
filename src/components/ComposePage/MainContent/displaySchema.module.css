@@ -18,9 +18,9 @@
     box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    width: 20rem;
+    width: 18.5rem;
     height: auto;
-    margin-left: 1.5rem;
+    margin-left: 1rem;
     display: flex;
     justify-content: inherit;
     align-items: center;
@@ -52,8 +52,10 @@
 }
 
 .imageNameText {
-    font-size: 10px;
-    margin-left: 8px;
+    font-size: 0.6rem;
+    margin-left: 0.1rem;
+    font-weight: normal;
+    color: gray;
 }
 
 .items {

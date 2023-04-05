@@ -11,6 +11,7 @@
     padding-right: 149px;
     margin-bottom: 1rem;
     border-bottom: 1px solid black;
+   
 }
 .modelBoxBorder{
   
@@ -32,11 +33,12 @@
    padding-left: 38%;
 }
 .treeview{
-    text-align:center;
+    text-align:justify;
     min-height: 400px;
     color: #000;
     border-right:1px solid #b4b1b1;
     background-color:#fff;
+    word-break: break-all;
 }
 .modal
 {
@@ -53,17 +55,19 @@
      border-color: #918d8d;  
      align-content: center;
     border-radius: 1px  #ccc;
-     margin-left:0.5rem;   
+     margin-left:0.5rem; 
+    
     }
     .lowerDivider {
          border-bottom: 0.0625rem solid #ccc;  
         }
         
         .rowTextStyle { 
-        color: rgb(77, 72, 72);
-        
+      /*   color: rgb(77, 72, 72); */
+        font-weight: 500;
      text-align: left;
-        
-         font-size: 14px;
-        
+     word-break: break-all;
+         font-size: '0.8rem';
+        margin-left: 1rem;
+        height: 2.5rem; 
         }

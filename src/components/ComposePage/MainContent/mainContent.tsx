@@ -1,5 +1,5 @@
 import { ApartmentOutlined, DatabaseOutlined, PlusCircleFilled } from '@ant-design/icons';
-import { Button, Layout, Row } from 'antd';
+import { Button, Image, Layout, Row } from 'antd';
 import React, { useEffect, useState } from 'react'
 import ButtonComponent from '../buttons/buttons';
 import ModalBox from '../ModalBox/modalBox';
@@ -16,23 +16,40 @@ import { removeNode } from '@/redux/actions/schemasaction';
 const MainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
+  const [exportClicked, setExportClicked] = useState(false);
   const [selectedValues, setSelectedValues] = useState<any[]>([]);
+  const [lastIndexes, setLastIndexes] = useState<any[]>([]);
   const selcectData = useSelector(getSelectedArraySelector); 
+  const lastIndex= selcectData.slice(-1)[0]
+  
+  useEffect(()=>{
+    if(lastIndex && 'tableName' in lastIndex && lastIndex.columns && lastIndex.columns.length >0)
+    {  
+      const exists = lastIndexes && lastIndex && lastIndexes.filter(Boolean).some((node) => node.uid === lastIndex.uid);
+      if(lastIndexes && !exists){
+      setLastIndexes(prevLastIndexes => [...prevLastIndexes, lastIndex]);   }
+    }
+   
+  },[selcectData])
 
   const dispatch = useDispatch();
   const handleRemove = (uid: string) => {
-    console.log("uid in main content",uid)
     dispatch(removeNode(uid));
+    setLastIndexes(lastIndexes => lastIndexes.filter(node => node.uid !== uid));
   };
 
-  const handleExport = (selectedData: any[]) => {
-    setSelectedValues(selectedData);
+  const handleExport = (lastIndexes: any[]) => {
+    setExportClicked(true)
+    setLastIndexes(lastIndexes);
+
   };
   const showModal = () => {
     setVisible(true);
+   
   };
   const handleCancel = () => {
     setVisible(false);
+    
   };
   return (
     <>
@@ -44,22 +61,20 @@ const MainContent = () => {
         onCancel={handleCancel}
         onExport={handleExport} 
       />
-       <Row >   
-      
-
-         
-          {selcectData.map((node) => ( 
-              <DisplaySchemaBox key={node} text={node.tableName} uid={node.uid} 
-              attribute={"ATTRIBUTES / "} icon={<ApartmentOutlined style={{fontSize:'2rem',color:'grey'}}/>} 
-              handleRemove={handleRemove} lengthOfColums={node?.columns?.length}
+      {exportClicked &&(
+       <Row >               
+          {lastIndexes.map((node:any) => ( 
+              <DisplaySchemaBox key={node.tableName} text={node.tableName} uid={node.uid} 
+              attribute={"ATTRIBUTES / "} icon={ <Image preview={false}src="/Schemas.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+              </Image> } 
+              handleRemove={handleRemove}  lengthOfColums={node?.columns?.length} 
               />     
           ))}     
-
-       </Row>
+       </Row>)}
        <Row style={{marginTop:'1rem'}}>
         <Button icon={<PlusCircleFilled/>} style={{marginLeft:"1.5rem",width:"4rem",height:"3rem",color:"#7E60BC"}}
         onClick={showModal}
-        ></Button>   </Row>                  
+        ></Button> </Row>                  
     </Content>
 </Layout>
 </>

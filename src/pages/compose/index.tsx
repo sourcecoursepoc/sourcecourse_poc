@@ -53,17 +53,12 @@ const Compose = () => {
 
           <Row>
             <Col  className={styles.sideButtons}>
-      <Image preview={false} src="/Schemas.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}onClick={() => handleIconClick('HddFilled')}/> <br/>
-      <Image preview={false} src="/DB.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}} onClick={() => handleIconClick('ContainerFilled')}/><br/>
-      <Image preview={false} src="/Initial Load.png"style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
-      <Image preview={false} src="/sync.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/><br/>
-      <Image preview={false} src="/DB.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}/>
-     
-      {/*  <MainIcons icon={<HddFilled />} onClick={() => handleIconClick('HddFilled')} />
-       <MainIcons icon={<ContainerFilled />} onClick={() => handleIconClick('ContainerFilled')} />
-        <MainIcons icon={<ApartmentOutlined />} onClick={() => handleIconClick('ApartmentOutlined')} />
-        <MainIcons icon={<ClusterOutlined />} onClick={() => handleIconClick('ClusterOutlined')} />
-        <MainIcons icon={<SettingFilled />} onClick={() => handleIconClick('SettingFilled')} /> */}
+      <Image preview={false} src="/Schemas.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}} onClick={() => handleIconClick('HddFilled')} alt=""/> <br/>
+      <Image preview={false} src="/DB.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt="" onClick={() => handleIconClick('ContainerFilled')}/><br/>
+      <Image preview={false} src="/Initial Load.png"style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt=""/><br/>
+      <Image preview={false} src="/sync.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt=""/><br/>
+      <Image preview={false} src="/DB.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt=""/>
+
             </Col>
            
             <Col span={18}>

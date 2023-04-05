@@ -1,4 +1,4 @@
-import { Button, Col, Modal, Row } from "antd";
+import { Button, Col, Image, Modal, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import SearchBar from "./searchBar";
 import styles from "./modalBox.module.css";
@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getDataBaseSelector, getSelectedArraySelector } from "@/redux/selector";
 import { removeNode } from "@/redux/actions/schemasaction";
+import { PlusCircleFilled, PlusOutlined } from "@ant-design/icons";
  //import { fetchDataBaseRequest } from "../../../redux/actions/schemasaction";
 //import { addNode } from '../../redux/actions/schemasaction';
 
@@ -17,13 +18,31 @@ interface MyModalProps {
 }
 
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
+  const [lastIndexes, setLastIndexes] = useState<any[]>([]); // initialize an empty array
+
   const selcectData = useSelector(getSelectedArraySelector);
-  //const Description = selcectData.map(node => node.description);
+
+  const lastIndex= selcectData.slice(-1)[0]
+  
+  useEffect(()=>{
+    if(lastIndex && 'tableName' in lastIndex && lastIndex.columns && lastIndex.columns.length >0)
+    {  
+      const exists = lastIndexes && lastIndex && lastIndexes.filter(Boolean).some((node) => node.uid === lastIndex.uid  );
+      if(lastIndexes && !exists){
+      setLastIndexes(prevLastIndexes => [...prevLastIndexes, lastIndex]);   }
+    }
+   
+  },[selcectData])
+ 
+
+  console.log("selcectData last index",lastIndexes)
+  const tableArray = selcectData.map((node:any) => node.tableName);
+  console.log("tableArray",tableArray)
 
   const dispatch = useDispatch();
 
   const handleExport = () => {
-    onExport(selcectData);
+    onExport(lastIndexes);
   };
   const handleExportButton=()=>
   {
@@ -32,6 +51,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
   }
   const handleRemove = (uid: string) => {
     dispatch(removeNode(uid));
+    setLastIndexes(lastIndexes => lastIndexes.filter(node => node.uid !== uid));
   };
    const database = useSelector(getDataBaseSelector);
    console.log("dataaaaa",selcectData)
@@ -45,7 +65,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
         closable={false}
         width={800}
         
-        bodyStyle={{  borderRadius: "5px" ,height: 'auto' }}
+        bodyStyle={{  borderRadius: "5px" ,maxHeight:'500px',  overflowY: "auto" }}
       >
         <Row>
           <Col span={12} className={styles.modelBoxBorder}>
@@ -68,7 +88,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
         </Row>
         <Row >
           <Col span={12} className={styles.treeview}>
-            <TreeView db={database} />
+            <TreeView db={database} iconImage={<PlusOutlined style={{width:'3rem',fontSize:'0.8rem',color:'#7E60BC',strokeWidth: '2' }}/>}/>
           </Col>
           <Col
             span={12}
@@ -77,16 +97,17 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
               borderRight: "1px solid #ccc",
              
             }}
-          >
-           {selcectData.map((node:any) => (
+          >         
+           {lastIndexes.map((node:any) => (
            <> <Row align={"middle"} >
              <Col span={18} key={node.tableName}
             className={styles.rowTextStyle}
-             >{node.tableName && <p>{node.tableName}</p>}
+             >{node && node?.tableName && <p><span> <Image src="/Schemas.png" preview={false} style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.3rem" }}>
+             </Image> </span>{node?.tableName}</p>}
              </Col>
 
                <Col span={1} >
-              <Button style={{border:'none',color:'red',background:'white',fontWeight:"normal"}}
+              <Button style={{border:'none',color:'red',background:'white',fontWeight:"500",width:'1rem',fontSize:'0.7rem'}}
               onClick={() => handleRemove(node.uid)}
               >Remove</Button>
               </Col> </Row>
