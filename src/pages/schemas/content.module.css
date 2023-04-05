@@ -24,25 +24,15 @@
     height: 8rem;
 }
 
-.displayBoxContainer .displayCard>div {
-    padding: 1px;
-    width: 15rem;
-    height: 5rem;
-    left: 1.5rem;
-    margin-right: 3rem;
-    width: 25%;
-    height: 0%;
-    left: 1%;
-    margin-left: 3%;
-    border: 1px solid black;
-}
-
 .saveButton {
     padding: 1.25rem;
     flex-direction: row-reverse;
 }
-.button{
-    width: 6.25rem;
-    background:#7E60BC;
-    font-size: 1rem;
+
+.headerText {
+    font-weight: bold;
+    font-size: 17px;
+    left: 20px;
+    color: white;
+    top: 14px;
 }

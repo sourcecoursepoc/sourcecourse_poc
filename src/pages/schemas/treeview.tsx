@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { Tree, Image } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -11,6 +11,7 @@ const { TreeNode } = Tree;
 const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
+
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
   }, []);
@@ -62,7 +63,6 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
     return undefined;
   };
 
-console.log(selectedNode,"selectedNode")
   const renderColumns = (columns: ColumnProps[] | undefined) => {
     if (!columns) {
       return null;
@@ -75,7 +75,7 @@ console.log(selectedNode,"selectedNode")
   const renderTables = (tables: TableProps[]) => {
     return tables.map((table: TableProps) => (
       <TreeNode title={<span>
-        <Image src="/Schemas.png" style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+        <Image preview={false} src="/Schemas.png" style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
         </Image>
         {table.tableName}
       </span>} key={table.uid}
@@ -93,7 +93,7 @@ console.log(selectedNode,"selectedNode")
     return db.map((item: DBProps) => (
       <TreeNode key={item.uid}
         title={<span>
-          <Image src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+          <Image preview={false} src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
           </Image>
           {item.DBName}
         </span>}
