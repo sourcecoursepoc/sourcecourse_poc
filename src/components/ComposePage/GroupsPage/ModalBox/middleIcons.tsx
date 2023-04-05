@@ -30,3 +30,15 @@ const MiddleIcons = ({ index, name, onUpArrowClick, onDownArrowClick }) => {
 };
 
 export default MiddleIcons;
+
+{/* <Button style={{border:'none',color:'red',background:'white',fontWeight:"normal"}}
+
+ onClick={() => handleRemove(node.uid)}
+
+ >Remove</Button>
+
+const handleRemove = (uid: string) => {
+
+      dispatch(removeNode(uid));
+  
+    }; */}
