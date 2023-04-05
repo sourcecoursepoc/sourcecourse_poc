@@ -1,8 +1,7 @@
 import React from "react";
-import { Card, Row, Col, Divider, Image } from "antd";
+import { Row, Col, Image } from "antd";
 import styles from "./displaybox.module.css";
 import "./content.module.css";
-import { ApartmentOutlined } from "@ant-design/icons";
 
 export interface ChildComponentProps {
   image: string;
@@ -19,13 +18,12 @@ const DisplayBox: ({ title, value }: MyComponentProps) => JSX.Element = ({ title
           <Row className={styles.image}
           ><Col>
               {title === "Status" ? (
-                <Image src="/Status.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+                <Image preview={false} src="/Status.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
               ) : title === "Size" ? (
-                <Image src="/Size.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+                <Image preview={false} src="/Size.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
               ) : (
-                    <Image src="/sync.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+                    <Image preview={false} src="/sync.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
                   )}
-              {/* {<ApartmentOutlined />} */}
             </Col>
           </Row>
           <Row className={styles.imageName}>

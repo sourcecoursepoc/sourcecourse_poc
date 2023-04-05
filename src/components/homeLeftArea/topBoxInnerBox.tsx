@@ -19,7 +19,10 @@ const TopInnerBox: React.FC = () => {
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
           <div className={styles.innerrightTop}>
-            <Image src="/Schemas.png"  style={{height:"3rem",marginTop:"1.1rem"}}></Image> 
+            <Image
+              src="/Schemas.png"
+              style={{ height: "3rem", marginTop: "1.1rem" }}
+            ></Image>
           </div>
           <Button
             type="link"

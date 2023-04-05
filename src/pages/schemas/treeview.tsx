@@ -19,6 +19,7 @@ const { TreeNode } = Tree;
 const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
+
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
   }, []);
@@ -78,7 +79,7 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
     return undefined;
   };
 
-  console.log(selectedNode, "selectedNode");
+
   const renderColumns = (columns: ColumnProps[] | undefined) => {
     if (!columns) {
       return null;
@@ -124,7 +125,7 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
       item.DBName ? (
         <TreeNode
         title={<span>
-          <Image src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+          <Image preview={false} src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
           </Image>
           {item.DBName}
         </span>}

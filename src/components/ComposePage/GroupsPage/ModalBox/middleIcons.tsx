@@ -1,23 +1,31 @@
-import { DeleteFilled, DeleteOutlined, DownOutlined, UpOutlined } from "@ant-design/icons";
-import { Button, Space } from "antd";
-import styles from "../ModalBox/groupsModalBox.module.css";
+import {
+  DeleteFilled,
+  DeleteOutlined,
+  DownOutlined,
+  UpOutlined,
+} from "@ant-design/icons";
+import { Space } from "antd";
 
-interface MyComponent{
-uid: string;
- handleRemove: (uid: string) => void;
-}
-
-const MiddleIcons:React.FC<MyComponent>= ({index,handleRemove,uid}) => {
+import React from "react";
+const MiddleIcons = ({ index, name, onUpArrowClick, onDownArrowClick }) => {
   return (
-   <Space size={8} style={{ marginRight: "0.5rem" }}>
-  {index > 0 && (
-    <UpOutlined style={{ marginTop: "1rem", fontSize: "10px" }} />
-  )}
-  {index === length - 1 ? null : (
-    <DownOutlined style={{ marginTop: "1rem", fontSize: "10px" }} />
-  )}
-  <DeleteFilled style={{ color: "red", marginTop: "1rem" }} onClick={() => handleRemove(uid)}/>
-</Space>
+    <Space size={8} style={{ marginRight: "0.5rem" }}>
+      {index > 0 && (
+        <UpOutlined
+          style={{ marginTop: "1rem", fontSize: "10px" }}
+          onClick={onUpArrowClick}
+        />
+      )}
+      {/* //array.length-1 */}
+      {index < -1 ? null : (
+        <DownOutlined
+          style={{ marginTop: "1rem", fontSize: "10px" }}
+          onClick={onDownArrowClick}
+        />
+      )}
+
+      <DeleteFilled style={{ color: "red", marginTop: "1rem" }} />
+    </Space>
   );
 };
 

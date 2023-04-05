@@ -39,11 +39,21 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
  console.log("uid in main content",uid)
      dispatch(removeNode(uid));
      };
-     
+
   function handleAddIconClick(node: string) {
     setSchema(node);
   }
+  const handleArrowClick = (index: number, direction: "up" | "down") => {
+    const newData = [...selcectData];
+    const currentIndex = index;
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
 
+    if (targetIndex >= 0 && targetIndex < newData.length) {
+      const element = selcectData.splice(currentIndex, 1)[0];
+      const data = selcectData.splice(targetIndex, 0, element);
+      dispatch(fetchDataBaseRequest(data));
+    }
+  };
   return (
     <Modal
       visible={visible}
@@ -135,7 +145,12 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
                     )}
                   </Col>
                 </Row>
-                <MiddleIcons index={index} handleRemove={handleRemove}/>
+                <MiddleIcons
+                  index={index}
+                  name={node.name}
+                  onUpArrowClick={() => handleArrowClick(index, "up")}
+                  onDownArrowClick={() => handleArrowClick(index, "down")}
+                />
               </div>
               <Row className={styles.lowerDivider}></Row>
             </>

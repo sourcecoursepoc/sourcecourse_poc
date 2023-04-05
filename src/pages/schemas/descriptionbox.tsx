@@ -1,12 +1,13 @@
 import React from 'react';
-import { Input, Row, Col } from 'antd';
+import { Input } from 'antd';
+
 const { TextArea } = Input;
+
 interface DescriptionBoxProps {
-    label: string;
     value: any;
 
 }
-const DescriptionBox: React.FC = ({ value }) => (
+const DescriptionBox: React.FC<DescriptionBoxProps> = ({ value }) => (
 
     <>
         <TextArea placeholder="Description" value={value} />
