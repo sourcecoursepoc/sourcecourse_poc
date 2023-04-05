@@ -4,11 +4,14 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
 import { getDataBaseSelector } from '../../redux/selector';
-import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined } from '@ant-design/icons';
+import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const { TreeNode } = Tree;
+interface IconImage{
+  iconImage: string;
+}
 
-const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
+const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,iconImage }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
   useEffect(() => {
@@ -52,7 +55,7 @@ const TreeView: React.FC<Props | TableProps[]> = ({ db, tableDb }) => {
         if (table.uid === key) {
           return table;
         }
-        for (const column of table.columns) {
+        for (const column of table?.columns || []) {
           if (column.uid === key) {
             return column;
           }
@@ -78,10 +81,11 @@ console.log(selectedNode,"selectedNode")
         <Image src="/Schemas.png" style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
         </Image>
         {table.tableName}
+        <span>{table?.columns?.length > 0 ? iconImage: undefined}</span>
       </span>} key={table.uid}
-        switcherIcon={table.columns.length > 0 ? <DownOutlined /> : undefined}
+        switcherIcon={table?.columns?.length > 0 ? <RightOutlined style={{fontSize: "0.6rem"}} /> : undefined}
       >
-        {table.columns.length > 0 && renderColumns(table.columns)}
+        {table?.columns?.length > 0 && renderColumns(table?.columns)}
       </TreeNode>
     ));
   };
@@ -93,11 +97,11 @@ console.log(selectedNode,"selectedNode")
     return db.map((item: DBProps) => (
       <TreeNode key={item.uid}
         title={<span>
-          <Image src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+          <Image src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.3rem" }}>
           </Image>
           {item.DBName}
         </span>}
-        switcherIcon={Array.isArray(item.Tables) && item.Tables.length > 0 ? <DownOutlined /> : undefined}
+        switcherIcon={Array.isArray(item.Tables) && item.Tables.length > 0 ? <RightOutlined style={{fontSize: "0.6rem", marginTop: "0.7rem"}}/> : undefined}
         className={selectedNode.length > 0 && item.uid === selectedNode[0].uid ? "ant-tree-node-selected" : ""}
 
       >
@@ -105,7 +109,7 @@ console.log(selectedNode,"selectedNode")
       </TreeNode>
     ));
   };
-  return <Tree onSelect={onSelect} style={{ fontSize: "20px" }} showIcon defaultSelectedKeys={defaultSelectedKey}
+  return <Tree onSelect={onSelect} style={{ fontSize: "0.8rem" ,fontWeight:'bold'}} showIcon defaultSelectedKeys={defaultSelectedKey}
   >{renderDB(db)}</Tree>;
 };
 

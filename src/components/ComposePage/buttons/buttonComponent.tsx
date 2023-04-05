@@ -8,7 +8,6 @@ const ButtonComponent= () => {
   return (
     <Col span={7}  className={styles.buttonAreaBorder} >             
                 <Row >
-
                 <Buttons text={"Delete"} icon={<DeleteFilled className={styles.icon}/>} size={"middle"} onClick={()=>{}} href={""} />
                 <Buttons text="Clone" icon={<CopyFilled className={styles.icon}/>} size={"middle"} onClick={()=>{}}  href={""} />                                       
                 </Row>
