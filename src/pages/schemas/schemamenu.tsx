@@ -1,7 +1,7 @@
 import { Menu, Row, Col, Button } from 'antd';
 import { Item } from 'rc-menu';
 import styles from "./schemas.module.css";
-import { CloseOutlined, PlusOutlined, AppstoreAddOutlined, ApartmentOutlined, PartitionOutlined, AppstoreOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined, PartitionOutlined, AppstoreOutlined } from '@ant-design/icons';
 
 // const { SubMenu } = Menu;
 const SchemaMenu: React.FC = () => {

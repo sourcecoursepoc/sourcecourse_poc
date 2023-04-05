@@ -56,3 +56,15 @@
   padding-block: 4px;
   border-radius: 30px;
 }
+.mygroupbutton {  
+  align-items: center;
+  color: #fff;
+  background-color: #7E60BC;
+  margin-left: 1rem;
+   margin-bottom: 1rem;
+   width: 5rem;
+   font-size: 0.6rem;
+   font-weight: 400;
+   font-family:Arial, Helvetica, sans-serif;
+   padding-block: 8px;
+}
