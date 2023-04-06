@@ -20,11 +20,15 @@ import TextAreaComponent from '@/components/ComposePage/TextArea/textArea';
 const Compose = () => {
   const { Content } = Layout;
   const [selectedIcon, setSelectedIcon] = useState(null);
-  const handleIconClick = (icon) => {
-    setSelectedIcon(icon);
+  const handleIconClick = (imageIcon:any) => {
+    setSelectedIcon(imageIcon);
   };
 
   const renderSelectedComponent = () => {
+    if (selectedIcon === null) {
+      return null; // or handle this case however is appropriate for your application
+    }
+    else{
     switch (selectedIcon) {
       case 'HddFilled':
         return <MainContent />;
@@ -33,6 +37,7 @@ const Compose = () => {
       // add additional cases for each icon
       default:
         return null;
+    }
     }
   };
  
@@ -52,15 +57,14 @@ const Compose = () => {
           </Row>
 
           <Row>
-            <Col  className={styles.sideButtons}>
+          <Col  className={styles.sideButtons}>
       <Image preview={false} src="/Schemas.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}} onClick={() => handleIconClick('HddFilled')} alt=""/> <br/>
-      <Image preview={false} src="/DB.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt="" onClick={() => handleIconClick('ContainerFilled')}/><br/>
+      <Image preview={false} src="/DB1.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt="" onClick={() => handleIconClick('ContainerFilled')}/><br/>
       <Image preview={false} src="/Initial Load.png"style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt=""/><br/>
       <Image preview={false} src="/sync.png" style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt=""/><br/>
       <Image preview={false} src="/DB.png"  style={{width:"3rem",height:"3.5rem",marginLeft:"6rem",borderBottom:'1px solid grey'}}alt=""/>
 
             </Col>
-           
             <Col span={18}>
             {renderSelectedComponent()}
             </Col>
