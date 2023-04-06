@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect, ReactNode } from 'react'; 
 import { Tree, Image } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
@@ -8,7 +8,7 @@ import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined, Left
 
 const { TreeNode } = Tree;
 interface IconImage{
-  iconImage: string;
+  iconImage: ReactNode;
 }
 
 const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,iconImage }) => {
@@ -90,7 +90,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
   const renderTables = (tables: TableProps[]) => {
     return tables.map((table: TableProps) => (
       <TreeNode title={<span>
-        <Image src="/Schemas.png" style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+        <Image src="/Schemas.png" alt='' style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
         </Image>
         {table.tableName}
         <span>{table?.columns?.length > 0 ? iconImage: undefined}</span>
@@ -109,7 +109,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
       item.DBName ? (
         <TreeNode
         title={<span>
-          <Image preview={false} src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+          <Image preview={false} src="/Server.png" alt='' style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
           </Image>
           {item.DBName}
         </span>}
