@@ -12,7 +12,8 @@ import {
     POST_GROUPDATA_DATABASE,
     POST_GROUPDATA_DATABASE_SUCCESS,
     POST_GROUPDATA_DATABASE_FAILURE,
-    REMOVE_NODE
+    REMOVE_NODE,
+    ADD_GROUPDATA_ARRAY
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -88,6 +89,11 @@ export type FetchDataBaseFailure = {
     payload: FetchDataBaseFailurePayload;
 };
 
+export interface AddArrayAction {
+    type: typeof ADD_ARRAY;
+    payload: any;
+
+}
 export type DataBaseActions =
     | FetchDataBaseRequest
     | FetchDataBaseSuccess
@@ -103,7 +109,7 @@ export interface GroupdataDataBaseState {
     pending: boolean;
     groupdataDatabase: TableProps[];
     error: string | null;
-    myArray: any[];
+    myGroupdataArray: any[];
 }
 
 export interface FetchGroupdataDataBaseSuccessPayload {
@@ -129,8 +135,8 @@ export type FetchGroupdataDataBaseFailure = {
     payload: FetchGroupdataDataBaseFailurePayload;
 };
 
-export interface AddArrayAction {
-    type: typeof ADD_ARRAY;
+export interface AddGroupArrayAction {
+    type: typeof ADD_GROUPDATA_ARRAY;
     payload: any;
 
 }
@@ -144,7 +150,7 @@ export type GroupdataDataBaseActions =
     | FetchGroupdataDataBaseRequest
     | FetchGroupdataDataBaseSuccess
     | FetchGroupdataDataBaseFailure
-    | AddArrayAction
+    | AddGroupArrayAction
     ;
 
 // Post schemas tags and descriprion
