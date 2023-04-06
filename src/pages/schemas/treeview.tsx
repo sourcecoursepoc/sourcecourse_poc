@@ -2,16 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Tree, Image } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
-import { getDataBaseSelector } from '../../redux/selector';
+import { fetchDataBaseRequest, addArray, addGroupdataArray } from '../../redux/actions/schemasaction';
+import { getDataBaseSelector, getGroupdataDataBaseSelector } from '../../redux/selector';
 import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const { TreeNode } = Tree;
 interface IconImage{
   iconImage: string;
+  onSelect:() => void;
+  groupData:boolean;
+  setGroupData:()=>void;
 }
 
-const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,iconImage }) => {
+const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,iconImage,groupData,setGroupData }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
 
@@ -34,12 +37,19 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
   const selectColumns = (state: TableProps) => state.columns;
   const Tables = useSelector(selectTables);
   const columns = useSelector(selectColumns);
-
   const [selectedNode, setSelectedNode] = useState<any[]>([]);
 
   const onSelect = (keys: any, info: any) => {
     const selectedKey = keys[0] as string;
+    console.log("selectedKey",selectedKey)
+  
+    console.log("data data data",data)
+    console.log("Tables : ",Tables)
+    console.log("columns : ",columns)
+   
     const selectedObj: any = findNodeByKey(data, Tables, columns, selectedKey);
+    console.log("selectedObj",selectedObj)
+    
     // Check if the selected object already exists in the array
     const exists =
       selectedNode &&
@@ -49,7 +59,37 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
       setSelectedNode([selectedObj]);
       dispatch(addArray([selectedObj]));
     }
+    console.log("groupData",groupData)
+    if(groupData){
+      console.log("testtttttttttt data")
+      // const selectedObjGroup: any = findNodeByKey_Group( Tables, columns, selectedKey);
+      // console.log("selectedObjGroup",selectedObjGroup)
+      console.log("addGroupdataArray([selectedObj])",addGroupdataArray([selectedObj]))
+      dispatch(addGroupdataArray([selectedObj]));
+    }
   };
+
+  // const findNodeByKey_Group = (
+  //   Tables: TableProps[],
+  //   columns: ColumnProps[],
+  //   key: string
+  // ): TableProps | ColumnProps | undefined => {
+  //   console.log("Tables",Tables)
+  //   console.log("db.Tables",db.Tables)
+  //     for (const table of db.Tables) {
+  //       if (table.uid === key) {
+  //         return table;
+  //       }
+  //       for (const column of table?.columns || []) {
+  //         if (column.uid === key) {
+  //           return column;
+  //         }
+  //       }
+      
+  //   }
+  //   return undefined;
+  // }; 
+ 
   const findNodeByKey = (
     data: DBProps[],
     Tables: TableProps[],
@@ -141,5 +181,5 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
       {renderDB(db)}
     </Tree>
   );
-};
+  };
 export default TreeView;
