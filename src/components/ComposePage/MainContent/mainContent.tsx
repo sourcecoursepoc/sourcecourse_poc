@@ -17,32 +17,17 @@ const MainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
   const [exportClicked, setExportClicked] = useState(false);
-  const [selectedValues, setSelectedValues] = useState<any[]>([]);
-  const [lastIndexes, setLastIndexes] = useState<any[]>([]);
-  const selcectData = useSelector(getSelectedArraySelector); 
-  const lastIndex= selcectData.slice(-1)[0]
-  
-  useEffect(()=>{
-    if(lastIndex && 'tableName' in lastIndex && lastIndex.columns && lastIndex.columns.length >0)
-    {  
-      const exists = lastIndexes && lastIndex && lastIndexes.filter(Boolean).some((node) => node.uid === lastIndex.uid);
-      if(lastIndexes && !exists){
-      setLastIndexes(prevLastIndexes => [...prevLastIndexes, lastIndex]);   }
-    }
-   
-  },[selcectData])
+  const [lastIndexes, setLastIndexes] = useState<any[]>([]); 
 
-  const dispatch = useDispatch();
-  const handleRemove = (uid: string) => {
-    dispatch(removeNode(uid));
-    setLastIndexes(lastIndexes => lastIndexes.filter(node => node.uid !== uid));
-  };
-
-  const handleExport = (lastIndexes: any[]) => {
-    setExportClicked(true)
+  const handleExport = (lastIndexes: any[]) => { 
     setLastIndexes(lastIndexes);
-
+    setExportClicked(true);
   };
+   const handleRemove = (uid: string) => {
+    // dispatch(removeNode(uid)); 
+     setLastIndexes(lastIndexes => lastIndexes.filter(node => node.uid !== uid));
+    
+   };
   const showModal = () => {
     setVisible(true);
    
@@ -60,14 +45,16 @@ const MainContent = () => {
         visible={visible}
         onCancel={handleCancel}
         onExport={handleExport} 
+        lastIndexes={lastIndexes}
+        setLastIndexes={setLastIndexes}
       />
       {exportClicked &&(
        <Row >               
-          {lastIndexes.map((node:any) => ( 
+           {lastIndexes.map((node:any) => ( 
               <DisplaySchemaBox key={node.tableName} text={node.tableName} uid={node.uid} 
               attribute={"ATTRIBUTES / "} icon={ <Image preview={false}src="/Schemas.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
               </Image> } 
-              handleRemove={handleRemove}  lengthOfColums={node?.columns?.length} 
+               handleRemove={handleRemove}   lengthOfColums={node?.columns?.length} 
               />     
           ))}     
        </Row>)}
