@@ -17,6 +17,7 @@ import GroupsModalBoxButtons from "./groupsModalBoxButtons";
 import GroupsThirdSide from "./groupsThirdSide";
 import MiddleIcons from "./middleIcons";
 import { removeNode } from '@/redux/actions/schemasaction';
+import NewAttributeContent from "./newAttributeContent";
 
 interface MyModalProps {
   visible?: boolean;
@@ -29,6 +30,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabase = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
+  const [displayAttributeSection,setDisplayAttributeSection] = useState(false)
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
@@ -43,6 +45,11 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
   function handleAddIconClick(node: string) {
     setSchema(node);
   }
+
+  function contentToggle(){
+        setDisplayAttributeSection(true)
+      }
+
   const handleArrowClick = (index: number, direction: "up" | "down") => {
     const newData = [...selcectData];
     const currentIndex = index;
@@ -121,7 +128,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
           </Row>
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
-          <AttributeButton />
+        <AttributeButton onClickAttribute={contentToggle}/>
           {selcectData.map((node, index) => (
             <>
               <div
@@ -157,7 +164,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
           ))}
         </Col>
         {/* third partition area */}
-        <GroupsThirdSide />
+        {displayAttributeSection ? <NewAttributeContent /> : <GroupsThirdSide/>}
       </Row>
     </Modal>
   );
