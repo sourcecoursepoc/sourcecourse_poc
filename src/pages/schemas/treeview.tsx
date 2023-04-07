@@ -117,9 +117,29 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     }
     return columns.map((column: ColumnProps) => (
       <TreeNode
-        title={column.name}
+        title={
+          <span>
+            {column.metadata.isPrimary ? (
+              <Image src="primarykey-icon2.png" style={{
+                width: "1rem",
+                height: "1rem",
+                marginRight: "0.5rem",
+              }}
+                preview={false} />
+            ) : (
+                <Image src="column-icon1.png" style={{
+                  width: "1rem",
+                  height: "1rem",
+                  marginRight: "0.5rem",
+                }}
+                  preview={false} />
+              )}
+            {column.name}
+            <span>{columns ?.length > 0 ? iconImage : undefined}</span>
+          </span>
+        }
         key={column.uid}
-        icon={<FolderOutlined />}
+      // icon={<FolderOutlined />}
       />
     ));
   };
@@ -136,8 +156,8 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
                 width: "1rem",
                 height: "1rem",
                 marginRight: "0.5rem",
-                marginBottom: "0.5rem",
               }}
+              preview={false}
             ></Image>
             {table.tableName}
             <span>{table ?.columns ?.length > 0 ? iconImage : undefined}</span>
@@ -166,11 +186,11 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
             <span>
               <Image
                 preview={false}
-                src="/Server.png"
+                src="/Server-Icon.png"
                 alt=""
                 style={{
-                  width: "2rem",
-                  height: "2rem",
+                  width: "1rem",
+                  height: "1rem",
                   marginRight: "0.5rem",
                   marginBottom: "0.5rem",
                 }}
@@ -182,7 +202,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
           switcherIcon={
             Array.isArray(item.Tables) && item.Tables.length > 0 ? (
               <RightOutlined
-                style={{ fontSize: "0.6rem", marginTop: "0.7rem" }}
+                style={{ fontSize: "0.6rem" }}
               />
             ) : undefined
           }
