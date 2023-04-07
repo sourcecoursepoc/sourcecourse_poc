@@ -1,5 +1,5 @@
-import React from 'react'
-import { Layout, Row, Col } from 'antd';
+import React, { useState, useEffect } from 'react'
+import { Layout, Row, Col, Image } from 'antd';
 import styles from "./content.module.css";
 import DescriptionBox from './descriptionbox';
 import DisplayBox from './displaybox';
@@ -8,6 +8,10 @@ import { useSelector } from 'react-redux';
 import { getSelectedArraySelector } from '../../redux/selector';
 import { Transcription } from './transcriptionFile';
 import Buttons from '../../components/ComposePage/buttons/buttons';
+import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
+import ConfirmationModal from '../../components/ComposePage/GroupsPage/ModalBox/ConfirmationModal';
+import { CloseOutlined, SaveFilled } from '@ant-design/icons';
+import Toast from './toast';
 
 const { Content } = Layout;
 
@@ -21,7 +25,64 @@ export default function SchemaContent() {
     const selectedMetaDataLastIndex = selectedMetaData.length - 1;
     const selectedMetaDataLastItem = selectedMetaData[selectedMetaDataLastIndex];
     const selcectedDataLastElement = selcectedData.slice(-1)[0];
+    const [columnData, setColumnData] = useState([]);
+    const [saveModalVisible, setSaveModalVisible] = useState(false);
+    const [cancelModalVisible, setCancelModalVisible] = useState(false);
 
+    const handleSaveClick = () => {
+        setSaveModalVisible(true);
+    };
+
+    const handleSaveModalOk = () => {
+        setSaveModalVisible(false);
+
+    };
+    const handleSaveModalCancel = () => {
+        setSaveModalVisible(false);
+    };
+
+    const handleCancelClick = () => {
+        setCancelModalVisible(true);
+    };
+
+    const handleCancelModalOk = () => {
+        setCancelModalVisible(false);
+
+    };
+
+    const handleCancelModalCancel = () => {
+        setCancelModalVisible(false);
+    };
+
+
+
+    useEffect(() => {
+        if (selcectedDataLastElement && 'tableName' in selcectedDataLastElement && 'columns' in selcectedDataLastElement) {
+            setColumnData(selcectedDataLastElement.columns);
+        } else {
+            setColumnData([]);
+        }
+    }, [selcectedDataLastElement, setColumnData]);
+
+
+    let selectedColumnData: any = [];
+    for (let column in columnData) {
+
+        if (Array.isArray(columnData) && columnData.length > 0) {
+            selectedColumnData.push(
+                <DisplaySchemaBox
+                    text={columnData[column].name}
+                    attribute={columnData[column].metadata.type}
+                    icon={<Image preview={false} src="/Schemas.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}></Image>}
+                    uid={""}
+                    handleRemove={() => ({})}
+                    lengthOfColums={""}
+                />
+            );
+        }
+
+    }
+    console.log(selectedColumnData, "ddddddddddd")
     let selectedValueName = '';
 
     if (selcectedDataLastElement) {
@@ -43,27 +104,74 @@ export default function SchemaContent() {
         );
     }
 
+    const handleOkButtonClick = () => {
+        handleOk();
+        handleCancelModalOk();
+    };
+    const [description, setDescription] = useState('');
+    const [tags, setTags] = useState<string[]>([]);
+
+    useEffect(() => {
+        setDescription(descriptionLastItem);
+    }, [descriptionLastItem]);
+    const handleOk = () => {
+        setDescription('');
+        setTags([]);
+
+    };
     return (
-        <Layout className={styles.layout}>
-            <Content className={styles.content}>
-                <Row className={styles.pinkbar} >
-                    <Col span={4} className={styles.headerText}>{selectedValueName}</Col>
-                </Row>
-                <Row gutter={[16, 16]}>
+        <>
+            <Layout className={styles.layout}>
+                <Content className={styles.content}>
+                    <Row className={styles.pinkbar} >
+                        <Col span={4} className={styles.headerText}>{selectedValueName}</Col>
+                    </Row>
+                    <Row gutter={[16, 16]} style={{marginRight:"-16px"}}>
 
-                    {listItems}
+                        {listItems}
 
-                </Row>
-                <Row className={styles.descriptionbox}>
-                    <DescriptionBox value={descriptionLastItem} />
-                </Row>
-                <Row>
-                    <TagBox />
-                </Row>
-                <Row className={styles.saveButton}>
-                    <Buttons text="Save" icon={""} size={"middle"} onClick={() => { }} href={""} />
-                </Row>
-            </Content>
-        </Layout>
-    )
+                    </Row>
+                    <Row className={styles.descriptionbox}>
+                        <DescriptionBox value={description} onChange={setDescription} />
+                    </Row>
+                    <Row>
+                        <TagBox tags={tags} setTags={setTags} />
+                    </Row>
+                    <Row gutter={[16, 16]} style={{ padding: "10px" }}>
+                        {selectedColumnData && selectedColumnData.length > 0 && (
+                            <div className={styles.attribute}>
+                                <h5 className={styles.attributtext}>Attributes</h5>
+                            </div>
+                        )}
+                        {selectedColumnData}
+                    </Row>
+                    <Row className={styles.saveButton}>
+                        <Col>
+                            <Buttons text="Save" icon={<SaveFilled />} size={"middle"} onClick={handleSaveClick} />
+                            <ConfirmationModal
+                                visible={saveModalVisible}
+                                onOk={handleSaveModalOk}
+                                onCancel={handleSaveModalCancel}
+                                title="Save Confirmation"
+                                message="Are you sure you want to save?"
+                            />
+                        </Col>
+                        <Col>
+                            <Buttons text="Cancel" icon={<CloseOutlined />} size={"middle"} onClick={handleCancelClick} />
+                            <ConfirmationModal
+                                visible={cancelModalVisible}
+                                onOk={handleOkButtonClick}
+                                onCancel={handleCancelModalCancel}
+                                title="Cancel Confirmation"
+                                message="Are you sure you want to cancel?"
+                            // onOk={handleOk} onCancel={() => { }}
+                            />
+
+                        </Col>
+                        {/* <Toast/> */}
+                    </Row>
+                </Content>
+            </Layout>
+        </>
+    );
 }

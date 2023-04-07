@@ -1,24 +1,25 @@
-import React, { useState, useEffect } from 'react'; 
+import React, { useState, useEffect } from 'react';
 import { Tree, Image } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
 import { getDataBaseSelector } from '../../redux/selector';
 import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import Notification from './Notification';
 
 const { TreeNode } = Tree;
-interface IconImage{
+interface IconImage {
   iconImage: string;
 }
 
-const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,iconImage }) => {
+const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb, iconImage }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
   }, []);
-
+  
   const [defaultSelectedKey, setDefaultSelectedKey] = useState("");
 
   useEffect(() => {
@@ -64,7 +65,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
         if (table.uid === key) {
           return table;
         }
-        for (const column of table?.columns || []) {
+        for (const column of table ?.columns || []) {
           if (column.uid === key) {
             return column;
           }
@@ -93,11 +94,11 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
         <Image src="/Schemas.png" style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
         </Image>
         {table.tableName}
-        <span>{table?.columns?.length > 0 ? iconImage: undefined}</span>
+        <span>{table ?.columns ?.length > 0 ? iconImage : undefined}</span>
       </span>} key={table.uid}
-        switcherIcon={table?.columns?.length > 0 ? <RightOutlined style={{fontSize: "0.6rem"}} /> : undefined}
+        switcherIcon={table ?.columns ?.length > 0 ? <RightOutlined style={{ fontSize: "0.6rem" }} /> : undefined}
       >
-        {table?.columns?.length > 0 && renderColumns(table?.columns)}
+        {table ?.columns ?.length > 0 && renderColumns(table ?.columns)}
       </TreeNode>
     ));
   };
@@ -108,15 +109,15 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
     return db.map((item: DBProps) =>
       item.DBName ? (
         <TreeNode
-        title={<span>
-          <Image preview={false} src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
-          </Image>
-          {item.DBName}
-        </span>}
+          title={<span>
+            <Image preview={false} src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+            </Image>
+            {item.DBName}
+          </span>}
           key={item.uid}
           switcherIcon={
             Array.isArray(item.Tables) && item.Tables.length > 0 ? (
-              <RightOutlined style={{fontSize: "0.6rem", marginTop: "0.7rem"}}/>
+              <RightOutlined style={{ fontSize: "0.6rem", marginTop: "0.7rem" }} />
             ) : undefined
           }
         >
@@ -125,16 +126,16 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,icon
             renderTables(item.Tables)}
         </TreeNode>
       ) : (
-        Array.isArray(item.Tables) &&
-        item.Tables.length > 0 &&
-        renderTables(item.Tables)
-      )
+          Array.isArray(item.Tables) &&
+          item.Tables.length > 0 &&
+          renderTables(item.Tables)
+        )
     );
   };
   return (
     <Tree
       onSelect={onSelect}
-      style={{ fontSize: "15px" ,fontWeight:"500"}}
+      style={{ fontSize: "12px", fontWeight: "500" }}
       showIcon
       defaultSelectedKeys={defaultSelectedKey}
     >

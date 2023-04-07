@@ -1,5 +1,4 @@
 import { Button, Modal } from "antd";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
 
 interface ConfirmationModalProps {
   visible: boolean;
@@ -25,10 +24,10 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
         <Button key="cancel" danger onClick={onCancel}>
           Cancel
         </Button>,
-        <Button key="ok" type="primary"  onClick={onOk}>
+        <Button key="ok" type="primary" onClick={onOk}>
           OK
         </Button>,
-        
+
       ]}
     >
       <p>

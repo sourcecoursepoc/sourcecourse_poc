@@ -34,7 +34,7 @@ const DisplayBox: ({ title, value }: MyComponentProps) => JSX.Element = ({ title
           </Row>
         </div>
         <div className={styles.innerleft}>
-          <Row className={styles.items}><Col><p className={styles.styeText}>{value}</p></Col></Row>
+          <Row className={styles.items}><Col style={{ width: "100%", textAlign: "-webkit-center" }}><p className={styles.styeText}>{value}</p></Col></Row>
         </div>
       </div>
 

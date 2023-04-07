@@ -4,14 +4,25 @@ import { Input } from 'antd';
 const { TextArea } = Input;
 
 interface DescriptionBoxProps {
-    value: any;
-
+    value: string;
+    onChange: (value: string) => void;
 }
-const DescriptionBox: React.FC<DescriptionBoxProps> = ({ value }) => (
 
-    <>
-        <TextArea placeholder="Description" value={value} />
-    </>
-);
+const DescriptionBox: React.FC<DescriptionBoxProps> = ({ value, onChange }) => {
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.keyCode === 8) {
+            onChange('');
+        }
+    };
+
+    return (
+        <TextArea
+            placeholder="Description"
+            value={value}
+            onChange={(e) => onChange(e.target.value)}
+            onKeyDown={handleKeyDown}
+        />
+    );
+};
 
 export default DescriptionBox;
