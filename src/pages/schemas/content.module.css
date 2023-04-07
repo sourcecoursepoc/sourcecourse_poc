@@ -21,9 +21,12 @@
     margin-top: 2rem;
     margin-left: 1rem;
     width: 96%;
-    height: 8rem;
+    height: 7rem;
 }
+/* .descriptionbox:hover{
+    border: 0.0825rem solid #c3428d;
 
+} */
 .saveButton {
     padding: 1.25rem;
     flex-direction: row-reverse;
@@ -35,4 +38,27 @@
     left: 20px;
     color: white;
     top: 14px;
+}
+
+.mysavebutton {
+    align-items: center;
+    color: #fff;
+    background-color: #7E60BC;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    width: 5rem;
+    font-size: 0.6rem;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.attributtext {
+    border-bottom: 1px solid #d9d9d9;
+    margin: 0px 17px 0px 19px;
+    width: 100%
+}
+
+.attribute {
+    width: 100%;
+    margin-top: 35px;
 }

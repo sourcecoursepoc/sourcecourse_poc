@@ -17,58 +17,52 @@ import AttributeButton from "./attributeButton";
 import GroupsModalBoxButtons from "./groupsModalBoxButtons";
 import GroupsThirdSide from "./groupsThirdSide";
 import MiddleIcons from "./middleIcons";
-import { removeNode } from '@/redux/actions/schemasaction';
+import { removeNode } from "@/redux/actions/schemasaction";
 import NewAttributeContent from "./newAttributeContent";
 
 interface MyModalProps {
   visible?: boolean;
   onCancel?: () => void;
- 
 }
 
 const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
-  const [groupData, setGroupData] = useState(false);
+  const [groupModalBoxTreeView, setGroupModalBoxTreeView] = useState(true);
+  const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  console.log("databasedatabase",database);
-  const groupdataDatabase = useSelector(getGroupdataDataBaseSelector);
-  console.log("groupdataDatabasegroupdataDatabase",groupdataDatabase);
+  const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
-  const [displayAttributeSection,setDisplayAttributeSection] = useState(false)
+  const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
 
-const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
-console.log("selectGroupdataData",selectGroupdataData)
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
     dispatch(fetchGroupDataRequest());
   }, []);
 
-
   const handleRemove = (uid: string) => {
- console.log("uid in main content",uid)
-     dispatch(removeNode(uid));
-     };
+    console.log("uid in main content", uid);
+    dispatch(removeNode(uid));
+  };
 
   function handleAddIconClick(node: string) {
     setSchema(node);
   }
 
-  function contentToggle(){
-        setDisplayAttributeSection(true)
-      }
+  function contentToggle() {
+    setDisplayAttributeSection(true);
+  }
 
-  
-  // const handleArrowClick = (index: number, direction: "up" | "down") => {
-  //   const newData = [...selcectData];
-  //   const currentIndex = index;
-  //   const targetIndex = direction === "up" ? index - 1 : index + 1;
-  //   if (targetIndex >= 0 && targetIndex < newData.length) {
-  //     const element = selcectData.splice(currentIndex, 1)[0];
-  //     const data = selcectData.splice(targetIndex, 0, element);
-  //     dispatch(fetchDataBaseRequest(data));
-  //   }
-  // };
+  const handleArrowClick = (index: number, direction: "up" | "down") => {
+    const newData = [...selectGroupdataData];
+    const currentIndex = index;
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
+    if (targetIndex >= 0 && targetIndex < newData.length) {
+      const element = selectGroupdataData.splice(currentIndex, 1)[0];
+      const data = selectGroupdataData.splice(targetIndex, 0, element);
+      dispatch(fetchDataBaseRequest(data));
+    }
+  };
   return (
     <Modal
       visible={visible}
@@ -131,12 +125,18 @@ console.log("selectGroupdataData",selectGroupdataData)
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-              {groupdataDatabase && <TreeView db={groupdataDatabase} setGroupData={setGroupData} groupData={groupData} />}
+              {groupdataDatabaseSelector && (
+                <TreeView
+                  db={groupdataDatabaseSelector}
+                  setGroupModalBoxTreeView={setGroupModalBoxTreeView}
+                  groupModalBoxTreeView={groupModalBoxTreeView}
+                />
+              )}
             </Col>
           </Row>
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
-        <AttributeButton onClickAttribute={contentToggle}/>
+          <AttributeButton onClickAttribute={contentToggle} />
           {selectGroupdataData.map((node, index) => (
             <>
               <div
@@ -162,6 +162,7 @@ console.log("selectGroupdataData",selectGroupdataData)
                 </Row>
                 <MiddleIcons
                   index={index}
+                  arrayLength={selectGroupdataData.length-1}
                   name={node.name}
                   onUpArrowClick={() => handleArrowClick(index, "up")}
                   onDownArrowClick={() => handleArrowClick(index, "down")}
@@ -172,7 +173,11 @@ console.log("selectGroupdataData",selectGroupdataData)
           ))}
         </Col>
         {/* third partition area */}
-        {displayAttributeSection ? <NewAttributeContent /> : <GroupsThirdSide/>}
+        {displayAttributeSection ? (
+          <NewAttributeContent />
+        ) : (
+          <GroupsThirdSide />
+        )}
       </Row>
     </Modal>
   );
