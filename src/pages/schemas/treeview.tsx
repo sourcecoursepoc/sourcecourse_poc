@@ -26,7 +26,7 @@ interface IconImage {
   //iconImage: string;
   onSelect: () => void;
   groupModalBoxTreeView: boolean;
-  setGroupModalBoxTreeView: () => void;
+  // setGroupModalBoxTreeView: () => void;
   iconImage: ReactNode;
 }
 
@@ -35,7 +35,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   tableDb,
   iconImage,
   groupModalBoxTreeView,
-  setGroupModalBoxTreeView,
+  // setGroupModalBoxTreeView,
 }) => {
 
   const dispatch = useDispatch();
