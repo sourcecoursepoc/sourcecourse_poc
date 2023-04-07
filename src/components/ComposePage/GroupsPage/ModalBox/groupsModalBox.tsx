@@ -27,12 +27,12 @@ interface MyModalProps {
 
 const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
   const [groupModalBoxTreeView, setGroupModalBoxTreeView] = useState(true);
+  const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
-  const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
 
   useEffect(() => {
@@ -162,6 +162,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
                 </Row>
                 <MiddleIcons
                   index={index}
+                  arrayLength={selectGroupdataData.length-1}
                   name={node.name}
                   onUpArrowClick={() => handleArrowClick(index, "up")}
                   onDownArrowClick={() => handleArrowClick(index, "down")}
