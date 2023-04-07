@@ -11,7 +11,7 @@ import Buttons from '../../components/ComposePage/buttons/buttons';
 import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
 import ConfirmationModal from '../../components/ComposePage/GroupsPage/ModalBox/ConfirmationModal';
 import { CloseOutlined, SaveFilled } from '@ant-design/icons';
-import Toast from './toast';
+import { showSuccessToast, showErrorToast } from './toast';
 
 const { Content } = Layout;
 
@@ -35,6 +35,7 @@ export default function SchemaContent() {
 
     const handleSaveModalOk = () => {
         setSaveModalVisible(false);
+        showErrorToast("error in saving data")
 
     };
     const handleSaveModalCancel = () => {
@@ -73,7 +74,7 @@ export default function SchemaContent() {
                 <DisplaySchemaBox
                     text={columnData[column].name}
                     attribute={columnData[column].metadata.type}
-                    icon={<Image preview={false} src="/Schemas.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}></Image>}
+                    icon={columnData[column].metadata.isPrimary ? <Image preview={false} src="/primarykey-icon2.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} /> : <Image preview={false} src="/column-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} />}
                     uid={""}
                     handleRemove={() => ({})}
                     lengthOfColums={""}
@@ -117,22 +118,44 @@ export default function SchemaContent() {
     const handleOk = () => {
         setDescription('');
         setTags([]);
-
+        showSuccessToast("cleared")
     };
     return (
         <>
             <Layout className={styles.layout}>
                 <Content className={styles.content}>
                     <Row className={styles.pinkbar} >
-                        <Col span={4} className={styles.headerText}>{selectedValueName}</Col>
+                        <Col span={18} className={styles.headerText}>{selectedValueName}</Col>
+                        <Col style={{ marginTop: "8px" }}>
+                            <Buttons text="Save" icon={<SaveFilled />} size={"middle"} onClick={handleSaveClick} />
+                            <ConfirmationModal
+                                visible={saveModalVisible}
+                                onOk={handleSaveModalOk}
+                                onCancel={handleSaveModalCancel}
+                                title="Save Confirmation"
+                                message="Are you sure you want to save?"
+                            />
+                        </Col>
+                        <Col style={{ marginTop: "8px" }}>
+                            <Buttons text="Cancel" icon={<CloseOutlined />} size={"middle"} onClick={handleCancelClick} />
+                            <ConfirmationModal
+                                visible={cancelModalVisible}
+                                onOk={handleOkButtonClick}
+                                onCancel={handleCancelModalCancel}
+                                title="Cancel Confirmation"
+                                message="Are you sure you want to cancel?"
+                            />
+                        </Col>
                     </Row>
-                    <Row gutter={[16, 16]} style={{marginRight:"-16px"}}>
+                    <Row gutter={[16, 16]} style={{ marginRight: "-16px" }}>
 
                         {listItems}
 
                     </Row>
                     <Row className={styles.descriptionbox}>
-                        <DescriptionBox value={description} onChange={setDescription} />
+                        <Col style={{ width: "100%" }}>
+                            <DescriptionBox value={description} onChange={setDescription} placeholder="Description" />
+                        </Col>
                     </Row>
                     <Row>
                         <TagBox tags={tags} setTags={setTags} />
@@ -146,7 +169,7 @@ export default function SchemaContent() {
                         {selectedColumnData}
                     </Row>
                     <Row className={styles.saveButton}>
-                        <Col>
+                        {/* <Col>
                             <Buttons text="Save" icon={<SaveFilled />} size={"middle"} onClick={handleSaveClick} />
                             <ConfirmationModal
                                 visible={saveModalVisible}
@@ -164,11 +187,8 @@ export default function SchemaContent() {
                                 onCancel={handleCancelModalCancel}
                                 title="Cancel Confirmation"
                                 message="Are you sure you want to cancel?"
-                            // onOk={handleOk} onCancel={() => { }}
                             />
-
-                        </Col>
-                        {/* <Toast/> */}
+                        </Col> */}
                     </Row>
                 </Content>
             </Layout>
