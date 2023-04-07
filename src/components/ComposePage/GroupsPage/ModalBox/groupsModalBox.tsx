@@ -18,6 +18,7 @@ import GroupsModalBoxButtons from "./groupsModalBoxButtons";
 import GroupsThirdSide from "./groupsThirdSide";
 import MiddleIcons from "./middleIcons";
 import { removeNode } from '@/redux/actions/schemasaction';
+import NewAttributeContent from "./newAttributeContent";
 
 interface MyModalProps {
   visible?: boolean;
@@ -34,6 +35,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
   const groupdataDatabase = useSelector(getGroupdataDataBaseSelector);
   console.log("groupdataDatabasegroupdataDatabase",groupdataDatabase);
   const selcectData = useSelector(getSelectedArraySelector);
+  const [displayAttributeSection,setDisplayAttributeSection] = useState(false)
 
 const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
 console.log("selectGroupdataData",selectGroupdataData)
@@ -51,6 +53,10 @@ console.log("selectGroupdataData",selectGroupdataData)
   function handleAddIconClick(node: string) {
     setSchema(node);
   }
+
+  function contentToggle(){
+        setDisplayAttributeSection(true)
+      }
 
   
   // const handleArrowClick = (index: number, direction: "up" | "down") => {
@@ -130,7 +136,7 @@ console.log("selectGroupdataData",selectGroupdataData)
           </Row>
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
-          <AttributeButton />
+        <AttributeButton onClickAttribute={contentToggle}/>
           {selectGroupdataData.map((node, index) => (
             <>
               <div
@@ -166,7 +172,7 @@ console.log("selectGroupdataData",selectGroupdataData)
           ))}
         </Col>
         {/* third partition area */}
-        <GroupsThirdSide />
+        {displayAttributeSection ? <NewAttributeContent /> : <GroupsThirdSide/>}
       </Row>
     </Modal>
   );
