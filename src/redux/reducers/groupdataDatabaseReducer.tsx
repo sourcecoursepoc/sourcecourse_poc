@@ -2,7 +2,7 @@ import {
     FETCH_GROUPDATA_DATABASE,
     FETCH_GROUPDATA_DATABASE_FAILURE,
     FETCH_GROUPDATA_DATABASE_SUCCESS,
-    ADD_ARRAY
+    ADD_GROUPDATA_ARRAY
 } from "../actions/schemaActionTypes";
 import { GroupdataDataBaseActions,GroupdataDataBaseState } from "../actions/schemaTypes";
 
@@ -10,7 +10,7 @@ const initialGroupdataDataBaseState: GroupdataDataBaseState = {
     pending: false,
     groupdataDatabase: [],
     error: null,
-    myArray: [],
+    myGroupdataArray: [],
 
 };
 
@@ -42,12 +42,12 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
                 groupdataDatabase: [],
                 error: action.payload.error,
             };
-        case ADD_ARRAY:
+        case ADD_GROUPDATA_ARRAY:
             if (Array.isArray(action.payload)) {
                 console.log(action.payload, "payload")
                 return {
                     ...state,
-                    myArray: [...state.myArray, ...action.payload]
+                    myGroupdataArray: [...state.myGroupdataArray, ...action.payload]
                 };
             } else {
                 // Handle non-iterable payload, e.g. throw an error or log a warning

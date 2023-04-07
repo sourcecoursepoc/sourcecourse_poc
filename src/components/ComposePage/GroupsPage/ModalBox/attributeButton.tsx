@@ -3,13 +3,13 @@ import styles from "../ModalBox/groupsModalBox.module.css";
 
 
 
-const AttributeButton=  () => {
+const AttributeButton=  (props) => {
   
-    
+  const {onClickAttribute} = props;
     return (
         <div style={{ display: "flex", justifyContent: "space-between" }}>
         <h5 style={{ marginLeft: "0.5rem" }}>Attributes</h5>
-        <Button className={styles.attributesbutton}>New Attribute</Button>
+        <Button className={styles.attributesbutton} onClick={onClickAttribute}>New Attribute</Button>
       </div>
     );
   }
