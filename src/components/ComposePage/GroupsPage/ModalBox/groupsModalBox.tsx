@@ -9,7 +9,7 @@ import {
   getSelectedGroupdataArraySelector,
 } from "@/redux/selector";
 import { Col, Input, Modal, Row } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,SetStateAction,Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TreeView from "../../../../pages/schemas/treeview";
 import styles from "../ModalBox/groupsModalBox.module.css";
@@ -22,28 +22,66 @@ import NewAttributeContent from "./newAttributeContent";
 
 interface MyModalProps {
   visible?: boolean;
+  setVisible: (visible: boolean) => void;
   onCancel?: () => void;
+  lastIndices: any[];
+  setLastIndices: Dispatch<SetStateAction<any[]>>;
+  onExport: (selectedData: any[]) => void;
 }
 
-const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
+const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,lastIndices,setLastIndices,onExport }) => {
   const [groupModalBoxTreeView, setGroupModalBoxTreeView] = useState(true);
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
+  const [saveModalVisible, setSaveModalVisible] = useState(false);
+  
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
+  const lastIndexGroup= selectGroupdataData.slice(-1)[0]
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
     dispatch(fetchGroupDataRequest());
   }, []);
+  useEffect(()=>{
+    if(lastIndexGroup && 'name' in lastIndexGroup )
+    {  
+      const exists = lastIndices && lastIndexGroup && lastIndices.filter(Boolean).some((node) => node.uid === lastIndexGroup.uid  );
+      if(lastIndices && !exists){
+      setLastIndices(prevLastIndices => [...prevLastIndices, lastIndexGroup]);   }
+    }
+  },[selectGroupdataData])
+
+
+  const handleExport = () => {
+    onExport(lastIndices);
+  };
+  const handleExportButton=()=>
+  {
+    handleExport()
+  }
+  const handleSaveClick = () => {
+    setSaveModalVisible(true);
+  };
+ 
+  const handleSaveModalOk = () => {
+   handleExportButton();
+   setSaveModalVisible(false);
+   setVisible(false);
+  };
+
+  const handleSaveModalCancel = () => {
+    setSaveModalVisible(false);
+  }; 
 
   const handleRemove = (uid: string) => {
     console.log("uid in main content", uid);
     dispatch(removeNode(uid));
   };
+
 
   function handleAddIconClick(node: string) {
     setSchema(node);
@@ -105,7 +143,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
             marginTop: "0.5rem",
           }}
         >
-          <GroupsModalBoxButtons />
+          <GroupsModalBoxButtons handleSaveModalCancel={handleSaveModalCancel} handleSaveModalOk={handleSaveModalOk} saveModalVisible={saveModalVisible} handleSaveClick={handleSaveClick}/>
         </Col>
       </Row>
       <Row style={{ height: "29rem", width: "60rem" }}>
@@ -137,7 +175,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
           <AttributeButton onClickAttribute={contentToggle} />
-          {selectGroupdataData.map((node, index) => (
+          {lastIndices?.map((node, index) => (
             <>
               <div
                 style={{
