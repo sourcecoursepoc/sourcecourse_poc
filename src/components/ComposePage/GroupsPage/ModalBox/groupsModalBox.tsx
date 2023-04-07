@@ -6,6 +6,7 @@ import {
   getDataBaseSelector,
   getGroupdataDataBaseSelector,
   getSelectedArraySelector,
+  getSelectedGroupdataArraySelector,
 } from "@/redux/selector";
 import { Col, Input, Modal, Row } from "antd";
 import React, { useEffect, useState } from "react";
@@ -22,20 +23,27 @@ import NewAttributeContent from "./newAttributeContent";
 interface MyModalProps {
   visible?: boolean;
   onCancel?: () => void;
+ 
 }
 
 const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
+  const [groupData, setGroupData] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
+  console.log("databasedatabase",database);
   const groupdataDatabase = useSelector(getGroupdataDataBaseSelector);
+  console.log("groupdataDatabasegroupdataDatabase",groupdataDatabase);
   const selcectData = useSelector(getSelectedArraySelector);
   const [displayAttributeSection,setDisplayAttributeSection] = useState(false)
 
+const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
+console.log("selectGroupdataData",selectGroupdataData)
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
     dispatch(fetchGroupDataRequest());
   }, []);
+
 
   const handleRemove = (uid: string) => {
  console.log("uid in main content",uid)
@@ -50,17 +58,17 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
         setDisplayAttributeSection(true)
       }
 
-  const handleArrowClick = (index: number, direction: "up" | "down") => {
-    const newData = [...selcectData];
-    const currentIndex = index;
-    const targetIndex = direction === "up" ? index - 1 : index + 1;
-
-    if (targetIndex >= 0 && targetIndex < newData.length) {
-      const element = selcectData.splice(currentIndex, 1)[0];
-      const data = selcectData.splice(targetIndex, 0, element);
-      dispatch(fetchDataBaseRequest(data));
-    }
-  };
+  
+  // const handleArrowClick = (index: number, direction: "up" | "down") => {
+  //   const newData = [...selcectData];
+  //   const currentIndex = index;
+  //   const targetIndex = direction === "up" ? index - 1 : index + 1;
+  //   if (targetIndex >= 0 && targetIndex < newData.length) {
+  //     const element = selcectData.splice(currentIndex, 1)[0];
+  //     const data = selcectData.splice(targetIndex, 0, element);
+  //     dispatch(fetchDataBaseRequest(data));
+  //   }
+  // };
   return (
     <Modal
       visible={visible}
@@ -123,13 +131,13 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, onCancel }) => {
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-              {groupdataDatabase && <TreeView db={groupdataDatabase} />}
+              {groupdataDatabase && <TreeView db={groupdataDatabase} setGroupData={setGroupData} groupData={groupData} />}
             </Col>
           </Row>
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
         <AttributeButton onClickAttribute={contentToggle}/>
-          {selcectData.map((node, index) => (
+          {selectGroupdataData.map((node, index) => (
             <>
               <div
                 style={{
