@@ -1,4 +1,4 @@
-#ant-tabs-nav .ant-tabs-tab:hover {
+/* #ant-tabs-nav .ant-tabs-tab:hover {
   background-color: yellow;
 }
 
@@ -25,4 +25,18 @@
 
 .ant-tabs-tab-active {
   color: #363636 !important;
+} */
+:where(.css-dev-only-do-not-override-mxhywb).ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #1f2021!important;
+  text-shadow: 0 0 0.25px currentcolor;
+}
+#tabpane{
+
+  color: #363636;
+}
+#tabStyle{
+  color: black;
+}
+#tabStyle-tab-1{
+  color: black!important;
 }

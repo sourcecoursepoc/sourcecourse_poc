@@ -21,6 +21,7 @@ import {
 } from "@ant-design/icons";
 
 const { TreeNode } = Tree;
+
 interface IconImage {
   //iconImage: string;
   onSelect: () => void;
@@ -36,6 +37,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   groupModalBoxTreeView,
   // setGroupModalBoxTreeView,
 }) => {
+
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
   const groupDataSelector = useSelector(getGroupdataDataBaseSelector);
@@ -63,7 +65,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
 
   const onSelect = (keys: any, info: any) => {
     const selectedKey = keys[0] as string;
-
     const selectedObj: any = groupDataSelector
       ? findNodeByKey(data, groupDataSelector, columns, selectedKey)
       : findNodeByKey(data, Tables, columns, selectedKey);
@@ -87,9 +88,11 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     key: string
   ): DBProps | TableProps | ColumnProps | undefined => {
     let tempdata: any = data;
+
     if (groupModalBoxTreeView) {
       tempdata = Tables;
     }
+
     for (const node of tempdata) {
       if (node.uid === key) {
         return node;
@@ -98,7 +101,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
         if (table.uid === key) {
           return table;
         }
-        for (const column of table?.columns || []) {
+        for (const column of table ?.columns || []) {
           if (column.uid === key) {
             return column;
           }
@@ -114,12 +117,33 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     }
     return columns.map((column: ColumnProps) => (
       <TreeNode
-        title={column.name}
+        title={
+          <span>
+            {column.metadata.isPrimary ? (
+              <Image src="primarykey-icon2.png" style={{
+                width: "1rem",
+                height: "1rem",
+                marginRight: "0.5rem",
+              }}
+                preview={false} />
+            ) : (
+                <Image src="column-icon1.png" style={{
+                  width: "1rem",
+                  height: "1rem",
+                  marginRight: "0.5rem",
+                }}
+                  preview={false} />
+              )}
+            {column.name}
+            <span>{columns ?.length > 0 ? iconImage : undefined}</span>
+          </span>
+        }
         key={column.uid}
-        icon={<FolderOutlined />}
+      // icon={<FolderOutlined />}
       />
     ));
   };
+
   const renderTables = (tables: TableProps[]) => {
     return tables.map((table: TableProps) => (
       <TreeNode
@@ -132,24 +156,25 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
                 width: "1rem",
                 height: "1rem",
                 marginRight: "0.5rem",
-                marginBottom: "0.5rem",
               }}
+              preview={false}
             ></Image>
             {table.tableName}
-            <span>{table?.columns?.length > 0 ? iconImage : undefined}</span>
+            <span>{table ?.columns ?.length > 0 ? iconImage : undefined}</span>
           </span>
         }
         key={table.uid}
         switcherIcon={
-          table?.columns?.length > 0 ? (
+          table ?.columns ?.length > 0 ? (
             <RightOutlined style={{ fontSize: "0.6rem" }} />
           ) : undefined
-        }
+        }
       >
-        {table?.columns?.length > 0 && renderColumns(table?.columns)}
+        {table ?.columns ?.length > 0 && renderColumns(table ?.columns)}
       </TreeNode>
     ));
   };
+
   const renderDB = (db: DBProps[]) => {
     if (!db) {
       return null;
@@ -161,11 +186,11 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
             <span>
               <Image
                 preview={false}
-                src="/Server.png"
+                src="/Server-Icon.png"
                 alt=""
                 style={{
-                  width: "2rem",
-                  height: "2rem",
+                  width: "1rem",
+                  height: "1rem",
                   marginRight: "0.5rem",
                   marginBottom: "0.5rem",
                 }}
@@ -177,7 +202,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
           switcherIcon={
             Array.isArray(item.Tables) && item.Tables.length > 0 ? (
               <RightOutlined
-                style={{ fontSize: "0.6rem", marginTop: "0.7rem" }}
+                style={{ fontSize: "0.6rem" }}
               />
             ) : undefined
           }
@@ -187,10 +212,10 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
             renderTables(item.Tables)}
         </TreeNode>
       ) : (
-        Array.isArray(item.Tables) &&
-        item.Tables.length > 0 &&
-        renderTables(item.Tables)
-      )
+          Array.isArray(item.Tables) &&
+          item.Tables.length > 0 &&
+          renderTables(item.Tables)
+        )
     );
   };
   return (

@@ -18,11 +18,11 @@ const DisplayBox: ({ title, value }: MyComponentProps) => JSX.Element = ({ title
           <Row className={styles.image}
           ><Col>
               {title === "Status" ? (
-                <Image preview={false} src="/Status.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+                <Image preview={false} src="/Status-Icon.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
               ) : title === "Size" ? (
                 <Image preview={false} src="/Size.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
               ) : (
-                    <Image preview={false} src="/sync.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+                    <Image preview={false} src="/Sync-Icon-1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
                   )}
             </Col>
           </Row>
@@ -34,7 +34,7 @@ const DisplayBox: ({ title, value }: MyComponentProps) => JSX.Element = ({ title
           </Row>
         </div>
         <div className={styles.innerleft}>
-          <Row className={styles.items}><Col><p className={styles.styeText}>{value}</p></Col></Row>
+          <Row className={styles.items}><Col style={{ width: "100%", textAlign: "-webkit-center" }}><p className={styles.styeText}>{value}</p></Col></Row>
         </div>
       </div>
 

@@ -3,7 +3,9 @@
   height: 100%;
   background-color: white;
 }
-
+.textAreaerror {
+  border-color: red;
+}
 .layout {
   height: 100%;
   background-color: white;
@@ -51,4 +53,12 @@
 }
 .icon {
   font-size: small;
+}
+.custom{
+  border: 1px solid grey ;
+border-radius: 1px;
+height: 2rem;
+}
+.red{
+  border: 1px solid red ;
 }

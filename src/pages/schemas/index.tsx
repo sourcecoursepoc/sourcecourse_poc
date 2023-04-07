@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import { getDataBaseSelector } from "../../redux/selector";
 import { useEffect, useState } from "react";
 import { fetchDataBaseRequest } from "../../redux/actions/schemasaction";
-
+import Toast from "./toast";
 const Schemas = () => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
@@ -33,6 +33,7 @@ const Schemas = () => {
               <SchemaContent />
             </Col>
           </Row>
+          <Toast/>
         </Content>
       </Layout>
     </Space>

@@ -11,6 +11,11 @@
     display: flex;
     justify-content: inherit;
     align-items: center;
+    cursor: pointer;
+}
+
+.outerbox:hover {
+    border: 0.0825rem solid #c3428d;
 }
 
 .innerright {
@@ -63,10 +68,11 @@
 }
 
 .styeText {
-    font-size: 1rem;
+    font-size: 0.875rem;
     text-align: center;
     font-weight: 450;
     font-family: system-ui;
     color: gray;
-    margin-left: -1.125rem;
+    margin: 0px 30px 0px 0px;
+    width: 85%;
 }

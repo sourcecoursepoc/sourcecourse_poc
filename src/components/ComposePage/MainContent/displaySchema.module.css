@@ -18,7 +18,7 @@
     box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
     position: relative;
     overflow: hidden;
-    width: 18.5rem;
+    /* width: 18.5rem; */
     height: auto;
     margin-left: 1rem;
     display: flex;
