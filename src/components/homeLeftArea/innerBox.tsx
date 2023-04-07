@@ -26,7 +26,7 @@ export default function ({ title, value }: InnerBoxProps) {
                 />
               )}
               {title === "Groups" && (
-                <Image preview={false} src="./Groups-Icon2.png"  
+                <Image preview={false} src="./Groups-Icon1.png"  
                   />
               )}
               {title === "Schema" && (
@@ -37,7 +37,7 @@ export default function ({ title, value }: InnerBoxProps) {
                 <Image preview={false} src="/Sync-Icon-1.png"  />
               )}
               {title === "Users" && (
-                <Image preview={false} src="/users-Icon2.png" /> 
+                <Image preview={false} src="/users-Icon1.png" /> 
               )}
             </Col>
           </Row>
