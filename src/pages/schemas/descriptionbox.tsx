@@ -1,22 +1,60 @@
-import React from 'react';
-import { Input, Row, Col } from 'antd';
+import React, { useState, KeyboardEvent } from "react";
+import { Input } from "antd";
+import styles from "../../styles/floatInput.module.css";
 const { TextArea } = Input;
-interface DescriptionBoxProps {
-    label: string;
-    value: string;
 
-  }
-const DescriptionBox: React.FC = ({value}) => (
-    
-    <>
-        <TextArea placeholder="Description" value={value} disabled/>
-        {/* <Row style={{border:"1px solid", borderRadius:"5px",textAlign:"left"}}>
-            <Col>
-                <p >
-             Aenean blandit vulputate tellus a dapibus. Phasellus volutpat turpis quis massa laoreet blandit. Integer pulvinar ligula at massa auctor, vel vehicula diam malesuada. In malesuada laoreet tellus, et vestibulum velit congue quis. In viverra neque at massa accumsan, id ornare urna bibendum. Quisque tempor vitae sem sed varius. Curabitur leo leo, scelerisque vitae lorem porttitor, efficitur scelerisque nulla. Praesent et luctus sapien. Aliquam mollis vel nisi bibendum pulvinar. Mauris scelerisque ex in enim malesuada, non faucibus mi laoreet. Etiam aliquam est non lectus dictum fermentum. In suscipit nunc id dolor aliquam porta. Morbi auctor efficitur ante, sed tristique mi interdum ultrices. Donec tincidunt sem sit amet accumsan sollicitudin. Praesent in dolor in enim imperdiet venenatis euismod vel urna
-          </p></Col>
-        </Row> */}
-    </>
-);
+interface DescriptionBoxProps {
+    value: string;
+    onChange: (value: string) => void;
+    placeholder?: string;
+    required?: boolean;
+}
+
+const DescriptionBox: React.FC<DescriptionBoxProps> = ({
+    value,
+    onChange,
+    placeholder = "Description",
+    required,
+}) => {
+    const [focus, setFocus] = useState(false);
+
+    const isOccupied = focus || (value && value.length !== 0);
+
+    const labelClass = isOccupied
+        ? `${styles.label} ${styles.aslabel}`
+        : `${styles.label} ${styles.asplaceholder}`;
+
+    const requiredMark = required ? <span className="text-danger">*</span> : null;
+
+    const handleFocus = () => {
+        setFocus(true);
+    };
+
+    const handleBlur = () => {
+        setFocus(false);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.keyCode === 8) {
+            onChange("");
+        }
+    };
+
+    return (
+        <div className={styles.floatlabel} onBlur={handleBlur} onFocus={handleFocus}>
+            <TextArea
+            style={{height:"7rem"}}
+                placeholder={placeholder}
+                value={value}
+                onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}
+                onKeyDown={handleKeyDown}
+            />
+
+            <label className={labelClass}>
+                {isOccupied ? placeholder : ""} {requiredMark}
+            </label>
+        </div>
+    );
+};
 
 export default DescriptionBox;

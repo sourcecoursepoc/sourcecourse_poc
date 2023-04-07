@@ -25,6 +25,7 @@
   margin-top: 0.813rem;
   justify-content: inherit;
   align-items: center;
+  min-height: 3.1rem;
 }
 .innerright {
   height: fit-content;
@@ -43,7 +44,10 @@
   align-content: center;
   padding: 0.6875;
   margin-top: 0rem;
-  margin-left: 1rem;
+  margin-bottom: 0.3rem;
+  max-width: 1.5rem;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* .imageName{ 
 
@@ -63,4 +67,10 @@
 .icon {
   width: 2rem;
   height: -1rem;
+}
+.schemas{
+  height: 1.9rem;
+  margin-bottom: 0.1rem;
+  margin-top: 0.1rem;
+  margin-left: 0.2rem;
 }

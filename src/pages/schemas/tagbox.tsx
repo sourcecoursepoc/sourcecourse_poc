@@ -2,8 +2,12 @@ import { useState } from 'react';
 import { Tag, Input, Row, Col } from 'antd';
 import styles from "./tagbox.module.css";
 
-const TagBox = () => {
-    const [tags, setTags] = useState<string[]>([]);
+type Props = {
+    tags: string[];
+    setTags: (tags: string[]) => void;
+};
+
+const TagBox = ({ tags, setTags }: Props) => {
     const [inputValue, setInputValue] = useState<string>('');
 
     const handleClose = (removedTag: string) => {
@@ -29,7 +33,6 @@ const TagBox = () => {
 
     return (
         <>
-            {/* <div style={{ display: 'flex', flexWrap: 'wrap', border: "1px solid", width: "100%" }}> */}
             <Row className={styles.tagBox}>
                 {tags.map((tag) => (
                     <Tag
@@ -48,11 +51,9 @@ const TagBox = () => {
                     onPressEnter={handleInputConfirm}
                     onBlur={handleInputConfirm}
                     placeholder="Tags"
-                    style={{ width: "100%" }}
                     className={styles.inputBox}
                 />
             </Row>
-            {/* </div> */}
         </>
     );
 };

@@ -1,4 +1,5 @@
 import React from "react";
+import { Transcription } from "./transcriptionFile";
 import {
   Layout,
   Row,
@@ -20,36 +21,32 @@ import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
 const { Content } = Layout;
 
-interface MyComponentProps {
+interface ContentProps {
   heading: string;
   projectDescription: string;
-
-  //buttonLabels: string[];
 }
-const ProjectContent: React.FC<MyComponentProps> = ({
+
+const ProjectContent: React.FC<ContentProps> = ({
   heading,
   projectDescription,
 }) => {
-  const image: string = "http://dlib.org/dlib/october97/ibm/schema.gif";
-  const image1: string =
-    "http://www.google.comwww.aperfectworld.org/clipart/shapes/triangle11a.png";
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
-  const listItems = [];
+  const listItems: any = [];
   const projectArray = projectListData[0]?.projects[0]?.projectDetails;
-  
-  console.log(projectArray,"projectArray");
+  const transcriptList = Transcription(projectArray);
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
-  
-  for (const item in projectArray) {
-    /*  console.log(`${item}: ${projectArray[item]}`); */
+
+  for (const item in transcriptList) {
+    // console.log(`${item}: ${transcriptList[item]}`);
     listItems.push(
-      <InnerBox title={item} value={projectArray[item]}></InnerBox>
+      <InnerBox title={item} value={transcriptList[item]}></InnerBox>
     );
   }
+  
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>

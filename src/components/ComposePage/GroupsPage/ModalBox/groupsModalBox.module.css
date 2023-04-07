@@ -1,23 +1,128 @@
-
 .textAreaBorder {
-    color: rgb(133, 130, 130);
-    border-bottom: 1px solid #ccc ;
-    background-color: #fff;
-    margin-bottom: 1rem;
-  }
-  .rowTextStyle {
-    color: rgb(77, 72, 72);
-    text-align: left;
-    padding-left: 0.5rem;
-    font-size: 12px;
-  }
-  .descriptionbox{
-    margin-top:0.5rem;
-    border-radius: 2px;
-    width: 100%;
-    /* height: 10rem; */
+  color: rgb(133, 130, 130);
+  border-bottom: 1px solid #ccc;
+  background-color: #fff;
+  margin-bottom: 1rem;
 }
-  
-  
+.rowTextStyle {
+  color: rgb(77, 72, 72);
+  text-align: left;
+  padding-left: 0.5rem;
+  font-size: 12px;
+}
+.descriptionbox {
+  margin-top: 0.5rem;
+  border-radius: 2px;
+  width: 100%;
+}
+.lowerDivider {
+  border-bottom: 0.0625rem solid #ccc;
+}
+.rowTextStyle {
+  color: rgb(77, 72, 72);
+  text-align: left;
+  font-size: 14px;
+}
+.icon {
+  font-size: small;
+}
 
-  
+.attributesbutton {
+  align-items: center;
+  background-color: #7e60bc;
+  margin-left: 0.5rem;
+  margin-right: 0.25rem;
+  margin-top: 0.5rem;
+  width: 6rem;
+  height: 2rem;
+  font-size: 0.6rem;
+  color: #fff;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-block: 4px;
+  border-radius: 3px;
+}
+.pipelinebutton {
+  align-items: center;
+  background-color: #7e60bc;
+  margin-left: 8rem;
+  margin-top: 0.25rem;
+  width: 8rem;
+  height: 2rem;
+  font-size: 0.6rem;
+  color: #fff;
+  font-weight: 400;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-block: 4px;
+  border-radius: 30px;
+}
+.mygroupbutton {  
+  align-items: center;
+  color: #fff;
+  background-color: #7E60BC;
+  margin-left: 1rem;
+   margin-bottom: 1rem;
+   width: 5rem;
+   font-size: 0.6rem;
+   font-weight: 400;
+   font-family:Arial, Helvetica, sans-serif;
+   padding-block: 8px;
+}
+
+.button {
+  float: left;
+  margin: 0 5px 0 0;
+  width: fit-content;
+  height: 30px;
+  position: relative;
+  text-align: center;
+}
+
+.button label,
+.button input {
+  display: block;
+  position: relative;
+  top: -23px;
+  left: 6px;
+  right: 0;
+  bottom: 0;
+  background: #bababa;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  padding-block: 1px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 20px;
+  width: fit-content;
+  height: 20px;
+}
+
+.button input[type="radio"] {
+  opacity: 0.011;
+  z-index: 100;
+  background: #bababa;
+  border-radius: 20px;
+  height: 23px;
+}
+
+.button input[type="radio"]:checked + label {
+  background: #7e60bc;
+  border-radius: 20px;
+  color:#fff;
+}
+
+.button label {
+  cursor: pointer;
+  z-index: 90;
+  line-height: 1.8em;
+}
+
+.datatype {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 0.5rem;
+  color: #5f5f5f;
+}

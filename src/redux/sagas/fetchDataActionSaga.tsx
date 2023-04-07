@@ -11,13 +11,10 @@ import { FETCH_PIPELINE_REQUEST } from "../actions/actionTypes";
 const getPipelines = () =>
   axios.get<IPIPELINE[]>("http://localhost:8000/pipeline");
 
-/*
-  Worker Saga: Fired on FETCH_TODO_REQUEST action
-*/
+
 function* fetchPipelineSaga() {
   try {
     const response =yield call(getPipelines);
-    console.log(response)
     yield put(
       fetchPipelineSuccess({
         pipelines: response.data,

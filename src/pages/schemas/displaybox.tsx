@@ -1,38 +1,40 @@
 import React from "react";
-import { Card, Row, Col, Divider } from "antd";
+import { Row, Col, Image } from "antd";
 import styles from "./displaybox.module.css";
 import "./content.module.css";
-import { ClusterOutlined } from '@ant-design/icons';
-import { useSelector } from "react-redux";
-import { getSelectedArraySelector } from "../../redux/selector";
 
-interface MyComponentProps {
-  title: string;
-  iconName: string;
-  icon: ReactNode;
+export interface ChildComponentProps {
+  image: string;
 }
-
-const DisplayBox = ({ text, iconName, icon }) => {
-  const selcectedMetaData = useSelector(getSelectedArraySelector);
-  const selectedMetaData = selcectedMetaData.map(node => node.metadata);
-  console.log(selectedMetaData, "selectedMetaDataselectedMetaDataselectedMetaData");
+interface MyComponentProps {
+  title: any;
+  value: any;
+}
+const DisplayBox: ({ title, value }: MyComponentProps) => JSX.Element = ({ title, value }) => {
   return (
     <>
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
           <Row className={styles.image}
           ><Col>
-              {icon}
+              {title === "Status" ? (
+                <Image preview={false} src="/Status-Icon.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+              ) : title === "Size" ? (
+                <Image preview={false} src="/Size.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+              ) : (
+                    <Image preview={false} src="/Sync-Icon-1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem" }} />
+                  )}
             </Col>
           </Row>
           <Row className={styles.imageName}>
             <Col className={styles.imageNameText}>
-              <p >{iconName}
+              <p >{title}
               </p>
-            </Col></Row>
+            </Col>
+          </Row>
         </div>
         <div className={styles.innerleft}>
-          <Row className={styles.items}><Col><p className={styles.styeText}>{text}</p></Col></Row>
+          <Row className={styles.items}><Col style={{ width: "100%", textAlign: "-webkit-center" }}><p className={styles.styeText}>{value}</p></Col></Row>
         </div>
       </div>
 

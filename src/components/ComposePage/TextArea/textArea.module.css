@@ -11,3 +11,8 @@
    margin-bottom: 1rem;
  
 }
+.erroTextArea{
+   border: 1px solid red ;
+border-radius: 1px;
+height: 2rem;
+}

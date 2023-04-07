@@ -3,7 +3,9 @@
   height: 100%;
   background-color: white;
 }
-
+.textAreaerror {
+  border-color: red;
+}
 .layout {
   height: 100%;
   background-color: white;
@@ -16,6 +18,7 @@
   margin-bottom: 1rem;
   max-width: 16.5rem;
   flex-direction: row;
+  padding-left: 1.5rem;
 }
 .button-container {
   display: flex;
@@ -46,7 +49,16 @@
   color: rgb(133, 130, 130);
   border-right: 1px solid #ccc;
   background-color: #fff;
+  padding-right: 10px;
 }
 .icon {
   font-size: small;
+}
+.custom{
+  border: 1px solid grey ;
+border-radius: 1px;
+height: 2rem;
+}
+.red{
+  border: 1px solid red ;
 }

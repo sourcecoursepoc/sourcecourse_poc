@@ -7,15 +7,22 @@ import GroupsModalBox from "../GroupsPage/ModalBox/groupsModalBox";
 import styles from "../MainContent/mainContent.module.css";
 import MainIcons from "../../../components/ComposePage/MainContent/mainContentIcons";
 
+
 const GroupsMainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
+  const [exportClicked, setExportClicked] = useState(false);
+  const [lastIndices, setLastIndices] = useState<any[]>([]); 
 
   const showGroupsModal = () => {
     setVisible(true);
   };
   const handleGroupsCancel = () => {
     setVisible(false);
+  };
+  const handleExport = (lastIndexes: any[]) => { 
+    setLastIndices(lastIndexes);
+    setExportClicked(true);
   };
   return (
     <Layout className={styles.layout}>
@@ -33,7 +40,7 @@ const GroupsMainContent = () => {
           }}
           onClick={showGroupsModal}
         ></Button>
-        <GroupsModalBox visible={visible} onCancel={handleGroupsCancel} />
+        <GroupsModalBox visible={visible} setVisible={setVisible} onCancel={handleGroupsCancel} lastIndices={lastIndices} setLastIndices={setLastIndices}  onExport={handleExport} />
       </Content>
     </Layout>
   );

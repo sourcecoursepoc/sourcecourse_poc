@@ -1,58 +1,52 @@
 import React from "react";
-import { Row, Col, Divider, Statistic } from "antd";
+import { Row, Col } from "antd";
 import styles from "./innerBox.module.css";
-import { icons } from "antd/es/image/PreviewGroup";
+
 import { Image } from "antd";
-import {
-  CloudSyncOutlined,
-  ClusterOutlined,
-  FullscreenExitOutlined,
-  GroupOutlined,
-  UsergroupAddOutlined,
-} from "@ant-design/icons";
+import { GroupOutlined, UsergroupAddOutlined } from "@ant-design/icons";
 export interface ChildComponentProps {
   image: string;
 }
-interface MyStatisticProps {
+interface InnerBoxProps {
   title: string;
   value: number;
 }
-export default function ({ title, value }: MyStatisticProps) {
+export default function ({ title, value }: InnerBoxProps) {
   return (
     <>
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
-          {/*  <Row className={styles.image}> */}
-          {/*  <Col> */}
-          {title === "initialLoad" && (
-            <ClusterOutlined
-              style={{ fontSize: "2rem", alignContent: "center" }}
-            />
-          )}
-          {title === "groups" && (
-            <GroupOutlined style={{ fontSize: "35px" }}></GroupOutlined>
-          )}
-          {title === "schema" && (
-            <FullscreenExitOutlined style={{ fontSize: "35px" }} />
-          )}
-          {title === "sync" && (
-            <CloudSyncOutlined style={{ fontSize: "35px" }} />
-          )}
-          {title === "users" && (
-            <UsergroupAddOutlined style={{ fontSize: "35px" }} />
-          )}
-          {title === "user1" && (
-            <UsergroupAddOutlined style={{ fontSize: "35px" }} />
-          )}
-
-          {/*  </Col> */}
-          {/*  </Row> */}
+          <Row className={styles.image}>
+            <Col>
+              {title === "Initial Load" && (
+                <Image
+                  preview={false}
+                  src="/InitialLoad-Icon4.png"
+                 
+                />
+              )}
+              {title === "Groups" && (
+                <Image preview={false} src="./Groups-Icon2.png"  
+                  />
+              )}
+              {title === "Schema" && (
+                <Image preview={false} src="./Schemas.png" 
+                  />
+              )}
+              {title === "Sync" && (
+                <Image preview={false} src="/Sync-Icon-1.png"  />
+              )}
+              {title === "Users" && (
+                <Image preview={false} src="/users-Icon2.png" /> 
+              )}
+            </Col>
+          </Row>
           <Row className={styles.imageName}>
             <Col
               style={{
-                marginLeft: "1rem",
-                fontSize: "0.7rem",
-                marginRight: "0.5rem",
+                marginLeft: "auto",
+                fontSize: "0.6rem",
+                marginRight: "auto",
               }}
             >
               {" "}

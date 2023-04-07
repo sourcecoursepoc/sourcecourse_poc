@@ -5,7 +5,15 @@ import {
     FETCH_SCHEMA_DATABASE,
     FETCH_SCHEMA_DATABASE_FAILURE,
     FETCH_SCHEMA_DATABASE_SUCCESS,
-    ADD_ARRAY
+    FETCH_GROUPDATA_DATABASE,
+    FETCH_GROUPDATA_DATABASE_FAILURE,
+    FETCH_GROUPDATA_DATABASE_SUCCESS,
+    ADD_ARRAY,
+    POST_GROUPDATA_DATABASE,
+    POST_GROUPDATA_DATABASE_SUCCESS,
+    POST_GROUPDATA_DATABASE_FAILURE,
+    REMOVE_NODE,
+    ADD_GROUPDATA_ARRAY
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -48,37 +56,7 @@ export type SchemaActions =
     | FetchSchemaSuccess
     | FetchSchemaFailure;
 
-
-
-// interface ColumnProps {
-//     name: string;
-//     type: string;
-//     isPrimary: boolean;
-//     unique: boolean;
-//     nullable: boolean;
-//     consumed: string | boolean | number;
-//     consumers: string[];
-//     dataQuality: {
-//       score: string;
-//       description: string;
-//     };
-//   }
-
-//   interface DBTable {
-//     tableName: string;
-//     columns: ColumnProps[];
-//     rowCount: number;
-//     size: string;
-//     mindate: string;
-//     maxdate: string;
-//     yoycount: string;
-//     momcount: string;
-//   }
-
-//   interface IDataBase {
-//     DBName: string;
-//     Tables: TableProps[];
-//   }
+    
 export interface DataBaseState {
     pending: boolean;
     database: DBProps[];
@@ -93,6 +71,8 @@ export interface FetchDataBaseSuccessPayload {
 export interface FetchDataBaseFailurePayload {
     error: string;
 }
+
+
 
 export interface FetchDataBaseRequest {
     type: typeof FETCH_SCHEMA_DATABASE;
@@ -109,18 +89,93 @@ export type FetchDataBaseFailure = {
     payload: FetchDataBaseFailurePayload;
 };
 
+export interface AddArrayAction {
+    type: typeof ADD_ARRAY;
+    payload: any;
+
+}
 export type DataBaseActions =
     | FetchDataBaseRequest
     | FetchDataBaseSuccess
     | FetchDataBaseFailure
     | AddArrayAction
+    |RemoveNodeAction
     ;
 
 
 
 
-export interface AddArrayAction {
-    type: typeof ADD_ARRAY;
-    payload: any;
-    
+export interface GroupdataDataBaseState {
+    pending: boolean;
+    groupdataDatabase: TableProps[];
+    error: string | null;
+    myGroupdataArray: any[];
 }
+
+export interface FetchGroupdataDataBaseSuccessPayload {
+    groupdataDatabase: TableProps[];
+}
+
+export interface FetchGroupdataDataBaseFailurePayload {
+    error: string;
+}
+
+export interface FetchGroupdataDataBaseRequest {
+    type: typeof FETCH_GROUPDATA_DATABASE;
+
+}
+
+export type FetchGroupdataDataBaseSuccess = {
+    type: typeof FETCH_GROUPDATA_DATABASE_SUCCESS;
+    payload: FetchGroupdataDataBaseSuccessPayload;
+};
+
+export type FetchGroupdataDataBaseFailure = {
+    type: typeof FETCH_GROUPDATA_DATABASE_FAILURE;
+    payload: FetchGroupdataDataBaseFailurePayload;
+};
+
+export interface AddGroupArrayAction {
+    type: typeof ADD_GROUPDATA_ARRAY;
+    payload: any;
+
+}
+export interface RemoveNodeAction  {
+    type:typeof REMOVE_NODE;
+    payload:  { uid: string }; // The ID of the node to remove
+  }
+
+
+export type GroupdataDataBaseActions =
+    | FetchGroupdataDataBaseRequest
+    | FetchGroupdataDataBaseSuccess
+    | FetchGroupdataDataBaseFailure
+    | AddGroupArrayAction
+    ;
+
+// Post schemas tags and descriprion
+
+export interface PostDataState {
+    loading: boolean;
+    success: boolean;
+    error: string | null;
+}
+
+export interface PostDataRequestAction {
+    type: typeof POST_GROUPDATA_DATABASE;
+}
+
+export interface PostDataSuccessAction {
+    type: typeof POST_GROUPDATA_DATABASE_SUCCESS;
+}
+
+export interface PostDataFailureAction {
+    type: typeof POST_GROUPDATA_DATABASE_FAILURE;
+    payload: string;
+}
+
+export type PostDataActionTypes =
+    | PostDataRequestAction
+    | PostDataSuccessAction
+    | PostDataFailureAction;
+

@@ -5,9 +5,19 @@ import {
   FETCH_SCHEMA_DATABASE,
   FETCH_SCHEMA_DATABASE_SUCCESS,
   FETCH_SCHEMA_DATABASE_FAILURE,
-  ADD_ARRAY
+  ADD_ARRAY,
+  REMOVE_NODE,
+  FETCH_GROUPDATA_DATABASE,
+  FETCH_GROUPDATA_DATABASE_FAILURE,
+  FETCH_GROUPDATA_DATABASE_SUCCESS,
+  POST_GROUPDATA_DATABASE,
+  POST_GROUPDATA_DATABASE_SUCCESS,
+  POST_GROUPDATA_DATABASE_FAILURE,
+  ADD_GROUPDATA_ARRAY
 } from "./schemaActionTypes";
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, AddArrayAction } from "./schemaTypes";
+  
+ 
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddGroupArrayAction} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -45,9 +55,55 @@ export const fetchDataBaseFailure = (
   type: FETCH_SCHEMA_DATABASE_FAILURE,
   payload,
 });
+
 export const addArray = (payload: any): AddArrayAction => ({
   type: ADD_ARRAY,
   payload,
-  
+
 });
+
+export const fetchGroupDataRequest = (): FetchGroupdataDataBaseRequest => ({
+  type: FETCH_GROUPDATA_DATABASE,
+});
+
+
+export const fetchGroupDataSuccess = (
+  payload: FetchGroupdataDataBaseSuccessPayload
+): FetchGroupdataDataBaseSuccess => ({
+  type: FETCH_GROUPDATA_DATABASE_SUCCESS,
+  payload,
+});
+
+export const fetchGroupDataFailure = (
+  payload: FetchGroupdataDataBaseFailurePayload
+): FetchGroupdataDataBaseFailure => ({
+  type: FETCH_GROUPDATA_DATABASE_FAILURE,
+  payload,
+});
+
+
+export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
+  type: ADD_GROUPDATA_ARRAY,
+  payload,
+
+});
+export function removeNode(uid: string): RemoveNodeAction {
+  console.log("uiddddd",uid)
+  return {
+    type: REMOVE_NODE,
+    payload: { uid},
+  };
+}
+
+// Post Action
+
+export const postDataRequest = (): PostDataActionTypes => ({ type: POST_GROUPDATA_DATABASE });
+
+export const postDataSuccess = (): PostDataActionTypes => ({ type: POST_GROUPDATA_DATABASE_SUCCESS });
+
+export const postDataFailure = (error: string): PostDataActionTypes => ({
+  type: POST_GROUPDATA_DATABASE_FAILURE,
+  payload: error,
+});
+
 

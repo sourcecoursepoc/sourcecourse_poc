@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Divider, Statistic, Button } from "antd";
+import { Row, Col, Divider, Statistic, Button, Image } from "antd";
 import styles from "./topBoxInnerBox.module.css";
 import { icons } from "antd/es/image/PreviewGroup";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,11 +18,23 @@ const TopInnerBox: React.FC = () => {
     <>
       <div className={styles.outerbox}>
         <div className={styles.innerright}>
-          <div className={styles.innerrightTop}></div>
+          <div className={styles.innerrightTop}>
+            <Image
+            preview={false}
+              src="./Schemas.png"
+              style={{ height: "3rem", marginTop: "1.1rem" }}
+            ></Image>
+          </div>
           <Button
             type="link"
             href="/schemas"
-            style={{ color: "black", height: 47 }}
+            className={styles.Button}
+            style={{
+              color: "black",
+              height: 47,
+              borderTopRightRadius: "0px",
+              borderTopLeftRadius: "0px",
+            }}
           >
             Discover
           </Button>
