@@ -12,11 +12,12 @@ import {
   FETCH_GROUPDATA_DATABASE_SUCCESS,
   POST_GROUPDATA_DATABASE,
   POST_GROUPDATA_DATABASE_SUCCESS,
-  POST_GROUPDATA_DATABASE_FAILURE
+  POST_GROUPDATA_DATABASE_FAILURE,
+  ADD_GROUPDATA_ARRAY
 } from "./schemaActionTypes";
   
  
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction} from "./schemaTypes";
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddGroupArrayAction} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -55,6 +56,11 @@ export const fetchDataBaseFailure = (
   payload,
 });
 
+export const addArray = (payload: any): AddArrayAction => ({
+  type: ADD_ARRAY,
+  payload,
+
+});
 
 export const fetchGroupDataRequest = (): FetchGroupdataDataBaseRequest => ({
   type: FETCH_GROUPDATA_DATABASE,
@@ -76,8 +82,8 @@ export const fetchGroupDataFailure = (
 });
 
 
-export const addArray = (payload: any): AddArrayAction => ({
-  type: ADD_ARRAY,
+export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
+  type: ADD_GROUPDATA_ARRAY,
   payload,
 
 });

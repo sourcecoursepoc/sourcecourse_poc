@@ -1,5 +1,5 @@
 import { Button, Col, Image, Modal, Row } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import SearchBar from "./searchBar";
 import styles from "./modalBox.module.css";
 import TreeView from "../../../pages/schemas/treeview";
@@ -15,15 +15,15 @@ interface MyModalProps {
   visible: boolean;
   onCancel: () => void;
   onExport: (selectedData: any[]) => void;
+  lastIndexes: any[];
+  setLastIndexes: Dispatch<SetStateAction<any[]>>;
 }
 
-const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
-  const [lastIndexes, setLastIndexes] = useState<any[]>([]); // initialize an empty array
-
+const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport,lastIndexes,setLastIndexes}) => {
+  const dispatch = useDispatch();
+  const database = useSelector(getDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
-
   const lastIndex= selcectData.slice(-1)[0]
-  
   useEffect(()=>{
     if(lastIndex && 'tableName' in lastIndex && lastIndex.columns && lastIndex.columns.length >0)
     {  
@@ -33,13 +33,6 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
     }
    
   },[selcectData])
- 
-
-  console.log("selcectData last index",lastIndexes)
-  const tableArray = selcectData.map((node:any) => node.tableName);
-  console.log("tableArray",tableArray)
-
-  const dispatch = useDispatch();
 
   const handleExport = () => {
     onExport(lastIndexes);
@@ -50,12 +43,10 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
     onCancel()
   }
   const handleRemove = (uid: string) => {
-    dispatch(removeNode(uid));
+    //dispatch(removeNode(uid));
     setLastIndexes(lastIndexes => lastIndexes.filter(node => node.uid !== uid));
   };
-   const database = useSelector(getDataBaseSelector);
-   console.log("dataaaaa",selcectData)
- 
+   
   return (
     <>
       <Modal
@@ -81,9 +72,11 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
                 height: "2rem",
               }}
               onClick={handleExportButton}
+              
             >
               Import
             </Button>
+
           </Col>
         </Row>
         <Row >

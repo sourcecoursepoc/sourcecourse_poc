@@ -1,4 +1,7 @@
-import { Button, Modal } from "antd";
+import {Modal } from "antd";
+import { CheckOutlined, CloseOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
+import ButtonComponent from "../../buttons/buttonComponent";
+import Buttons from "../../buttons/buttons";
 
 interface ConfirmationModalProps {
   visible: boolean;
@@ -21,13 +24,8 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       title={title}
       onCancel={onCancel}
       footer={[
-        <Button key="cancel" danger onClick={onCancel}>
-          Cancel
-        </Button>,
-        <Button key="ok" type="primary" onClick={onOk}>
-          OK
-        </Button>,
-
+      <Buttons text={"Yes"} icon={<CheckOutlined/>} size={"middle"} onClick={onOk}></Buttons> ,
+      <Buttons text={"No"} icon={<CloseOutlined/>} size={"middle"} onClick={onCancel}></Buttons>,   
       ]}
     >
       <p>

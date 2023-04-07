@@ -1,18 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react'; 
 import { Tree, Image } from 'antd';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { fetchDataBaseRequest, addArray } from '../../redux/actions/schemasaction';
-import { getDataBaseSelector } from '../../redux/selector';
+import { fetchDataBaseRequest, addArray, addGroupdataArray } from '../../redux/actions/schemasaction';
+import { getDataBaseSelector, getGroupdataDataBaseSelector } from '../../redux/selector';
 import { DownOutlined, DatabaseOutlined, PartitionOutlined, FolderOutlined, LeftOutlined, RightOutlined } from '@ant-design/icons';
 import Notification from './Notification';
 
 const { TreeNode } = Tree;
-interface IconImage {
-  iconImage: string;
+interface IconImage{
+  //iconImage: string;
+  onSelect:() => void;
+  groupData:boolean;
+  setGroupData:()=>void;
+  iconImage: ReactNode;
 }
 
-const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb, iconImage }) => {
+const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb,iconImage,groupData,setGroupData }) => {
   const dispatch = useDispatch();
   const data = useSelector(getDataBaseSelector);
 
@@ -35,12 +39,19 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb, ico
   const selectColumns = (state: TableProps) => state.columns;
   const Tables = useSelector(selectTables);
   const columns = useSelector(selectColumns);
-
   const [selectedNode, setSelectedNode] = useState<any[]>([]);
 
   const onSelect = (keys: any, info: any) => {
     const selectedKey = keys[0] as string;
+    console.log("selectedKey",selectedKey)
+  
+    console.log("data data data",data)
+    console.log("Tables : ",Tables)
+    console.log("columns : ",columns)
+   
     const selectedObj: any = findNodeByKey(data, Tables, columns, selectedKey);
+    console.log("selectedObj",selectedObj)
+    
     // Check if the selected object already exists in the array
     const exists =
       selectedNode &&
@@ -50,7 +61,37 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb, ico
       setSelectedNode([selectedObj]);
       dispatch(addArray([selectedObj]));
     }
+    console.log("groupData",groupData)
+    if(groupData){
+      console.log("testtttttttttt data")
+      // const selectedObjGroup: any = findNodeByKey_Group( Tables, columns, selectedKey);
+      // console.log("selectedObjGroup",selectedObjGroup)
+      console.log("addGroupdataArray([selectedObj])",addGroupdataArray([selectedObj]))
+      dispatch(addGroupdataArray([selectedObj]));
+    }
   };
+
+  // const findNodeByKey_Group = (
+  //   Tables: TableProps[],
+  //   columns: ColumnProps[],
+  //   key: string
+  // ): TableProps | ColumnProps | undefined => {
+  //   console.log("Tables",Tables)
+  //   console.log("db.Tables",db.Tables)
+  //     for (const table of db.Tables) {
+  //       if (table.uid === key) {
+  //         return table;
+  //       }
+  //       for (const column of table?.columns || []) {
+  //         if (column.uid === key) {
+  //           return column;
+  //         }
+  //       }
+      
+  //   }
+  //   return undefined;
+  // }; 
+ 
   const findNodeByKey = (
     data: DBProps[],
     Tables: TableProps[],
@@ -91,7 +132,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb, ico
   const renderTables = (tables: TableProps[]) => {
     return tables.map((table: TableProps) => (
       <TreeNode title={<span>
-        <Image src="/Schemas.png" style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+        <Image src="/Schemas.png" alt='' style={{ width: "1rem", height: "1rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
         </Image>
         {table.tableName}
         <span>{table ?.columns ?.length > 0 ? iconImage : undefined}</span>
@@ -109,11 +150,11 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb, ico
     return db.map((item: DBProps) =>
       item.DBName ? (
         <TreeNode
-          title={<span>
-            <Image preview={false} src="/Server.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
-            </Image>
-            {item.DBName}
-          </span>}
+        title={<span>
+          <Image preview={false} src="/Server.png" alt='' style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+          </Image>
+          {item.DBName}
+        </span>}
           key={item.uid}
           switcherIcon={
             Array.isArray(item.Tables) && item.Tables.length > 0 ? (
@@ -142,5 +183,5 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({ db, tableDb, ico
       {renderDB(db)}
     </Tree>
   );
-};
+  };
 export default TreeView;

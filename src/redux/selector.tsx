@@ -9,9 +9,10 @@ const getError = (state: AppState) => state.schema.error;
 const getDataBase = (state: AppState) => state.database.database;
 const getGroupdataDataBase = (state: AppState) => state.groupdataDatabase.groupdataDatabase;
 const getSelectedArray = (state: AppState) => state.database.myArray;
-
+const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.myGroupdataArray;
 
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
+export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
 export const getDataBaseSelector = createSelector(getDataBase, (database) => database)
 export const getGroupdataDataBaseSelector = createSelector(getGroupdataDataBase, (groupdataDatabase) => groupdataDatabase)
 export const getSchemasSelector = createSelector(getSchemas, (schemas) => schemas);
