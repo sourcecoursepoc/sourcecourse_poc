@@ -20,6 +20,7 @@ export default function ({ title, value }: InnerBoxProps) {
             <Col>
               {title === "Initial Load" && (
                 <Image
+                preview={false}
                   src="/Initial Load.png"
                   style={{
                     width: "4.97rem",
@@ -33,6 +34,7 @@ export default function ({ title, value }: InnerBoxProps) {
               )}
               {title === "Schema" && (
                 <Image
+                preview={false}
                   src="/Schemas.png"
                   style={{
                     height: "1.9rem",
@@ -44,6 +46,7 @@ export default function ({ title, value }: InnerBoxProps) {
               )}
               {title === "Sync" && (
                 <Image
+                preview={false}
                   src="/sync.png"
                   style={{
                     height: "1.9rem",

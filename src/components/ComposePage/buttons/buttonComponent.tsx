@@ -10,30 +10,22 @@ import styles from "./buttonStyle.module.css";
 import Buttons from "./buttons";
 import ConfirmationModal from "../GroupsPage/ModalBox/ConfirmationModal";
 
-const ButtonComponent = () => {
-  const [saveModalVisible, setSaveModalVisible] = useState(false);
+const ButtonComponent = ({
+  saveModalVisible,
+  handleSaveModalOk,
+  handleSaveModalCancel,
+  handleSaveClick,
+  saveBoxMessage,
+}) => {
   const [exitModalVisible, setExitModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const handleSaveClick = () => {
-    setSaveModalVisible(true);
-  };
-
-  const handleSaveModalOk = () => {
-    setSaveModalVisible(false);
-    
-  };
-
-  const handleSaveModalCancel = () => {
-    setSaveModalVisible(false);
-  };
-
   const handleExitClick = () => {
     setExitModalVisible(true);
   };
 
   const handleExitModalOk = () => {
     setExitModalVisible(false);
-    window.location.href = "";
+    window.location.href = "/";
   };
 
   const handleExitModalCancel = () => {
@@ -58,21 +50,19 @@ const ButtonComponent = () => {
           icon={<DeleteFilled className={styles.icon} />}
           size={"middle"}
           onClick={handleDeleteClick}
-         
         />
         <ConfirmationModal
           visible={deleteModalVisible}
           onOk={handleDeleteModalOk}
           onCancel={handleDeleteModalCancel}
           title="Delete Confirmation"
-          message="Are you sure you want to Delete?"
+          message="are you sure want to delete"
         />
         <Buttons
           text="Clone"
           icon={<CopyFilled className={styles.icon} />}
           size={"middle"}
           onClick={() => {}}
-         
         />
       </Row>
       <Row>
@@ -87,14 +77,15 @@ const ButtonComponent = () => {
           onOk={handleSaveModalOk}
           onCancel={handleSaveModalCancel}
           title="Save Confirmation"
-          message="Are you sure you want to save?"
+          message={
+            saveBoxMessage
+          }
         />
         <Buttons
           text="Exit"
           icon={<CloseOutlined className={styles.icon} />}
           size={"middle"}
           onClick={handleExitClick}
-         
         />
         <ConfirmationModal
           visible={exitModalVisible}
