@@ -71,7 +71,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       selectedNode &&
       selectedObj &&
       selectedNode.filter(Boolean).some((node) => node.uid === selectedObj.uid);
-    if (selectedObj && !exists) {
+    if (selectedObj && !exists && !groupModalBoxTreeView) {
       setSelectedNode([selectedObj]);
       dispatch(addArray([selectedObj]));
     }
