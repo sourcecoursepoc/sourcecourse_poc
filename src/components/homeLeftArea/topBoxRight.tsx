@@ -8,6 +8,7 @@ const TopBoxRight: React.FC = () => {
       <div className={styles.outerbox}>
         <div className={styles.innerrightTop}>
           <Image
+           preview={false}
             src="./compose.png"
             style={{
               height: "2.5rem",

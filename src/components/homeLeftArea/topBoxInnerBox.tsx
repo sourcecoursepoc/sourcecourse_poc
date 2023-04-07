@@ -20,6 +20,7 @@ const TopInnerBox: React.FC = () => {
         <div className={styles.innerright}>
           <div className={styles.innerrightTop}>
             <Image
+            preview={false}
               src="/Schemas.png"
               style={{ height: "3rem", marginTop: "1.1rem" }}
             ></Image>
