@@ -2,8 +2,12 @@ import { useState } from 'react';
 import { Tag, Input, Row, Col } from 'antd';
 import styles from "./tagbox.module.css";
 
-const TagBox = () => {
-    const [tags, setTags] = useState<string[]>([]);
+type Props = {
+    tags: string[];
+    setTags: (tags: string[]) => void;
+};
+
+const TagBox = ({ tags, setTags }: Props) => {
     const [inputValue, setInputValue] = useState<string>('');
 
     const handleClose = (removedTag: string) => {
