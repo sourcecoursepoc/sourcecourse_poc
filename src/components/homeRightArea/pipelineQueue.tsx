@@ -5,7 +5,7 @@ import {
   ClusterOutlined,
   DatabaseOutlined,
 } from "@ant-design/icons";
-import { Button, Col, Layout, Progress, Row } from "antd";
+import { Button, Col, Layout, Progress, Row,Image } from "antd";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getPipelineSelector } from "../../redux/selectors";
@@ -26,15 +26,22 @@ const PipelineQueues: React.FC = () => {
           gutter={[16, 16]}
           className={styles.rowTextStyle}
           align="middle"
-          style={{ marginBottom: "20px", marginTop: "10px" }}
+          style={{ marginBottom: "10px", marginTop: "10px" }}
         >
           <Col span={4}>
             {pipeline.type === "Initial Load" ? (
-              <ClusterOutlined style={{ fontSize: "26px", color: "blue" }} />
+               <Image
+               preview={false}
+               src="/InitialLoad-Icon4.png"
+             style={{
+                 maxWidth: "1.3rem"
+                
+               }} 
+             />
             ) : (
-              <DatabaseOutlined
-                style={{ fontSize: "26px", color: "#AA336A" }}
-              />
+              <Image preview={false} src="/Sync-Icon-1.png"  style={{
+                maxWidth: "1.3rem",
+              }}  />
             )}
           </Col>
           <Col span={12} style={{ fontSize: "11px" }}>

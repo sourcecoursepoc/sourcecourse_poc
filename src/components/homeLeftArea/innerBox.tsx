@@ -20,53 +20,33 @@ export default function ({ title, value }: InnerBoxProps) {
             <Col>
               {title === "Initial Load" && (
                 <Image
-                preview={false}
-                  src="/Initial Load.png"
-                  style={{
-                    width: "4.97rem",
-                    marginBottom: "-0.2rem",
-                    marginLeft: "-1.5rem",
-                  }}
+                  preview={false}
+                  src="/InitialLoad-Icon4.png"
+                 
                 />
               )}
               {title === "Groups" && (
-                <GroupOutlined style={{ fontSize: "35px" }}></GroupOutlined>
+                <Image preview={false} src="./Groups-Icon2.png"  
+                  />
               )}
               {title === "Schema" && (
-                <Image
-                preview={false}
-                  src="/Schemas.png"
-                  style={{
-                    height: "1.9rem",
-                    marginBottom: "0.1rem",
-                    marginLeft: "0.2rem",
-                    marginTop: "0.1rem",
-                  }}
-                />
+                <Image preview={false} src="./Schemas.png" 
+                  />
               )}
               {title === "Sync" && (
-                <Image
-                preview={false}
-                  src="/sync.png"
-                  style={{
-                    height: "1.9rem",
-                    marginBottom: "0.1rem",
-                    marginLeft: "-0.8rem",
-                    marginTop: "0.1rem",
-                  }}
-                />
+                <Image preview={false} src="/Sync-Icon-1.png"  />
               )}
               {title === "Users" && (
-                <UsergroupAddOutlined style={{ fontSize: "35px" }} />
+                <Image preview={false} src="/users-Icon2.png" /> 
               )}
             </Col>
           </Row>
           <Row className={styles.imageName}>
             <Col
               style={{
-                marginLeft: "1rem",
+                marginLeft: "auto",
                 fontSize: "0.6rem",
-                marginRight: "0.5rem",
+                marginRight: "auto",
               }}
             >
               {" "}
