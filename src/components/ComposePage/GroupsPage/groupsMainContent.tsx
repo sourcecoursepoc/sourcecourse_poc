@@ -6,13 +6,15 @@ import ModalBox from "../ModalBox/modalBox";
 import GroupsModalBox from "../GroupsPage/ModalBox/groupsModalBox";
 import styles from "../MainContent/mainContent.module.css";
 import MainIcons from "../../../components/ComposePage/MainContent/mainContentIcons";
+import PipelineModalBox from "../CreatePipeline/PipelineModalBox";
 
 
 const GroupsMainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
   const [exportClicked, setExportClicked] = useState(false);
-  const [lastIndices, setLastIndices] = useState<any[]>([]); 
+  const [lastIndices, setLastIndices] = useState<any[]>([]);
+  const [showPipeline, setShowPipeline] = useState(false)
 
   const showGroupsModal = () => {
     setVisible(true);
@@ -23,6 +25,13 @@ const GroupsMainContent = () => {
   const handleExport = (lastIndexes: any[]) => { 
     setLastIndices(lastIndexes);
     setExportClicked(true);
+  };
+  const toggleCreatePipeline = () => {
+    setVisible(false)
+    setShowPipeline(true)
+  };
+  const handlePipelineCancel = () => {
+    setShowPipeline(false);
   };
   return (
     <Layout className={styles.layout}>
@@ -40,7 +49,8 @@ const GroupsMainContent = () => {
           }}
           onClick={showGroupsModal}
         ></Button>
-        <GroupsModalBox visible={visible} setVisible={setVisible} onCancel={handleGroupsCancel} lastIndices={lastIndices} setLastIndices={setLastIndices}  onExport={handleExport} />
+        <GroupsModalBox visible={visible} setVisible={setVisible} onCancel={handleGroupsCancel} lastIndices={lastIndices} setLastIndices={setLastIndices}  onExport={handleExport} onCreatePipeline={toggleCreatePipeline} />
+        <PipelineModalBox showCreatePipeline={showPipeline} onCancel={handlePipelineCancel}/>
       </Content>
     </Layout>
   );
