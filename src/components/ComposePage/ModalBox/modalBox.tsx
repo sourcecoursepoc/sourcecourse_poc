@@ -5,46 +5,35 @@ import styles from "./modalBox.module.css";
 import TreeView from "../../../pages/schemas/treeview";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { getDataBaseSelector, getSelectedArraySelector } from "@/redux/selector";
-import { removeNode } from "@/redux/actions/schemasaction";
+import { getDataBaseSelector, getlastIndexesArraySelector, getSelectedArraySelector, getSelectorTableNodes } from "@/redux/selector";
+import {  removeLastIndex } from "@/redux/actions/schemasaction";
 import { PlusCircleFilled, PlusOutlined } from "@ant-design/icons";
+import { addLastIndex } from "@/redux/actions/schemaTypes";
  //import { fetchDataBaseRequest } from "../../../redux/actions/schemasaction";
 //import { addNode } from '../../redux/actions/schemasaction';
 
 interface MyModalProps {
   visible: boolean;
   onCancel: () => void;
-  onExport: (selectedData: any[]) => void;
-  lastIndexes: any[];
-  setLastIndexes: Dispatch<SetStateAction<any[]>>;
+  onExport: (selectedTableArray: any[]) => void;
 }
 
-const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport,lastIndexes,setLastIndexes}) => {
+const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  const selcectData = useSelector(getSelectedArraySelector);
-  const lastIndex= selcectData.slice(-1)[0]
-  useEffect(()=>{
-    if(lastIndex && 'tableName' in lastIndex && lastIndex.columns && lastIndex.columns.length >0)
-    {  
-      const exists = lastIndexes && lastIndex && lastIndexes.filter(Boolean).some((node) => node.uid === lastIndex.uid  );
-      if(lastIndexes && !exists){
-      setLastIndexes(prevLastIndexes => [...prevLastIndexes, lastIndex]);   }
-    }
-   
-  },[selcectData])
+  const selectedTableArray= useSelector(getSelectorTableNodes);
 
-  const handleExport = () => {
-    onExport(lastIndexes);
+  const handleImport = () => {
+    onExport(selectedTableArray);
   };
-  const handleExportButton=()=>
+  const handleImportButton=()=>
   {
-    handleExport()
+    handleImport()
     onCancel()
   }
   const handleRemove = (uid: string) => {
-    //dispatch(removeNode(uid));
-    setLastIndexes(lastIndexes => lastIndexes.filter(node => node.uid !== uid));
+    dispatch(removeLastIndex(uid));
+  
   };
    
   return (
@@ -71,7 +60,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport,lastInde
                 borderRadius: "1px",
                 height: "2rem",
               }}
-              onClick={handleExportButton}
+              onClick={handleImportButton}
               
             >
               Import
@@ -91,7 +80,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport,lastInde
              
             }}
           >         
-           {lastIndexes.map((node:any) => (
+           {selectedTableArray?.map((node:any) => (
            <> <Row align={"middle"} >
              <Col span={18} key={node.tableName}
             className={styles.rowTextStyle}

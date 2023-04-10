@@ -7,7 +7,7 @@ import {
 import { Space } from "antd";
 
 import React from "react";
-const MiddleIcons = ({ index, name, onUpArrowClick, onDownArrowClick ,arrayLength}) => {
+const MiddleIcons = ({ index, name, onUpArrowClick, onDownArrowClick ,arrayLength,onDeleteClick}) => {
   return (
     <Space size={8} style={{ marginRight: "0.5rem" }}>
       {index > 0 && (
@@ -23,7 +23,7 @@ const MiddleIcons = ({ index, name, onUpArrowClick, onDownArrowClick ,arrayLengt
           onClick={onDownArrowClick}
         />
       )}
-      <DeleteFilled style={{ color: "red", marginTop: "1rem" }} />
+      <DeleteFilled style={{ color: "red", marginTop: "1rem" }} onClick={onDeleteClick}/>
     </Space>
   );
 };
