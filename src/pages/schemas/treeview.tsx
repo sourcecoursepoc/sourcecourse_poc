@@ -87,7 +87,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
 
   const columns = useSelector(selectColumns);
   const selcectedData = useSelector(getSelectedArraySelector);
-  console.log("selcectedData.selcectedData", selcectedData);
   const [selectedNode, setSelectedNode] = useState<any[]>([]);
 
   const [selectedLastIndexes, setSelectedLastIndexes] = useState<Array<any>>(
@@ -105,8 +104,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       selectedNode &&
       selectedObj &&
       selectedNode.filter(Boolean).some((node) => node.uid === selectedObj.uid);
-
-    if (selectedObj && !exists) {
+    if (selectedObj && !exists && !groupModalBoxTreeView) {
       setSelectedNode([selectedObj]);
 
       dispatch(addArray([selectedObj]));
@@ -123,7 +121,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       selectedObj.columns.length > 0
     ) {
       const lastIndex = selectedObj;
-      console.log("selLastIndex", lastIndex);
       const lastIndexExists = selectedLastIndexes.some(
         (item) => item.uid === lastIndex.uid
       );
@@ -138,7 +135,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     setSelectedLastIndexes(selectedTableArray); // assuming 'lastIndexes' is the name of the Redux state variable
   }, [selectedTableArray]);
 
-  console.log("selectedLastIndexes..selectedLastIndexes", selectedLastIndexes);
   const findNodeByKey = (
     data: DBProps[],
 
