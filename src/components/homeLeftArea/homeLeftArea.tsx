@@ -3,14 +3,13 @@ import styles from "./homeLeftArea.module.css";
 import TopBox from "./topBox";
 import { Divider, Row, Tabs } from "antd";
 import SearchBar from "./searchBox";
-
 import ProjectContent from "./content";
 import MyTabs from "./demoTab";
-
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
+
 const HomeLeftArea: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);

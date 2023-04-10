@@ -4,13 +4,16 @@ import styles from "./innerBox.module.css";
 
 import { Image } from "antd";
 import { GroupOutlined, UsergroupAddOutlined } from "@ant-design/icons";
+
 export interface ChildComponentProps {
   image: string;
 }
+
 interface InnerBoxProps {
   title: string;
   value: number;
 }
+
 export default function ({ title, value }: InnerBoxProps) {
   return (
     <>
