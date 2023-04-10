@@ -47,6 +47,8 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   }, []);
 
   const [defaultSelectedKey, setDefaultSelectedKey] = useState("");
+  const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
+
 
   useEffect(() => {
     if (data.length > 0) {
@@ -54,6 +56,8 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       setSelectedNode([firstNode]);
       dispatch(addArray([firstNode]));
       setDefaultSelectedKey(firstNode.uid); // set the uid of the first node as the default selected key
+      setExpandedKeys([firstNode.uid]); // expand the first node by default
+
     }
   }, [data]);
 
@@ -63,8 +67,10 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   const columns = useSelector(selectColumns);
   const [selectedNode, setSelectedNode] = useState<any[]>([]);
 
+
   const onSelect = (keys: any, info: any) => {
     const selectedKey = keys[0] as string;
+
     const selectedObj: any = groupDataSelector
       ? findNodeByKey(data, groupDataSelector, columns, selectedKey)
       : findNodeByKey(data, Tables, columns, selectedKey);
@@ -79,6 +85,14 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     if (groupModalBoxTreeView) {
       dispatch(addGroupdataArray([selectedObj]));
     }
+    // expand the parent nodes of the selected node
+    const parentKeys: string[] = [];
+    let node = selectedObj;
+    while (node ?.parentKey) {
+      parentKeys.push(node.parentKey);
+      node = findNodeByKey(data, Tables, columns, node.parentKey);
+    }
+    setExpandedKeys([...expandedKeys, ...parentKeys, selectedKey]); // include all parent keys and the selected key
   };
 
   const findNodeByKey = (
@@ -139,7 +153,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
           </span>
         }
         key={column.uid}
-      // icon={<FolderOutlined />}
       />
     ));
   };
@@ -223,6 +236,9 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       onSelect={onSelect}
       style={{ fontSize: "15px", fontWeight: "500" }}
       showIcon
+      expandedKeys={expandedKeys}
+      selectedKeys={selectedNode.map((node) => node.uid)}
+      onExpand={(keys) => setExpandedKeys(keys)}
       defaultSelectedKeys={defaultSelectedKey}
     >
       {renderDB(db)}
