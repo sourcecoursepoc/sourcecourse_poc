@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Button, Col, Divider, Input, Modal, Row } from "antd";
 import Buttons from "../../buttons/buttons";
 import styles from "../ModalBox/groupsModalBox.module.css";
@@ -12,23 +12,42 @@ import {
 import DeleteButtonModalBox from "./deleteButtonModalBox";
 import ConfirmationModal from "./ConfirmationModal";
 
-const GroupsModalBoxuttons = () => {
-  const [saveModalVisible, setSaveModalVisible] = useState(false);
+// interface MyGroupModalProps {
+//   onExport: (selectedData: any[]) => void;
+//   lastIndices: any[];
+//   setLastIndices: Dispatch<SetStateAction<any[]>>;
+//   handleSaveModalCancel:()=>void;
+//   handleSaveModalOk:()=>void;
+//   saveModalVisible:boolean;
+//   handleSaveClick:()=>void;
+// }
+
+const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModalVisible,handleSaveClick, onCreatePipeline}) => {
+  // const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [exitModalVisible, setExitModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const handleSaveClick = () => {
-    setSaveModalVisible(true);
-  };
 
-  const handleSaveModalOk = () => {
-   setSaveModalVisible(false);
-    
-  };
+  // const handleExport = () => {
+  //   onExport(lastIndices);
+  // };
+  // const handleExportButton=()=>
+  // {
+  //   handleExport()
+  // }
+  // const handleSaveClick = () => {
+  //   setSaveModalVisible(true);
+  // };
+ 
+  // const handleSaveModalOk = () => {
+  //  handleExportButton();
+  //  setSaveModalVisible(false);
+  // };
 
-  const handleSaveModalCancel = () => {
-    setSaveModalVisible(false);
-  }; 
+  // const handleSaveModalCancel = () => {
+  //   setSaveModalVisible(false);
+  // }; 
 
+ 
   const handleExitClick = () => {
     setExitModalVisible(true);
    
@@ -99,7 +118,7 @@ const GroupsModalBoxuttons = () => {
             type="primary"
             shape="round"
             onClick={handleSaveClick}
-            
+                
           >
             Save
           </Button>
@@ -135,6 +154,7 @@ const GroupsModalBoxuttons = () => {
           <Button
             icon={<BranchesOutlined className={styles.icon} />}
             className={styles.pipelinebutton}
+            onClick={onCreatePipeline}
           >
             Create Pipeline
           </Button>

@@ -9,13 +9,12 @@ const TopBoxRight: React.FC = () => {
         <div className={styles.innerrightTop}>
           <Image
            preview={false}
-            src="./compose.png"
-            style={{
-              height: "2.5rem",
-              marginTop: "1.1rem",
-              marginLeft: "2.3rem",
-              width: "3.6rem",
-            }}
+            src="./compose-Icon2.png"
+           style={{
+              
+              marginLeft: "2rem",
+              width: "4rem",
+            }} 
           ></Image>
         </div>
         <div className={styles.innerrightBottom}>

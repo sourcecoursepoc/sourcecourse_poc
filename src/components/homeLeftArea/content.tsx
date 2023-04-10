@@ -46,7 +46,6 @@ const ProjectContent: React.FC<ContentProps> = ({
       <InnerBox title={item} value={transcriptList[item]}></InnerBox>
     );
   }
-  
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>

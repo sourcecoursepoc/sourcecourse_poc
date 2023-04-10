@@ -129,7 +129,7 @@ const Compose = () => {
                
               <Image
                 preview={false}
-                src="/DB.png"
+                src="/Groups-Icon1.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",
@@ -143,7 +143,20 @@ const Compose = () => {
                
               <Image
                 preview={false}
-                src="/Initial Load.png"
+                src="/users-Icon1.png"
+                style={{
+                  width: "3rem",
+                  height: "3.5rem",
+                  marginLeft: "6rem",
+                  borderBottom: "1px solid grey",
+                }}
+                alt=""
+              />
+              <br />
+
+              <Image
+                preview={false}
+                src="/InitialLoad-Icon4.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",
@@ -156,20 +169,7 @@ const Compose = () => {
                
               <Image
                 preview={false}
-                src="/sync.png"
-                style={{
-                  width: "3rem",
-                  height: "3.5rem",
-                  marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
-                }}
-                alt=""
-              />
-              <br />
-               
-              <Image
-                preview={false}
-                src="/DB.png"
+                src="/Sync-Icon-1.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",

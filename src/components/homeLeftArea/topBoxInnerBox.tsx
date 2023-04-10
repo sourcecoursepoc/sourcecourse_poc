@@ -14,6 +14,7 @@ const TopInnerBox: React.FC = () => {
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
+  
   return (
     <>
       <div className={styles.outerbox}>
@@ -21,7 +22,7 @@ const TopInnerBox: React.FC = () => {
           <div className={styles.innerrightTop}>
             <Image
             preview={false}
-              src="/Schemas.png"
+              src="./Schemas.png"
               style={{ height: "3rem", marginTop: "1.1rem" }}
             ></Image>
           </div>

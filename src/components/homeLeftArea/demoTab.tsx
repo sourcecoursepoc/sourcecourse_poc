@@ -1,7 +1,7 @@
 import React from "react";
 import { Tabs } from "antd";
 const { TabPane } = Tabs;
-
+import "./tabs.module.css"
 interface TabProps {
   onBooleanValueChange: (value: boolean) => void;
 }
@@ -23,12 +23,13 @@ function MyTabs(props: TabProps) {
   return (
     <Tabs defaultActiveKey="1"
 tabBarStyle={tabsStyle} 
+id="tabStyle"
      onClick={handleTabClick}>
       
       <TabPane
         tab="All projects " style={{ font: "#fffff"}}
         key="1"
-        // style={{ marginTop: " -16px" }}
+        id="tabpane"
       ></TabPane>
     </Tabs>
   );

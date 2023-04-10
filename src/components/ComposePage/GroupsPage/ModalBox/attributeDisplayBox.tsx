@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { Card, Row, Col, Divider } from "antd";
-import styles from "./displaySchema.module.css";
+import styles from "./attributeDisplayBox.module.css";
 import { DeleteFilled } from "@ant-design/icons";
 import { useSelector } from "react-redux";
 import { getSelectedArraySelector } from "@/redux/selector";
@@ -15,7 +15,7 @@ interface MyComponentProps {
   handleRemove: (uid: string) => void;
    lengthOfColums:any; 
 }
-const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon,uid,handleRemove ,lengthOfColums  }) => {
+const AttributeDisplayBox: React.FC<MyComponentProps> = ({ text, attribute, icon,uid,handleRemove ,lengthOfColums  }) => {
 
   return (
     <>
@@ -35,7 +35,7 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon,ui
           </Row>
           <Row className={styles.imageName}>
             <Col className={styles.imageNameText}>
-              <p  >{attribute} {lengthOfColums} 
+              <p>{attribute} {lengthOfColums} 
               </p>
             </Col></Row>
         </div>
@@ -44,4 +44,4 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon,ui
   );
 };
 
-export default DisplaySchemaBox;
+export default AttributeDisplayBox;

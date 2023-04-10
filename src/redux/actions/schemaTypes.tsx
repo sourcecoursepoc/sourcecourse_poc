@@ -13,7 +13,10 @@ import {
     POST_GROUPDATA_DATABASE_SUCCESS,
     POST_GROUPDATA_DATABASE_FAILURE,
     REMOVE_NODE,
-    ADD_GROUPDATA_ARRAY
+    ADD_GROUPDATA_ARRAY,
+    ADD_LAST_INDEX,
+    REMOVE_LAST_INDEX,
+    CLEAR_LAST_INDEXES
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -62,6 +65,7 @@ export interface DataBaseState {
     database: DBProps[];
     error: string | null;
     myArray: any[];
+    lastIndexes:any[];
 }
 
 export interface FetchDataBaseSuccessPayload {
@@ -100,6 +104,9 @@ export type DataBaseActions =
     | FetchDataBaseFailure
     | AddArrayAction
     |RemoveNodeAction
+    | AddLastIndexAction
+    |RemoveLastIndexAction
+    |ClearLastIndexAction
     ;
 
 
@@ -110,6 +117,8 @@ export interface GroupdataDataBaseState {
     groupdataDatabase: TableProps[];
     error: string | null;
     myGroupdataArray: any[];
+    myArray: any[];
+
 }
 
 export interface FetchGroupdataDataBaseSuccessPayload {
@@ -144,7 +153,33 @@ export interface RemoveNodeAction  {
     type:typeof REMOVE_NODE;
     payload:  { uid: string }; // The ID of the node to remove
   }
+  export interface AddLastIndexAction {
+    type: typeof ADD_LAST_INDEX;
+    payload: any;
+  }
+  
+  export  interface RemoveLastIndexAction {
+    type: typeof REMOVE_LAST_INDEX;
+    payload: string;
+  }
 
+   export  interface ClearLastIndexAction {
+    type: typeof CLEAR_LAST_INDEXES;
+    payload: [];
+  }
+  export const addLastIndex = (lastIndex:any) => {
+    return {
+      type: ADD_LAST_INDEX,
+      payload: lastIndex,
+    };
+  };
+  
+  export const removeLastIndex = (uid:any) => {
+    return {
+      type: REMOVE_LAST_INDEX,
+      payload: uid,
+    };
+  };
 
 export type GroupdataDataBaseActions =
     | FetchGroupdataDataBaseRequest
