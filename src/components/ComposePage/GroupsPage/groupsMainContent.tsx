@@ -5,6 +5,8 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 import GroupsModalBox from "../GroupsPage/ModalBox/groupsModalBox";
 import styles from "../MainContent/mainContent.module.css";
+import MainIcons from "../../../components/ComposePage/MainContent/mainContentIcons";
+import PipelineModalBox from "../CreatePipeline/PipelineModalBox";
 import AttributeDisplayBox from "./ModalBox/attributeDisplayBox";
 
 
@@ -13,6 +15,7 @@ const GroupsMainContent = () => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
   const [exportClicked, setExportClicked] = useState(false);
+  const [showPipeline, setShowPipeline] = useState(false)
   const [lastIndices, setLastIndices] = useState<any[]>([]); 
   const selectGroupdataAttributeData = useSelector(getSelectedGroupdataArraySelector);
   
@@ -26,6 +29,13 @@ const GroupsMainContent = () => {
   const handleExport = (lastIndices: any[]) => { 
     setLastIndices(lastIndices);
     setExportClicked(true);
+  };
+  const toggleCreatePipeline = () => {
+    setVisible(false)
+    setShowPipeline(true)
+  };
+  const handlePipelineCancel = () => {
+    setShowPipeline(false);
   };
 
   const handleRemove = (uid: string) => {
@@ -59,8 +69,9 @@ const GroupsMainContent = () => {
             color: "#7E60BC",
           }}
           onClick={showGroupsModal}
-        ></Button></Row>
-        <GroupsModalBox visible={visible} setVisible={setVisible} onCancel={handleGroupsCancel} lastIndices={lastIndices} setLastIndices={setLastIndices}  onExport={handleExport} />
+        ></Button>
+        <GroupsModalBox visible={visible} setVisible={setVisible} onCancel={handleGroupsCancel} lastIndices={lastIndices} setLastIndices={setLastIndices}  onExport={handleExport} onCreatePipeline={toggleCreatePipeline} />
+        <PipelineModalBox showCreatePipeline={showPipeline} onCancel={handlePipelineCancel}/>
       </Content>
     </Layout>
   );

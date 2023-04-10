@@ -22,7 +22,7 @@ import ConfirmationModal from "./ConfirmationModal";
 //   handleSaveClick:()=>void;
 // }
 
-const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModalVisible,handleSaveClick}) => {
+const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModalVisible,handleSaveClick, onCreatePipeline}) => {
   // const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [exitModalVisible, setExitModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
@@ -154,6 +154,7 @@ const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModal
           <Button
             icon={<BranchesOutlined className={styles.icon} />}
             className={styles.pipelinebutton}
+            onClick={onCreatePipeline}
           >
             Create Pipeline
           </Button>
