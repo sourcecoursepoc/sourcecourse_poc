@@ -19,6 +19,7 @@ import GroupsThirdSide from "./groupsThirdSide";
 import MiddleIcons from "./middleIcons";
 import { removeNode } from "@/redux/actions/schemasaction";
 import NewAttributeContent from "./newAttributeContent";
+import { PlusOutlined } from "@ant-design/icons";
 
 interface MyModalProps {
   visible?: boolean;
@@ -30,7 +31,15 @@ interface MyModalProps {
   onCreatePipeline?: () => void;
 }
 
-const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,lastIndices,setLastIndices,onExport,onCreatePipeline }) => {
+const GroupsModalBox: React.FC<MyModalProps> = ({
+  visible,
+  setVisible,
+  onCancel,
+  lastIndices,
+  setLastIndices,
+  onExport,
+  onCreatePipeline,
+}) => {
   const [groupModalBoxTreeView, setGroupModalBoxTreeView] = useState(true);
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
@@ -128,8 +137,12 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
       onCancel={onCancel}
       footer={null}
       closable={false}
-      width={1000}
-      bodyStyle={{ height: "80vh", borderRadius: "5px", width: "100%" }}
+      width={1050}
+      bodyStyle={{
+        maxHeight: "500px",
+        overflowY: "auto",
+        borderRadius: "5px",
+      }}
     >
       <Row style={{ borderBottom: "1px solid #ccc" }}>
         <Col
@@ -164,11 +177,17 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
             marginTop: "0.5rem",
           }}
         >
-          <GroupsModalBoxButtons handleSaveModalCancel={handleSaveModalCancel} handleSaveModalOk={handleSaveModalOk} saveModalVisible={saveModalVisible} handleSaveClick={handleSaveClick} onCreatePipeline={onCreatePipeline}/>
+          <GroupsModalBoxButtons
+            handleSaveModalCancel={handleSaveModalCancel}
+            handleSaveModalOk={handleSaveModalOk}
+            saveModalVisible={saveModalVisible}
+            handleSaveClick={handleSaveClick}
+            onCreatePipeline={onCreatePipeline}
+          />
         </Col>
       </Row>
-      <Row style={{ height: "29rem", width: "60rem" }}>
-        <Col span={6} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
+      <Row>
+        <Col span={6} style={{ borderRight: "1px solid #ccc" }}>
           <Row style={{ marginTop: "1rem", width: "14rem" }}>
             <Col span={24} style={{ marginLeft: "0.15rem" }}>
               {/* <SearchBar /> */}
@@ -189,12 +208,13 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
                   db={groupdataDatabaseSelector}
                   setGroupModalBoxTreeView={setGroupModalBoxTreeView}
                   groupModalBoxTreeView={groupModalBoxTreeView}
+                  iconImage={<PlusOutlined style={{width:'3rem',fontSize:'0.8rem',color:'#7E60BC',strokeWidth: '2' }}/>}
                 />
               )}
             </Col>
           </Row>
         </Col>
-        <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
+        <Col span={8} style={{ borderRight: "1px solid #ccc" }}>
           <AttributeButton onClickAttribute={contentToggle} />
           {lastIndices?.map((node, index) => (
             <>
@@ -215,6 +235,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
                       <p>
                         {node.name}
                         <br />
+                       {node.type}
                       </p>
                     )}
                   </Col>

@@ -1,6 +1,7 @@
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Col, Input, Row, Select } from "antd";
 import styles from "../ModalBox/groupsModalBox.module.css";
+import FloatInput from "./floatInput";
 import InfoCircleOutlinedFunction from "./infoCircleOutlined";
 
 const GroupsThirdSide = () => {
@@ -29,7 +30,8 @@ const GroupsThirdSide = () => {
               <Row>
                 <Col span={24}>
                   <div style={{ position: "relative", marginBottom: "1rem" }}>
-                    <Input
+                    <FloatInput
+                    label="Alias"
                       placeholder="Alias"
                       style={{
                         borderColor: "#ccc",
@@ -40,7 +42,7 @@ const GroupsThirdSide = () => {
                       }}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
-                      {<InfoCircleOutlinedFunction value={""} />}
+                      {<InfoCircleOutlinedFunction value={""} tooltipTitle={"This information is about alias"}/>}
                     </div>
                   </div>
                 </Col>
@@ -48,7 +50,8 @@ const GroupsThirdSide = () => {
               <Row>
                 <Col span={24}>
                   <div style={{ position: "relative", marginBottom: "1rem" }}>
-                    <Input
+                    <FloatInput
+                    label="Prefix Value"
                       placeholder="Prefix Value"
                       style={{
                         borderColor: "#ccc",
@@ -59,7 +62,7 @@ const GroupsThirdSide = () => {
                       }}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
-                      {<InfoCircleOutlinedFunction value={""} />}
+                      {<InfoCircleOutlinedFunction value={""} tooltipTitle={"This information is about prefix value"}/>}
                     </div>
                   </div>
                 </Col>
@@ -69,7 +72,8 @@ const GroupsThirdSide = () => {
               <Row>
                 <Col span={24}>
                   <div style={{ position: "relative", marginBottom: "1rem" }}>
-                    <Input
+                    <FloatInput
+                    label="Default Value"
                       placeholder="Default Value"
                       style={{
                         borderColor: "#ccc",
@@ -80,7 +84,7 @@ const GroupsThirdSide = () => {
                       }}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
-                      {<InfoCircleOutlinedFunction value={""} />}
+                      {<InfoCircleOutlinedFunction value={""} tooltipTitle={"This information is about default value"}/>}
                     </div>
                   </div>
                 </Col>
@@ -88,7 +92,8 @@ const GroupsThirdSide = () => {
               <Row>
                 <Col span={24}>
                   <div style={{ position: "relative", marginBottom: "1rem" }}>
-                    <Input
+                    <FloatInput
+                    label="Suffix Value"
                       placeholder="Suffix Value"
                       style={{
                         borderColor: "#ccc",
@@ -99,7 +104,7 @@ const GroupsThirdSide = () => {
                       }}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
-                      {<InfoCircleOutlinedFunction value={""} />}
+                      {<InfoCircleOutlinedFunction value={""} tooltipTitle={"This information is about suffix value"}/>}
                     </div>
                   </div>
                 </Col>
@@ -119,7 +124,7 @@ const GroupsThirdSide = () => {
             <Select
               style={{ width: "100%", height: "100%" }}
               value="Convert Values"
-              suffixIcon={<InfoCircleOutlined style={{marginRight:"15rem",color:"#7e60bc"}}/>}
+              suffixIcon={<InfoCircleOutlined style={{marginRight:"15rem",color:"#7e60bc"}} />}
             >
               <Option value="Value Type 1">Selection 1</Option>
             </Select>

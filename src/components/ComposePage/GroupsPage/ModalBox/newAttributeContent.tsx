@@ -70,7 +70,7 @@ const NewAttributeContent = () => {
                       }}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
-                      {<InfoCircleOutlinedFunction value={""} />}
+                      {<InfoCircleOutlinedFunction value={""} tooltipTitle={"This information is about attribute name"}/>}
                     </div>
                   </div>
                 </Col>
