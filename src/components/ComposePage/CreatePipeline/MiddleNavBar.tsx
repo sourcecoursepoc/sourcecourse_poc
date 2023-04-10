@@ -1,11 +1,12 @@
 import { Row } from 'antd'
-import React from 'react'
+import React, { useState } from 'react'
 
 const MiddleNavBar = () => {
+    const [isScheduleActive, setIsScheduleActive] = useState(true);
   return (
     <Row type="flex" justify="center" align="middle">
-        <button>Schedule</button>
-        <button>Output Type</button>
+        <button onClick={() => setIsScheduleActive(true)} style={{ backgroundColor: isScheduleActive ? 'cyan' : 'white' }}>Schedule</button>
+      <button onClick={() => setIsScheduleActive(false)} style={{ backgroundColor: !isScheduleActive ? 'cyan' : 'white' }}>Output Type</button>
     </Row>  
   )
 }
