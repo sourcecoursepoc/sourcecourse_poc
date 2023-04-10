@@ -9,7 +9,7 @@ import {
   getSelectedGroupdataArraySelector,
 } from "@/redux/selector";
 import { Col, Input, Modal, Row } from "antd";
-import React, { useEffect, useState,SetStateAction,Dispatch } from "react";
+import React, { useEffect, useState, SetStateAction, Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TreeView from "../../../../pages/schemas/treeview";
 import styles from "../ModalBox/groupsModalBox.module.css";
@@ -35,54 +35,67 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
-  
+
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
-  const lastIndexGroup= selectGroupdataData.slice(-1)[0]
+  const lastIndexGroup = selectGroupdataData.slice(-1)[0];
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
     dispatch(fetchGroupDataRequest());
   }, []);
-  useEffect(()=>{
-    if(lastIndexGroup && 'name' in lastIndexGroup )
-    {  
-      const exists = lastIndices && lastIndexGroup && lastIndices.filter(Boolean).some((node) => node.uid === lastIndexGroup.uid  );
-      if(lastIndices && !exists){
-      setLastIndices(prevLastIndices => [...prevLastIndices, lastIndexGroup]);   }
+  useEffect(() => {
+    if (lastIndexGroup && "name" in lastIndexGroup) {
+      const exists =
+        lastIndices &&
+        lastIndexGroup &&
+        lastIndices
+          .filter(Boolean)
+          .some((node) => node.uid === lastIndexGroup.uid);
+      if (lastIndices && !exists) {
+        setLastIndices((prevLastIndices) => [
+          ...prevLastIndices,
+          lastIndexGroup,
+        ]);
+      }
     }
-  },[selectGroupdataData])
-
+  }, [selectGroupdataData]);
 
   const handleExport = () => {
     onExport(lastIndices);
   };
-  const handleExportButton=()=>
-  {
-    handleExport()
-  }
-  const handleSaveClick = () => {
-    setSaveModalVisible(true);
+  const handleExportButton = () => {
+    handleExport();
   };
- 
+  const handleSaveClick = () => {
+    // setSaveModalVisible(true);
+    handleExportButton();
+    setVisible(false);
+  };
+
   const handleSaveModalOk = () => {
-   handleExportButton();
-   setSaveModalVisible(false);
-   setVisible(false);
+    handleExportButton();
+    setVisible(false);
+    // setSaveModalVisible(false);
   };
 
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
-  }; 
+  };
 
   const handleRemove = (uid: string) => {
     console.log("uid in main content", uid);
     dispatch(removeNode(uid));
   };
 
+  const onDeleteClick = (index: number) => {
+    const newLastIndices = [...lastIndices];
+    newLastIndices.splice(index, 1);
+    setLastIndices(newLastIndices);
+  };
 
   function handleAddIconClick(node: string) {
     setSchema(node);
@@ -92,14 +105,21 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
     setDisplayAttributeSection(true);
   }
 
+  const swapElements = (array: array, index1: number, index2: number) => {
+    const newArray = [...array];
+    const temp = newArray[index1];
+    newArray[index1] = newArray[index2];
+    newArray[index2] = temp;
+    return newArray;
+  };
+
   const handleArrowClick = (index: number, direction: "up" | "down") => {
-    const newData = [...selectGroupdataData];
+    const newData = [...lastIndices];
     const currentIndex = index;
     const targetIndex = direction === "up" ? index - 1 : index + 1;
     if (targetIndex >= 0 && targetIndex < newData.length) {
-      const element = selectGroupdataData.splice(currentIndex, 1)[0];
-      const data = selectGroupdataData.splice(targetIndex, 0, element);
-      dispatch(fetchDataBaseRequest(data));
+      const swappedArray = swapElements(lastIndices, currentIndex, targetIndex);
+      setLastIndices(swappedArray);
     }
   };
   return (
@@ -201,10 +221,11 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
                 </Row>
                 <MiddleIcons
                   index={index}
-                  arrayLength={selectGroupdataData.length-1}
+                  arrayLength={selectGroupdataData.length - 1}
                   name={node.name}
                   onUpArrowClick={() => handleArrowClick(index, "up")}
                   onDownArrowClick={() => handleArrowClick(index, "down")}
+                  onDeleteClick={() => onDeleteClick(index)}
                 />
               </div>
               <Row className={styles.lowerDivider}></Row>

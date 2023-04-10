@@ -13,11 +13,14 @@ import {
   POST_GROUPDATA_DATABASE,
   POST_GROUPDATA_DATABASE_SUCCESS,
   POST_GROUPDATA_DATABASE_FAILURE,
-  ADD_GROUPDATA_ARRAY
+  ADD_LAST_INDEX,
+  REMOVE_LAST_INDEX,
+  ADD_GROUPDATA_ARRAY,
+  CLEAR_LAST_INDEXES
 } from "./schemaActionTypes";
   
  
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddGroupArrayAction} from "./schemaTypes";
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddLastIndexAction, RemoveLastIndexAction, AddGroupArrayAction,ClearLastIndexAction} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -94,7 +97,25 @@ export function removeNode(uid: string): RemoveNodeAction {
     payload: { uid},
   };
 }
+export const addLastIndex = (lastIndex: any): AddLastIndexAction=> {
+  return {
+    type: ADD_LAST_INDEX,
+    payload: lastIndex,
+  };
+};
 
+export const removeLastIndex = (uid: string): RemoveLastIndexAction => {
+  return {
+    type: REMOVE_LAST_INDEX,
+    payload: uid,
+  };
+};
+export const clearLastIndex = (): ClearLastIndexAction => {
+  return {
+    type: CLEAR_LAST_INDEXES,
+    payload: [],
+  };
+};
 // Post Action
 
 export const postDataRequest = (): PostDataActionTypes => ({ type: POST_GROUPDATA_DATABASE });
@@ -105,5 +126,6 @@ export const postDataFailure = (error: string): PostDataActionTypes => ({
   type: POST_GROUPDATA_DATABASE_FAILURE,
   payload: error,
 });
+
 
 
