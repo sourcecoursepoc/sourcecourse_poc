@@ -5,7 +5,11 @@ import {
     ADD_ARRAY,
     POST_GROUPDATA_DATABASE_FAILURE,
     POST_GROUPDATA_DATABASE_SUCCESS,
-    REMOVE_NODE
+    REMOVE_NODE,
+    ADD_LAST_INDEX,
+    REMOVE_LAST_INDEX,
+    CLEAR_LAST_INDEXES,
+   // CLEAR_LAST_INDEXES,
 } from "../actions/schemaActionTypes";
 import { DataBaseState, DataBaseActions, PostDataActionTypes, PostDataState } from "../actions/schemaTypes";
 
@@ -14,6 +18,7 @@ const initialDataBaseState: DataBaseState = {
   database: [],
   error: null,
   myArray: [],
+  lastIndexes: [],
 };
 
 export default (state = initialDataBaseState, action: DataBaseActions) => {
@@ -62,11 +67,34 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
       case REMOVE_NODE:
                 const updatedArray = state.myArray.filter(node => node.uid !== action.payload.uid);
              
-                console.log(updatedArray,"updatedArray")
                 return {
                     ...state,
                     myArray: updatedArray,
                 }; 
+     case ADD_LAST_INDEX:
+                  const exists = state.lastIndexes.some((node) => node.uid === action.payload.uid);
+                  if (!exists) {
+                    return {
+                      ...state,
+                      lastIndexes: [...state.lastIndexes, action.payload],
+                    };
+                  } else {
+                    return state;
+                  }
+     case REMOVE_LAST_INDEX:
+                    const index = state.lastIndexes.findIndex((node) => node.uid === action.payload);
+                    if (index !== -1) {
+                      state.lastIndexes.splice(index, 1);
+                    }
+                    return {
+                      ...state,
+                      lastIndexes: [...state.lastIndexes],
+                    };
+       case CLEAR_LAST_INDEXES:
+                    return {
+                      ...state,
+                      lastIndexes: [],
+                    }; 
           
     default:
       return {

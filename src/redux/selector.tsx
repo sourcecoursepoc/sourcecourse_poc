@@ -13,10 +13,16 @@ const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.m
 
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
+const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
+
+export const getSelectorTableNodes = createSelector(getLastIndexesArray, (lastIndexes) => lastIndexes)
+
+export const getlastIndexesArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getDataBaseSelector = createSelector(getDataBase, (database) => database)
 export const getGroupdataDataBaseSelector = createSelector(getGroupdataDataBase, (groupdataDatabase) => groupdataDatabase)
 export const getSchemasSelector = createSelector(getSchemas, (schemas) => schemas);
 export const getProjectsSelector = createSelector(getProjects, (projects) => projects);
+
 export const getPendingSelector = createSelector(
   getPending,
   (pending) => pending
