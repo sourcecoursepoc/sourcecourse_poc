@@ -27,9 +27,10 @@ interface MyModalProps {
   lastIndices: any[];
   setLastIndices: Dispatch<SetStateAction<any[]>>;
   onExport: (selectedData: any[]) => void;
+  onCreatePipeline?: () => void;
 }
 
-const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,lastIndices,setLastIndices,onExport }) => {
+const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,lastIndices,setLastIndices,onExport,onCreatePipeline }) => {
   const [groupModalBoxTreeView, setGroupModalBoxTreeView] = useState(true);
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
@@ -143,7 +144,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
             marginTop: "0.5rem",
           }}
         >
-          <GroupsModalBoxButtons handleSaveModalCancel={handleSaveModalCancel} handleSaveModalOk={handleSaveModalOk} saveModalVisible={saveModalVisible} handleSaveClick={handleSaveClick}/>
+          <GroupsModalBoxButtons handleSaveModalCancel={handleSaveModalCancel} handleSaveModalOk={handleSaveModalOk} saveModalVisible={saveModalVisible} handleSaveClick={handleSaveClick} onCreatePipeline={onCreatePipeline}/>
         </Col>
       </Row>
       <Row style={{ height: "29rem", width: "60rem" }}>
