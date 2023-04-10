@@ -14,6 +14,7 @@ const TopInnerBox: React.FC = () => {
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
+  
   return (
     <>
       <div className={styles.outerbox}>
