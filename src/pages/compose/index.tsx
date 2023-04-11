@@ -181,7 +181,7 @@ const Compose = () => {
                   padding:"0.5rem"
                 }}
                 alt=""
-                // onSelect={<ReportMainContent/>}
+              
               />
               <br />
                
