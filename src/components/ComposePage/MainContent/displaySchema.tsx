@@ -15,9 +15,12 @@ interface MyComponentProps {
   uid: string; // new prop for the uid of the node
   handleRemove: (uid: string) => void;
   lengthOfColums: any;
-  width?:any;
+  width?: any;
+  status: any;
+  padding?:any;
+  paddingLeft:any;
 }
-const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, uid, handleRemove, lengthOfColums, deleteIcon,width }) => {
+const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, uid, handleRemove, lengthOfColums, deleteIcon, width, status,padding,paddingLeft }) => {
 
   return (
     <>
@@ -28,8 +31,10 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, u
           </Col>
         </div>
         <div style={{ width: 'inherit' }}>
-          <Row className={styles.items}><Col style={{ width: '90%', fontSize: '1rem', textAlign: 'justify', height: 'auto', color: 'grey' }}>
-            {text}</Col>
+          <Row className={styles.items} style={{padding:`${padding}rem`}}><Col style={{ width: '90%', fontSize: '1rem', textAlign: 'justify', height: 'auto', color: 'grey' }}>
+            <div>{text}</div>
+            <span style={{fontSize:"0.5rem"}}>{status}</span>
+          </Col>
             <Col style={{ paddingLeft: '6.5px' }}>
               {deleteIcon}
               {/* <DeleteFilled style={{color:"red",height:'auto'}} */}

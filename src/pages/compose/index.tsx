@@ -16,6 +16,7 @@ import ButtonComponent from "@/components/ComposePage/buttons/buttonComponent";
 
 import GroupsMainContent from "@/components/ComposePage/GroupsPage/groupsMainContent";
 import TextAreaComponent from "@/components/ComposePage/TextArea/textArea";
+import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -41,13 +42,13 @@ const Compose = () => {
     } else {
       setNameError(false);
     }
-  
+
     if (description.trim() === "") {
       setDescriptionError(true);
     } else {
       setDescriptionError(false);
     }
-  
+
     setSaveModalVisible(true);
   };
   const handleIconClick = (icon) => {
@@ -58,16 +59,18 @@ const Compose = () => {
     if (selectedIcon === null) {
       return null; // or handle this case however is appropriate for your application
     }
-    else{
-    switch (selectedIcon) {
-      case "HddFilled":
-        return <MainContent />;
-      case "ContainerFilled":
-        return <GroupsMainContent />;
-      // add additional cases for each icon
-      default:
-        return null;
-    }
+    else {
+      switch (selectedIcon) {
+        case "HddFilled":
+          return <MainContent />;
+        case "ContainerFilled":
+          return <GroupsMainContent />;
+        case "ComposePipeline":
+          return <ComposePipeline />
+        // add additional cases for each icon
+        default:
+          return null;
+      }
     }
   };
 
@@ -84,7 +87,7 @@ const Compose = () => {
               descriptionValue={description}
               nameError={nameError}
               descriptionError={descriptionError}
-              className={nameError ? "textAreaError" : ""} 
+              className={nameError ? "textAreaError" : ""}
             />
             <Col
               span={1}
@@ -98,21 +101,21 @@ const Compose = () => {
               handleSaveClick={handleSaveClick}
               saveBoxMessage={
                 nameError ? (
-                 "name can not be empty"
-                ) :descriptionError? (
+                  "name can not be empty"
+                ) : descriptionError ? (
                   "description can not be empty"
-                ) : nameError&&descriptionError? (
+                ) : nameError && descriptionError ? (
                   "name and description can not be empty"
-                ) :(
-                  ""
-                )
+                ) : (
+                        ""
+                      )
               }
             />
           </Row>
 
           <Row>
             <Col className={styles.sideButtons}>
-               
+
               <Image
                 preview={false}
                 src="/Schemas.png"
@@ -126,7 +129,7 @@ const Compose = () => {
                 alt=""
               />{" "}
               <br />
-               
+
               <Image
                 preview={false}
                 src="/Groups-Icon1.png"
@@ -140,7 +143,7 @@ const Compose = () => {
                 onClick={() => handleIconClick("ContainerFilled")}
               />
               <br />
-               
+
               <Image
                 preview={false}
                 src="/compose-pipeline.png"
@@ -151,6 +154,7 @@ const Compose = () => {
                   borderBottom: "1px solid grey",
                 }}
                 alt=""
+                onClick={() => handleIconClick("ComposePipeline")}
               />
               <br />
 
@@ -166,7 +170,7 @@ const Compose = () => {
                 alt=""
               />
               <br />
-               
+
               <Image
                 preview={false}
                 src="/Sync-Icon-1.png"
