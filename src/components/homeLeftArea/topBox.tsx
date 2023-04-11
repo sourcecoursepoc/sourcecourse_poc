@@ -3,6 +3,7 @@ import { Button, Card, Col, Row, Divider } from "antd";
 import styles from "./topBox.module.css";
 import TopInnerBox from "./topBoxInnerBox";
 import TopBoxRight from "./topBoxRight";
+
 const TopBox: React.FC = () => {
   const gridStyle = {
     width: "50%",

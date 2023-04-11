@@ -13,6 +13,8 @@ import { getSelectedArraySelector, getSelectorTableNodes } from '@/redux/selecto
 import { useDispatch } from 'react-redux';
 import { removeNode } from '@/redux/actions/schemasaction';
 import { removeLastIndex } from '@/redux/actions/schemaTypes';
+import { DeleteFilled } from "@ant-design/icons";
+
 
 const MainContent = () => {
   const { Content } = Layout;
@@ -64,7 +66,7 @@ const MainContent = () => {
       {importClicked &&(
        <Row >               
            {selectedTableArray.map((node:any) => ( 
-              <DisplaySchemaBox key={node.tableName} text={node.tableName} uid={node.uid} 
+              <DisplaySchemaBox key={node.tableName} text={node.tableName} uid={node.uid} deleteIcon={<DeleteFilled style={{color:"red",height:'auto'}} onClick={() => handleRemove(node.uid)}/>}
               attribute={"ATTRIBUTES / "} icon={ <Image preview={false}src="/Schemas.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
               </Image> } 
                handleRemove={handleRemove}   lengthOfColums={node?.columns?.length} 
