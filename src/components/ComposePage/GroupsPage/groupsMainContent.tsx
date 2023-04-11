@@ -47,7 +47,6 @@ const GroupsMainContent = () => {
 
   const handleRemove = (uid: string) => {
     // dispatch(removeNode(uid));
-
     setLastIndices((lastIndices) =>
       lastIndices.filter((node) => node.uid !== uid)
     );
@@ -81,17 +80,13 @@ const GroupsMainContent = () => {
 
           </Row>
         )}
-
         <Row style={{ marginTop: "1rem" }}>
           <Button
             icon={<PlusCircleFilled />}
             style={{
               marginLeft: "1.5rem",
-
               width: "4rem",
-
               height: "3rem",
-
               color: "#7E60BC",
             }}
             onClick={showGroupsModal}

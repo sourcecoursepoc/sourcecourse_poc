@@ -44,7 +44,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
-
+  const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
@@ -72,7 +72,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
       }
     }
   }, [selectGroupdataData]);
-
+console.log("lastIndiceslastIndices",lastIndices)
   const handleExport = () => {
     onExport(lastIndices);
   };
@@ -96,7 +96,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   };
 
   const handleRemove = (uid: string) => {
-    console.log("uid in main content", uid);
     dispatch(removeNode(uid));
   };
 
@@ -113,6 +112,13 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   function contentToggle() {
     setDisplayAttributeSection(true);
   }
+
+  const handleRowClick = (node:any) => {
+    console.log("Getting innnnnn");
+    setSelectedNodeDetails([node]);
+    console.log("selectedNodeDetails", selectedNodeDetails);
+    console.log("Getting outttttttt");
+  };
 
   const swapElements = (array: array, index1: number, index2: number) => {
     const newArray = [...array];
@@ -218,6 +224,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
           <AttributeButton onClickAttribute={contentToggle} />
           {lastIndices?.map((node, index) => (
             <>
+            {console.log("nodeeeeeeeeeee",node.metadata)}
               <div
                 style={{
                   display: "flex",
@@ -229,13 +236,15 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
                   key={node.name}
                   className={styles.rowTextStyle}
                   align="middle"
+                  onClick={() => handleRowClick(node.metadata)}
+                  style={{ cursor: "pointer" }}
                 >
                   <Col span={28}>
                     {node.name && (
                       <p>
                         {node.name}
                         <br />
-                       {node.type}
+                        <span style={{ color: 'grey' }}>{node.type.toUpperCase()}</span>
                       </p>
                     )}
                   </Col>
@@ -257,7 +266,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
         {displayAttributeSection ? (
           <NewAttributeContent />
         ) : (
-          <GroupsThirdSide />
+          <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails}/>
         )}
       </Row>
     </Modal>
