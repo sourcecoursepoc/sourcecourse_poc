@@ -143,7 +143,7 @@ const Compose = () => {
                
               <Image
                 preview={false}
-                src="/users-Icon1.png"
+                src="/compose-pipeline.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",

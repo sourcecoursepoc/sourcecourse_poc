@@ -78,6 +78,7 @@ export default function SchemaContent() {
                     uid={""}
                     handleRemove={() => ({})}
                     lengthOfColums={""}
+                    width={170}
                 />
             );
         }
