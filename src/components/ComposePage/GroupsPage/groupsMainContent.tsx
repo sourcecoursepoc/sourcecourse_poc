@@ -7,30 +7,22 @@ import { Button, Layout, Row } from "antd";
 import { useState } from "react";
 
 import { useSelector } from "react-redux";
-
 import PipelineModalBox from "../CreatePipeline/PipelineModalBox";
-
 import GroupsModalBox from "../GroupsPage/ModalBox/groupsModalBox";
-
 import styles from "../MainContent/mainContent.module.css";
-
 import AttributeDisplayBox from "./ModalBox/attributeDisplayBox";
-
 const GroupsMainContent = () => {
+
   const { Content } = Layout;
 
   const [visible, setVisible] = useState(false);
 
   const [exportClicked, setExportClicked] = useState(false);
-
   const [lastIndices, setLastIndices] = useState<any[]>([]);
-
   const selectGroupdataAttributeData = useSelector(
     getSelectedGroupdataArraySelector
   );
-
   const [showPipeline, setShowPipeline] = useState(false);
-
   const showGroupsModal = () => {
     setVisible(true);
   };
@@ -43,14 +35,14 @@ const GroupsMainContent = () => {
     setLastIndices(lastIndices);
 
     setExportClicked(true);
-  };
 
+  };
   const handleRemove = (uid: string) => {
-    // dispatch(removeNode(uid));
     setLastIndices((lastIndices) =>
       lastIndices.filter((node) => node.uid !== uid)
     );
   };
+
 
   const toggleCreatePipeline = () => {
     setVisible(false);
@@ -61,7 +53,6 @@ const GroupsMainContent = () => {
   const handlePipelineCancel = () => {
     setShowPipeline(false);
   };
-
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>
@@ -77,7 +68,6 @@ const GroupsMainContent = () => {
               attribute={"ATTRIBUTES / "}
               handleRemove={handleRemove}
             />
-
           </Row>
         )}
         <Row style={{ marginTop: "1rem" }}>
@@ -109,5 +99,4 @@ const GroupsMainContent = () => {
     </Layout>
   );
 };
-
 export default GroupsMainContent;

@@ -59,13 +59,15 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   const data = useSelector(getDataBaseSelector);
 
   const groupDataSelector = useSelector(getGroupdataDataBaseSelector);
-  const selectedTableArray= useSelector(getSelectorTableNodes);
+  const selectedTableArray = useSelector(getSelectorTableNodes);
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
   }, []);
 
   const [defaultSelectedKey, setDefaultSelectedKey] = useState("");
+  const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
+
 
   useEffect(() => {
     if (data.length > 0) {
@@ -73,6 +75,8 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       setSelectedNode([firstNode]);
       dispatch(addArray([firstNode]));
       setDefaultSelectedKey(firstNode.uid); // set the uid of the first node as the default selected key
+      setExpandedKeys([firstNode.uid]); // expand the first node by default
+
     }
   }, [data]);
 
@@ -124,8 +128,16 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
         dispatch(addLastIndex(lastIndex)); // dispatch the lastIndex to addLastIndex
         setSelectedLastIndexes([...selectedLastIndexes, lastIndex]); // add the lastIndex to the array of selectedLastIndexes
       }
-      
+
     }
+    // expand the parent nodes of the selected node
+    const parentKeys: string[] = [];
+    let node = selectedObj;
+    while (node ?.parentKey) {
+      parentKeys.push(node.parentKey);
+      node = findNodeByKey(data, Tables, columns, node.parentKey);
+    }
+    setExpandedKeys([...expandedKeys, ...parentKeys, selectedKey]); // include all parent keys and the selected key
   };
   useEffect(() => {
     setSelectedLastIndexes(selectedTableArray); // assuming 'lastIndexes' is the name of the Redux state variable
@@ -156,7 +168,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
           return table;
         }
 
-        for (const column of table?.columns || []) {
+        for (const column of table ?.columns || []) {
           if (column.uid === key) {
             return column;
           }
@@ -190,28 +202,26 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
                 alt=""
               />
             ) : (
-              <Image
-                src="column-icon1.png"
-                style={{
-                  width: "1rem",
+                <Image
+                  src="column-icon1.png"
+                  style={{
+                    width: "1rem",
 
-                  height: "1rem",
+                    height: "1rem",
 
-                  marginRight: "0.5rem",
-                }}
-                preview={false}
-                alt=""
-              />
-            )}
+                    marginRight: "0.5rem",
+                  }}
+                  preview={false}
+                  alt=""
+                />
+              )}
 
             {column.name}
 
-            <span>{columns?.length > 0 ? iconImage : undefined}</span>
+            <span>{columns ?.length > 0 ? iconImage : undefined}</span>
           </span>
         }
         key={column.uid}
-
-        // icon={<FolderOutlined />}
       />
     ));
   };
@@ -236,17 +246,17 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
 
             {table.tableName}
 
-            <span>{table?.columns?.length > 0 ? iconImage : undefined}</span>
+            <span>{table ?.columns ?.length > 0 ? iconImage : undefined}</span>
           </span>
         }
         key={table.uid}
         switcherIcon={
-          table?.columns?.length > 0 ? (
+          table ?.columns ?.length > 0 ? (
             <RightOutlined style={{ fontSize: "0.6rem" }} />
           ) : undefined
         }
       >
-        {table?.columns?.length > 0 && renderColumns(table?.columns)}
+        {table ?.columns ?.length > 0 && renderColumns(table ?.columns)}
       </TreeNode>
     ));
   };
@@ -291,10 +301,10 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
             renderTables(item.Tables)}
         </TreeNode>
       ) : (
-        Array.isArray(item.Tables) &&
-        item.Tables.length > 0 &&
-        renderTables(item.Tables)
-      )
+          Array.isArray(item.Tables) &&
+          item.Tables.length > 0 &&
+          renderTables(item.Tables)
+        )
     );
   };
 
@@ -303,6 +313,9 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       onSelect={onSelect}
       style={{ fontSize: "15px", fontWeight: "500" }}
       showIcon
+      expandedKeys={expandedKeys}
+      selectedKeys={selectedNode.map((node) => node.uid)}
+      onExpand={(keys) => setExpandedKeys(keys)}
       defaultSelectedKeys={defaultSelectedKey}
     >
       {renderDB(db)}
