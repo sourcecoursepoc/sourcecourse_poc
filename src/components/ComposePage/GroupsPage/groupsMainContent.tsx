@@ -7,9 +7,10 @@ import PipelineModalBox from "../CreatePipeline/PipelineModalBox";
 import GroupsModalBox from "../GroupsPage/ModalBox/groupsModalBox";
 import styles from "../MainContent/mainContent.module.css";
 import AttributeDisplayBox from "./ModalBox/attributeDisplayBox";
-
 const GroupsMainContent = () => {
+
   const { Content } = Layout;
+
   const [visible, setVisible] = useState(false);
   const [exportClicked, setExportClicked] = useState(false);
   const [lastIndices, setLastIndices] = useState<any[]>([]);
@@ -19,33 +20,28 @@ const GroupsMainContent = () => {
   const [showPipeline, setShowPipeline] = useState(false);
   const showGroupsModal = () => {
     setVisible(true);
-
   };
 
   const handleGroupsCancel = () => {
     setVisible(false);
   };
-
   const handleExport = (lastIndices: any[]) => {
     setLastIndices(lastIndices);
     setExportClicked(true);
-  };
 
+  };
   const handleRemove = (uid: string) => {
     setLastIndices((lastIndices) =>
       lastIndices.filter((node) => node.uid !== uid)
     );
   };
-
   const toggleCreatePipeline = () => {
     setVisible(false);
     setShowPipeline(true);
   };
-
   const handlePipelineCancel = () => {
     setShowPipeline(false);
   };
-
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>
@@ -92,5 +88,4 @@ const GroupsMainContent = () => {
     </Layout>
   );
 };
-
 export default GroupsMainContent;
