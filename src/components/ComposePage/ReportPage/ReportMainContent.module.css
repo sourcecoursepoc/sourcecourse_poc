@@ -53,4 +53,16 @@
     margin-left: 1rem;
     font-size: medium;
 }
-
+.contentInside{
+    height: 50%;
+    margin-top: 0.5rem;
+    margin-left: 1rem;
+    width: 90%;
+    border: 1px  solid #ccc;
+   
+}
+.layoutInside {
+   
+    height: 100%;
+    background-color: white;
+}
