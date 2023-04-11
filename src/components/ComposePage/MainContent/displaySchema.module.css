@@ -25,6 +25,10 @@
   align-items: center;
   margin-bottom: 1rem;
 }
+.outerbox:hover{
+    cursor: pointer;
+    border: 0.0825rem solid #c3428d;
+}
 .innerright {
   height: 4.375rem;
   min-width: 3.5rem;

@@ -20,6 +20,7 @@ import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { useDispatch } from "react-redux";
 import Toast, { showSuccessToast } from "../schemas/toast";
 import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
+import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -48,13 +49,13 @@ const Compose = () => {
     } else {
       setNameError(false);
     }
-  
+
     if (description.trim() === "") {
       setDescriptionError(true);
     } else {
       setDescriptionError(false);
     }
-  
+
     setSaveModalVisible(true);
   };
   const handleIconClick = (icon) => {
@@ -78,18 +79,20 @@ const Compose = () => {
     if (selectedIcon === null) {
       return null; // or handle this case however is appropriate for your application
     }
-    else{
-    switch (selectedIcon) {
-      case "HddFilled":
-        return <MainContent />;
-       case "ContainerFilled":
-        return <GroupsMainContent />; 
-        case "Reports":
-        return <ReportMainContent />;
-      // add additional cases for each icon
-      default:
-        return null;
-    }
+    else {
+      switch (selectedIcon) {
+        case "HddFilled":
+          return <MainContent />;
+        case "ContainerFilled":
+          return <GroupsMainContent />;
+          case "Reports":
+            return <ReportMainContent />;
+        case "ComposePipeline":
+          return <ComposePipeline />
+        // add additional cases for each icon
+        default:
+          return null;
+      }
     }
   };
 
@@ -107,7 +110,7 @@ const Compose = () => {
               descriptionValue={description}
               nameError={nameError}
               descriptionError={descriptionError}
-              className={nameError ? "textAreaError" : ""} 
+              className={nameError ? "textAreaError" : ""}
             />
             <Col
               span={1}
@@ -125,21 +128,21 @@ const Compose = () => {
               deleteModalVisible={deleteModalVisible}
               saveBoxMessage={
                 nameError ? (
-                 "name can not be empty"
-                ) :descriptionError? (
+                  "name can not be empty"
+                ) : descriptionError ? (
                   "description can not be empty"
-                ) : nameError&&descriptionError? (
+                ) : nameError && descriptionError ? (
                   "name and description can not be empty"
-                ) :(
-                  ""
-                )
+                ) : (
+                        ""
+                      )
               }
             />
           </Row>
 
           <Row>
             <Col className={styles.sideButtons}>
-               
+
               <Image
                 preview={false}
                 src="/Schemas.png"
@@ -154,7 +157,7 @@ const Compose = () => {
                 alt=""
               />{" "}
               <br />
-               
+
               <Image
                 preview={false}
                 src="/Groups-Icon1.png"
@@ -169,22 +172,37 @@ const Compose = () => {
                 onClick={() => handleIconClick("ContainerFilled")}
               />
               <br />
-               
+
               <Image
                 preview={false}
-                src="/DB-Icon1.png"
+                src="/compose-pipeline.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
+                  borderBottom: "1px solid grey",
                   padding:"0.5rem"
                 }}
                 alt=""
-              
+                onClick={() => handleIconClick("ComposePipeline")}
               />
               <br />
-               
+
+              <Image
+                preview={false}
+                src="/InitialLoad-Icon4.png"
+                style={{
+                  width: "3rem",
+                  height: "3.5rem",
+                  marginLeft: "6rem",
+                  borderBottom: "1px solid grey",
+                  padding:"0.5rem"
+                }}
+                alt=""
+                onClick={() => handleIconClick("Reports")}
+              />
+              <br />
+
               <Image
                 preview={false}
                 src="/Sync-Icon-1.png"

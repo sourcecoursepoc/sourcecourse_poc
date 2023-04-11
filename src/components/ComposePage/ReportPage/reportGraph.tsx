@@ -12,6 +12,13 @@ interface reportGraphComp{
     slash:string;
 }
 const ReportGraph:React.FC<reportGraphComp> = ({title1,numb1,numb2,title2,slash}) => {
+    const data = [
+        { name: 'Group A', value: 400 },
+        { name: 'Group B', value: 800 },
+      
+      ];
+      const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042'];
+
   return (
     <>
       <div className={styles.outerbox}>
@@ -20,13 +27,38 @@ const ReportGraph:React.FC<reportGraphComp> = ({title1,numb1,numb2,title2,slash}
         </Row>
         <Row className={styles.innerBox2}>
           <p>{numb1}</p><p>{slash}</p><p>{numb2}</p><p>{' '}</p><p>{title2}</p>
-        </Row>
-        <Row>
-        <PieChart width={800} height={400}>
-
+          <PieChart width={200} height={200}>
+        <Pie
+          data={data}
+         
+          innerRadius={60}
+          outerRadius={80}
+          fill="#8884d8"
+          paddingAngle={5}
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie>
+   {/*       <Pie
+          data={data}
+          startAngle={180}
+          endAngle={0}
+          innerRadius={60}
+          outerRadius={80}
+          fill="#8884d8"
+          paddingAngle={5}
+          dataKey="value"
+        >
+          {data.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          ))}
+        </Pie> */} 
             
         </PieChart>
         </Row>
+        
       </div>
     </>
   );

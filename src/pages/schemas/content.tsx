@@ -35,7 +35,7 @@ export default function SchemaContent() {
 
     const handleSaveModalOk = () => {
         setSaveModalVisible(false);
-        showErrorToast("error in saving data")
+        showSuccessToast("saved successfully")
 
     };
     const handleSaveModalCancel = () => {
@@ -78,12 +78,13 @@ export default function SchemaContent() {
                     uid={""}
                     handleRemove={() => ({})}
                     lengthOfColums={""}
+                    width={170}
                 />
             );
         }
 
     }
-    console.log(selectedColumnData, "ddddddddddd")
+
     let selectedValueName = '';
 
     if (selcectedDataLastElement) {
@@ -118,15 +119,14 @@ export default function SchemaContent() {
     const handleOk = () => {
         setDescription('');
         setTags([]);
-        showSuccessToast("cleared")
     };
     return (
         <>
             <Layout className={styles.layout}>
                 <Content className={styles.content}>
                     <Row className={styles.pinkbar} >
-                        <Col span={18} className={styles.headerText}>{selectedValueName}</Col>
-                        <Col style={{ marginTop: "8px" }}>
+                        <Col span={17} className={styles.headerText}>{selectedValueName}</Col>
+                        <Col style={{ marginTop: "8px",marginLeft:"16px" }}>
                             <Buttons text="Save" icon={<SaveFilled />} size={"middle"} onClick={handleSaveClick} />
                             <ConfirmationModal
                                 visible={saveModalVisible}
@@ -153,7 +153,7 @@ export default function SchemaContent() {
 
                     </Row>
                     <Row className={styles.descriptionbox}>
-                        <Col style={{ width: "100%" }}>
+                        <Col style={{ width: "100%" }} >
                             <DescriptionBox value={description} onChange={setDescription} placeholder="Description" />
                         </Col>
                     </Row>

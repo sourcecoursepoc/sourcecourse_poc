@@ -65,13 +65,16 @@ const GroupsMainContent = () => {
 
   return (
     <Layout className={styles.layout}>
+           {" "}
       <Content className={styles.content}>
+               {" "}
         <Row className={styles.pinkbar}>
-          <p className={styles.text}>Groups</p>
+                    <p className={styles.text}>Groups</p>       {" "}
         </Row>
-
+               {" "}
         {exportClicked && (
           <Row>
+                       {" "}
             <AttributeDisplayBox
               key={1}
               text={""}
@@ -79,10 +82,12 @@ const GroupsMainContent = () => {
               attribute={"ATTRIBUTES / "}
               handleRemove={handleRemove}
             />
+                     {" "}
           </Row>
         )}
-
+               {" "}
         <Row style={{ marginTop: "1rem" }}>
+                   {" "}
           <Button
             icon={<PlusCircleFilled />}
             style={{
@@ -96,8 +101,9 @@ const GroupsMainContent = () => {
             }}
             onClick={showGroupsModal}
           ></Button>
+                 {" "}
         </Row>
-
+               {" "}
         <GroupsModalBox
           visible={visible}
           setVisible={setVisible}
@@ -107,12 +113,14 @@ const GroupsMainContent = () => {
           onExport={handleExport}
           onCreatePipeline={toggleCreatePipeline}
         />
-
+               {" "}
         <PipelineModalBox
           showCreatePipeline={showPipeline}
           onCancel={handlePipelineCancel}
         />
+             {" "}
       </Content>
+         {" "}
     </Layout>
   );
 };
