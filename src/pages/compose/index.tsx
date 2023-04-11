@@ -16,6 +16,10 @@ import ButtonComponent from "@/components/ComposePage/buttons/buttonComponent";
 
 import GroupsMainContent from "@/components/ComposePage/GroupsPage/groupsMainContent";
 import TextAreaComponent from "@/components/ComposePage/TextArea/textArea";
+import { clearLastIndex } from "@/redux/actions/schemasaction";
+import { useDispatch } from "react-redux";
+import Toast, { showSuccessToast } from "../schemas/toast";
+import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -26,14 +30,17 @@ const Compose = () => {
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
-  const handleSaveModalOk = () => {
-    setSaveModalVisible(false);
-    // do something else after the modal is confirmed
-  };
+  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
+  const dispatch = useDispatch();
+  const handleSaveModalOk = () => { 
+    setSaveModalVisible(false);
+    showSuccessToast("Saved Successfully")
+    /* dispatch(clearLastIndex());
+    setName(""); */
+  };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
-    // do something else after the modal is cancelled
   };
   const handleSaveClick = () => {
     if (name.trim() === "") {
@@ -54,6 +61,19 @@ const Compose = () => {
     setSelectedIcon(icon);
   };
 
+  const handleDeleteModalOk = () => {
+    setDeleteModalVisible(false);
+    dispatch(clearLastIndex());
+    setName("");
+    setDescription("");
+    showSuccessToast("Deleted Successfully")
+  };
+  const handleDeleteClick = () => {
+    setDeleteModalVisible(true);
+  };
+  const handleDeleteModalCancel = () => {
+    setDeleteModalVisible(false);
+  };
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
       return null; // or handle this case however is appropriate for your application
@@ -62,8 +82,10 @@ const Compose = () => {
     switch (selectedIcon) {
       case "HddFilled":
         return <MainContent />;
-      case "ContainerFilled":
-        return <GroupsMainContent />;
+       case "ContainerFilled":
+        return <GroupsMainContent />; 
+        case "Reports":
+        return <ReportMainContent />;
       // add additional cases for each icon
       default:
         return null;
@@ -72,6 +94,7 @@ const Compose = () => {
   };
 
   return (
+    <>
     <Space direction="vertical" className={styles.space} size={[0, 48]}>
       <Layout className={styles.layout}>
         <Header />
@@ -96,6 +119,10 @@ const Compose = () => {
               handleSaveModalOk={handleSaveModalOk}
               handleSaveModalCancel={handleSaveModalCancel}
               handleSaveClick={handleSaveClick}
+              handleDeleteClick={handleDeleteClick}
+              handleDeleteModalOk={handleDeleteModalOk}
+              handleDeleteModalCancel={handleDeleteModalCancel}
+              deleteModalVisible={deleteModalVisible}
               saveBoxMessage={
                 nameError ? (
                  "name can not be empty"
@@ -120,7 +147,8 @@ const Compose = () => {
                   width: "3rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
+                  borderBottom: "1px solid #ccc",
+                  padding:"0.5rem"
                 }}
                 onClick={() => handleIconClick("HddFilled")}
                 alt=""
@@ -129,12 +157,13 @@ const Compose = () => {
                
               <Image
                 preview={false}
-                src="/DB.png"
+                src="/Groups-Icon1.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
+                  borderBottom: "1px solid #ccc",
+                  padding:"0.5rem"
                 }}
                 alt=""
                 onClick={() => handleIconClick("ContainerFilled")}
@@ -143,38 +172,43 @@ const Compose = () => {
                
               <Image
                 preview={false}
-                src="/Initial Load.png"
+                src="/DB-Icon1.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
+                  borderBottom: "1px solid #ccc",
+                  padding:"0.5rem"
                 }}
                 alt=""
+                // onSelect={<ReportMainContent/>}
               />
               <br />
                
               <Image
                 preview={false}
-                src="/sync.png"
+                src="/Sync-Icon-1.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
+                  borderBottom: "1px solid #ccc",
+                  padding:"0.5rem"
                 }}
                 alt=""
+                onClick={() => handleIconClick("Reports")}
               />
               <br />
                
               <Image
                 preview={false}
-                src="/DB.png"
+                src="/users-Icon1.png"
                 style={{
                   width: "3rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
+                  borderBottom: "1px solid #ccc",
+                  padding:"0.5rem"
                 }}
                 alt=""
               />
@@ -182,9 +216,11 @@ const Compose = () => {
 
             <Col span={18}>{renderSelectedComponent()}</Col>
           </Row>
-        </Content>
+          <Toast/>       
+           </Content>
       </Layout>
     </Space>
+    </>
   );
 };
 
