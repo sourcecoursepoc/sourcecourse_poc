@@ -194,12 +194,10 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
           <span>
             {column.metadata.isPrimary ? (
               <Image
-                src="primarykey-icon2.png"
+                src="primarykey-icon1.png"
                 style={{
                   width: "1rem",
-
                   height: "1rem",
-
                   marginRight: "0.5rem",
                 }}
                 preview={false}
@@ -210,9 +208,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
                   src="column-icon1.png"
                   style={{
                     width: "1rem",
-
                     height: "1rem",
-
                     marginRight: "0.5rem",
                   }}
                   preview={false}
