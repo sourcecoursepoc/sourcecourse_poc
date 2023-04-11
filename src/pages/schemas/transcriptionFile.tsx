@@ -24,7 +24,13 @@ export function Transcription(selectedMetaDataLastItem: any) {
         const defaultValue = data[key];
         const value = selectedMetaDataLastItem[key] ?? defaultValue ?? null;
         const fieldName = defaultValue || key;
-        transcriptObj[fieldName] = t(`data.${key}`, { defaultValue: value });
+        transcriptObj[fieldName] = typeof value === "boolean"
+            ? value ? "true" : "false"
+            : typeof value === "number"
+                ? t(`data.${key}`, { defaultValue: value.toString() })
+                : value instanceof Date
+                    ? t(`data.${key}`, { defaultValue: value.toISOString() })
+                    : t(`data.${key}`, { defaultValue: value });
     }
 
     return transcriptObj;
