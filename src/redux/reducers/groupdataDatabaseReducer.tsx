@@ -2,9 +2,11 @@ import {
     FETCH_GROUPDATA_DATABASE,
     FETCH_GROUPDATA_DATABASE_FAILURE,
     FETCH_GROUPDATA_DATABASE_SUCCESS,
-    ADD_GROUPDATA_ARRAY
+    ADD_GROUPDATA_ARRAY,
+    POST_GROUPDATA_FAILURE,
+    POST_GROUPDATA_SUCCESS
 } from "../actions/schemaActionTypes";
-import { GroupdataDataBaseActions,GroupdataDataBaseState } from "../actions/schemaTypes";
+import { GroupdataDataBaseActions,GroupdataDataBaseState, PostGroupData, PostGroupDataActionTypes } from "../actions/schemaTypes";
 
 const initialGroupdataDataBaseState: GroupdataDataBaseState = {
     pending: false,
@@ -56,5 +58,24 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
             return {
                 ...state,
             };
+    }
+};
+
+const initialState: PostGroupData = {
+    loading: false,
+    success: false,
+    error: null,
+};
+
+export const postDataReducer = (state = initialState, action: PostGroupDataActionTypes): PostGroupData => {
+    switch (action.type) {
+        case POST_GROUPDATA_FAILURE:
+            return { ...state, loading: true };
+        case POST_GROUPDATA_SUCCESS:
+            return { ...state, loading: false, success: true };
+        case POST_GROUPDATA_FAILURE:
+            return { ...state, loading: false, error: action.payload };
+        default:
+            return state;
     }
 };
