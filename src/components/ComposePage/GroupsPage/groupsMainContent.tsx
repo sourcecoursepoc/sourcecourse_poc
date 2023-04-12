@@ -1,5 +1,4 @@
 import { getSelectedGroupdataArraySelector } from "@/redux/selector";
-
 import { PlusCircleFilled } from "@ant-design/icons";
 
 import { Button, Layout, Row } from "antd";
@@ -12,6 +11,7 @@ import GroupsModalBox from "../GroupsPage/ModalBox/groupsModalBox";
 import styles from "../MainContent/mainContent.module.css";
 import AttributeDisplayBox from "./ModalBox/attributeDisplayBox";
 const GroupsMainContent = () => {
+
 
   const { Content } = Layout;
 
@@ -35,6 +35,7 @@ const GroupsMainContent = () => {
     setLastIndices(lastIndices);
 
     setExportClicked(true);
+
 
   };
   const handleRemove = (uid: string) => {
