@@ -1,6 +1,6 @@
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { Col, Input, Row } from "antd";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import styles from "../ModalBox/groupsModalBox.module.css";
 import InfoCircleOutlinedFunction from "./infoCircleOutlined";
 import { Radio,Select,Space } from 'antd';
@@ -8,11 +8,25 @@ import type { SelectProps, RadioChangeEvent } from 'antd';
 import FloatInput from "./floatInput";
 
 
-const NewAttributeContent = () => {
+const NewAttributeContent = (props) => {
     const { Option } = Select;
     const { TextArea } = Input;
     const attributeOptions = ['id', 'name', 'status', 'company', 'supplier_id'];
     const options: SelectProps['options'] = [];
+    const [reRender,setReRender]=useState(props.reRender)
+
+    useEffect(() => {
+            setReRender(!props.reRender);
+            console.log("Rerender")
+          }, [props.reRender]);
+      
+          useEffect(() => {
+            const getAttributeName = (e) => {
+              const {value} = e.target
+              console.log("attributevalue",value)
+              props.attributeValues(value,selectedValue)
+            }
+          }, [props]);
 
     for (let i = 0; i < attributeOptions.length; i++) {
         options.push({
@@ -21,16 +35,29 @@ const NewAttributeContent = () => {
         });
       }
 
+            function getDatatype(e) {
+                const { value } = e.target
+                console.log("nodename::",value)
+                setSelectedValue(value)
+                props.attributeValues(attributeName,value)
+              }
+        
+              function getAttributeName(e) {
+                const {value} = e.target
+                console.log("attributevalue",value)
+                setAttributeName(value)
+                props.attributeValues(value,selectedValue)
+              }
+
       const handleChange = (value: string | string[]) => {
         console.log(`Selected: ${value}`);
       };
 
       const [value, setValue] = useState('VARCHAR');
       const [displayAttributeList, setDisplayAttributeList] = useState(false)
+      const [selectedValue, setSelectedValue] = useState('VARCHAR');
+      const [attributeName,setAttributeName] = useState('Attribute Name')
 
-      const onChange = ({ target: { value } }: RadioChangeEvent) => {
-        setValue(value);
-      };
 
       function setDisplayAttributes(e) {
           setDisplayAttributeList(e.target.checked)
@@ -61,6 +88,7 @@ const NewAttributeContent = () => {
                     <FloatInput
                     label="Attribute"
                       placeholder="Attribute Name"
+                      onChange={getAttributeName}
                       style={{
                         borderColor: "#ccc",
                         borderRadius: "2px",
@@ -102,27 +130,27 @@ const NewAttributeContent = () => {
           
 <div className={styles.datatype}>Data Type</div>
 <div className={styles.button}>
-  <input type="radio" id="varchar" name="datatype"/>
+  <input type="radio" id="varchar" name="datatype" value="VARCHAR" defaultChecked onChange={getDatatype} />
   <label className="btn btn-default" htmlFor="varchar">VARCHAR</label>
 </div>
 <div className={styles.button}>
-  <input type="radio" id="number" name="datatype" />
+  <input type="radio" id="number" name="datatype" value="NUMBER" onChange={getDatatype} />
   <label className="btn btn-default" htmlFor="number">NUMBER</label>
 </div>
 <div className={styles.button}>
-  <input type="radio" id="boolean" name="datatype" />
+  <input type="radio" id="boolean" name="datatype" value="BOOLEAN" onChange={getDatatype}/>
   <label className="btn btn-default" htmlFor="boolean">BOOLEAN</label>
 </div>
 <div className={styles.button}>
-  <input type="radio" id="datetime" name="datatype" />
+  <input type="radio" id="datetime" name="datatype" value="DATETIME" onChange={getDatatype}/>
   <label className="btn btn-default" htmlFor="datetime">DATETIME</label>
 </div>
 <div className={styles.button}>
-  <input type="radio" id="guid" name="datatype" />
+  <input type="radio" id="guid" name="datatype" value="GUID" onChange={getDatatype}/>
   <label className="btn btn-default" htmlFor="guid">GUID</label>
 </div>
 <div className={styles.button}>
-  <input type="radio" id="blob" name="datatype" />
+  <input type="radio" id="blob" name="datatype" value="BLOB" onChange={getDatatype}/>
   <label className="btn btn-default" htmlFor="blob">BLOB</label>
 </div>
           </Col>
