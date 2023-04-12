@@ -5,9 +5,11 @@ import styles from "../../../../styles/floatInput.module.css";
 
 const FloatInput = (props) => {
   const [focus, setFocus] = useState(false);
-  let { label, value, placeholder, type, required } = props;
+  let { label, placeholder, type, required,dataValue } = props;
 
-  if (!placeholder) placeholder = label;
+  const [value, setValue] = useState('');
+
+  // if (!placeholder) placeholder = label;
 
   const isOccupied = focus || (value && value.length !== 0);
 
@@ -15,13 +17,19 @@ const FloatInput = (props) => {
 
   const requiredMark = required ? <span className="text-danger">*</span> : null;
 
+  const handleBlur = e => {
+    console.log("value:::",value)
+    setFocus(false)
+    setValue(e.target.value);
+  };
+
   return (
     <div
       className={styles.floatlabel}
-      onBlur={() => setFocus(false)}
+      
       onFocus={() => setFocus(true)}
     >
-      <Input onChange={props.onChange} type={type} defaultValue={value} 
+      <Input onChange={props.onChange} type={type} defaultValue={value} value={dataValue} onBlur={handleBlur}
       style ={{ borderColor: "#ccc",
       borderRadius: "2px",
       display: "block",

@@ -35,7 +35,7 @@ export default function SchemaContent() {
 
     const handleSaveModalOk = () => {
         setSaveModalVisible(false);
-        showErrorToast("error in saving data")
+        showSuccessToast("saved successfully")
 
     };
     const handleSaveModalCancel = () => {
@@ -74,16 +74,17 @@ export default function SchemaContent() {
                 <DisplaySchemaBox
                     text={columnData[column].name}
                     attribute={columnData[column].metadata.type}
-                    icon={columnData[column].metadata.isPrimary ? <Image preview={false} src="/primarykey-icon2.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} /> : <Image preview={false} src="/column-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} />}
+                    icon={columnData[column].metadata.isPrimary ? <Image preview={false} src="/primarykey-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} /> : <Image preview={false} src="/column-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} />}
                     uid={""}
                     handleRemove={() => ({})}
                     lengthOfColums={""}
+                    width={170}
                 />
             );
         }
 
     }
-    console.log(selectedColumnData, "ddddddddddd")
+
     let selectedValueName = '';
 
     if (selcectedDataLastElement) {
@@ -118,15 +119,14 @@ export default function SchemaContent() {
     const handleOk = () => {
         setDescription('');
         setTags([]);
-        showSuccessToast("cleared")
     };
     return (
         <>
             <Layout className={styles.layout}>
                 <Content className={styles.content}>
                     <Row className={styles.pinkbar} >
-                        <Col span={18} className={styles.headerText}>{selectedValueName}</Col>
-                        <Col style={{ marginTop: "8px" }}>
+                        <Col span={17} className={styles.headerText}>{selectedValueName}</Col>
+                        <Col style={{ marginTop: "8px",marginLeft:"16px" }}>
                             <Buttons text="Save" icon={<SaveFilled />} size={"middle"} onClick={handleSaveClick} />
                             <ConfirmationModal
                                 visible={saveModalVisible}
@@ -153,7 +153,7 @@ export default function SchemaContent() {
 
                     </Row>
                     <Row className={styles.descriptionbox}>
-                        <Col style={{ width: "100%" }}>
+                        <Col style={{ width: "100%" }} >
                             <DescriptionBox value={description} onChange={setDescription} placeholder="Description" />
                         </Col>
                     </Row>

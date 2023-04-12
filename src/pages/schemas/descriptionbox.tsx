@@ -42,7 +42,7 @@ const DescriptionBox: React.FC<DescriptionBoxProps> = ({
 
     return (
         <div className={styles.floatlabel} onBlur={handleBlur} onFocus={handleFocus}>
-            <TextArea
+            <TextArea className={styles.textArea}
             style={{height:"7rem"}}
                 placeholder={placeholder}
                 value={value}

@@ -7,10 +7,7 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getDataBaseSelector, getlastIndexesArraySelector, getSelectedArraySelector, getSelectorTableNodes } from "@/redux/selector";
 import {  removeLastIndex } from "@/redux/actions/schemasaction";
-import { PlusCircleFilled, PlusOutlined } from "@ant-design/icons";
-import { addLastIndex } from "@/redux/actions/schemaTypes";
- //import { fetchDataBaseRequest } from "../../../redux/actions/schemasaction";
-//import { addNode } from '../../redux/actions/schemasaction';
+import { PlusOutlined } from "@ant-design/icons";
 
 interface MyModalProps {
   visible: boolean;

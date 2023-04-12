@@ -4,7 +4,9 @@ import pipelineSaga from "../sagas/fetchDataActionSaga";
 import { schemaSaga, DataBaseSaga } from "../sagas/schemaActionSaga";
 import projectSaga from "../sagas/projectSaga";
 import { groupdataDataBaseSaga } from "./groupdataDatabaseSaga";
+import { ComposePipelineSaga } from "./composeSaga";
 
 export function* rootSaga() {
-  yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()),(groupdataDataBaseSaga()),(projectSaga())]);
+  console.log("rootSaga: running...");
+  yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()),(groupdataDataBaseSaga()),(projectSaga()),(ComposePipelineSaga())]);
 }

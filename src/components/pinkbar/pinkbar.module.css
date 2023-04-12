@@ -1,0 +1,12 @@
+.pinkbar{
+    background: linear-gradient(to right, #c3428d, #FFFFFF);
+    padding: 0rem;
+    margin: 0rem 0rem 1rem 0rem;
+    height: 3rem;   
+}
+.text{
+    color: #fff;
+    font-family: sans-serif;
+    margin-left: 1rem;
+    font-size: medium;
+}
