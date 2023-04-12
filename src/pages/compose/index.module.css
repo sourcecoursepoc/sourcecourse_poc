@@ -62,3 +62,11 @@ height: 2rem;
 .red{
   border: 1px solid red ;
 }
+.buttonImage
+{
+  width: 3rem;
+   height: 3.5rem;
+   margin-left: 6rem;
+   border-bottom: 1px solid #ccc;
+   padding:0.5rem;
+}
