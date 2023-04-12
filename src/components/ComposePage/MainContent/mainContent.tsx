@@ -67,7 +67,7 @@ const MainContent = () => {
        <Row >               
            {selectedTableArray.map((node:any) => ( 
               <DisplaySchemaBox key={node.tableName} text={node.tableName} uid={node.uid} deleteIcon={<DeleteFilled style={{color:"red",height:'auto'}} onClick={() => handleRemove(node.uid)}/>}
-              attribute={"ATTRIBUTES / "} icon={ <Image preview={false}src="/Schemas.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
+              attribute={"ATTRIBUTES / "} icon={ <Image preview={false}src="/schemas-icon.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
               </Image> } 
                handleRemove={handleRemove}   lengthOfColums={node?.columns?.length} 
               />     

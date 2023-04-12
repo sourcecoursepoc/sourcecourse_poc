@@ -28,7 +28,7 @@ const ReportMainContent = () => {
     <Layout className={styles.layout}>
       <Content className={styles.content}>
         <Row className={styles.pinkbar}>
-          <p className={styles.text}>Report</p>
+          <p className={styles.text}>Reports</p>
         </Row>
         <Row type="flex">
     <div
