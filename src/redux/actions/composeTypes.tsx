@@ -42,4 +42,4 @@ export type ComposePipelineActions =
     | FetchComposePipelineSuccess
     | FetchComposePipelineFailure;
 
-
+console.log("composeActionTypes: action types defined");
