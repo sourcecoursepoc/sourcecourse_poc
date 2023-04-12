@@ -53,6 +53,7 @@ const GroupsMainContent = () => {
   const handlePipelineCancel = () => {
     setShowPipeline(false);
   };
+  // page for calling the whole content of groups
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>
