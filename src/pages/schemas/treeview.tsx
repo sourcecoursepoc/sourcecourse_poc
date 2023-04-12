@@ -72,11 +72,8 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   useEffect(() => {
     if (data.length > 0) {
       const firstNode = data[0];
-
       setSelectedNode([firstNode]);
-
       dispatch(addArray([firstNode]));
-
       setDefaultSelectedKey(firstNode.uid); // set the uid of the first node as the default selected key
       setExpandedKeys([firstNode.uid]); // expand the first node by default
 
@@ -110,7 +107,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       selectedNode.filter(Boolean).some((node) => node.uid === selectedObj.uid);
     if (selectedObj && !exists && !groupModalBoxTreeView) {
       setSelectedNode([selectedObj]);
-
       dispatch(addArray([selectedObj]));
     }
 

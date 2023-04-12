@@ -11,7 +11,7 @@ interface MyComponentProps {
   text: string;
   attribute: string;
   icon: ReactNode;
-  uid: string; // new prop for the uid of the node
+  uid: string;
   handleRemove: (uid: string) => void;
    lengthOfColums:any; 
 }

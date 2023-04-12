@@ -42,6 +42,7 @@ const GroupsMainContent = () => {
   const handleExport = (lastIndices: any[]) => {
     setLastIndices(lastIndices);
 
+
     setExportClicked(true);
   };
 
@@ -52,6 +53,7 @@ const GroupsMainContent = () => {
       lastIndices.filter((node) => node.uid !== uid)
     );
   };
+
 
   const toggleCreatePipeline = () => {
     setVisible(false);
