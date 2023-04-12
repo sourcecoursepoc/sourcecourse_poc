@@ -20,19 +20,17 @@ import { useDispatch } from "react-redux";
 
 const ButtonComponent = ({
   saveModalVisible,
-
   handleSaveModalOk,
-
   handleSaveModalCancel,
-
   handleSaveClick,
-
   saveBoxMessage,
+  handleDeleteClick,
+  deleteModalVisible,
+  handleDeleteModalOk,
+  handleDeleteModalCancel,
 }) => {
   const dispatch = useDispatch();
   const [exitModalVisible, setExitModalVisible] = useState(false);
-
-  const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const selectedTableArray= useSelector(getSelectorTableNodes);
 
   const handleExitClick = () => {
@@ -49,18 +47,18 @@ const ButtonComponent = ({
     setExitModalVisible(false);
   };
 
-  const handleDeleteClick = () => {
-    setDeleteModalVisible(true);
-  };
+ 
 
-  const handleDeleteModalOk = () => {
+/*   const handleDeleteModalOk = () => {
     setDeleteModalVisible(false);
     dispatch(clearLastIndex());
-  };
 
-  const handleDeleteModalCancel = () => {
-    setDeleteModalVisible(false);
   };
+ */
+ 
+ /*  const handleDeleteModalCancel = () => {
+    setDeleteModalVisible(false);
+  }; */
 
   return (
     <Col span={7} className={styles.buttonAreaBorder}>

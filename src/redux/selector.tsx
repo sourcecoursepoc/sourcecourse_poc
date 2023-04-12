@@ -10,7 +10,7 @@ const getDataBase = (state: AppState) => state.database.database;
 const getGroupdataDataBase = (state: AppState) => state.groupdataDatabase.groupdataDatabase;
 const getSelectedArray = (state: AppState) => state.database.myArray;
 const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.myGroupdataArray;
-const getComposePipeline=(state:AppState)=> console.log(state.composePipeline.composePipeline,"state.composePipeline.composePipeline")
+const getComposePipeline=(state:AppState)=> state.composePipeline.composePipeline;
 
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
