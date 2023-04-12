@@ -1,8 +1,7 @@
 import { Col, Modal, Row, Card } from "antd";
 import React, { useState } from "react";
-import Buttons from "../buttons/buttons";
-import MiddleNavBar from "./MiddleNavBar";
-import UpperSection from "./upperSection";
+import BottomSection from "./BottomSection";
+import UpperSection from "./UpperSection";
 
 interface MyModalProps {
   showCreatePipeline?: boolean;
@@ -11,6 +10,8 @@ interface MyModalProps {
 
 const PipelineModalBox: React.FC<MyModalProps> = ({ showCreatePipeline, onCancel }) => {
 
+   
+
   return (
     <Modal
       visible={showCreatePipeline}
@@ -18,12 +19,12 @@ const PipelineModalBox: React.FC<MyModalProps> = ({ showCreatePipeline, onCancel
       footer={null}
       closable={false}
       width={1000}
-      bodyStyle={{ height: "80vh", borderRadius: "5px", width: "100%" }}
+      bodyStyle={{ borderRadius: "5px", width: "100%", minHeight: "30rem"}}
     >
 
       <UpperSection />
 
-      <MiddleNavBar />
+      <BottomSection />
 
     </Modal>
   );
