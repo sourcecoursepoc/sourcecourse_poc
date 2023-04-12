@@ -145,8 +145,8 @@ console.log("lastIndiceslastIndices",lastIndices)
       closable={false}
       width={1050}
       bodyStyle={{
-        maxHeight: "500px",
-        overflowY: "auto",
+        minHeight: "30rem",
+       overflowY:"auto",
         borderRadius: "5px",
       }}
     >
@@ -193,7 +193,7 @@ console.log("lastIndiceslastIndices",lastIndices)
         </Col>
       </Row>
       <Row>
-        <Col span={6} style={{ borderRight: "1px solid #ccc" }}>
+        <Col span={6} style={{ minHeight:"25rem", borderRight: "1px solid #ccc",marginTop: "0.5rem" }}>
           <Row style={{ marginTop: "1rem", width: "14rem" }}>
             <Col span={24} style={{ marginLeft: "0.15rem" }}>
               {/* <SearchBar /> */}
@@ -220,16 +220,16 @@ console.log("lastIndiceslastIndices",lastIndices)
             </Col>
           </Row>
         </Col>
-        <Col span={8} style={{ borderRight: "1px solid #ccc" }}>
+        <Col span={8} style={{ borderRight: "1px solid #ccc",marginTop: "0.5rem" }}>
           <AttributeButton onClickAttribute={contentToggle} />
           {lastIndices?.map((node, index) => (
             <>
-            {console.log("nodeeeeeeeeeee",node.metadata)}
               <div
                 style={{
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  marginBottom:"-1rem"
                 }}
               >
                 <Row
@@ -242,9 +242,10 @@ console.log("lastIndiceslastIndices",lastIndices)
                   <Col span={28}>
                     {node.name && (
                       <p>
-                        {node.name}
+                         <span style={{ color: 'black', fontWeight: '500' }}>{node.name}</span>
+                        
                         <br />
-                        <span style={{ color: 'grey' }}>{node.type.toUpperCase()}</span>
+                        <span style={{ color: 'grey', fontSize: '12px' }}>{node.type.toUpperCase()}</span>
                       </p>
                     )}
                   </Col>

@@ -6,22 +6,16 @@
     background-color:#fff;
     min-height: 4rem;
    max-height: 23rem;
-   
-    
 }
 .mainContentStyle {
     text-align: center; 
     min-height: 5rem;
-    background-color: #fff;
-    
-   
+    background-color: #fff; 
 }
 .buttonStyle{
    margin-left: 6rem;
    width:4rem;
-   height:5rem;
-  
-   
+   height:5rem; 
 }
 .space {
     width: 100%;
