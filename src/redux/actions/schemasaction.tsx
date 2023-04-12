@@ -16,11 +16,14 @@ import {
   ADD_LAST_INDEX,
   REMOVE_LAST_INDEX,
   ADD_GROUPDATA_ARRAY,
-  CLEAR_LAST_INDEXES
+  CLEAR_LAST_INDEXES,
+  POST_GROUPDATA,
+  POST_GROUPDATA_SUCCESS,
+  POST_GROUPDATA_FAILURE
 } from "./schemaActionTypes";
   
  
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddLastIndexAction, RemoveLastIndexAction, AddGroupArrayAction,ClearLastIndexAction} from "./schemaTypes";
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddLastIndexAction, RemoveLastIndexAction, AddGroupArrayAction,ClearLastIndexAction, PostGroupDataActionTypes} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -126,6 +129,13 @@ export const postDataFailure = (error: string): PostDataActionTypes => ({
   type: POST_GROUPDATA_DATABASE_FAILURE,
   payload: error,
 });
+//post action for group data
+export const postGropDataRequest = (): PostGroupDataActionTypes => ({ type: POST_GROUPDATA});
 
+export const postGropDataSuccess = (): PostGroupDataActionTypes => ({ type: POST_GROUPDATA_SUCCESS });
 
+export const postGropDataFailure = (error: string): PostGroupDataActionTypes => ({
+  type: POST_GROUPDATA_FAILURE,
+  payload: error,
+});
 
