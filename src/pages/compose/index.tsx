@@ -145,9 +145,9 @@ const Compose = () => {
 
               <Image
                 preview={false}
-                src="/Schemas.png"
+                src="/schemas-icon.png"
                 style={{
-                  width: "3rem",
+                  width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
@@ -160,9 +160,9 @@ const Compose = () => {
 
               <Image
                 preview={false}
-                src="/Groups-Icon1.png"
+                src="/groups-icon.png"
                 style={{
-                  width: "3rem",
+                  width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
@@ -177,11 +177,11 @@ const Compose = () => {
                 preview={false}
                 src="/compose-pipeline.png"
                 style={{
-                  width: "3rem",
+                  width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
-                  padding:"0.5rem"
+                  borderBottom: "1px solid #ccc",
+                  padding:"0.3rem"
                 }}
                 alt=""
                 onClick={() => handleIconClick("ComposePipeline")}
@@ -190,13 +190,13 @@ const Compose = () => {
 
               <Image
                 preview={false}
-                src="/InitialLoad-Icon4.png"
+                src="/reports-icon.png"
                 style={{
-                  width: "3rem",
+                  width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid grey",
-                  padding:"0.5rem"
+                  borderBottom: "1px solid #ccc",
+                  padding:"0.3rem"
                 }}
                 alt=""
                 onClick={() => handleIconClick("Reports")}
@@ -205,31 +205,18 @@ const Compose = () => {
 
               <Image
                 preview={false}
-                src="/Sync-Icon-1.png"
+                src="/users-Icon1.png"
                 style={{
-                  width: "3rem",
+                  width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
-                  padding:"0.5rem"
+                  padding:"0.3rem"
                 }}
                 alt=""
                 onClick={() => handleIconClick("Reports")}
               />
-              <br />
-               
-              <Image
-                preview={false}
-                src="/users-Icon1.png"
-                style={{
-                  width: "3rem",
-                  height: "3.5rem",
-                  marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
-                  padding:"0.5rem"
-                }}
-                alt=""
-              />
+         
             </Col>
 
             <Col span={18}>{renderSelectedComponent()}</Col>
