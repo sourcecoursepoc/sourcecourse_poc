@@ -51,6 +51,9 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const selcectData = useSelector(getSelectedArraySelector);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
   const lastIndexGroup = selectGroupdataData.slice(-1)[0];
+  const [attrName,setAttrName] = useState('Attribute Name')
+  const [datatype,setDatatype] = useState('VARCHAR')
+  const [render,setRender] = useState(false)
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
@@ -71,7 +74,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
         ]);
       }
     }
-  }, [selectGroupdataData]);
+  }, [selectGroupdataData,attrName]);
 console.log("lastIndiceslastIndices",lastIndices)
   const handleExport = () => {
     onExport(lastIndices);
@@ -111,7 +114,20 @@ console.log("lastIndiceslastIndices",lastIndices)
 
   function contentToggle() {
     setDisplayAttributeSection(true);
+    setDisplayAttributeSection(true)
+    setRender(!render)
+    setAttrName("Attribute Name")
+    const newLastIndices = [...lastIndices];
+    newLastIndices.push({name: "Attribute Name", type: "VARCHAR"})
+    setLastIndices(newLastIndices);
   }
+
+  function getValues(attributeName:string,selectedDataType:string){
+        setAttrName(attributeName)
+        setDatatype(selectedDataType)
+        selectGroupdataData.slice(-1)[0] = {name: attributeName, type: selectedDataType}
+        lastIndices[lastIndices.length-1] = {name: attributeName, type: selectedDataType}
+       }
 
   const handleRowClick = (node:any) => {
     console.log("Getting innnnnn");
@@ -265,7 +281,7 @@ console.log("lastIndiceslastIndices",lastIndices)
         </Col>
         {/* third partition area */}
         {displayAttributeSection ? (
-          <NewAttributeContent />
+          <NewAttributeContent attributeValues={getValues} reRender={render} key={render}/>
         ) : (
           <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails}/>
         )}
