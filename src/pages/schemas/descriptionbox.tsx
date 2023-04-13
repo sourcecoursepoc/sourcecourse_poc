@@ -1,4 +1,4 @@
-import React, { useState, KeyboardEvent } from "react";
+import React, { useState, KeyboardEvent, CSSProperties } from "react";
 import { Input } from "antd";
 import styles from "../../styles/floatInput.module.css";
 const { TextArea } = Input;
@@ -8,6 +8,7 @@ interface DescriptionBoxProps {
     onChange: (value: string) => void;
     placeholder?: string;
     required?: boolean;
+    style?:CSSProperties;
 }
 
 const DescriptionBox: React.FC<DescriptionBoxProps> = ({
@@ -15,6 +16,7 @@ const DescriptionBox: React.FC<DescriptionBoxProps> = ({
     onChange,
     placeholder = "Description",
     required,
+    style,
 }) => {
     const [focus, setFocus] = useState(false);
 
@@ -43,7 +45,7 @@ const DescriptionBox: React.FC<DescriptionBoxProps> = ({
     return (
         <div className={styles.floatlabel} onBlur={handleBlur} onFocus={handleFocus}>
             <TextArea className={styles.textArea}
-            style={{height:"7rem"}}
+            style={{...{ height: "7rem" }, ...style}}
                 placeholder={placeholder}
                 value={value}
                 onChange={(e: ChangeEvent<HTMLTextAreaElement>) => onChange(e.target.value)}

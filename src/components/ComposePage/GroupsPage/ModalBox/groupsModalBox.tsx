@@ -19,6 +19,7 @@ import GroupsThirdSide from "./groupsThirdSide";
 import MiddleIcons from "./middleIcons";
 import { removeNode } from "@/redux/actions/schemasaction";
 import NewAttributeContent from "./newAttributeContent";
+import { PlusOutlined } from "@ant-design/icons";
 
 interface MyModalProps {
   visible?: boolean;
@@ -30,18 +31,29 @@ interface MyModalProps {
   onCreatePipeline?: () => void;
 }
 
-const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,lastIndices,setLastIndices,onExport,onCreatePipeline }) => {
+const GroupsModalBox: React.FC<MyModalProps> = ({
+  visible,
+  setVisible,
+  onCancel,
+  lastIndices,
+  setLastIndices,
+  onExport,
+  onCreatePipeline,
+}) => {
   const [groupModalBoxTreeView, setGroupModalBoxTreeView] = useState(true);
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
-
+  const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
   const lastIndexGroup = selectGroupdataData.slice(-1)[0];
+  const [attrName,setAttrName] = useState('Attribute Name')
+  const [datatype,setDatatype] = useState('VARCHAR')
+  const [render,setRender] = useState(false)
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
@@ -62,8 +74,8 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
         ]);
       }
     }
-  }, [selectGroupdataData]);
-
+  }, [selectGroupdataData,attrName]);
+console.log("lastIndiceslastIndices",lastIndices)
   const handleExport = () => {
     onExport(lastIndices);
   };
@@ -87,7 +99,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
   };
 
   const handleRemove = (uid: string) => {
-    console.log("uid in main content", uid);
     dispatch(removeNode(uid));
   };
 
@@ -103,7 +114,27 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
 
   function contentToggle() {
     setDisplayAttributeSection(true);
+    setDisplayAttributeSection(true)
+    setRender(!render)
+    setAttrName("Attribute Name")
+    const newLastIndices = [...lastIndices];
+    newLastIndices.push({name: "Attribute Name", type: "VARCHAR"})
+    setLastIndices(newLastIndices);
   }
+
+  function getValues(attributeName:string,selectedDataType:string){
+        setAttrName(attributeName)
+        setDatatype(selectedDataType)
+        selectGroupdataData.slice(-1)[0] = {name: attributeName, type: selectedDataType}
+        lastIndices[lastIndices.length-1] = {name: attributeName, type: selectedDataType}
+       }
+
+  const handleRowClick = (node:any) => {
+    console.log("Getting innnnnn");
+    setSelectedNodeDetails([node]);
+    console.log("selectedNodeDetails", selectedNodeDetails);
+    console.log("Getting outttttttt");
+  };
 
   const swapElements = (array: array, index1: number, index2: number) => {
     const newArray = [...array];
@@ -128,8 +159,12 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
       onCancel={onCancel}
       footer={null}
       closable={false}
-      width={1000}
-      bodyStyle={{ height: "80vh", borderRadius: "5px", width: "100%" }}
+      width={1050}
+      bodyStyle={{
+        minHeight: "30rem",
+       overflowY:"auto",
+        borderRadius: "5px",
+      }}
     >
       <Row style={{ borderBottom: "1px solid #ccc" }}>
         <Col
@@ -164,11 +199,17 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
             marginTop: "0.5rem",
           }}
         >
-          <GroupsModalBoxButtons handleSaveModalCancel={handleSaveModalCancel} handleSaveModalOk={handleSaveModalOk} saveModalVisible={saveModalVisible} handleSaveClick={handleSaveClick} onCreatePipeline={onCreatePipeline}/>
+          <GroupsModalBoxButtons
+            handleSaveModalCancel={handleSaveModalCancel}
+            handleSaveModalOk={handleSaveModalOk}
+            saveModalVisible={saveModalVisible}
+            handleSaveClick={handleSaveClick}
+            onCreatePipeline={onCreatePipeline}
+          />
         </Col>
       </Row>
-      <Row style={{ height: "29rem", width: "60rem" }}>
-        <Col span={6} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
+      <Row>
+        <Col span={6} style={{ minHeight:"25rem", borderRight: "1px solid #ccc",marginTop: "0.5rem" }}>
           <Row style={{ marginTop: "1rem", width: "14rem" }}>
             <Col span={24} style={{ marginLeft: "0.15rem" }}>
               {/* <SearchBar /> */}
@@ -189,12 +230,13 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
                   db={groupdataDatabaseSelector}
                   setGroupModalBoxTreeView={setGroupModalBoxTreeView}
                   groupModalBoxTreeView={groupModalBoxTreeView}
+                  iconImage={<PlusOutlined style={{width:'3rem',fontSize:'0.8rem',color:'#7E60BC',strokeWidth: '2' }}/>}
                 />
               )}
             </Col>
           </Row>
         </Col>
-        <Col span={8} style={{ borderRight: "1px solid #ccc", height: "95%" }}>
+        <Col span={8} style={{ borderRight: "1px solid #ccc",marginTop: "0.5rem" }}>
           <AttributeButton onClickAttribute={contentToggle} />
           {lastIndices?.map((node, index) => (
             <>
@@ -203,18 +245,23 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  marginBottom:"-1rem"
                 }}
               >
                 <Row
                   key={node.name}
                   className={styles.rowTextStyle}
                   align="middle"
+                  onClick={() => handleRowClick(node.metadata)}
+                  style={{ cursor: "pointer" }}
                 >
                   <Col span={28}>
                     {node.name && (
                       <p>
-                        {node.name}
+                         <span style={{ color: 'black', fontWeight: '500' }}>{node.name}</span>
+                        
                         <br />
+                        <span style={{ color: 'grey', fontSize: '12px' }}>{node.type.toUpperCase()}</span>
                       </p>
                     )}
                   </Col>
@@ -234,9 +281,9 @@ const GroupsModalBox: React.FC<MyModalProps> = ({ visible, setVisible, onCancel,
         </Col>
         {/* third partition area */}
         {displayAttributeSection ? (
-          <NewAttributeContent />
+          <NewAttributeContent attributeValues={getValues} reRender={render} key={render}/>
         ) : (
-          <GroupsThirdSide />
+          <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails}/>
         )}
       </Row>
     </Modal>
