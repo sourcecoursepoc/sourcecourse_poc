@@ -6,6 +6,8 @@ import schemaDataBaseReducer from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import composeReducer from "./composeReducer";
 
+import groupReducer from "./groupReducer";
+
 console.log("Creating root reducer...");
 
 const rootReducer = combineReducers({
@@ -15,6 +17,7 @@ const rootReducer = combineReducers({
   groupdataDatabase: groupdataDatabaseReducer,
   project: projectReducer,
   composePipeline: composeReducer,
+  group:groupReducer,
 });
 
 console.log("Root reducer created:", rootReducer);

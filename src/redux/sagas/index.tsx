@@ -6,7 +6,9 @@ import projectSaga from "../sagas/projectSaga";
 import { groupdataDataBaseSaga } from "./groupdataDatabaseSaga";
 import { ComposePipelineSaga } from "./composeSaga";
 
+import groupSaga from "./groupSaga";
+
 export function* rootSaga() {
   console.log("rootSaga: running...");
-  yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()),(groupdataDataBaseSaga()),(projectSaga()),(ComposePipelineSaga())]);
+  yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()),(groupSaga()),(projectSaga()),(allGroupDataSaga()),(ComposePipelineSaga())]);
 }
