@@ -148,23 +148,14 @@ export type SchemaActions =
       | FetchProjectSuccess
       | FetchProjectFailure;
 
-      export interface ICOLUMNS{
-        name:string;
-        type: string;
-        uid: string;
-        data: {
-          notes:string
-        };
-        tags:[],
-        pipeline:string
-      }
-
+      
 
       export interface IGROUPDATA {
-        projectID:string,
-        groupName:string,
-        groupDesc:string
-        columns:[ICOLUMNS],
+        projectID: string,
+       name:string,
+      desc:string,
+      attributes:string,
+       
        
      
       }
@@ -174,7 +165,7 @@ export type SchemaActions =
         groups: IGROUPDATA[];
         error: string | null;
       }
-      
+     
       export interface FetchGroupSuccessPayload {
         groups: IGROUPDATA[];
       }
@@ -188,10 +179,11 @@ export type SchemaActions =
       }
       
       export type FetchGroupSuccess = {
+        
         type: typeof FETCH_ALLGROUP_DATA_SUCCESS;
         payload: FetchGroupSuccessPayload;
       };
-      
+    
       export type FetchGroupFailure = {
         type: typeof  FETCH_ALLGROUP_DATA_FAILURE;
         payload: FetchGroupFailurePayload;

@@ -11,21 +11,29 @@ import {
     FetchGroupFailurePayload,
   } from "../actions/types";
   
-  export const fetchGroupRequest = (): FetchGroupRequest => ({
-    type: FETCH_ALLGROUP_DATA_REQUEST,
-  });
+  export const fetchGroupRequest = (): FetchGroupRequest => {
+    console.log("fetchGroupRequest action creator called");
+    return {
+      type:FETCH_ALLGROUP_DATA_REQUEST,
+    };
+  }
   
   export const fetchGroupSuccess = (
     payload: FetchGroupSuccessPayload
-  ): FetchGroupSuccess => ({
-    type:  FETCH_ALLGROUP_DATA_SUCCESS,
-    payload,
-  });
+  ): FetchGroupSuccess => {
+    console.log("fetchGroupSuccess action creator called with payload:", payload);
+    return {
+      type: FETCH_ALLGROUP_DATA_SUCCESS,
+      payload,
+    };
+  }
   
   export const fetchGroupFailure = (
     payload: FetchGroupFailurePayload
-  ): FetchGroupFailure => ({
-    type:  FETCH_ALLGROUP_DATA_FAILURE,
-    payload,
-  });
-    
+  ): FetchGroupFailure => {
+    console.log("fetchGroupFailure action creator called with payload:", payload);
+    return {
+      type: FETCH_ALLGROUP_DATA_FAILURE,
+      payload,
+    };
+  }

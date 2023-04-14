@@ -14,8 +14,8 @@ const initialState: GroupState = {
   error: null,
 };
 
-// eslint-disable-next-line import/no-anonymous-default-export
 export default (state = initialState, action: GroupActions) => {
+  console.log("Action:", action);
   switch (action.type) {
     case  FETCH_ALLGROUP_DATA_REQUEST:
       return {

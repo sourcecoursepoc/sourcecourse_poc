@@ -1,22 +1,21 @@
 import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
-import {  IGROUPDATA } from "../actions/types";
-import {  FETCH_ALLGROUP_DATA_REQUEST} from "../actions/actionTypes";
-import { fetchGroupFailure, fetchGroupSuccess } from "../actions/fetchGroupActions";
+import { IGROUPDATA } from "../actions/types";
+import { FETCH_ALLGROUP_DATA_REQUEST } from "../actions/actionTypes";
+import {
+  fetchGroupFailure,
+  fetchGroupSuccess,
+} from "../actions/fetchGroupActions";
 
-
-const getGroups= () =>
-  axios.get<IGROUPDATA[]>("http://localhost:8000/allGroupData");
-/*
-  Worker Saga: Fired on FETCH_TODO_REQUEST action
-*/
-function* fetchGroupSaga():any {
-console.log("AJfjsfg")
- 
+const getGroups = () => {
+  return axios.get<IGROUPDATA[]>("http://localhost:8000/allGroupData");
+};
+  console.log(getGroups,"getGroups")
+function* fetchGroupSaga(): any {
   try {
     const response = yield call(getGroups);
-   console.log(response)
+    console.log("response", response);
     yield put(
       fetchGroupSuccess({
         groups: response.data,
