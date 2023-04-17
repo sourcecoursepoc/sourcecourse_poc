@@ -29,7 +29,7 @@ export default function ({ title, value }: InnerBoxProps) {
                 />
               )}
               {title === "Groups" && (
-                <Image preview={false} src="./Groups-Icon1.png"  
+                <Image preview={false} src="./groups-icon.png"  
                   />
               )}
               {title === "Schema" && (

@@ -2,7 +2,8 @@ import {
     FETCH_GROUPDATA_DATABASE,
     FETCH_GROUPDATA_DATABASE_FAILURE,
     FETCH_GROUPDATA_DATABASE_SUCCESS,
-    ADD_GROUPDATA_ARRAY
+    ADD_GROUPDATA_ARRAY,
+    ADD_ATTRIBUTE_DETAILS
 } from "../actions/schemaActionTypes";
 import { GroupdataDataBaseActions,GroupdataDataBaseState } from "../actions/schemaTypes";
 
@@ -11,6 +12,7 @@ const initialGroupdataDataBaseState: GroupdataDataBaseState = {
     groupdataDatabase: [],
     error: null,
     myGroupdataArray: [],
+    lastIndices: [],
 
 };
 
@@ -44,14 +46,25 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
             };
         case ADD_GROUPDATA_ARRAY:
             if (Array.isArray(action.payload)) {
-                console.log(action.payload, "payload")
+                console.log(action.payload, "payload groupData")
                 return {
                     ...state,
                     myGroupdataArray: [...state.myGroupdataArray, ...action.payload]
                 };
             } else {
                 // Handle non-iterable payload, e.g. throw an error or log a warning
-            }
+            };
+            case ADD_ATTRIBUTE_DETAILS:
+                console.log("Received data in ADD_ATTRIBUTE_DETAILS -------reducer:", action.payload);
+                  const exists = state.lastIndices.some((node) => node.uid === action.payload.uid);
+                  if (!exists) {
+                    return {
+                      ...state,
+                      lastIndices: [...state.lastIndices, action.payload],
+                    };
+                  } else {
+                    return state;
+                  }
         default:
             return {
                 ...state,

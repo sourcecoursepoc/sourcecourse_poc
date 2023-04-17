@@ -43,7 +43,7 @@ export default function ComposePipeline() {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
-                                                icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "1rem", height: "1rem", marginRight: "0.3125rem" }} />}
+                                                icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
 
                                             // deleteIcon={node.status}

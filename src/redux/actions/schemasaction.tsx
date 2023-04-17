@@ -16,11 +16,12 @@ import {
   ADD_LAST_INDEX,
   REMOVE_LAST_INDEX,
   ADD_GROUPDATA_ARRAY,
-  CLEAR_LAST_INDEXES
+  CLEAR_LAST_INDEXES,
+  ADD_ATTRIBUTE_DETAILS
 } from "./schemaActionTypes";
   
  
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddLastIndexAction, RemoveLastIndexAction, AddGroupArrayAction,ClearLastIndexAction} from "./schemaTypes";
+import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddLastIndexAction, RemoveLastIndexAction, AddGroupArrayAction,ClearLastIndexAction, AddAttributeDetailsAction} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -90,6 +91,16 @@ export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
   payload,
 
 });
+
+//action for adding attribute details to an array
+export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction=> {
+  console.log("Received data in addAttributeDetails ---- action:", lastIndices);
+  return {
+    type: ADD_ATTRIBUTE_DETAILS,
+    payload: lastIndices,
+  };
+};
+
 export function removeNode(uid: string): RemoveNodeAction {
   console.log("uiddddd",uid)
   return {
