@@ -8,6 +8,8 @@ import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import composeReducer from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
+import groupReducer from "./groupReducer";
+
 console.log("Creating root reducer...");
 
 const rootReducer = combineReducers({
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   project: projectReducer,
   composePipeline: composeReducer,
   record:fetchRecordsReducer,
+  group:groupReducer,
 });
 
 
