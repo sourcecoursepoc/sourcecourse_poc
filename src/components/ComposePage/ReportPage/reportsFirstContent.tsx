@@ -3,9 +3,9 @@ import React from 'react';
 import styles from './reportsFirstContent.module.css';
 
 interface ReportsComponent{
-    schemaNumber:string;
+    schemaNumber:number;
     schemaName:string;
-    groupNumber:string;
+    groupNumber:number;
     groupName:string;
 
 }
