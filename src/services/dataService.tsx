@@ -5,6 +5,12 @@ import axios from "axios";
     const dataURL = "http://localhost:8000/pipeline";
     const response = await axios.get(dataURL);
     return { data: response.data };
+  };
+  export const fetchRecordList = async () => {
+    const query = new URLSearchParams().toString();
+    const dataURL = "http://localhost:8000/record";
+    const response = await axios.get(dataURL);
+    return { data: response.data };
   }; 
 /*   export const fetchSchemas = async (params: FetchDataListParams) => {
    const query = new URLSearchParams(params).toString();
