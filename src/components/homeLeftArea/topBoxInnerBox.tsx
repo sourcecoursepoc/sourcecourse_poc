@@ -22,7 +22,7 @@ const TopInnerBox: React.FC = () => {
           <div className={styles.innerrightTop}>
             <Image
             preview={false}
-              src="./Schemas.png"
+              src="./schemas-icon.png"
               style={{ height: "3rem", marginTop: "1.1rem" }}
             ></Image>
           </div>

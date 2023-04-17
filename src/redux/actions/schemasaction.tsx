@@ -16,14 +16,37 @@ import {
   ADD_LAST_INDEX,
   REMOVE_LAST_INDEX,
   ADD_GROUPDATA_ARRAY,
-  CLEAR_LAST_INDEXES
+  CLEAR_LAST_INDEXES,
 } from "./schemaActionTypes";
-  
- 
-import { FetchSchemaRequest, FetchSchemaSuccessPayload, FetchSchemaSuccess, FetchSchemaFailurePayload, FetchSchemaFailure, FetchDataBaseRequest, FetchDataBaseSuccessPayload, FetchDataBaseSuccess, FetchDataBaseFailurePayload, FetchDataBaseFailure, FetchGroupdataDataBaseRequest, FetchGroupdataDataBaseSuccessPayload, FetchGroupdataDataBaseSuccess, FetchGroupdataDataBaseFailurePayload, FetchGroupdataDataBaseFailure, AddArrayAction, PostDataActionTypes ,RemoveNodeAction, AddLastIndexAction, RemoveLastIndexAction, AddGroupArrayAction,ClearLastIndexAction} from "./schemaTypes";
+
+import {
+  FetchSchemaRequest,
+  FetchSchemaSuccessPayload,
+  FetchSchemaSuccess,
+  FetchSchemaFailurePayload,
+  FetchSchemaFailure,
+  FetchDataBaseRequest,
+  FetchDataBaseSuccessPayload,
+  FetchDataBaseSuccess,
+  FetchDataBaseFailurePayload,
+  FetchDataBaseFailure,
+  FetchGroupdataDataBaseRequest,
+  FetchGroupdataDataBaseSuccessPayload,
+  FetchGroupdataDataBaseSuccess,
+  FetchGroupdataDataBaseFailurePayload,
+  FetchGroupdataDataBaseFailure,
+  AddArrayAction,
+  PostDataActionTypes,
+  RemoveNodeAction,
+  AddLastIndexAction,
+  RemoveLastIndexAction,
+  AddGroupArrayAction,
+  ClearLastIndexAction,
+} from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
+
   params,
 });
 
@@ -31,6 +54,7 @@ export const fetchSchemaSuccess = (
   payload: FetchSchemaSuccessPayload
 ): FetchSchemaSuccess => ({
   type: FETCH_SCHEMA_SCHEMADATA_SUCCESS,
+
   payload,
 });
 
@@ -38,6 +62,7 @@ export const fetchSchemaFailure = (
   payload: FetchSchemaFailurePayload
 ): FetchSchemaFailure => ({
   type: FETCH_SCHEMA_SCHEMADATA_FAILURE,
+
   payload,
 });
 
@@ -49,6 +74,7 @@ export const fetchDataBaseSuccess = (
   payload: FetchDataBaseSuccessPayload
 ): FetchDataBaseSuccess => ({
   type: FETCH_SCHEMA_DATABASE_SUCCESS,
+
   payload,
 });
 
@@ -56,24 +82,25 @@ export const fetchDataBaseFailure = (
   payload: FetchDataBaseFailurePayload
 ): FetchDataBaseFailure => ({
   type: FETCH_SCHEMA_DATABASE_FAILURE,
+
   payload,
 });
 
 export const addArray = (payload: any): AddArrayAction => ({
   type: ADD_ARRAY,
-  payload,
 
+  payload,
 });
 
 export const fetchGroupDataRequest = (): FetchGroupdataDataBaseRequest => ({
   type: FETCH_GROUPDATA_DATABASE,
 });
 
-
 export const fetchGroupDataSuccess = (
   payload: FetchGroupdataDataBaseSuccessPayload
 ): FetchGroupdataDataBaseSuccess => ({
   type: FETCH_GROUPDATA_DATABASE_SUCCESS,
+
   payload,
 });
 
@@ -81,25 +108,30 @@ export const fetchGroupDataFailure = (
   payload: FetchGroupdataDataBaseFailurePayload
 ): FetchGroupdataDataBaseFailure => ({
   type: FETCH_GROUPDATA_DATABASE_FAILURE,
+
   payload,
 });
-
 
 export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
   type: ADD_GROUPDATA_ARRAY,
-  payload,
 
+  payload,
 });
+
 export function removeNode(uid: string): RemoveNodeAction {
-  console.log("uiddddd",uid)
+  console.log("uiddddd", uid);
+
   return {
     type: REMOVE_NODE,
-    payload: { uid},
+
+    payload: { uid },
   };
 }
-export const addLastIndex = (lastIndex: any): AddLastIndexAction=> {
+
+export const addLastIndex = (lastIndex: any): AddLastIndexAction => {
   return {
     type: ADD_LAST_INDEX,
+
     payload: lastIndex,
   };
 };
@@ -107,25 +139,31 @@ export const addLastIndex = (lastIndex: any): AddLastIndexAction=> {
 export const removeLastIndex = (uid: string): RemoveLastIndexAction => {
   return {
     type: REMOVE_LAST_INDEX,
+
     payload: uid,
   };
 };
+
 export const clearLastIndex = (): ClearLastIndexAction => {
   return {
     type: CLEAR_LAST_INDEXES,
+
     payload: [],
   };
 };
+
 // Post Action
 
-export const postDataRequest = (): PostDataActionTypes => ({ type: POST_GROUPDATA_DATABASE });
+export const postDataRequest = (): PostDataActionTypes => ({
+  type: POST_GROUPDATA_DATABASE,
+});
 
-export const postDataSuccess = (): PostDataActionTypes => ({ type: POST_GROUPDATA_DATABASE_SUCCESS });
+export const postDataSuccess = (): PostDataActionTypes => ({
+  type: POST_GROUPDATA_DATABASE_SUCCESS,
+});
 
 export const postDataFailure = (error: string): PostDataActionTypes => ({
   type: POST_GROUPDATA_DATABASE_FAILURE,
+
   payload: error,
 });
-
-
-

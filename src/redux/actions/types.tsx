@@ -5,11 +5,16 @@ import {
   FETCH_ALLPROJECTS_FAILURE,
   FETCH_ALLPROJECTS_REQUEST,
   FETCH_ALLPROJECTS_SUCCESS,
+  FETCH_ALLGROUP_DATA_REQUEST,
+  FETCH_ALLGROUP_DATA_SUCCESS,
+  FETCH_ALLGROUP_DATA_FAILURE
 } from "../actions/actionTypes";
 import {
   FETCH_SCHEMA_DATA,
   FETCH_SCHEMA_DATA_SUCCESS,
   FETCH_SCHEMA_DATA_FAILURE,
+  FETCH_ALLGROUP_DATA,
+ 
 } from "./schemaActionTypes";
 
 export interface IPIPELINE {
@@ -142,3 +147,49 @@ export type SchemaActions =
       | FetchProjectRequest
       | FetchProjectSuccess
       | FetchProjectFailure;
+
+      
+
+      export interface IGROUPDATA {
+        projectID: string,
+       name:string,
+      desc:string,
+      attributes:string,
+       
+       
+     
+      }
+      
+      export interface GroupState {
+        pending: boolean;
+        groups: IGROUPDATA[];
+        error: string | null;
+      }
+     
+      export interface FetchGroupSuccessPayload {
+        groups: IGROUPDATA[];
+      }
+      
+      export interface FetchGroupFailurePayload {
+        error: string;
+      }
+      
+      export interface FetchGroupRequest {
+        type: typeof FETCH_ALLGROUP_DATA_REQUEST;
+      }
+      
+      export type FetchGroupSuccess = {
+        
+        type: typeof FETCH_ALLGROUP_DATA_SUCCESS;
+        payload: FetchGroupSuccessPayload;
+      };
+    
+      export type FetchGroupFailure = {
+        type: typeof  FETCH_ALLGROUP_DATA_FAILURE;
+        payload: FetchGroupFailurePayload;
+      };
+      
+      export type GroupActions =
+        | FetchGroupRequest
+        | FetchGroupSuccess
+        | FetchGroupFailure;
