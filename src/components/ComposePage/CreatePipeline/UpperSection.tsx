@@ -17,7 +17,7 @@ const UpperSection = () => {
                         marginTop: "0.5rem",
                     }}
                 >
-                    <CardDisplay alt="initial load" src="/Schemas.png" title="Initial load"/>
+                    <CardDisplay alt="initial load" src="/Schemas.png" title="Initial Load"/>
                     <CardDisplay alt="Sync" src="/Sync-Icon-1.png" title="Sync"/>
                 </Col>
 
