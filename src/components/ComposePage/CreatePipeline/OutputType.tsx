@@ -55,7 +55,8 @@ const OutputType = () => {
                 marginTop: '1rem',
                 marginBottom: "1rem",
                 marginLeft: "0.3rem"
-            }} />
+            }}
+            type="email" />
             </Row>
 
         </>
