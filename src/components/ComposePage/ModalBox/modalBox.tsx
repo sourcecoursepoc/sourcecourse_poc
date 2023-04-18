@@ -41,7 +41,6 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel ,onExport}) => {
         footer={null}
         closable={false}
         width={800}
-        
         bodyStyle={{  borderRadius: "5px" ,maxHeight:'500px',  overflowY: "auto" }}
       >
         <Row>
