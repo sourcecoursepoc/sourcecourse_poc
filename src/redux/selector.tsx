@@ -11,6 +11,7 @@ const getGroupdataDataBase = (state: AppState) => state.groupdataDatabase.groupd
 const getSelectedArray = (state: AppState) => state.database.myArray;
 const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.myGroupdataArray;
 const getComposePipeline=(state:AppState)=> state.composePipeline.composePipeline;
+const getGroups = (state: AppState) => state.group.groups;
 
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
@@ -23,7 +24,7 @@ export const getDataBaseSelector = createSelector(getDataBase, (database) => dat
 export const getGroupdataDataBaseSelector = createSelector(getGroupdataDataBase, (groupdataDatabase) => groupdataDatabase)
 export const getSchemasSelector = createSelector(getSchemas, (schemas) => schemas);
 export const getProjectsSelector = createSelector(getProjects, (projects) => projects);
-
+export const getGroupSelector = createSelector(getGroups, (groups) => groups);
 export const getPendingSelector = createSelector(
   getPending,
   (pending) => pending

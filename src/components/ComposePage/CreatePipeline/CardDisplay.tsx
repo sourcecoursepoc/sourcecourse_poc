@@ -1,15 +1,24 @@
-import { Card } from 'antd'
+import { Col, Row, Image } from 'antd'
 import React from 'react'
+import styles from "./CardDisplay.module.css";
 
-const CardDisplay = ({alt,src,title}) => {
+const CardDisplay = ({ alt, src, title }) => {
     return (
-        <Card hoverable style={{ width: 240 }}>
-            <Card.Meta
-                avatar={<img height={30} alt={alt} src={src} style={{ marginRight: 10 }} />}
-                title={title}
-                style={{ fontSize: 16 }}
-            />
-        </Card>
+        <>
+      <div className={styles.outerbox}>
+        <div className={styles.innerright}>
+          <Row className={styles.image}
+          ><Col>
+               <Image preview={false} src={src} alt={alt} style={{ width: "3rem", height: "3rem", marginRight: "0.5rem" }} />
+            </Col>
+          </Row>
+        </div>
+        <div className={styles.innerleft}>
+          <Row className={styles.items}><Col style={{ width: "100%", textAlign: "-webkit-center" }}><p className={styles.styeText}>{title}</p></Col></Row>
+        </div>
+      </div>
+
+    </>
     )
 }
 
