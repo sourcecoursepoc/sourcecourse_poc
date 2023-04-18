@@ -1,0 +1,65 @@
+.container {
+    flex: 1;
+    border-right: 1px solid #ccc;
+    padding-right: 20px;
+    height: auto;
+}
+
+.LeftContainer {
+    border: 1px solid #ccc;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+}
+
+.projectInfoContainer {
+    border-bottom: 1px solid #ccc;
+    height: auto;
+    display: flex;
+    align-items: center;
+}
+
+.ImageContainer {
+    height: 50px;
+    margin-right: 15px;
+    margin-left: 15px;
+}
+
+.headingText {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.descriptionText {
+    margin: 0;
+    font-size: 10px;
+    word-break: break-word;
+}
+
+.rightBox {
+    border: 1px solid #ccc;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+}
+
+.statusBoxes {
+    display: flex;
+    align-items: center;
+    padding-left: 2px;
+    border-right: 1px solid #ccc;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+
+.statusBoxContainer {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    margin-left: 0px;
+    margin-right: 0px;
+    height: 30px;
+    box-shadow: 0.125rem 0.125rem 0.25rem rgba(0, 0, 0, 0.3);
+    color: gray;
+
+}

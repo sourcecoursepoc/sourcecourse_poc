@@ -17,7 +17,11 @@ import {
   REMOVE_LAST_INDEX,
   ADD_GROUPDATA_ARRAY,
   CLEAR_LAST_INDEXES,
+  ADD_ATTRIBUTE_DETAILS
 } from "./schemaActionTypes";
+  
+ 
+
 
 import {
   FetchSchemaRequest,
@@ -43,6 +47,7 @@ import {
   AddGroupArrayAction,
   ClearLastIndexAction,
 } from "./schemaTypes";
+>>>>>>> 4b1e9f63c238d3dcd02ef70e42a9098650f6520e
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -117,6 +122,15 @@ export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
 
   payload,
 });
+
+//action for adding attribute details to an array
+export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction=> {
+  console.log("Received data in addAttributeDetails ---- action:", lastIndices);
+  return {
+    type: ADD_ATTRIBUTE_DETAILS,
+    payload: lastIndices,
+  };
+};
 
 export function removeNode(uid: string): RemoveNodeAction {
   console.log("uiddddd", uid);
