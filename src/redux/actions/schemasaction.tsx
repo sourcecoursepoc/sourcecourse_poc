@@ -17,7 +17,9 @@ import {
   REMOVE_LAST_INDEX,
   ADD_GROUPDATA_ARRAY,
   CLEAR_LAST_INDEXES,
-  ADD_ATTRIBUTE_DETAILS
+  ADD_ATTRIBUTE_DETAILS,
+  DELETE_GROUP_MODAL,
+  DELETE_GROUP_MODAL_BOX
 } from "./schemaActionTypes";
   
  
@@ -46,8 +48,11 @@ import {
   RemoveLastIndexAction,
   AddGroupArrayAction,
   ClearLastIndexAction,
+  AddAttributeDetailsAction,
+  deleteGroupModalAction,
+  deleteGroupModalBoxAction,
 } from "./schemaTypes";
->>>>>>> 4b1e9f63c238d3dcd02ef70e42a9098650f6520e
+
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -161,7 +166,14 @@ export const removeLastIndex = (uid: string): RemoveLastIndexAction => {
 export const clearLastIndex = (): ClearLastIndexAction => {
   return {
     type: CLEAR_LAST_INDEXES,
+    payload: [],
+  };
+};
 
+//delete group data modal box
+export const deleteGroupModalBox = (): deleteGroupModalBoxAction => {
+  return {
+    type:DELETE_GROUP_MODAL_BOX,
     payload: [],
   };
 };
