@@ -19,8 +19,6 @@ import {
   CLEAR_LAST_INDEXES,
   ADD_ATTRIBUTE_DETAILS
 } from "./schemaActionTypes";
-  
- 
 
 
 import {
@@ -133,7 +131,6 @@ export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction
 
 export function removeNode(uid: string): RemoveNodeAction {
   console.log("uiddddd", uid);
-
   return {
     type: REMOVE_NODE,
 
