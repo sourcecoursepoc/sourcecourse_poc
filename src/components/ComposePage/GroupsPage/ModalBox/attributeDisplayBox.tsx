@@ -13,31 +13,54 @@ interface MyComponentProps {
   icon: ReactNode;
   uid: string;
   handleRemove: (uid: string) => void;
-   lengthOfColums:any; 
+  lengthOfColums: any;
+  desc:string
 }
-const AttributeDisplayBox: React.FC<MyComponentProps> = ({ text, attribute, icon,uid,handleRemove ,lengthOfColums  }) => {
-
+const AttributeDisplayBox: React.FC<MyComponentProps> = ({
+  text,
+  attribute,
+  icon,
+  uid,
+  handleRemove,
+  lengthOfColums,
+  desc
+}) => {
   return (
     <>
       <div className={styles.outerbox}>
-        <div className={styles.innerright}>        
-          <Col className={styles.image}>
-              {icon}
-            </Col>
+        <div className={styles.innerright}>
+          <Col className={styles.image}>{icon}</Col>
         </div>
-        <div style={{width:'inherit'}}>
-          <Row className={styles.items}><Col style={{width:'90%',fontSize:'1rem',textAlign:'justify',height:'auto',color: 'grey'}}>
-            {text}</Col>
-          <Col style={{paddingLeft:'6.5px'}}>
-         <DeleteFilled style={{color:"red",height:'auto'}}
-          onClick={() => handleRemove(uid)}/>
-          </Col>         
+        <div>
+          <Row className={styles.items}>
+            <Col
+              style={{
+                width: "90%",
+                fontSize: "1rem",
+                textAlign: "justify",
+                height: "auto",
+                color: "grey",
+              }}
+            >
+              {text}
+             
+            </Col>
+           {/*  <Col style={{ paddingLeft: "6.5px" }}>
+              <DeleteFilled
+                style={{ color: "red", height: "auto" }}
+                onClick={() => handleRemove(uid)}
+              />
+            </Col> */}
+            <Col style={{  color:"gray",marginTop:"1px",fontSize:"0.6rem"}} > {desc}</Col>
+           
           </Row>
           <Row className={styles.imageName}>
             <Col className={styles.imageNameText}>
-              <p>{attribute} {lengthOfColums} 
+              <p>
+                {attribute} {lengthOfColums}
               </p>
-            </Col></Row>
+            </Col>
+          </Row>
         </div>
       </div>
     </>

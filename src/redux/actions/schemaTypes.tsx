@@ -17,7 +17,10 @@ import {
     ADD_LAST_INDEX,
     REMOVE_LAST_INDEX,
     CLEAR_LAST_INDEXES,
-    ADD_ATTRIBUTE_DETAILS
+    ADD_ATTRIBUTE_DETAILS,
+    POST_GROUPDATA,
+    POST_GROUPDATA_SUCCESS,
+    POST_GROUPDATA_FAILURE
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -232,3 +235,27 @@ export type PostDataActionTypes =
     | PostDataSuccessAction
     | PostDataFailureAction;
 
+//post for groupDataBase
+export interface PostGroupData {
+    loading: boolean;
+    success: boolean;
+    error: string | null;
+}
+
+export interface PostGrooupDataRequestAction {
+    type: typeof POST_GROUPDATA;
+}
+
+export interface PostGrooupDataSuccessAction {
+    type: typeof POST_GROUPDATA_SUCCESS;
+}
+
+export interface PostGrooupDataFailureAction {
+    type: typeof POST_GROUPDATA_FAILURE;
+    payload: string;
+}
+
+export type PostGroupDataActionTypes =
+    | PostGrooupDataRequestAction
+    | PostGrooupDataSuccessAction
+    | PostGrooupDataFailureAction;

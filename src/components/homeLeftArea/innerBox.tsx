@@ -29,11 +29,11 @@ export default function ({ title, value }: InnerBoxProps) {
                 />
               )}
               {title === "Groups" && (
-                <Image preview={false} src="./groups-icon.png"  
+                <Image preview={false} src="./groups-Icon.png"  
                   />
               )}
               {title === "Schema" && (
-                <Image preview={false} src="./Schemas.png" 
+                <Image preview={false} src="./schemas-icon.png" 
                   />
               )}
               {title === "Sync" && (
