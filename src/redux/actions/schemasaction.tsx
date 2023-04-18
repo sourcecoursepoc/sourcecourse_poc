@@ -47,7 +47,6 @@ import {
   AddGroupArrayAction,
   ClearLastIndexAction,
 } from "./schemaTypes";
->>>>>>> 4b1e9f63c238d3dcd02ef70e42a9098650f6520e
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
