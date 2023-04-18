@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import { getComposePipelineSelector } from '../../../redux/selector';
 import DisplaySchemaBox from '../MainContent/displaySchema';
 import { fetchComposePipelineRequest } from '../../../redux/actions/composeAction';
+import Buttons from '../buttons/buttons';
+import PipelineModalBox from './pipelineModalBox';
 const { TabPane } = Tabs;
 
 const { Content } = Layout;
@@ -14,9 +16,20 @@ const { Content } = Layout;
 export default function ComposePipeline() {
     const dispatch = useDispatch();
     const selectedComposePipeline = useSelector(getComposePipelineSelector);
-    console.log(selectedComposePipeline, "selectedComposePipeline")
-
     const [activeTab, setActiveTab] = useState('1');
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
     const handleTabChange = (key: string) => {
         setActiveTab(key);
@@ -43,14 +56,19 @@ export default function ComposePipeline() {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
-                                                icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "1rem", height: "1rem", marginRight: "0.3125rem" }} />}
+                                                icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
-
-                                            // deleteIcon={node.status}
+                                                width={"auto"}
+                                                deleteIcon={<Buttons text={node.status} onClick={showModal} style={{ width: "3.75rem", height: "1.5625rem", fontSize: "0.5rem" }} />}
                                             />
                                         </Col>
                                     );
                                 })}
+                                <PipelineModalBox
+                                    isModalVisible={isModalVisible}
+                                    handleOk={handleOk}
+                                    handleCancel={handleCancel}
+                                />
                             </Row>
                         </TabPane>
                         <TabPane tab={
@@ -60,7 +78,30 @@ export default function ComposePipeline() {
                                 <span>Sync</span>
                             </div>
                         } key="2">
-                            Content for Tab 2
+                            <Row >
+                                {selectedComposePipeline.map((node) => {
+                                    return (
+                                        <Col>
+                                            <DisplaySchemaBox
+                                                icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
+                                                text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
+                                                width={"auto"}
+                                                deleteIcon={<Buttons text={node.status} onClick={showModal} style={{
+                                                    width: "3.75rem",
+                                                    height: "1.5625rem",
+                                                    fontSize: "0.5rem",
+                                                    backgroundColor: node.status.toLowerCase() === "failed" ? "#ff4d4f" : "blue",
+                                                }} />}
+                                            />
+                                        </Col>
+                                    );
+                                })}
+                                <PipelineModalBox
+                                    isModalVisible={isModalVisible}
+                                    handleOk={handleOk}
+                                    handleCancel={handleCancel}
+                                />
+                            </Row>
                         </TabPane>
                     </Tabs>
                 </Content>
