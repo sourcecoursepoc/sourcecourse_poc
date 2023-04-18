@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { Button, Input, InputNumber } from 'antd';
 import styles from "./Schedule.module.css"
 import { CheckOutlined } from '@ant-design/icons';
+import FloatNumberInput from './FloatNumberInput';
+import FloatInput from "../GroupsPage/ModalBox/floatInput";
 
 const ScheduleTimePicker = () => {
 
@@ -9,37 +11,23 @@ const ScheduleTimePicker = () => {
 
     return (
         <div style={{ display: "flex", flexDirection: "row" }}>
-            <InputNumber placeholder="HH" style={{
-                alignContent: "center",
-                width: '3.5rem',
-                height: '4rem',
-                margin: '0.5rem',
-            }}
+            <FloatNumberInput label="HH"
+                placeholder="HH"
                 min={0}
                 max={12}
-                formatter={value => `${value}`.padStart(2, '0')}
-                parser={value => value.replace(/^0+/, '')} />
+                />
             <h2> : </h2>
-            <InputNumber placeholder="MM" style={{
-                width: '3.5rem',
-                height: '4rem',
-                margin: '0.5rem',
-            }}
+            <FloatNumberInput label="MM"
+                placeholder="MM"
                 min={0}
                 max={59}
-                formatter={value => `${value}`.padStart(2, '0')}
-                parser={value => value.replace(/^0+/, '')}
-            />
+                />
             <h2> : </h2>
-            <InputNumber placeholder="SS" style={{
-                width: '3.5rem',
-                height: '4rem',
-                margin: '0.5rem',
-            }}
+            <FloatNumberInput label="SS"
+                placeholder="SS"
                 min={0}
                 max={59}
-                formatter={value => `${value}`.padStart(2, '0')}
-                parser={value => value.replace(/^0+/, '')} />
+                />
 
             <div style={{ display: "flex", alignItems: "center" }}>
                 <Button className={styles.buttonCalender}

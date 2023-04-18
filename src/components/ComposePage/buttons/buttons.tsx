@@ -12,7 +12,7 @@ interface MyComponentProps {
     style?: React.CSSProperties;
 //buttonLabels: string[];
   }
-const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick,href},style) => {
+const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick,href,style}) => {
 
   return (
     <>   
