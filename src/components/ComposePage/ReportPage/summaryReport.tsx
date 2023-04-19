@@ -38,9 +38,9 @@ const SummaryReport = () => {
     { name: "Success", value: getRecords[0]?.PipelineStatus[0]?.success },
     { name: "Error", value: getRecords[0]?.PipelineStatus[0]?.error },
   ];
+
   return (
     <>
- 
        <ReportsFirstContent
         groupName="Groups"
         groupNumber={getRecords[0]?.groups}
@@ -49,46 +49,30 @@ const SummaryReport = () => {
       />
       
       <ReportGraph
-        title1="Record Details"
-        numb1={pieDataRecord[0].value}
-        numb2={pieDataRecord[1].value}
-        slash="/"
-        title2=" Records"
+        title="Record Details"
+        text={`${pieDataRecord[0].value} / ${pieDataRecord[1].value} Records`}
         pieData={pieDataRecord}
       />
       <ReportGraph
-        title1="Attribute Details"
-        numb1={pieDataAttribute[0].value}
-        numb2={pieDataAttribute[1].value}
-        slash="/"
-        title2=" Attributes"
+        title="Attribute Details"
+        text={`${pieDataAttribute[0].value} / ${pieDataAttribute[1].value} Attributes`}
         pieData={pieDataAttribute}
       />
       <ReportGraph
-        title1="Size Details"
-        numb1={pieDataSize[0].value}
-        numb2={pieDataSize[1].value}
-        slash="/"
-        title2=" GB"
+        title="Size Details"
+        text={`${pieDataSize[0].value} / ${pieDataSize[1].value} GB`}
         pieData={pieDataSize}
       />
       <ReportGraph
-        title1="Pipeline Execution"
-        numb1={pieDataPipeline[0].value}
-        numb2={null}
-        slash=""
-        title2=" Excecution"
+        title="Pipeline Execution"
+        text={`${pieDataPipeline[0].value} Excecution`}
         pieData={pieDataPipeline}
       />
       <ReportGraph
-        title1="Pipeline Status"
-        numb1={pieDataPipelineExe[0].value}
-        numb2={null}
-        slash=""
-        title2=" Execution"
+        title="Pipeline Status"
+        text={`${pieDataPipelineExe[0].value} Excecution`}
         pieData={pieDataPipelineExe}
-      /> 
-        
+      />
     </>
   );
 };

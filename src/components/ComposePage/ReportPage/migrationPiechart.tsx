@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Row,Col } from "antd";
 import React from "react";
 import {
   Bar,
@@ -28,13 +28,14 @@ const MigrationPiechart: React.FC<reportGraphComp> = ({
   pieData,title2,numb1,numb2,slash,title1
 }) => {
   const COLORS = ["#1f94dc", "#f16382"];
-  return ( 
-    <Row className={styles.innerBox22}>
+  return (
+    <Col className={styles.innerBox22} >
       <div className={styles.textContainer}>
-      {title1}
-    <p>{numb1}{' '}{slash}{' '}{numb2}{' '}{title2}</p></div>
-    <div className={styles.chartcontainer}>
-        <PieChart width={200} height={200} >
+        {title1}
+        <p>{numb1}{' '}{slash}{' '}{numb2}{' '}{title2}</p>
+      </div>
+      <div className={styles.chartcontainer}>
+        <PieChart width={200} height={200} > 
           <Pie
           data={pieData}        
           innerRadius={40}
@@ -50,11 +51,9 @@ const MigrationPiechart: React.FC<reportGraphComp> = ({
               />
             ))}
           </Pie>
-        </PieChart>
+          </PieChart>
         </div>
-        </Row>
-        
-   
+    </Col>
   );
 };
 

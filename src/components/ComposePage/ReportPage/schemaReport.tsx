@@ -56,27 +56,24 @@ const SchemaReport = () => {
       </div>
 
       <div className={styles.outerbox2}>
-    <Row className={styles.innerBox21}>
-      <p className={styles.number}>Schema Migration Status</p>
-    </Row>
-    
-      {data.map((item, index) => (
-        <MigrationPiechart
-          key={index}
-          title1={item.name}
-          numb1={item.value1}
-          numb2={item.value2}
-          title2="Records"
-          slash="/"
-          pieData={[
-            { name: "Record1", value: item.value1 },
-            { name: "Record2", value: item.value2 },
-          ]}
-        />
-      ))}
-      
+        <Row className={styles.innerBox21}>
+          <p className={styles.number}>Schema Migration Status</p>
+        </Row>
+        {data.map((item, index) => (
+          <MigrationPiechart
+            key={index}
+            title1={item.name}
+            numb1={item.value1}
+            numb2={item.value2}
+            title2="Records"
+            slash="/"
+            pieData={[
+              { name: "Record1", value: item.value1 },
+              { name: "Record2", value: item.value2 },
+            ]}
+          />
+        ))}
       </div>
-
     </>
   );
 };
