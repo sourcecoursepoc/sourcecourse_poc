@@ -3,7 +3,7 @@ import { Input, InputNumber } from "antd";
 
 import styles from "../../../styles/floatInput.module.css";
 
-const FloatInput = (props) => {
+const FloatNumberInput = (props) => {
   const [focus, setFocus] = useState(false);
   let { label, placeholder, type, required,dataValue } = props;
 
@@ -20,7 +20,7 @@ const FloatInput = (props) => {
   const handleBlur = e => {
     console.log("value:::",value)
     setFocus(false)
-    setValue(e.target.value);
+    setValue("0");
   };
 
   return (
@@ -41,7 +41,8 @@ const FloatInput = (props) => {
       display: "block",
       height: "4rem",
       width: "3.5rem",
-      margin: '0.5rem',}}/>
+      margin: '0.5rem',
+      paddingTop: '1rem'}}/>
 
       <label className={labelClass}>
 
@@ -51,5 +52,5 @@ const FloatInput = (props) => {
   );
 };
 
-export default FloatInput;
+export default FloatNumberInput;
 

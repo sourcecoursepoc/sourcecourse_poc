@@ -1,0 +1,37 @@
+.inputBox {
+    width: 58rem;
+    height: 3rem;
+}
+
+.floatlabel {
+    position: relative;
+}
+
+.label {
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 12px;
+    top: 11px;
+    transition: 0.2s ease all;
+}
+
+.asplaceholder {
+    color: gray;
+}
+
+.aslabel {
+    top: -8px;
+    font-size: 12px !important;
+    background: white;
+    padding: 0 4px;
+    margin-left: -4px;
+}
+
+.textArea:hover {
+    border-color: #c3428d;
+}
+
+.textArea:focus {
+    border-color: #c3428d !important;
+}

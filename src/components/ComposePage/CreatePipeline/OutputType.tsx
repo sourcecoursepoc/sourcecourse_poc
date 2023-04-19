@@ -3,15 +3,18 @@ import { useState } from "react";
 import { Row, Col, Button, Input } from "antd";
 import { CheckOutlined } from '@ant-design/icons';
 import styles from "./Schedule.module.css"
+import FloatInput from "../GroupsPage/ModalBox/floatInput"
+import EmailTagbox from './EmailTagbox';
 
 const OutputType = () => {
 
     const [selectedExportOption, setSelectedExportOption] = useState<string | null>(null);
 
+    const [tags, setTags] = useState<string[]>([]);
+
     return (
         <>
-
-            <Row>
+            <Row style={{ marginTop: "2.5rem" }}>
                 <Button className={styles.buttonCalender}
                     icon={selectedExportOption === "JSON" ? <CheckOutlined /> : undefined}
                     onClick={() => setSelectedExportOption("JSON")}
@@ -38,29 +41,25 @@ const OutputType = () => {
                 >TEXT FILE</Button>
             </Row>
 
-            <Row>
-            <Input placeholder="File Name" style={{
-                width: '15rem',
-                height: '3rem',
+            <Row style={{
                 marginTop: '1.5rem',
-                marginBottom: "1rem",
-                marginLeft: "0.3rem"
-            }} />
+                marginLeft: '0.3rem',
+            }}>
+                <FloatInput label="File Name" placeholder="File Name" style={{
+                    width: '15rem',
+                    height: '3rem',
+                }} />
             </Row>
 
-            <Row>
-            <Input placeholder="Intimation List" style={{
-                width: '100%',
-                height: '3rem',
-                marginTop: '1rem',
-                marginBottom: "1rem",
-                marginLeft: "0.3rem"
-            }}
-            type="email" />
+            <Row style={{
+                marginTop: '2rem',
+                marginLeft: '0.3rem',
+            }}>
+
+            <EmailTagbox tags={tags} setTags={setTags} placeholder="Intimation List" label="Intimation List"/>
             </Row>
 
         </>
-
     )
 }
 

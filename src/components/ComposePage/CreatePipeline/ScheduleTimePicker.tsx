@@ -3,14 +3,14 @@ import { Button, Input, InputNumber } from 'antd';
 import styles from "./Schedule.module.css"
 import { CheckOutlined } from '@ant-design/icons';
 import FloatNumberInput from './FloatNumberInput';
-import FloatInput from "../GroupsPage/ModalBox/floatInput";
+
 
 const ScheduleTimePicker = () => {
 
     const [timeSelectedAM, settimeSelectedAM] = useState(true);
 
     return (
-        <div style={{ display: "flex", flexDirection: "row" }}>
+        <div style={{ display: "flex", flexDirection: "row", marginLeft:'0.3rem' }}>
             <FloatNumberInput label="HH"
                 placeholder="HH"
                 min={0}
@@ -51,6 +51,3 @@ const ScheduleTimePicker = () => {
 
 export default ScheduleTimePicker
 
-function handleTimeSelectedOptionClick(arg0: string): void {
-    throw new Error('Function not implemented.');
-}

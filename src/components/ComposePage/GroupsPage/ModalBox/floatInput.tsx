@@ -5,7 +5,7 @@ import styles from "../../../../styles/floatInput.module.css";
 
 const FloatInput = (props) => {
   const [focus, setFocus] = useState(false);
-  let { label, placeholder, type, required,dataValue } = props;
+  let { label, placeholder, type, required, dataValue, style } = props;
 
   const [value, setValue] = useState('');
 
@@ -30,11 +30,7 @@ const FloatInput = (props) => {
       onFocus={() => setFocus(true)}
     >
       <Input onChange={props.onChange} type={type} defaultValue={value} value={dataValue} onBlur={handleBlur}
-      style ={{ borderColor: "#ccc",
-      borderRadius: "2px",
-      display: "block",
-      height: "3rem",
-      width: "10rem"}}/>
+      style ={style}/>
       <label className={labelClass}>
         {isOccupied ? label : placeholder} {requiredMark}
       </label>
