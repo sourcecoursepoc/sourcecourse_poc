@@ -4,15 +4,15 @@ import React, { ReactNode, useState } from 'react';
 import styles from './buttonStyle.module.css';
 
 interface MyComponentProps {
-  text: string;
-  icon: ReactNode;
-  size: SizeType;
-  href: string;
-  onClick: () => void;
-  style?: React.CSSProperties;
-  //buttonLabels: string[];
-}
-const Buttons: React.FC<MyComponentProps> = ({ text, icon, size, onClick, href, style }) => {
+    text: string; 
+    icon: ReactNode;
+    size:SizeType;
+    href:string;
+    onClick: () => void;
+    style?: React.CSSProperties;
+//buttonLabels: string[];
+  }
+const Buttons: React.FC<MyComponentProps>= ({text,icon,size,onClick,href,style}) => {
 
   return (
     <>
