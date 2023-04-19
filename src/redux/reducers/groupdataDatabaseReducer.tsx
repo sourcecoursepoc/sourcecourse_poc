@@ -5,7 +5,8 @@ import {
     ADD_GROUPDATA_ARRAY,
     ADD_ATTRIBUTE_DETAILS,
     POST_GROUPDATA_FAILURE,
-    POST_GROUPDATA_SUCCESS
+    POST_GROUPDATA_SUCCESS,
+    DELETE_GROUP_MODAL
 } from "../actions/schemaActionTypes";
 import { GroupdataDataBaseActions,GroupdataDataBaseState, PostGroupData, PostGroupDataActionTypes } from "../actions/schemaTypes";
 
@@ -66,7 +67,13 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
                     };
                   } else {
                     return state;
-                  }
+                  };
+                  case DELETE_GROUP_MODAL:
+                    return {
+                      ...state,
+                      lastIndices: [],
+                    }; 
+                    
         default:
             return {
                 ...state,

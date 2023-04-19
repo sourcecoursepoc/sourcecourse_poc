@@ -10,44 +10,19 @@ import {
   BranchesOutlined,
 } from "@ant-design/icons";
 import DeleteButtonModalBox from "./deleteButtonModalBox";
+import { useDispatch } from "react-redux";
 import ConfirmationModal from "./ConfirmationModal";
+import { deleteGroupModalBox } from "@/redux/actions/schemasaction";
+import { showSuccessToast } from "@/pages/schemas/toast";
 
-// interface MyGroupModalProps {
-//   onExport: (selectedData: any[]) => void;
-//   lastIndices: any[];
-//   setLastIndices: Dispatch<SetStateAction<any[]>>;
-//   handleSaveModalCancel:()=>void;
-//   handleSaveModalOk:()=>void;
-//   saveModalVisible:boolean;
-//   handleSaveClick:()=>void;
-// }
 
 const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModalVisible,handleSaveClick, onCreatePipeline}) => {
+  const dispatch = useDispatch();
   // const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [exitModalVisible, setExitModalVisible] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-
-  // const handleExport = () => {
-  //   onExport(lastIndices);
-  // };
-  // const handleExportButton=()=>
-  // {
-  //   handleExport()
-  // }
-  // const handleSaveClick = () => {
-  //   setSaveModalVisible(true);
-  // };
- 
-  // const handleSaveModalOk = () => {
-  //  handleExportButton();
-  //  setSaveModalVisible(false);
-  // };
-
-  // const handleSaveModalCancel = () => {
-  //   setSaveModalVisible(false);
-  // }; 
-
- 
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
   const handleExitClick = () => {
     setExitModalVisible(true);
    
@@ -68,6 +43,10 @@ const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModal
 
   const handleDeleteModalOk = () => {
     setDeleteModalVisible(false);
+    dispatch(deleteGroupModalBox());
+    setName("");
+    setDescription("");
+    showSuccessToast("Deleted Successfully")
     
   };
 
