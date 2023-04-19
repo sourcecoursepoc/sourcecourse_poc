@@ -25,6 +25,7 @@ export interface FetchComposePipelineFailurePayload {
 
 export interface FetchComposePipelineRequest {
     type: typeof FETCH_COMPOSE_PIPELINE;
+    params:any;
 }
 
 export type FetchComposePipelineSuccess = {
