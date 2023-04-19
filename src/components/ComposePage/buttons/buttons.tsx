@@ -10,13 +10,15 @@ interface MyComponentProps {
   href: string;
   onClick: () => void;
   style?: React.CSSProperties;
+  color: any;
   //buttonLabels: string[];
 }
-const Buttons: React.FC<MyComponentProps> = ({ text, icon, size, onClick, href, style }) => {
+const Buttons: React.FC<MyComponentProps> = ({ text, icon, size, onClick, href, style, color }) => {
 
   return (
     <>
-      <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} onClick={onClick} href={href} style={style} >
+      <Button type="primary" shape="round" icon={icon} size={size} className={styles.mybutton} onClick={onClick} href={href} style={{ ...style, background: color }}
+      >
         {text}
       </Button>
     </>
