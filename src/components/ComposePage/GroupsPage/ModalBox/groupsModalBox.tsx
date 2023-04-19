@@ -1,4 +1,5 @@
 import {
+  addAttributeDetails,
   fetchDataBaseRequest,
   fetchGroupDataRequest,
 } from "@/redux/actions/schemasaction";
@@ -101,6 +102,10 @@ console.log("lastIndiceslastIndices",lastIndices)
   const handleRemove = (uid: string) => {
     dispatch(removeNode(uid));
   };
+  const handleAddAttributeDetails = (lastIndices: any) => {
+    console.log("Received data in handleAddAttributeDetails:", lastIndices);
+    dispatch(addAttributeDetails(lastIndices));
+  };
 
   const onDeleteClick = (index: number) => {
     const newLastIndices = [...lastIndices];
@@ -132,6 +137,8 @@ console.log("lastIndiceslastIndices",lastIndices)
   const handleRowClick = (node:any) => {
     console.log("Getting innnnnn");
     setSelectedNodeDetails([node]);
+    handleAddAttributeDetails(lastIndices);
+    console.log("Data getting printed on clicking the attribute", lastIndices);
     console.log("selectedNodeDetails", selectedNodeDetails);
     console.log("Getting outttttttt");
   };

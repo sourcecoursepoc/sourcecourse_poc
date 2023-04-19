@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Input } from 'antd';
+import { Button, Input, InputNumber } from 'antd';
 import styles from "./Schedule.module.css"
 import { CheckOutlined } from '@ant-design/icons';
 
@@ -9,23 +9,37 @@ const ScheduleTimePicker = () => {
 
     return (
         <div style={{ display: "flex", flexDirection: "row" }}>
-            <Input placeholder="HH" style={{
+            <InputNumber placeholder="HH" style={{
+                alignContent: "center",
                 width: '3.5rem',
                 height: '4rem',
                 margin: '0.5rem',
-            }} />
+            }}
+                min={0}
+                max={12}
+                formatter={value => `${value}`.padStart(2, '0')}
+                parser={value => value.replace(/^0+/, '')} />
             <h2> : </h2>
-            <Input placeholder="MM" style={{
+            <InputNumber placeholder="MM" style={{
                 width: '3.5rem',
                 height: '4rem',
                 margin: '0.5rem',
-            }} />
+            }}
+                min={0}
+                max={59}
+                formatter={value => `${value}`.padStart(2, '0')}
+                parser={value => value.replace(/^0+/, '')}
+            />
             <h2> : </h2>
-            <Input placeholder="SS" style={{
+            <InputNumber placeholder="SS" style={{
                 width: '3.5rem',
                 height: '4rem',
                 margin: '0.5rem',
-            }} />
+            }}
+                min={0}
+                max={59}
+                formatter={value => `${value}`.padStart(2, '0')}
+                parser={value => value.replace(/^0+/, '')} />
 
             <div style={{ display: "flex", alignItems: "center" }}>
                 <Button className={styles.buttonCalender}

@@ -12,7 +12,7 @@ const getgroupdataDatabase = () =>
 function* fetchGroupdataDataBaseSaga() {
   try {
     const response = yield call(getgroupdataDatabase);
-    console.log("respose saga", response);
+    console.log("response saga", response);
     yield put(
         fetchGroupDataSuccess({
         groupdataDatabase: response.data,

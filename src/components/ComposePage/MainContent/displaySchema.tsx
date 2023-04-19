@@ -17,23 +17,23 @@ interface MyComponentProps {
   lengthOfColums: any;
   width?: any;
   status: any;
-  padding?:any;
-  paddingLeft:any;
+  padding?: any;
+  paddingLeft: any;
 }
-const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, uid, handleRemove, lengthOfColums, deleteIcon, width, status,padding,paddingLeft }) => {
+const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, uid, handleRemove, lengthOfColums, deleteIcon, width, status, padding, paddingLeft }) => {
 
   return (
     <>
-      <div className={styles.outerbox} style={{ width: `${width}px` }}>
+      <div className={styles.outerbox} style={{ width: width }}>
         <div className={styles.innerright}>
           <Col className={styles.image}>
             {icon}
           </Col>
         </div>
         <div style={{ width: 'inherit' }}>
-          <Row className={styles.items} style={{padding:`${padding}rem`}}><Col style={{ width: '90%', fontSize: '1rem', textAlign: 'justify', height: 'auto', color: 'grey' }}>
+          <Row className={styles.items} style={{ padding: `${padding}rem` }}><Col className={styles.textColumn} style={{ width: width }}>
             <div>{text}</div>
-            <span style={{fontSize:"0.5rem"}}>{status}</span>
+            <span style={{ fontSize: "0.5rem" }}>{status}</span>
           </Col>
             <Col style={{ paddingLeft: '6.5px' }}>
               {deleteIcon}

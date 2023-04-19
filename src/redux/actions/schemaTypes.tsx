@@ -17,6 +17,7 @@ import {
     ADD_LAST_INDEX,
     REMOVE_LAST_INDEX,
     CLEAR_LAST_INDEXES,
+    ADD_ATTRIBUTE_DETAILS,
     POST_GROUPDATA,
     POST_GROUPDATA_SUCCESS,
     POST_GROUPDATA_FAILURE
@@ -121,6 +122,7 @@ export interface GroupdataDataBaseState {
     error: string | null;
     myGroupdataArray: any[];
     myArray: any[];
+    lastIndices:any[];
 
 }
 
@@ -152,6 +154,21 @@ export interface AddGroupArrayAction {
     payload: any;
 
 }
+
+// action for adding attribute details to array 
+export interface AddAttributeDetailsAction {
+    type: typeof ADD_ATTRIBUTE_DETAILS;
+    payload: any;
+  }
+
+  export const AddAttributeDetails = (lastIndices:any) => {
+    return {
+      type: ADD_LAST_INDEX,
+      payload: lastIndices,
+    };
+  };
+  
+
 export interface RemoveNodeAction  {
     type:typeof REMOVE_NODE;
     payload:  { uid: string }; // The ID of the node to remove
@@ -189,6 +206,7 @@ export type GroupdataDataBaseActions =
     | FetchGroupdataDataBaseSuccess
     | FetchGroupdataDataBaseFailure
     | AddGroupArrayAction
+    |AddAttributeDetailsAction
     ;
 
 // Post schemas tags and descriprion
