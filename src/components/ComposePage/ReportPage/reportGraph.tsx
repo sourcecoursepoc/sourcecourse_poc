@@ -12,7 +12,7 @@ type PieChartData = {
 interface reportGraphComp{
     title1:string;
     numb1:number;
-    numb2:number;
+    numb2:number|null;
     title2:string;
     slash:string;
     pieData: PieChartData[];
@@ -23,12 +23,12 @@ const ReportGraph:React.FC<reportGraphComp> = ({title1,numb1,numb2,title2,slash,
 
   return (
     <>
-      <div className={styles.outerbox}>
+      <div className={styles.outerbox} >
         <Row className={styles.innerBox1}>
           <p style={{textAlign:"center",textJustify:'inherit'}}>{title1}</p>
         </Row>
         <Row className={styles.innerBox2}>
-          <p>{numb1}</p><p>{slash}</p><p>{numb2}</p><p>{' '}</p><p>{title2}</p>
+        <p>{numb1}{' '}{slash}{' '}{numb2}{' '}{title2}</p>
           <div className={styles.chartcontainer}>
           <PieChart width={200} height={200} >
         <Pie
