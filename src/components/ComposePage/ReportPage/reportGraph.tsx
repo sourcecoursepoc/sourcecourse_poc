@@ -10,25 +10,22 @@ type PieChartData = {
   value: number;
 }
 interface reportGraphComp{
-    title1:string;
-    numb1:number;
-    numb2:number;
-    title2:string;
-    slash:string;
+    title:string;
+    text:string;
     pieData: PieChartData[];
 }
-const ReportGraph:React.FC<reportGraphComp> = ({title1,numb1,numb2,title2,slash,pieData}) => {
+const ReportGraph:React.FC<reportGraphComp> = ({title,text,pieData}) => {
   const getRecords = useSelector(getRecordSelector);
       const COLORS = ['#1f94dc', '#f16382'];
 
   return (
     <>
-      <div className={styles.outerbox}>
+      <div className={styles.outerbox} >
         <Row className={styles.innerBox1}>
-          <p style={{textAlign:"center",textJustify:'inherit'}}>{title1}</p>
+          <p style={{textAlign:"center",textJustify:'inherit'}}>{title}</p>
         </Row>
         <Row className={styles.innerBox2}>
-          <p>{numb1}</p><p>{slash}</p><p>{numb2}</p><p>{' '}</p><p>{title2}</p>
+        <p>{text}</p>
           <div className={styles.chartcontainer}>
           <PieChart width={200} height={200} >
         <Pie

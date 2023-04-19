@@ -21,8 +21,6 @@ import {
   DELETE_GROUP_MODAL,
   DELETE_GROUP_MODAL_BOX
 } from "./schemaActionTypes";
-  
- 
 
 
 import {
@@ -52,7 +50,6 @@ import {
   deleteGroupModalAction,
   deleteGroupModalBoxAction,
 } from "./schemaTypes";
-
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
@@ -139,7 +136,6 @@ export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction
 
 export function removeNode(uid: string): RemoveNodeAction {
   console.log("uiddddd", uid);
-
   return {
     type: REMOVE_NODE,
 
