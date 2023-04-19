@@ -20,7 +20,8 @@ import {
     ADD_ATTRIBUTE_DETAILS,
     POST_GROUPDATA,
     POST_GROUPDATA_SUCCESS,
-    POST_GROUPDATA_FAILURE
+    POST_GROUPDATA_FAILURE,
+    DELETE_GROUP_MODAL
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -187,6 +188,8 @@ export interface RemoveNodeAction  {
     type: typeof CLEAR_LAST_INDEXES;
     payload: [];
   }
+
+
   export const addLastIndex = (lastIndex:any) => {
     return {
       type: ADD_LAST_INDEX,
@@ -201,12 +204,18 @@ export interface RemoveNodeAction  {
     };
   };
 
+  export  interface deleteGroupModalBoxAction {
+    type: typeof DELETE_GROUP_MODAL;
+    payload: [];
+  }
+
 export type GroupdataDataBaseActions =
     | FetchGroupdataDataBaseRequest
     | FetchGroupdataDataBaseSuccess
     | FetchGroupdataDataBaseFailure
     | AddGroupArrayAction
     |AddAttributeDetailsAction
+    |deleteGroupModalBoxAction
     ;
 
 // Post schemas tags and descriprion
