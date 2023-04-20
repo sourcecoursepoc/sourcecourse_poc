@@ -18,6 +18,7 @@ export default function ComposePipeline() {
     const selectedComposePipeline = useSelector(getComposePipelineSelector);
     const [activeTab, setActiveTab] = useState('1');
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const [nodeId, setNodeId] = useState<number | undefined>(undefined);
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -28,15 +29,28 @@ export default function ComposePipeline() {
     };
 
     const handleCancel = () => {
+        setNodeId(undefined)
         setIsModalVisible(false);
     };
 
     const handleTabChange = (key: string) => {
         setActiveTab(key);
     };
+
     useEffect(() => {
-        dispatch(fetchComposePipelineRequest());
-    }, []);
+        if (nodeId !== undefined) {
+            dispatch(fetchComposePipelineRequest(nodeId));
+        } else {
+            dispatch(fetchComposePipelineRequest(""));
+        }
+    }, [nodeId]);
+
+    const PipeLineButtonClick = (node: any, showModal: () => void) => {
+        if (node.id !== nodeId) {
+            setNodeId(node.id);
+        }
+        showModal();
+    };
 
     return (
         <>
@@ -52,14 +66,17 @@ export default function ComposePipeline() {
                             </div>
                         } key="1">
                             <Row >
-                                {selectedComposePipeline.map((node) => {
+                                {selectedComposePipeline && selectedComposePipeline.map((node) => {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
                                                 icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
                                                 width={"auto"}
-                                                deleteIcon={<Buttons text={node.status} onClick={showModal} style={{ width: "3.75rem", height: "1.5625rem", fontSize: "0.5rem" }} />}
+                                                deleteIcon={<Buttons text={node.status} onClick={() => PipeLineButtonClick(node, showModal)} style={{
+                                                    width: "3.75rem", height: "1.5625rem", fontSize: "0.5rem"
+                                                }} color={node.status && node.status.toLowerCase() === "failed" ? "#ff4d4f" : "#7E60BCs"}
+                                                />}
                                             />
                                         </Col>
                                     );
@@ -74,12 +91,14 @@ export default function ComposePipeline() {
                         <TabPane tab={
                             <div>
                                 <Image preview={false}
-                                    src="Sync-Icon-1.png" alt="" style={{ width: "1rem", height: "1rem", marginRight: "0.3125rem" }} />
+                                    src="Sync-Icon-1.png" alt="" style={{
+                                        width: "1rem", height: "1rem", marginRight: "0.3125rem"
+                                    }} />
                                 <span>Sync</span>
                             </div>
                         } key="2">
                             <Row >
-                                {selectedComposePipeline.map((node) => {
+                                {selectedComposePipeline && selectedComposePipeline.map((node) => {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
@@ -90,8 +109,11 @@ export default function ComposePipeline() {
                                                     width: "3.75rem",
                                                     height: "1.5625rem",
                                                     fontSize: "0.5rem",
-                                                    backgroundColor: node.status.toLowerCase() === "failed" ? "#ff4d4f" : "blue",
-                                                }} />}
+                                                    backgroundColor: "red"
+                                                    // background: node.status.toLowerCase() === "failed" ? "#ff4d4f" : "#7E60BCs",
+                                                }}
+                                                // color={"red"} onClick={() => PipeLineButtonClick(node)} 
+                                                />}
                                             />
                                         </Col>
                                     );

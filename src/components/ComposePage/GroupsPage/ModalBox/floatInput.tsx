@@ -5,7 +5,7 @@ import styles from "../../../../styles/floatInput.module.css";
 
 const FloatInput = (props) => {
   const [focus, setFocus] = useState(false);
-  let { label, placeholder, type, required, dataValue, style } = props;
+  let { label, placeholder, type, required,dataValue,style } = props;
 
   const [value, setValue] = useState('');
 
