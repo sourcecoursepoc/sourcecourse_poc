@@ -21,7 +21,7 @@ import {
     POST_GROUPDATA,
     POST_GROUPDATA_SUCCESS,
     POST_GROUPDATA_FAILURE,
-    DELETE_GROUP_MODAL
+    DELETE_GROUP_MODAL_BOX
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -205,7 +205,7 @@ export interface RemoveNodeAction  {
   };
 
   export  interface deleteGroupModalBoxAction {
-    type: typeof DELETE_GROUP_MODAL;
+    type: typeof DELETE_GROUP_MODAL_BOX;
     payload: [];
   }
 

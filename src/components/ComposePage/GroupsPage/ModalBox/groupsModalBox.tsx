@@ -27,9 +27,10 @@ interface MyModalProps {
   setVisible: (visible: boolean) => void;
   onCancel?: () => void;
   lastIndices: any[];
-  setLastIndices: Dispatch<SetStateAction<any[]>>;
+  setLastIndices:any[];
   onExport: (selectedData: any[]) => void;
   onCreatePipeline?: () => void;
+
 }
 
 const GroupsModalBox: React.FC<MyModalProps> = ({
@@ -116,6 +117,7 @@ console.log("lastIndiceslastIndices",lastIndices)
   function handleAddIconClick(node: string) {
     setSchema(node);
   }
+  
 
   function contentToggle() {
     setDisplayAttributeSection(true);
@@ -137,11 +139,16 @@ console.log("lastIndiceslastIndices",lastIndices)
   const handleRowClick = (node:any) => {
     console.log("Getting innnnnn");
     setSelectedNodeDetails([node]);
+    console.log("check check",node);
+    console.log("last Indicesssssssssssssss",lastIndices)
     handleAddAttributeDetails(lastIndices);
+    setLastIndices(selectedNodeDetails);
+    dispatch(addAttributeDetails(lastIndices));
     console.log("Data getting printed on clicking the attribute", lastIndices);
     console.log("selectedNodeDetails", selectedNodeDetails);
     console.log("Getting outttttttt");
   };
+  
 
   const swapElements = (array: array, index1: number, index2: number) => {
     const newArray = [...array];
@@ -259,7 +266,7 @@ console.log("lastIndiceslastIndices",lastIndices)
                   key={node.name}
                   className={styles.rowTextStyle}
                   align="middle"
-                  onClick={() => handleRowClick(node.metadata)}
+                  onClick={() => handleRowClick(node)}
                   style={{ cursor: "pointer" }}
                 >
                   <Col span={28}>

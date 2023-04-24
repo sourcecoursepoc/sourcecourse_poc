@@ -62,7 +62,7 @@ const GroupsMainContent = () => {
   }, []);
   const dispatch = useDispatch();
   // page for calling the whole content of groups
-  const lastIndicesText = lastIndices.map((node: any) => node.name).join(", ");
+  const lastIndicesText = lastIndices?.map((node: any) => node.name).join(", ");
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>

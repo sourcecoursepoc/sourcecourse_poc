@@ -6,7 +6,8 @@ import {
     ADD_ATTRIBUTE_DETAILS,
     POST_GROUPDATA_FAILURE,
     POST_GROUPDATA_SUCCESS,
-    DELETE_GROUP_MODAL
+    DELETE_GROUP_MODAL_BOX,
+    
 } from "../actions/schemaActionTypes";
 import { GroupdataDataBaseActions,GroupdataDataBaseState, PostGroupData, PostGroupDataActionTypes } from "../actions/schemaTypes";
 
@@ -16,6 +17,7 @@ const initialGroupdataDataBaseState: GroupdataDataBaseState = {
     error: null,
     myGroupdataArray: [],
     lastIndices: [],
+    myArray:[]
 
 };
 
@@ -68,7 +70,8 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
                   } else {
                     return state;
                   };
-                  case DELETE_GROUP_MODAL:
+                  case DELETE_GROUP_MODAL_BOX:
+                    console.log("DELETE_GROUP_MODAL_BOX reducer triggered",state);
                     return {
                       ...state,
                       lastIndices: [],

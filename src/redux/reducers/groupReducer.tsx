@@ -36,6 +36,7 @@ export default (state = initialState, action: GroupActions) => {
         groups: [],
         error: action.payload.error,
       };
+      
     default:
       return {
         ...state,

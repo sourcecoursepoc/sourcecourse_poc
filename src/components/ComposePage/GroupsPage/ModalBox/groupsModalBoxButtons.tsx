@@ -42,11 +42,11 @@ const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModal
   };
 
   const handleDeleteModalOk = () => {
-    setDeleteModalVisible(false);
-    dispatch(deleteGroupModalBox());
     setName("");
-    setDescription("");
-    showSuccessToast("Deleted Successfully")
+  setDescription("");
+  dispatch(deleteGroupModalBox());
+  setDeleteModalVisible(false);
+  showSuccessToast("Deleted Successfully");
     
   };
 
