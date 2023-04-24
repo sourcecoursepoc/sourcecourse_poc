@@ -50,7 +50,6 @@ import {
   deleteGroupModalBoxAction,
 } from "./schemaTypes";
 
-
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
 

@@ -57,8 +57,16 @@ export interface Record{
   initialLoad:number,
   sync:number,
   schemas:[] ,
-  RecordsDetails :[] 
-  
+  RecordsDetails :[{pending:number,migrated:number}] ,
+  PipelineStatus:[{success:number,error:number}],
+  PipelineExcecution:[{initialLoad:number,syncs:number}],
+  SizeDetails:[{pending:number,migrated:number}],
+  AttributeDetails:[{pending:number,migrated:number}],
+  Item:[{name:string,record1:number,record2:number}],
+  ItemDetails:[{name:string,record1:number,record2:number}],
+  ItemDimension:[{name:string,record1:number,record2:number}],
+  Distributors:[{name:string,record1:number,record2:number}],
+  Offers:[{name:string,record1:number,record2:number}]
   
 }
 export interface RecordsState {
