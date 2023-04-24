@@ -4,7 +4,7 @@ import { Row, Col, Button, Input } from "antd";
 import { CheckOutlined } from '@ant-design/icons';
 import styles from "./Schedule.module.css"
 import FloatInput from "../GroupsPage/ModalBox/floatInput"
-import EmailTagbox from './EmailTagbox';
+import IntimationListInputBox from './IntimationListInputBox';
 
 const OutputType = () => {
 
@@ -56,7 +56,8 @@ const OutputType = () => {
                 marginLeft: '0.3rem',
             }}>
 
-            <EmailTagbox tags={tags} setTags={setTags} placeholder="Intimation List" label="Intimation List"/>
+            <IntimationListInputBox tags={tags} setTags={setTags} placeholder="Intimation List" label="Intimation List" />
+            
             </Row>
 
         </>
