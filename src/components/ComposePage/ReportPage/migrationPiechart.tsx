@@ -10,7 +10,7 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import styles from "./migrationStatus.module.css";
+import styles from "./migration.module.css";
 type PieChartData = {
   name: string;
   value: number; 

@@ -66,7 +66,10 @@ export interface Record{
   ItemDetails:[{name:string,record1:number,record2:number}],
   ItemDimension:[{name:string,record1:number,record2:number}],
   Distributors:[{name:string,record1:number,record2:number}],
-  Offers:[{name:string,record1:number,record2:number}]
+  Offers:[{name:string,record1:number,record2:number}],
+  ItemPrice:[{name:string,record1:number,record2:number}],
+  ItemMovement:[{name:string,record1:number,record2:number}],
+  Itemreturn:[{name:string,record1:number,record2:number}]
   
 }
 export interface RecordsState {
