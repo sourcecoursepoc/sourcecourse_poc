@@ -1,16 +1,16 @@
-import { ICOMPOSEPIPELINE } from "../actions/composeTypes";
+import { ICOMPOSEPIPELINE, FetchComposePipelineRequest } from "../actions/composeTypes";
 import { FETCH_COMPOSE_PIPELINE } from "../actions/composeActionTypes";
 import { fetchComposePipelineSuccess, fetchComposePipelineFailure } from "../actions/composeAction";
 import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
-const getComposePipelines = () =>
-  axios.get<ICOMPOSEPIPELINE[]>("http://localhost:8000/composepipeline");
+const getComposePipelines = (requestParams?: any) =>
+  axios.get<ICOMPOSEPIPELINE[]>("http://localhost:8000/composepipeline" + (requestParams ? `?id=${requestParams}` : ""));
 
-function* fetchComposePipelineSaga() {
+function* fetchComposePipelineSaga(requestParams: FetchComposePipelineRequest) {
   try {
     console.log("fetchComposePipelineSaga: calling API...");
-    const response = yield call(getComposePipelines);
+    const response = yield call(() => getComposePipelines(requestParams.params));
     console.log("fetchComposePipelineSaga: response =", response.data);
     yield put(
       fetchComposePipelineSuccess({

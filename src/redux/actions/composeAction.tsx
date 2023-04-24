@@ -11,10 +11,11 @@ import {
   FETCH_COMPOSE_PIPELINE_FAILURE,
 } from "./composeActionTypes";
 
-export const fetchComposePipelineRequest = (): FetchComposePipelineRequest => {
+export const fetchComposePipelineRequest = (params:any): FetchComposePipelineRequest => {
   console.log("fetchComposePipelineRequest action creator called");
   return {
     type: FETCH_COMPOSE_PIPELINE,
+    params,
   }
 };
 

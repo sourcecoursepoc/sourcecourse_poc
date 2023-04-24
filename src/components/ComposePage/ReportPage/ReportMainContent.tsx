@@ -5,6 +5,7 @@ import styles from "./ReportMainContent.module.css";
 import ReportsFirstContent from "./reportsFirstContent";
 import SummaryReport from "./summaryReport";
 import SchemaReport from "./schemaReport";
+import GroupsReport from "./groupsReport";
 
 
 const ReportMainContent = () => {
@@ -19,8 +20,10 @@ const ReportMainContent = () => {
       switch (activeTab) {
         case "Summary":
           return <SummaryReport/>;
-         case "Schemas":
+        case "Schemas":
            return <SchemaReport/>;
+        case "Groups":
+            return <GroupsReport />;
         default:
           return null;
       }
