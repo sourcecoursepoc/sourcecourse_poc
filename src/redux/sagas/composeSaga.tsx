@@ -1,6 +1,6 @@
-import { ICOMPOSEPIPELINE, FetchComposePipelineRequest } from "../actions/composeTypes";
-import { FETCH_COMPOSE_PIPELINE } from "../actions/composeActionTypes";
-import { fetchComposePipelineSuccess, fetchComposePipelineFailure } from "../actions/composeAction";
+import { ICOMPOSEPIPELINE, FetchComposePipelineRequest, ICOMPOSEREPORTSPIPELINE } from "../actions/composeTypes";
+import { FETCH_COMPOSE_PIPELINE, FETCH_REPORTS_PIPELINE } from "../actions/composeActionTypes";
+import { fetchComposePipelineSuccess, fetchComposePipelineFailure, fetchComposeReportsPipelineRequestSuccess } from "../actions/composeAction";
 import axios from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
@@ -27,8 +27,35 @@ function* fetchComposePipelineSaga(requestParams: FetchComposePipelineRequest) {
   }
 }
 
+
 export function* ComposePipelineSaga() {
-  console.log("ComposePipelineSaga: setting up watcher...");
   yield takeLatest(FETCH_COMPOSE_PIPELINE, fetchComposePipelineSaga);
+}
+
+
+const getComposeReportsPipelines = () =>
+  axios.get<ICOMPOSEREPORTSPIPELINE[]>("http://localhost:8000/composeReportsPipeline");
+
+function* fetchComposeReportsPipelineSaga() {
+  try {
+    const response = yield call(() => getComposeReportsPipelines());
+    yield put(
+      fetchComposeReportsPipelineRequestSuccess({
+        composeReportsPipeline: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(
+      fetchComposePipelineFailure({
+        error: e.message,
+      })
+    );
+  }
+}
+
+
+export function* ComposeReportsPipelineSaga() {
+  console.log("ComposePipelineSaga: setting up watcher...");
+  yield takeLatest(FETCH_REPORTS_PIPELINE, fetchComposeReportsPipelineSaga);
   console.log("ComposePipelineSaga: watcher set up");
 }
