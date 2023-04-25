@@ -42,18 +42,18 @@ const SchemaReport = () => {
     },
     {
       name: "Item Price",
-      value1: getRecords[0]?.Offers[0]?.record1,
-      value2: getRecords[0]?.Offers[0]?.record2,
+      value1: getRecords[0]?.ItemPrice[0]?.record1,
+      value2: getRecords[0]?.ItemPrice[0]?.record2,
     },
     {
       name: "Item Movement",
-      value1: getRecords[0]?.Offers[0]?.record1,
-      value2: getRecords[0]?.Offers[0]?.record2,
+      value1: getRecords[0]?.ItemMovement[0]?.record1,
+      value2: getRecords[0]?.ItemMovement[0]?.record2,
     },
     {
       name: "Item return",
-      value1: getRecords[0]?.Offers[0]?.record1,
-      value2: getRecords[0]?.Offers[0]?.record2,
+      value1: getRecords[0]?.Itemreturn[0]?.record1,
+      value2: getRecords[0]?.Itemreturn[0]?.record2,
     },
   ];
 
@@ -61,7 +61,7 @@ const SchemaReport = () => {
     <>
       <div className={styles.outerbox}>
         <Row className={styles.innerBox1}>
-          <p className={styles.number}>Overall Migration Status</p>
+          <p className={styles.heading}>Overall Migration Status</p>
         </Row>
         <Row className={styles.innerBox2}>
           <div>
