@@ -10,29 +10,6 @@ import { getComposePipelineSelector } from '../../../redux/selector';
 import { useDispatch } from 'react-redux';
 import { fetchComposePipelineRequest } from '../../../redux/actions/composeAction';
 
-const data = [
-    {
-        title: 'Box 1',
-        items: [
-            { number: 1, name: 'Item 1', icon: <CheckOutlined /> },
-            { number: 2, name: 'Item 2', icon: <CheckOutlined /> },
-            { number: 3, name: 'Item 3', icon: <CheckOutlined /> },
-            { number: 4, name: 'Item 4', icon: <CheckOutlined /> },
-            { number: 5, name: 'Item 5', icon: <CheckOutlined /> },
-            { number: 6, name: 'Item 6', icon: <CheckOutlined /> },
-            { number: 7, name: 'Item 7', icon: <CheckOutlined /> },
-        ],
-    },
-    // add more boxes as needed
-];
-
-const data1 = [
-    { key: 'Triggerd', value: '2 Days Ago' },
-    { key: 'Duration', value: '3.5 hours' },
-    { key: 'Initiated By', value: 'Jack Ryan' },
-    { key: 'Size', value: '345 MB' },
-    { key: 'Records', value: '321654' }
-];
 interface ModalBoxProps {
     isModalVisible: boolean;
     handleCancel: () => void;

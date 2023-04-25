@@ -3,6 +3,7 @@ import { Col, Modal, Row, Card } from "antd";
 import Buttons from '../buttons/buttons';
 import { PlayCircleFilled } from "@ant-design/icons";
 import CardDisplay from './CardDisplay';
+import styles from '../buttons/buttonStyle.module.css'
 
 const UpperSection = () => {
     return (
@@ -33,8 +34,9 @@ const UpperSection = () => {
                 >
                     <Buttons
                         text="Execute"
-                        icon={<PlayCircleFilled />}
-                        size={"middle"}
+                        icon={<PlayCircleFilled /> }
+                        size={"large"}
+                        style={{minWidth: "8rem"}}
                         onClick={() => { }}
                         href={"/"}
                     />

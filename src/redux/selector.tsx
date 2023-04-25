@@ -10,15 +10,17 @@ const getDataBase = (state: AppState) => state.database.database;
 const getGroupdataDataBase = (state: AppState) => state.groupdataDatabase.groupdataDatabase;
 const getSelectedArray = (state: AppState) => state.database.myArray;
 const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.myGroupdataArray;
-const getComposePipeline=(state:AppState)=> state.composePipeline.composePipeline;
+const getComposePipeline = (state: AppState) => state.composePipeline.composePipeline;
 const getGroups = (state: AppState) => state.group.groups;
+const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipeline.composeReportsPipeline;
+export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
+
 
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
 const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
-
 export const getSelectorTableNodes = createSelector(getLastIndexesArray, (lastIndexes) => lastIndexes)
-export const getComposePipelineSelector=createSelector(getComposePipeline,(composePipeline)=>composePipeline);
+export const getComposePipelineSelector = createSelector(getComposePipeline, (composePipeline) => composePipeline);
 export const getlastIndexesArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getDataBaseSelector = createSelector(getDataBase, (database) => database)
 export const getGroupdataDataBaseSelector = createSelector(getGroupdataDataBase, (groupdataDatabase) => groupdataDatabase)

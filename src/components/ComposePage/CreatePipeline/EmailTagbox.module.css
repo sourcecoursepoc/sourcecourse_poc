@@ -1,0 +1,66 @@
+.inputBox {
+    width: 58rem;
+    height: 3rem;
+    /* border: 0px; */
+}
+ 
+.floatlabelbox {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    border: 1px solid #D9D9D9;
+    border-radius: 4px;
+    width: 58rem;
+    position: relative;
+    border-radius: 6px;
+    border-width: 1px;
+  }
+
+  .floatlabelbox:hover {
+    border: 1px solid #4096FF;
+  }
+
+.tagbox{
+    /* display: flex;
+    flex-direction: row; */
+
+    padding-top: 1rem;
+    padding-left: 0.3rem;
+    height: 2rem;
+}
+
+.floatlabel {
+    position: relative;
+    background-color: white;
+    border-radius: 6px;
+    border-width: 1px;
+}
+
+.label {
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 12px;
+    top: 11px;
+    transition: 0.2s ease all;
+}
+
+.asplaceholder {
+    color: gray;
+}
+
+.aslabel {
+    top: -8px;
+    font-size: 12px !important;
+    background: white;
+    padding: 0 4px;
+    margin-left: -4px;
+}
+
+.textArea:hover {
+    border-color: #c3428d;
+}
+
+.textArea:focus {
+    border-color: #c3428d !important;
+}

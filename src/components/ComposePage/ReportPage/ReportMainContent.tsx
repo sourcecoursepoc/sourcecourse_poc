@@ -5,6 +5,8 @@ import styles from "./ReportMainContent.module.css";
 import ReportsFirstContent from "./reportsFirstContent";
 import SummaryReport from "./summaryReport";
 import SchemaReport from "./schemaReport";
+import ComposeReportsPipeline from "../composeReportsPipeline/composeReportsPipeline";
+import GroupsReport from "./groupsReport";
 
 
 const ReportMainContent = () => {
@@ -19,8 +21,12 @@ const ReportMainContent = () => {
       switch (activeTab) {
         case "Summary":
           return <SummaryReport/>;
-         case "Schemas":
+        case "Schemas":
            return <SchemaReport/>;
+           case "Pipeline":
+           return <ComposeReportsPipeline/>
+        case "Groups":
+            return <GroupsReport />;
         default:
           return null;
       }
