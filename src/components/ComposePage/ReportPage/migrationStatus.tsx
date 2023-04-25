@@ -25,14 +25,14 @@ const MigrationStatus: React.FC<reportGraphComp> = ( { data } ) => {
   const COLORS = ["#1f94dc", "#f16382"];
   return (
     <>
-      <BarChart width={150} height={150} data={data} layout="vertical">
+      <BarChart width={280} height={150} data={data} layout="vertical" fontSize={10} marginLeft={20}>
         <XAxis type="number" />
         <YAxis type="category" dataKey="name" />
         <Tooltip />
        
         <Bar dataKey="value1" fill="#1f94dc" stackId="grouped" />
         <Bar dataKey="value2" fill="#f16382" stackId="grouped" />
-        {data.map((entry, index) => (
+        {data?.map((entry, index) => (
       <Fragment key={`bar-group-${index}`}>
         <Bar key={`bar-${index}`} dataKey="value1" fill="#1f94dc" stackId={`stack-${index}`} />
         <Bar key={`bar-${index}-2`} dataKey="value2" fill="#f16382" stackId={`stack-${index}`} />
