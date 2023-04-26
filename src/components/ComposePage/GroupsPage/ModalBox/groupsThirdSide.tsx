@@ -1,4 +1,5 @@
 import DescriptionBox from "@/pages/schemas/descriptionbox";
+import { addAttributeDetails } from "@/redux/actions/schemasaction";
 import { PlusCircleFilled } from "@ant-design/icons";
 import { Col, Collapse, Input, Row, Select } from "antd";
 import React, { Dispatch, SetStateAction } from "react";
@@ -26,36 +27,38 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
   const { TextArea } = Input;
   const dispatch = useDispatch();
   ////////
- const handleInputChange = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  value: string,
-  key:string
-) => {
-  console.log(e,"e")
-  console.log(value,"field")
-  console.log(key,"key")
-  setSelectedNodeDetails(selectedNodeDetails => {
-    console.log(lastIndices, "lasttttttttttttttttttttt");
-    const updatedNodeDetails = selectedNodeDetails.map(node => {
-      // console.log(node?.metadata, "nodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-      // console.log(alias, "aliassss");
-      // console.log(prefixValue, "prefixValueeee");
-      // return { ...node, metadata: { ...node.metadata, [field]: e.target.value } };
-      // if (node?.metadata?.[key] === value) {
-      //   return { ...node, metadata: { ...node.metadata, value: e.target.value } };
-      // }
-      
-        return { ...node, metadata: { ...node.metadata, [key]: value } };
-      
-      // return node;
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    value: string | undefined,
+    key: string
+  ) => {
+    console.log(selectedNodeDetails,"first--selectedNodeDetails")
+    setSelectedNodeDetails((selectedNodeDetails) => {
+      console.log(selectedNodeDetails,"--in--selectedNodeDetails")
+      const updatedSelectedNodeDetails = selectedNodeDetails.map((node) => {
+        if (node?.metadata?.[key] === value) {
+          return {
+            ...node,
+            metadata: {
+              ...node.metadata,
+              [key]: e.target.value
+            }
+          };
+        } else {
+          return node;
+        }
+      });
+      dispatch(addAttributeDetails(updatedSelectedNodeDetails));
+      console.log(updatedSelectedNodeDetails, "updatedSelectedNodeDetails--updatedSelectedNodeDetails");
+      return updatedSelectedNodeDetails;
     });
-    return updatedNodeDetails;
-  });
-};
-console.log(selectedNodeDetails, "qqqqqqqqqqqqqqqqqq");
+    
+  };
+  console.log(selectedNodeDetails, "--out--selectedNodeDetails--selectedNodeDetails");
+  
+  //////
 
 
-  ////////
   const { Panel } = Collapse;
 
   const conList = [{id: Math.random(),
@@ -230,7 +233,7 @@ console.log(selectedNodeDetails, "qqqqqqqqqqqqqqqqqq");
               </Row>
             </Col>
           </Row>
-          <Row style={{ marginTop: "1rem" }}>
+          {/* <Row style={{ marginTop: "1rem" }}>
           <Collapse style={{ width: "100%", height: "50%" }} expandIconPosition="right">
       <Panel header={<span><span style={{ fontSize: "12px", fontWeight: "bold" }}>Conditional Data Selection
           </span><InfoCircleOutlinedFunction
@@ -300,7 +303,7 @@ console.log(selectedNodeDetails, "qqqqqqqqqqqqqqqqqq");
                         </Row>
       </Panel>
     </Collapse>
-          </Row>
+          </Row> */}
         </Col>
       ))}
     </>

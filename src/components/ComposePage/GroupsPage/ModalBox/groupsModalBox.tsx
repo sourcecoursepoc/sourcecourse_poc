@@ -47,6 +47,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
+  console.log(selectedNodeDetails,"groupmodalBox--selectedNodeDetails")
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
@@ -136,18 +137,27 @@ console.log("lastIndiceslastIndices",lastIndices)
         lastIndices[lastIndices.length-1] = {name: attributeName, type: selectedDataType}
        }
 
-  const handleRowClick = (node:any) => {
-    console.log("Getting innnnnn");
-    setSelectedNodeDetails([node]);
-    console.log("check check",node);
-    console.log("last Indicesssssssssssssss",lastIndices)
-    handleAddAttributeDetails(lastIndices);
-    setLastIndices(selectedNodeDetails);
-    dispatch(addAttributeDetails(lastIndices));
-    console.log("Data getting printed on clicking the attribute", lastIndices);
-    console.log("selectedNodeDetails", selectedNodeDetails);
-    console.log("Getting outttttttt");
-  };
+       const handleRowClick = (node: any) => {
+        console.log("Getting innnnnn");
+        setSelectedNodeDetails([node]);
+        console.log("check check", node);
+        console.log("last Indicesssssssssssssss", lastIndices);
+        // Check if selected node details already exist in lastIndices
+        const isNodeAlreadySelected = lastIndices.some(
+          (selectedNode) => selectedNode.id === node.id
+        );  
+        if (!isNodeAlreadySelected) {
+          const updatedLastIndices = [...lastIndices, ...selectedNodeDetails];
+          handleAddAttributeDetails(updatedLastIndices);
+          setLastIndices(selectedNodeDetails);
+          dispatch(addAttributeDetails(updatedLastIndices));
+          console.log("Data getting printed on clicking the attribute", updatedLastIndices);
+        }  
+        console.log("selectedNodeDetails", selectedNodeDetails);
+        console.log("Getting outttttttt");
+      };
+      
+      
   
 
   const swapElements = (array: array, index1: number, index2: number) => {
