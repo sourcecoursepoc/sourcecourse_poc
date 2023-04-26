@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 
 import {
-  fetchDataBaseRequest,
   addArray,
   addGroupdataArray,
 } from "../../redux/actions/schemasaction";
@@ -60,10 +59,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
 
   const groupDataSelector = useSelector(getGroupdataDataBaseSelector);
   const selectedTableArray = useSelector(getSelectorTableNodes);
-
-  useEffect(() => {
-    // dispatch(fetchDataBaseRequest());
-  }, []);
 
   const [defaultSelectedKey, setDefaultSelectedKey] = useState("");
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
