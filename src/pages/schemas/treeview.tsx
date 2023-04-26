@@ -62,7 +62,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   const selectedTableArray = useSelector(getSelectorTableNodes);
 
   useEffect(() => {
-    dispatch(fetchDataBaseRequest());
+    // dispatch(fetchDataBaseRequest());
   }, []);
 
   const [defaultSelectedKey, setDefaultSelectedKey] = useState("");

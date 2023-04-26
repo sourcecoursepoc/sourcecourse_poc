@@ -25,16 +25,15 @@ const initialGroupdataDataBaseState: GroupdataDataBaseState = {
 
 
 export default (state = initialGroupdataDataBaseState, action: GroupdataDataBaseActions) => {
-    
+    console.log("== action",action);
+    console.log("== state",state);
     switch (action.type) {
         case FETCH_GROUPDATA_DATABASE:
-            console.log("testttttttttttttttttttt")
             return {
                 ...state,
                 pending: true,
             };
         case FETCH_GROUPDATA_DATABASE_SUCCESS:
-            console.log("reducerrrrr",action.payload.groupdataDatabase)
             return {
                 ...state,
                 pending: false,
@@ -42,7 +41,6 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
                 error: null,
             };
         case FETCH_GROUPDATA_DATABASE_FAILURE:
-            {console.log(action.payload.error,"actionnnnnnnnnnnnn");}
             return {
                 ...state,
                 pending: false,
@@ -51,7 +49,6 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
             };
         case ADD_GROUPDATA_ARRAY:
             if (Array.isArray(action.payload)) {
-                console.log(action.payload, "payload groupData")
                 return {
                     ...state,
                     myGroupdataArray: [...state.myGroupdataArray, ...action.payload]
@@ -60,7 +57,6 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
                 // Handle non-iterable payload, e.g. throw an error or log a warning
             };
             case ADD_ATTRIBUTE_DETAILS:
-                console.log("Received data in ADD_ATTRIBUTE_DETAILS -------reducer:", action.payload);
                   const exists = state.lastIndices.some((node) => node.uid === action.payload.uid);
                   if (!exists) {
                     return {
@@ -71,7 +67,6 @@ export default (state = initialGroupdataDataBaseState, action: GroupdataDataBase
                     return state;
                   };
                   case DELETE_GROUP_MODAL_BOX:
-                    console.log("DELETE_GROUP_MODAL_BOX reducer triggered",state);
                     return {
                       ...state,
                       lastIndices: [],

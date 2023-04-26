@@ -54,8 +54,6 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
 
     case ADD_ARRAY:
       if (Array.isArray(action.payload)) {
-        console.log(action.payload, "payload");
-
         return {
           ...state,
 

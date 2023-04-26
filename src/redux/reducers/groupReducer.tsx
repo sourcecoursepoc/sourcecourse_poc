@@ -16,6 +16,7 @@ const initialState: GroupState = {
 
 export default (state = initialState, action: GroupActions) => {
   console.log("Action:", action);
+  console.log("State:", state);
   switch (action.type) {
     case  FETCH_ALLGROUP_DATA_REQUEST:
       return {

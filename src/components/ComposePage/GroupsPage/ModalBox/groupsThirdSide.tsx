@@ -1,7 +1,7 @@
 import DescriptionBox from "@/pages/schemas/descriptionbox";
 import { PlusCircleFilled } from "@ant-design/icons";
 import { Col, Collapse, Input, Row, Select } from "antd";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { Dispatch, SetStateAction,useState } from "react";
 import { useDispatch } from "react-redux";
 import styles from "../ModalBox/groupsModalBox.module.css";
 import ConditionalDataSelection from "./conditionalDataSelection";
@@ -31,28 +31,27 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
   value: string,
   key:string
 ) => {
-  console.log(e,"e")
-  console.log(value,"field")
-  console.log(key,"key")
-  setSelectedNodeDetails(selectedNodeDetails => {
-    console.log(lastIndices, "lasttttttttttttttttttttt");
-    const updatedNodeDetails = selectedNodeDetails.map(node => {
-      // console.log(node?.metadata, "nodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-      // console.log(alias, "aliassss");
-      // console.log(prefixValue, "prefixValueeee");
-      // return { ...node, metadata: { ...node.metadata, [field]: e.target.value } };
-      // if (node?.metadata?.[key] === value) {
-      //   return { ...node, metadata: { ...node.metadata, value: e.target.value } };
-      // }
+  console.log(e,"e");
+  console.log(value,"field");
+  console.log(key,"key");
+  // setSelectedNodeDetails(selectedNodeDetails => {
+  //   console.log(lastIndices, "lasttttttttttttttttttttt");
+  //   const updatedNodeDetails = selectedNodeDetails.map(node => {
+  //     // console.log(node?.metadata, "nodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+  //     // console.log(alias, "aliassss");
+  //     // console.log(prefixValue, "prefixValueeee");
+  //     // return { ...node, metadata: { ...node.metadata, [field]: e.target.value } };
+  //     // if (node?.metadata?.[key] === value) {
+  //     //   return { ...node, metadata: { ...node.metadata, value: e.target.value } };
+  //     // }
       
-        return { ...node, metadata: { ...node.metadata, [key]: value } };
+  //       return { ...node, metadata: { ...node.metadata, [key]: value } };
       
-      // return node;
-    });
-    return updatedNodeDetails;
-  });
+  //     // return node;
+  //   });
+  //   return updatedNodeDetails;
+  // });
 };
-console.log(selectedNodeDetails, "qqqqqqqqqqqqqqqqqq");
 
 
   ////////

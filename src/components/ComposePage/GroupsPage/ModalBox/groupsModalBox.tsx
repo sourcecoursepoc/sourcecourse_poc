@@ -58,6 +58,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [render,setRender] = useState(false)
 
   useEffect(() => {
+    console.log("fetchGroupDataRequest");
     dispatch(fetchDataBaseRequest());
     dispatch(fetchGroupDataRequest());
   }, []);
@@ -77,7 +78,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
       }
     }
   }, [selectGroupdataData,attrName]);
-console.log("lastIndiceslastIndices",lastIndices)
+
   const handleExport = () => {
     onExport(lastIndices);
   };
@@ -121,9 +122,8 @@ console.log("lastIndiceslastIndices",lastIndices)
 
   function contentToggle() {
     setDisplayAttributeSection(true);
-    setDisplayAttributeSection(true)
-    setRender(!render)
-    setAttrName("Attribute Name")
+    setRender(!render);
+    // setAttrName("Attribute Name")
     const newLastIndices = [...lastIndices];
     newLastIndices.push({name: "Attribute Name", type: "VARCHAR"})
     setLastIndices(newLastIndices);
