@@ -11,13 +11,14 @@ import FloatInput from "./floatInput";
 import InfoCircleOutlinedFunction from "./infoCircleOutlined";
 
 interface MyModalProps {
-  selectedNodeDetails: any[];
-  setSelectedNodeDetails: () => void;
+  pSetSelectedAttributes: () => void;
+  pSelectedAttributes: any[];
 }
 
 const GroupsThirdSide: React.FC<MyModalProps> = ({
-  selectedNodeDetails,
-  setSelectedNodeDetails,
+  pSetSelectedAttributes,
+  pSelectedAttributes,
+  
 }) => {
   const dispatch = useDispatch();
 
@@ -26,10 +27,10 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
     value: string | undefined,
     key: string
   ) => {
-    console.log(selectedNodeDetails,"first--selectedNodeDetails")
-    setSelectedNodeDetails((selectedNodeDetails) => {
-      console.log(selectedNodeDetails,"--in--selectedNodeDetails")
-      const updatedSelectedNodeDetails = selectedNodeDetails.map((node) => {
+    console.log(pSelectedAttributes,"first--pSelectedAttributes")
+    pSetSelectedAttributes((pSelectedAttributes) => {
+      console.log(pSelectedAttributes,"--in--pSelectedAttributes")
+      const updatedSelectedNodeDetails = pSelectedAttributes.map((node) => {
         if (node?.metadata?.[key] === value) {
           return {
             ...node,
@@ -48,7 +49,7 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
     });
     
   };
-  console.log(selectedNodeDetails, "--out--selectedNodeDetails--selectedNodeDetails");
+  console.log(pSelectedAttributes, "--out--pSelectedAttributes--pSelectedAttributes");
   
   //////
 
@@ -88,7 +89,7 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
 
   return (
     <>
-      {selectedNodeDetails?.map((node: any) => (
+      {pSelectedAttributes?.map((node: any) => (
         // eslint-disable-next-line react/jsx-key
         <Col span={10} style={{ marginTop: "0.5rem", paddingLeft: "0.5rem" }}>
           <Row className={styles.descriptionbox}>

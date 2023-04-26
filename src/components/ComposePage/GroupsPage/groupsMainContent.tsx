@@ -21,7 +21,7 @@ const GroupsMainContent = () => {
   const [visible, setVisible] = useState(false);
 
   const [exportClicked, setExportClicked] = useState(false);
-  const [lastIndices, setLastIndices] = useState<any[]>([]);
+  const [selectedAttributes, setSelectedAttributes] = useState<any[]>([]);
   const selectGroupdataAttributeData = useSelector(
     getSelectedGroupdataArraySelector
   );
@@ -34,14 +34,13 @@ const GroupsMainContent = () => {
     setVisible(false);
   };
 
-  const handleExport = (lastIndices: any[]) => {
-    setLastIndices(lastIndices);
-
+  const handleExport = (selectedAttributes: any[]) => {
+    setSelectedAttributes(selectedAttributes);
     setExportClicked(true);
   };
   const handleRemove = (uid: string) => {
-    setLastIndices((lastIndices) =>
-      lastIndices.filter((node) => node.uid !== uid)
+    setSelectedAttributes((selectedAttributes) =>
+      selectedAttributes.filter((node) => node.uid !== uid)
     );
   };
 
@@ -61,12 +60,11 @@ const GroupsMainContent = () => {
   }, []);
 
   useEffect(() => {
-    console.log("lastIndices ===",lastIndices);
-  }, [lastIndices]);
+    console.log("selectedAttributes ===",selectedAttributes);
+  }, [selectedAttributes]);
 
   const dispatch = useDispatch();
   // page for calling the whole content of groups
-  // const lastIndicesText = lastIndices?.map((node: any) => node.name).join(", ");
   return (
     <Layout className={styles.layout}>
       <Content className={styles.content}>
@@ -113,8 +111,8 @@ const GroupsMainContent = () => {
           visible={visible}
           setVisible={setVisible}
           onCancel={handleGroupsCancel}
-          lastIndices={lastIndices}
-          setLastIndices={setLastIndices}
+          pSelectedAttributes={selectedAttributes}
+          pSetSelectedAttributes={setSelectedAttributes}
           onExport={handleExport}
           onCreatePipeline={toggleCreatePipeline}
         />

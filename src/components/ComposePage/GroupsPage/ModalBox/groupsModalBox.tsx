@@ -26,8 +26,8 @@ interface MyModalProps {
   visible?: boolean;
   setVisible: (visible: boolean) => void;
   onCancel?: () => void;
-  lastIndices: any[];
-  setLastIndices:any[];
+  pSelectedAttributes: any[];
+  pSetSelectedAttributes:() => void;
   onExport: (selectedData: any[]) => void;
   onCreatePipeline?: () => void;
 
@@ -37,8 +37,8 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   visible,
   setVisible,
   onCancel,
-  lastIndices,
-  setLastIndices,
+  pSelectedAttributes,
+  pSetSelectedAttributes,
   onExport,
   onCreatePipeline,
 }) => {
@@ -46,8 +46,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
-  const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
-  console.log(selectedNodeDetails,"groupmodalBox--selectedNodeDetails")
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
@@ -59,20 +57,19 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [render,setRender] = useState(false)
 
   useEffect(() => {
-    console.log("fetchGroupDataRequest");
     dispatch(fetchDataBaseRequest());
     dispatch(fetchGroupDataRequest());
   }, []);
   useEffect(() => {
     if (lastIndexGroup && "name" in lastIndexGroup) {
       const exists =
-        lastIndices &&
+        pSelectedAttributes &&
         lastIndexGroup &&
-        lastIndices
+        pSelectedAttributes
           .filter(Boolean)
           .some((node) => node.uid === lastIndexGroup.uid);
-      if (lastIndices && !exists) {
-        setLastIndices((prevLastIndices) => [
+      if (pSelectedAttributes && !exists) {
+        pSetSelectedAttributes((prevLastIndices) => [
           ...prevLastIndices,
           lastIndexGroup,
         ]);
@@ -81,7 +78,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   }, [selectGroupdataData,attrName]);
 
   const handleExport = () => {
-    onExport(lastIndices);
+    onExport(pSelectedAttributes);
   };
   const handleExportButton = () => {
     handleExport();
@@ -105,15 +102,15 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const handleRemove = (uid: string) => {
     dispatch(removeNode(uid));
   };
-  const handleAddAttributeDetails = (lastIndices: any) => {
-    console.log("Received data in handleAddAttributeDetails:", lastIndices);
-    dispatch(addAttributeDetails(lastIndices));
+  const handleAddAttributeDetails = (pSelectedAttributes: any) => {
+    console.log("Received data in handleAddAttributeDetails:", pSelectedAttributes);
+    dispatch(addAttributeDetails(pSelectedAttributes));
   };
 
   const onDeleteClick = (index: number) => {
-    const newLastIndices = [...lastIndices];
+    const newLastIndices = [...pSelectedAttributes];
     newLastIndices.splice(index, 1);
-    setLastIndices(newLastIndices);
+    pSetSelectedAttributes(newLastIndices);
   };
 
   function handleAddIconClick(node: string) {
@@ -125,39 +122,25 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
     setDisplayAttributeSection(true);
     setRender(!render);
     // setAttrName("Attribute Name")
-    const newLastIndices = [...lastIndices];
+    const newLastIndices = [...pSelectedAttributes];
     newLastIndices.push({name: "Attribute Name", type: "VARCHAR"})
-    setLastIndices(newLastIndices);
+    pSetSelectedAttributes(newLastIndices);
   }
 
   function getValues(attributeName:string,selectedDataType:string){
         setAttrName(attributeName)
         setDatatype(selectedDataType)
         selectGroupdataData.slice(-1)[0] = {name: attributeName, type: selectedDataType}
-        lastIndices[lastIndices.length-1] = {name: attributeName, type: selectedDataType}
+        pSelectedAttributes[pSelectedAttributes.length-1] = {name: attributeName, type: selectedDataType}
        }
 
-       const handleRowClick = (node: any) => {
-        console.log("Getting innnnnn");
-        setSelectedNodeDetails([node]);
-        console.log("check check", node);
-        console.log("last Indicesssssssssssssss", lastIndices);
-        // Check if selected node details already exist in lastIndices
-        const isNodeAlreadySelected = lastIndices.some(
-          (selectedNode) => selectedNode.id === node.id
-        );  
-        if (!isNodeAlreadySelected) {
-          const updatedLastIndices = [...lastIndices, ...selectedNodeDetails];
-          handleAddAttributeDetails(updatedLastIndices);
-          setLastIndices(selectedNodeDetails);
-          dispatch(addAttributeDetails(updatedLastIndices));
-          console.log("Data getting printed on clicking the attribute", updatedLastIndices);
-        }  
-        console.log("selectedNodeDetails", selectedNodeDetails);
-        console.log("Getting outttttttt");
-      };
-      
-      
+  const handleRowClick = (node:any) => {
+    pSetSelectedAttributes([node]);
+    handleAddAttributeDetails(pSelectedAttributes);
+    dispatch(addAttributeDetails(pSelectedAttributes));
+    console.log("Data getting printed on clicking the attribute", pSelectedAttributes);
+    console.log("Getting outttttttt");
+  };
   
 
   const swapElements = (array: array, index1: number, index2: number) => {
@@ -169,12 +152,12 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   };
 
   const handleArrowClick = (index: number, direction: "up" | "down") => {
-    const newData = [...lastIndices];
+    const newData = [...pSelectedAttributes];
     const currentIndex = index;
     const targetIndex = direction === "up" ? index - 1 : index + 1;
     if (targetIndex >= 0 && targetIndex < newData.length) {
-      const swappedArray = swapElements(lastIndices, currentIndex, targetIndex);
-      setLastIndices(swappedArray);
+      const swappedArray = swapElements(pSelectedAttributes, currentIndex, targetIndex);
+      pSetSelectedAttributes(swappedArray);
     }
   };
   return (
@@ -262,7 +245,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
         </Col>
         <Col span={8} style={{ borderRight: "1px solid #ccc",marginTop: "0.5rem" }}>
           <AttributeButton onClickAttribute={contentToggle} />
-          {lastIndices?.map((node, index) => (
+          {pSelectedAttributes?.map((node, index) => (
             <>
               <div
                 style={{
@@ -307,7 +290,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
         {displayAttributeSection ? (
           <NewAttributeContent attributeValues={getValues} reRender={render} key={render}/>
         ) : (
-          <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails}/>
+          <GroupsThirdSide pSetSelectedAttributes={pSetSelectedAttributes} pSelectedAttributes={pSelectedAttributes}/>
         )}
       </Row>
     </Modal>
