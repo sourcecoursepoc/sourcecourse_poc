@@ -13,20 +13,14 @@ import InfoCircleOutlinedFunction from "./infoCircleOutlined";
 interface MyModalProps {
   selectedNodeDetails: any[];
   setSelectedNodeDetails: () => void;
-  lastIndices: any[];
-  setLastIndices: Dispatch<SetStateAction<any[]>>;
 }
 
 const GroupsThirdSide: React.FC<MyModalProps> = ({
   selectedNodeDetails,
   setSelectedNodeDetails,
-  lastIndices,
-  setLastIndices,
 }) => {
-  const { Option } = Select;
-  const { TextArea } = Input;
   const dispatch = useDispatch();
-  ////////
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     value: string | undefined,
