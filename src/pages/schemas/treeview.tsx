@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import {
   addArray,
   addLastIndex,
+  addGroupdataArray,
 } from "../../redux/actions/schemasaction";
 import {
   getSelectedArraySelector,
@@ -58,6 +59,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     }
     if(element){
       dispatch(addArray([element]));
+      // dispatch(addGroupdataArray([element]));
     }
   }
 
