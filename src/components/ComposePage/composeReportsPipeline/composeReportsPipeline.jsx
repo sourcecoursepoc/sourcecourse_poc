@@ -5,7 +5,7 @@ import { getRecordSelector } from '../../../redux/selectors';
 import ReportGraph from '../ReportPage/reportGraph';
 import { Row, Col } from 'antd';
 import MigrationStatus from '../ReportPage/migrationStatus';
-import styles from "./ComposeReportsPipeline.module.css";
+import styles from "./composeReportsPipeline.module.css";
 import { getComposeReportsPipelineSelector } from '../../../redux/selector';
 import { useDispatch } from 'react-redux';
 import { fetchComposeReportsPipelineRequest } from '../../../redux/actions/composeAction';
