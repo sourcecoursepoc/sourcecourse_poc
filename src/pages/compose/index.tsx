@@ -28,12 +28,11 @@ const Compose = () => {
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  console.log("name", name);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [isSidebutonClickable, setIsSidebuttonClickable] = useState(false)
+  const [isSidebutonClickable, setIsSidebuttonClickable] = useState(true)
 
   const dispatch = useDispatch();
   const handleSaveProjectInfo = async () => { 
@@ -157,7 +156,6 @@ const Compose = () => {
 
           <Row>
             <Col className={styles.sideButtons}>
-
               <Image
                 preview={false}
                 src="/schemas-icon.png"
