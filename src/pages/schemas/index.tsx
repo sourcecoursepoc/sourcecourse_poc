@@ -13,6 +13,7 @@ import Toast from "./toast";
 const Schemas = () => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
+  console.log(database,"database")
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());

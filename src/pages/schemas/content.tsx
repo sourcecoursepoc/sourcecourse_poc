@@ -18,7 +18,8 @@ const { Content } = Layout;
 export default function SchemaContent() {
 
     const selcectedData = useSelector(getSelectedArraySelector);
-    const selectedMetaData = selcectedData.map(node => node.metadata);
+    const selectedMetaData = selcectedData.map(node => node?.metadata);
+    console.log(selectedMetaData,"selectedMetaData")
     const Description = selcectedData.map(node => node.description);
     const descriptionLastIndex = Description.length - 1;
     const descriptionLastItem = Description[descriptionLastIndex];
@@ -88,7 +89,7 @@ export default function SchemaContent() {
     let selectedValueName = '';
 
     if (selcectedDataLastElement) {
-        if ('DBName' in selcectedDataLastElement) {
+        if ('dbName' in selcectedDataLastElement) {
             selectedValueName = selcectedDataLastElement.DBName;
         } else if ('tableName' in selcectedDataLastElement) {
             selectedValueName = selcectedDataLastElement.tableName;
@@ -98,7 +99,7 @@ export default function SchemaContent() {
     }
 
     const transcriptList: any = Transcription(selectedMetaDataLastItem);
-
+console.log(transcriptList,"trans")
     const listItems: any = [];
     for (const item in transcriptList) {
         listItems.push(
