@@ -49,6 +49,7 @@ const Compose = () => {
       console.log(response.data)
       if (response.data !== -1) {
         setIsSidebuttonClickable(true); // Set the isclickable state to true
+        handleIconClick("HddFilled")
       }
     } catch (error) {
       console.error(error);
@@ -151,6 +152,7 @@ const Compose = () => {
                         ""
                       )
               }
+              buttonsDisabled = {(nameError || descriptionError )? true : false}
             />
           </Row>
 
