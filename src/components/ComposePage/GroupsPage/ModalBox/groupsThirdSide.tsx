@@ -48,7 +48,7 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
           return node;
         }
       });
-      dispatch(addAttributeDetails(updatedSelectedNodeDetails));
+      // dispatch(addAttributeDetails(updatedSelectedNodeDetails));
       console.log(updatedSelectedNodeDetails, "updatedSelectedNodeDetails--updatedSelectedNodeDetails");
       return updatedSelectedNodeDetails;
     });
@@ -56,40 +56,40 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
   };
   console.log(selectedNodeDetails, "--out--selectedNodeDetails--selectedNodeDetails");
   
-  //////
+  ////////
 
 
-  const { Panel } = Collapse;
+  // const { Panel } = Collapse;
 
-  const conList = [{id: Math.random(),
-    component : <ConditionalDataSelection key={Math.random()}/>}]
+  // const conList = [{id: Math.random(),
+  //   component : <ConditionalDataSelection key={Math.random()}/>}]
     
-    const convList = [{id: Math.random(),
-      component : <ConvertValues key={Math.random()}/>}]
+  //   const convList = [{id: Math.random(),
+  //     component : <ConvertValues key={Math.random()}/>}]
     
-    const [conditionalList, setConditionalList] = useState(conList)
-    const [convertList, setConvertList] = useState(convList)
+  //   const [conditionalList, setConditionalList] = useState(conList)
+  //   const [convertList, setConvertList] = useState(convList)
     
-    function addCondition(id:number) {
-      setConditionalList(conditionalList.concat({id:id, component: <ConditionalDataSelection key={id}/>}))
-    }
+  //   function addCondition(id:number) {
+  //     setConditionalList(conditionalList.concat({id:id, component: <ConditionalDataSelection key={id}/>}))
+  //   }
     
-    function addConvertValues(id:number) {
-      setConvertList(convertList.concat({id:id, component:<ConvertValues key={id} />}))
-    }
+  //   function addConvertValues(id:number) {
+  //     setConvertList(convertList.concat({id:id, component:<ConvertValues key={id} />}))
+  //   }
     
-    const onDeleteClick = (index: number) => {
-      console.log("deleted index",index)
-      const newConditionalList = [...conditionalList];
-      newConditionalList.splice(index, 1);
-      setConditionalList(newConditionalList);
-    };
+  //   const onDeleteClick = (index: number) => {
+  //     console.log("deleted index",index)
+  //     const newConditionalList = [...conditionalList];
+  //     newConditionalList.splice(index, 1);
+  //     setConditionalList(newConditionalList);
+  //   };
     
-    const onConvertDeleteClick = (index: number) => {
-      const newConvertList = [...convertList];
-      newConvertList.splice(index, 1);
-      setConvertList(newConvertList);
-    };
+  //   const onConvertDeleteClick = (index: number) => {
+  //     const newConvertList = [...convertList];
+  //     newConvertList.splice(index, 1);
+  //     setConvertList(newConvertList);
+  //   };
     
 
   return (
