@@ -48,7 +48,7 @@ const Compose = () => {
       });
       if (response.data !== -1) {
         setIsSidebuttonClickable(true); // Set the isclickable state to true
-        handleIconClick("HddFilled")
+        handleIconClick("HddFilled") //toggles schema
       }
     } catch (error) {
       console.error(error);
