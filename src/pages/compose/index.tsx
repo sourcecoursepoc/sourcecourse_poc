@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Space, Col, Row, Image } from "antd";
 import Header from "../../components/header/header";
+import axios from 'axios';
 import { Divider } from "antd";
 import styles from "./index.module.css";
 import {
@@ -32,13 +33,26 @@ const Compose = () => {
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
+  const [isSidebutonClickable, setIsSidebuttonClickable] = useState(false)
 
   const dispatch = useDispatch();
-  const handleSaveModalOk = () => { 
+  const handleSaveProjectInfo = async () => { 
     setSaveModalVisible(false);
     showSuccessToast("Saved Successfully")
     /* dispatch(clearLastIndex());
     setName(""); */
+    try {
+      const response = await axios.post('http://localhost:8080/sourcecourse/project', {
+        name: name,
+        description: description
+      });
+      if (response.data !== -1) {
+        setIsSidebuttonClickable(true); // Set the isclickable state to true
+        handleIconClick("HddFilled") //toggles schema
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
@@ -119,7 +133,7 @@ const Compose = () => {
             ></Col>
             <ButtonComponent
               saveModalVisible={saveModalVisible}
-              handleSaveModalOk={handleSaveModalOk}
+              handleSaveModalOk={handleSaveProjectInfo}
               handleSaveModalCancel={handleSaveModalCancel}
               handleSaveClick={handleSaveClick}
               handleDeleteClick={handleDeleteClick}
@@ -137,6 +151,7 @@ const Compose = () => {
                         ""
                       )
               }
+              buttonsDisabled = {(nameError || descriptionError )? true : false}
             />
           </Row>
 
@@ -153,7 +168,7 @@ const Compose = () => {
                   borderBottom: "1px solid #ccc",
                   padding:"0.5rem"
                 }}
-                onClick={() => handleIconClick("HddFilled")}
+                onClick={isSidebutonClickable ? () => handleIconClick("HddFilled") : () => {} }
                 alt=""
               />{" "}
               <br />
@@ -169,7 +184,7 @@ const Compose = () => {
                   padding:"0.5rem"
                 }}
                 alt=""
-                onClick={() => handleIconClick("ContainerFilled")}
+                onClick={isSidebutonClickable ? () => handleIconClick("ContainerFilled"): () => {}}
               />
               <br />
 
@@ -184,7 +199,7 @@ const Compose = () => {
                   padding:"0.3rem"
                 }}
                 alt=""
-                onClick={() => handleIconClick("ComposePipeline")}
+                onClick={isSidebutonClickable ? () => handleIconClick("ComposePipeline"): () => {}}
               />
               <br />
 
@@ -199,7 +214,7 @@ const Compose = () => {
                   padding:"0.3rem"
                 }}
                 alt=""
-                onClick={() => handleIconClick("Reports")}
+                onClick={isSidebutonClickable ? () => handleIconClick("Reports"): () => {}}
               />
               <br />
 
@@ -214,7 +229,7 @@ const Compose = () => {
                   padding:"0.3rem"
                 }}
                 alt=""
-                onClick={() => handleIconClick("Reports")}
+                onClick={isSidebutonClickable ? () => handleIconClick("Reports"): () => {}}
               />
          
             </Col>
