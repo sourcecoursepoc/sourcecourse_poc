@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Layout, Space, Col, Row, Image } from "antd";
 import Header from "../../components/header/header";
+import axios from 'axios';
 import { Divider } from "antd";
 import styles from "./index.module.css";
 import {
@@ -34,11 +35,20 @@ const Compose = () => {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
 
   const dispatch = useDispatch();
-  const handleSaveModalOk = () => { 
+  const handleSaveModalOk = async () => { 
     setSaveModalVisible(false);
     showSuccessToast("Saved Successfully")
     /* dispatch(clearLastIndex());
     setName(""); */
+    try {
+      const response = await axios.post('http://localhost:8080/sourcecourse/project', {
+        name: name,
+        description: description
+      });
+      console.log(response.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
