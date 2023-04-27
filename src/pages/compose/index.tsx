@@ -46,7 +46,6 @@ const Compose = () => {
         name: name,
         description: description
       });
-      console.log(response.data)
       if (response.data !== -1) {
         setIsSidebuttonClickable(true); // Set the isclickable state to true
         handleIconClick("HddFilled")
