@@ -167,7 +167,7 @@ export type SchemaActions =
       projectDetails:IDETAILS;
       projectId: number;
     projectName: string;
-    projectDesc: string;
+    description: string;
    
     }
     

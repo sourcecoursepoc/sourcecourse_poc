@@ -32,7 +32,7 @@ export default function ({ title, value }: InnerBoxProps) {
                 <Image preview={false} src="./groups-Icon.png"  
                   />
               )}
-              {title === "Schema" && (
+              {title === "Tables" && (
                 <Image preview={false} src="./schemas-icon.png" 
                   />
               )}
