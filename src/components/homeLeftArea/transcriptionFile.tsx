@@ -4,7 +4,7 @@ export function Transcription(projectArray) {
   const { t } = useTranslation();
   const data = {
     status: "Status",
-    schema: "Schema",
+    tables: "Tables",
     groups: "Groups",
     users: "Users",
     initialLoad: "Initial Load",
