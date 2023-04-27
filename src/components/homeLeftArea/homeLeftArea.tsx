@@ -47,21 +47,21 @@ const HomeLeftArea: React.FunctionComponent = () => {
 
         {isSearch
           ? parentArray?.map((item) => (
-              <Row className={styles.contentStyle} key={item.projectId}>
+              <Row className={styles.contentStyle} key={item.projectName}>
                 <ProjectContent
                   heading={item.projectName}
-                  projectDescription={item.projectDesc}
+                  projectDescription={item.description}
                 ></ProjectContent>
               </Row>
             ))
           : []}
 
         {isTabClicked && !isSearch
-          ? projectArray?.map((item) => (
-              <Row className={styles.contentStyle} key={item.projectId}>
+          ? projectListData?.map((item) => (
+              <Row className={styles.contentStyle} key={item.projectName}>
                 <ProjectContent
                   heading={item.projectName}
-                  projectDescription={item.projectDesc}
+                  projectDescription={item.description}
                 ></ProjectContent>
               </Row>
             ))
