@@ -22,6 +22,8 @@
   align-content: center;
   justify-content: center;
   font-weight: 500;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
 }
 .innerBox2 {
   background-color: white;
@@ -70,7 +72,8 @@
     align-content: center;
     justify-content: center;
     font-weight: 500;
-   
+    padding-left: 1rem;
+    padding-bottom: 1rem;
   }
   .innerBox22 {
     background-color: white; 
