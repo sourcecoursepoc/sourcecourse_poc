@@ -32,7 +32,6 @@ const Compose = () => {
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [isSidebutonClickable, setIsSidebuttonClickable] = useState(false)
   const [projectId, setProjectId] = useState(null);
 
   const dispatch = useDispatch();
@@ -47,7 +46,7 @@ const Compose = () => {
         description: description
       });
       if (response.data !== -1) {
-        setProjectId(response.data.uid); // Update the state with the response data
+        setProjectId(response.data.uid); // Update the state with the uid
         handleIconClick("HddFilled") //toggles schema
       }
       console.log(projectId)
