@@ -32,7 +32,8 @@ const Compose = () => {
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [isSidebutonClickable, setIsSidebuttonClickable] = useState(true)
+  const [isSidebutonClickable, setIsSidebuttonClickable] = useState(false)
+  const [projectId, setProjectId] = useState(null);
 
   const dispatch = useDispatch();
   const handleSaveProjectInfo = async () => { 
@@ -46,9 +47,10 @@ const Compose = () => {
         description: description
       });
       if (response.data !== -1) {
-        setIsSidebuttonClickable(true); // Set the isclickable state to true
+        setProjectId(response.data.uid); // Update the state with the response data
         handleIconClick("HddFilled") //toggles schema
       }
+      console.log(projectId)
     } catch (error) {
       console.error(error);
     }
@@ -164,9 +166,10 @@ const Compose = () => {
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
-                  padding:"0.5rem"
+                  padding:"0.5rem",
+                  opacity: projectId ? 1 : 0.5
                 }}
-                onClick={isSidebutonClickable ? () => handleIconClick("HddFilled") : () => {} }
+                onClick={projectId ? () => handleIconClick("HddFilled") : () => {} }
                 alt=""
               />{" "}
               <br />
@@ -179,10 +182,11 @@ const Compose = () => {
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
-                  padding:"0.5rem"
+                  padding:"0.5rem",
+                  opacity: projectId ? 1 : 0.5
                 }}
                 alt=""
-                onClick={isSidebutonClickable ? () => handleIconClick("ContainerFilled"): () => {}}
+                onClick={projectId ? () => handleIconClick("ContainerFilled"): () => {}}
               />
               <br />
 
@@ -194,10 +198,11 @@ const Compose = () => {
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
-                  padding:"0.3rem"
+                  padding:"0.3rem",
+                  opacity: projectId ? 1 : 0.5
                 }}
                 alt=""
-                onClick={isSidebutonClickable ? () => handleIconClick("ComposePipeline"): () => {}}
+                onClick={projectId ? () => handleIconClick("ComposePipeline"): () => {}}
               />
               <br />
 
@@ -209,10 +214,11 @@ const Compose = () => {
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
-                  padding:"0.3rem"
+                  padding:"0.3rem",
+                  opacity: projectId ? 1 : 0.5
                 }}
                 alt=""
-                onClick={isSidebutonClickable ? () => handleIconClick("Reports"): () => {}}
+                onClick={projectId ? () => handleIconClick("Reports"): () => {}}
               />
               <br />
 
@@ -224,10 +230,11 @@ const Compose = () => {
                   height: "3.5rem",
                   marginLeft: "6rem",
                   borderBottom: "1px solid #ccc",
-                  padding:"0.3rem"
+                  padding:"0.3rem",
+                  opacity: projectId ? 1 : 0.5
                 }}
                 alt=""
-                onClick={isSidebutonClickable ? () => handleIconClick("Reports"): () => {}}
+                onClick={projectId ? () => handleIconClick("Reports"): () => {}}
               />
          
             </Col>
