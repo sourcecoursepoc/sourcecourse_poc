@@ -7,7 +7,7 @@ import { fetchProjectFailure, fetchProjectSuccess } from "../actions/fetchProjec
 
 
 const getProjects = () =>
-  axios.get<IPROJECT[]>("http://localhost:8000/projects");
+axios.get<IPROJECT[]>("http://localhost:8080/sourcecourse/home");
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */

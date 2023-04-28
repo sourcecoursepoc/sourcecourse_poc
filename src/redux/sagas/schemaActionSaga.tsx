@@ -32,7 +32,7 @@ function* fetchSchemaSaga(requestParams: FetchSchemaRequest) {
 
 
 const getDatabase = () =>
-  axios.get<DBProps[]>("http://localhost:8000/tables");
+  axios.get<DBProps[]>("http://localhost:8080/sourcecourse/db");
 
 /*
   Worker Saga: Fired on FETCH_DATABASE_REQUEST action

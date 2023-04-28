@@ -9,6 +9,7 @@ interface ConfirmationModalProps {
   message: string;
   onOk: () => void;
   onCancel: () => void;
+  buttonsDisabled: boolean;
 }
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
@@ -17,6 +18,8 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   message,
   onOk,
   onCancel,
+  buttonsDisabled,
+
 }) => {
   return (
     <Modal
@@ -24,8 +27,8 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       title={title}
       onCancel={onCancel}
       footer={[
-      <Buttons text={"Yes"} icon={<CheckOutlined/>} size={"middle"} onClick={onOk}></Buttons> ,
-      <Buttons text={"No"} icon={<CloseOutlined/>} size={"middle"} onClick={onCancel}></Buttons>,   
+      <Buttons text={"Yes"} icon={<CheckOutlined/>} size={"middle"} onClick={onOk} disabled={buttonsDisabled}></Buttons> ,
+      <Buttons text={"No"} icon={<CloseOutlined/>} size={"middle"} onClick={onCancel} disabled={buttonsDisabled}></Buttons>,   
       ]}
     >
       <p>

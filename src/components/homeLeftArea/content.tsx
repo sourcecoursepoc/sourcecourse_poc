@@ -33,18 +33,28 @@ const ProjectContent: React.FC<ContentProps> = ({
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
   const listItems: any = [];
-  const projectArray = projectListData[0]?.projects[0]?.projectDetails;
+  const projectArray = projectListData[0];
   const transcriptList = Transcription(projectArray);
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
   }, []);
 
+  const dummyArray = [<InnerBox title="Initial Load" value={0} key={Math.random()}></InnerBox>,
+  <InnerBox title="Sync" value={0} key={Math.random()}></InnerBox>,
+  <InnerBox title="Users" value={0} key={Math.random()}></InnerBox>
+]
+  listItems.push(
+    ...dummyArray
+  );
+
   for (const item in transcriptList) {
     // console.log(`${item}: ${transcriptList[item]}`);
+    if((item === "Groups") || (item === "Tables")){
     listItems.push(
       <InnerBox title={item} value={transcriptList[item]}></InnerBox>
     );
+    }
   }
   return (
     <Layout className={styles.layout}>

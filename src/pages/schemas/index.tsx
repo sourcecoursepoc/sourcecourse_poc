@@ -27,7 +27,7 @@ const Schemas = () => {
         <Content>
           <Row>
             <Col span={6} className={styles.treeview}>
-              {database && <TreeView db={database} />}
+              {database.length>0 && <TreeView db={database} />}
             </Col>
             <Col span={16}>
               <SchemaContent />
