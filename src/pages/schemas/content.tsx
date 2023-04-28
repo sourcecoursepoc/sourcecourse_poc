@@ -79,7 +79,8 @@ export default function SchemaContent() {
                     uid={""}
                     handleRemove={() => ({})}
                     lengthOfColums={""}
-                    width={170}
+                    minWidth={170}
+                    width={"auto"}
                 />
             );
         }
@@ -90,7 +91,7 @@ export default function SchemaContent() {
 
     if (selcectedDataLastElement) {
         if ('dbName' in selcectedDataLastElement) {
-            selectedValueName = selcectedDataLastElement.DBName;
+            selectedValueName = selcectedDataLastElement.dbName;
         } else if ('tableName' in selcectedDataLastElement) {
             selectedValueName = selcectedDataLastElement.tableName;
         } else if ('name' in selcectedDataLastElement) {
