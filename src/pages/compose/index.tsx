@@ -49,7 +49,6 @@ const Compose = () => {
         setProjectId(response.data.uid); // Update the state with the uid
         handleIconClick("HddFilled") //toggles schema
       }
-      console.log(projectId)
     } catch (error) {
       console.error(error);
     }
