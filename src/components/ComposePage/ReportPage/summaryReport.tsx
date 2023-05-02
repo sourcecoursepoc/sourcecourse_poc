@@ -38,17 +38,18 @@ const SummaryReport = () => {
     { name: "Success", value: getRecords[0]?.PipelineStatus[0]?.success },
     { name: "Error", value: getRecords[0]?.PipelineStatus[0]?.error },
   ];
-
+ 
   return (
     <>
+    
        <ReportsFirstContent
         groupName="Groups"
         groupNumber={getRecords[0]?.groups}
         schemaName="Schemas"
         schemaNumber={getRecords[0]?.schemaCount}
       />
-      
-      <ReportGraph
+
+       <ReportGraph
         title="Record Details"
         text={`${pieDataRecord[0].value} / ${pieDataRecord[1].value} Records`}
         pieData={pieDataRecord}
@@ -72,7 +73,7 @@ const SummaryReport = () => {
         title="Pipeline Status"
         text={`${pieDataPipelineExe[0].value} Excecution`}
         pieData={pieDataPipelineExe}
-      />
+      /> 
     </>
   );
 };

@@ -28,6 +28,7 @@ const ButtonComponent = ({
   deleteModalVisible,
   handleDeleteModalOk,
   handleDeleteModalCancel,
+  buttonsDisabled,
 }) => {
   const dispatch = useDispatch();
   const [exitModalVisible, setExitModalVisible] = useState(false);
@@ -100,6 +101,7 @@ const ButtonComponent = ({
           onCancel={handleSaveModalCancel}
           title="Save Confirmation"
           message={saveBoxMessage}
+          buttonsDisabled={buttonsDisabled}
         />
 
         <Buttons

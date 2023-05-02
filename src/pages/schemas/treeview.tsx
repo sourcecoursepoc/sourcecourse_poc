@@ -1,194 +1,77 @@
 import React, { useState, useEffect, ReactNode } from "react";
-
 import { Tree, Image } from "antd";
-
 import { useSelector } from "react-redux";
-
 import { useDispatch } from "react-redux";
-
 import {
-  fetchDataBaseRequest,
   addArray,
+  addLastIndex,
   addGroupdataArray,
 } from "../../redux/actions/schemasaction";
-
 import {
-  getDataBaseSelector,
-  getGroupdataDataBaseSelector,
   getSelectedArraySelector,
-  getSelectorTableNodes,
 } from "../../redux/selector";
-
 import {
-  DownOutlined,
-  DatabaseOutlined,
-  PartitionOutlined,
-  FolderOutlined,
-  LeftOutlined,
   RightOutlined,
 } from "@ant-design/icons";
-import { addLastIndex } from "@/redux/actions/schemaTypes";
-
 const { TreeNode } = Tree;
 
 interface IconImage {
-  //iconImage: string;
-
   onSelect: () => void;
-
-  groupModalBoxTreeView: boolean;
-
-  setGroupModalBoxTreeView: () => void;
-
   iconImage: ReactNode;
 }
 
 const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   db,
-
-  tableDb,
-
   iconImage,
-
-  groupModalBoxTreeView,
-
-  setGroupModalBoxTreeView,
 }) => {
   const dispatch = useDispatch();
-
-  const data = useSelector(getDataBaseSelector);
-
-  const groupDataSelector = useSelector(getGroupdataDataBaseSelector);
-  const selectedTableArray = useSelector(getSelectorTableNodes);
-
-  useEffect(() => {
-    dispatch(fetchDataBaseRequest());
-  }, []);
-
-  const [defaultSelectedKey, setDefaultSelectedKey] = useState("");
+  const selcectedData = useSelector(getSelectedArraySelector);
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
 
-
   useEffect(() => {
-    if (data.length > 0) {
-      const firstNode = data[0];
-      setSelectedNode([firstNode]);
+    if (db ?.length > 0) {
+      const firstNode = db[0];
       dispatch(addArray([firstNode]));
-      setDefaultSelectedKey(firstNode.uid); // set the uid of the first node as the default selected key
       setExpandedKeys([firstNode.uid]); // expand the first node by default
-
     }
-  }, [data]);
+  }, [db]);
 
-  const selectTables = (state: DBProps) => state.Tables;
+  type KeysType = string[];
 
-  const selectColumns = (state: TableProps) => state.columns;
-
-  const Tables = useSelector(selectTables);
-
-  const columns = useSelector(selectColumns);
-  const selcectedData = useSelector(getSelectedArraySelector);
-  const [selectedNode, setSelectedNode] = useState<any[]>([]);
-
-  const [selectedLastIndexes, setSelectedLastIndexes] = useState<Array<any>>(
-    []
-  );
-
-  const onSelect = (keys: any, info: any) => {
-    const selectedKey = keys[0] as string;
-
-    const selectedObj: any = groupDataSelector
-      ? findNodeByKey(data, groupDataSelector, columns, selectedKey)
-      : findNodeByKey(data, Tables, columns, selectedKey);
-
-    const exists =
-      selectedNode &&
-      selectedObj &&
-      selectedNode.filter(Boolean).some((node) => node.uid === selectedObj.uid);
-    if (selectedObj && !exists && !groupModalBoxTreeView) {
-      setSelectedNode([selectedObj]);
-      dispatch(addArray([selectedObj]));
-    }
-
-    if (groupModalBoxTreeView) {
-      dispatch(addGroupdataArray([selectedObj]));
-    }
-    if (
-      selectedObj &&
-      typeof selectedObj === 'object' &&
-      "tableName" in selectedObj &&
-      selectedObj.columns &&
-      selectedObj.columns.length > 0
-    ) {
-      const lastIndex = selectedObj;
-      const lastIndexExists = selectedLastIndexes.some(
-        (item) => item.uid === lastIndex.uid
-      );
-      if (!lastIndexExists) {
-        dispatch(addLastIndex(lastIndex)); // dispatch the lastIndex to addLastIndex
-        setSelectedLastIndexes([...selectedLastIndexes, lastIndex]); // add the lastIndex to the array of selectedLastIndexes
-      }
-
-    }
-    // expand the parent nodes of the selected node
-    const parentKeys: string[] = [];
-    let node = selectedObj;
-    while (node ?.parentKey) {
-      parentKeys.push(node.parentKey);
-      node = findNodeByKey(data, Tables, columns, node.parentKey);
-    }
-    setExpandedKeys([...expandedKeys, ...parentKeys, selectedKey]); // include all parent keys and the selected key
-  };
-  useEffect(() => {
-    setSelectedLastIndexes(selectedTableArray); // assuming 'lastIndexes' is the name of the Redux state variable
-  }, [selectedTableArray]);
-
-  const findNodeByKey = (
-    data: DBProps[],
-
-    Tables: TableProps[],
-
-    columns: ColumnProps[],
-
-    key: string
-  ): DBProps | TableProps | ColumnProps | undefined => {
-    let tempdata: any = data;
-
-    if (groupModalBoxTreeView) {
-      tempdata = Tables;
-    }
-
-    for (const node of tempdata) {
-      if (node.uid === key) {
-        return node;
-      }
-
-      for (const table of node.Tables) {
-        if (table.uid === key) {
-          return table;
-        }
-
-        for (const column of table ?.columns || []) {
-          if (column.uid === key) {
-            return column;
-          }
-        }
-      }
-    }
-
-    return undefined;
+  type InfoType = {
+    event: React.MouseEvent<HTMLDivElement>;
+    node: any;
   };
 
-  const renderColumns = (columns: ColumnProps[] | undefined) => {
+  const onSelect = (keys: KeysType, info: InfoType) => {
+    const treeKeys = keys?.[0]?.split("-");
+    let element;
+    if(treeKeys.length>2){
+      const tables = db.find(val=> val.uid.toString()===treeKeys[0])?.tables;
+      const columns = tables.find(val=> val.uid.toString()===treeKeys[1])?.columns;
+      element  = columns.find(val=> val.uid.toString()===treeKeys[2]);
+    } else if (treeKeys.length>1){
+      const tables = db.find(val=> val.uid.toString()===treeKeys[0])?.tables;
+      element = tables.find(val=> val.uid.toString()===treeKeys[1]);
+      dispatch(addLastIndex(element));
+    }else if (treeKeys.length>0){
+      element = db.find(val=> val.uid.toString()===treeKeys[0]);
+    }
+    if(element){
+      dispatch(addArray([element]));
+      // dispatch(addGroupdataArray([element]));
+    }
+  }
+
+  const renderColumns = (columns: ColumnProps[] | undefined, dbUid:string,tableUid:string) => {
     if (!columns) {
       return null;
     }
-
-    return columns.map((column: ColumnProps) => (
+    return columns ?.map((column: ColumnProps) => (
       <TreeNode
         title={
           <span>
-            {column.metadata.isPrimary ? (
+            {column ?.metadata ?.isPrimary ? (
               <Image
                 src="primarykey-icon1.png"
                 style={{
@@ -212,18 +95,17 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
                 />
               )}
 
-            {column.name}
-
+            {column ?.name}
             <span>{columns ?.length > 0 ? iconImage : undefined}</span>
           </span>
         }
-        key={column.uid}
+        key={`${dbUid}-${tableUid}-${column?.uid?.toString()}`}
       />
     ));
   };
 
-  const renderTables = (tables: TableProps[]) => {
-    return tables.map((table: TableProps) => (
+  const renderTables = (tables: TableProps[],dbUid:string) => {
+    return tables ?.map((table: TableProps) => (
       <TreeNode
         title={
           <span>
@@ -240,19 +122,19 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
               preview={false}
             ></Image>
 
-            {table.tableName}
+            {table ?.tableName}
 
             <span>{table ?.columns ?.length > 0 ? iconImage : undefined}</span>
           </span>
         }
-        key={table.uid}
+        key={`${dbUid}-${table?.uid?.toString()}`}
         switcherIcon={
           table ?.columns ?.length > 0 ? (
             <RightOutlined style={{ fontSize: "0.6rem" }} />
           ) : undefined
         }
       >
-        {table ?.columns ?.length > 0 && renderColumns(table ?.columns)}
+        {table ?.columns ?.length > 0 && renderColumns(table ?.columns,dbUid,table?.uid?.toString())}
       </TreeNode>
     ));
   };
@@ -262,8 +144,8 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       return null;
     }
 
-    return db.map((item: DBProps) =>
-      item.DBName ? (
+    return db ?.map((item: DBProps) =>
+      item ?.dbName ? (
         <TreeNode
           title={
             <span>
@@ -282,24 +164,23 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
                 }}
               ></Image>
 
-              {item.DBName}
+              {item ?.dbName}
             </span>
           }
-          key={item.uid}
+          key={`${item?.uid?.toString()}`}
           switcherIcon={
-            Array.isArray(item.Tables) && item.Tables.length > 0 ? (
+            item ?.tables ?.length > 0 ? (
               <RightOutlined style={{ fontSize: "0.6rem" }} />
             ) : undefined
           }
         >
-          {Array.isArray(item.Tables) &&
-            item.Tables.length > 0 &&
-            renderTables(item.Tables)}
+          {item ?.tables ?.length > 0 &&
+              renderTables(item ?.tables,item?.uid?.toString())}
         </TreeNode>
       ) : (
-          Array.isArray(item.Tables) &&
-          item.Tables.length > 0 &&
-          renderTables(item.Tables)
+          Array.isArray(item ?.tables) &&
+            item ?.tables ?.length > 0 &&
+              renderTables(item ?.tables,item?.uid?.toString())
         )
     );
   };
@@ -307,12 +188,13 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   return (
     <Tree
       onSelect={onSelect}
-      style={{ fontSize: "15px", fontWeight: "500" }}
+      style={{ fontSize: "15px", fontWeight: "500", alignText: "left" }}
       showIcon
       expandedKeys={expandedKeys}
-      selectedKeys={selectedNode.map((node) => node.uid)}
+      selectedKeys={selcectedData.map((node) => node.uid)}
       onExpand={(keys) => setExpandedKeys(keys)}
-      defaultSelectedKeys={defaultSelectedKey}
+      defaultSelectedKeys={db?.[0]?.uid}
+      height={500}
     >
       {renderDB(db)}
     </Tree>

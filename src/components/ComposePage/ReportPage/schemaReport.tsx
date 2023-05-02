@@ -5,8 +5,8 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import MigrationPiechart from "./migrationPiechart";
-import MigrationStatus from "./migrationStatus";
-import styles from "./migrationStatus.module.css";
+import styles from "./migration.module.css";
+import MigrationBarChart from "./migrationBarChart";
 
 const SchemaReport = () => {
   const getRecords = useSelector(getRecordSelector);
@@ -40,24 +40,39 @@ const SchemaReport = () => {
       value1: getRecords[0]?.Offers[0]?.record1,
       value2: getRecords[0]?.Offers[0]?.record2,
     },
+    {
+      name: "Item Price",
+      value1: getRecords[0]?.ItemPrice[0]?.record1,
+      value2: getRecords[0]?.ItemPrice[0]?.record2,
+    },
+    {
+      name: "Item Movement",
+      value1: getRecords[0]?.ItemMovement[0]?.record1,
+      value2: getRecords[0]?.ItemMovement[0]?.record2,
+    },
+    {
+      name: "Item return",
+      value1: getRecords[0]?.Itemreturn[0]?.record1,
+      value2: getRecords[0]?.Itemreturn[0]?.record2,
+    },
   ];
 
   return (
     <>
       <div className={styles.outerbox}>
         <Row className={styles.innerBox1}>
-          <p className={styles.number}>Overall Migration Status</p>
+          <p className={styles.heading}>Overall Migration Status</p>
         </Row>
         <Row className={styles.innerBox2}>
           <div>
-            <MigrationStatus data={data} />
+            <MigrationBarChart data={data} />
           </div>
         </Row>
       </div>
 
       <div className={styles.outerbox2}>
         <Row className={styles.innerBox21}>
-          <p className={styles.number}>Schema Migration Status</p>
+          <p className={styles.heading}>Schema Migration Status</p>
         </Row>
         {data.map((item, index) => (
           <MigrationPiechart

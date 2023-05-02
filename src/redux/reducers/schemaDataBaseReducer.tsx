@@ -72,7 +72,7 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
                     myArray: updatedArray,
                 }; 
      case ADD_LAST_INDEX:
-                  const exists = state.lastIndexes.some((node) => node.uid === action.payload.uid);
+                  const exists = state.lastIndexes.some((node) => node?.uid === action.payload?.uid);
                   if (!exists) {
                     return {
                       ...state,

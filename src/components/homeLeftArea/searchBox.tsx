@@ -16,7 +16,7 @@ function SearchBar(props: ChildProps) {
   const { searchArray } = props;
   const dispatch = useDispatch();
   const searchData = useSelector(getProjectsSelector);
-  const searchArrayData = searchData[0]?.projects;
+  // const searchArrayData = searchData[0]?.projects;
   const [searchInput, setSearchInput] = useState("");
  
 useEffect(() => {
@@ -26,7 +26,7 @@ useEffect(() => {
   const handleSearchItems = (searchValue: string) => {
     console.log("searchValue", searchValue);
     if (searchValue !== "") {
-      const filteredData = searchArrayData?.filter((item) =>
+      const filteredData = searchData?.filter((item) =>
         item?.projectName.toLowerCase().includes(searchValue.toLowerCase())
       );
       searchArray(filteredData, true);

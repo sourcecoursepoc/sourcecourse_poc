@@ -36,7 +36,7 @@ const schedule = () => {
     };
 
     return (
-        <Row gutter={[16, 16]} align="middle" style={{ marginTop: "4rem" }} >
+        <Row gutter={[16, 16]} align="middle" style={{ marginTop: "2.5rem" }} >
             <Col span={24}>
                 <Button className={styles.buttonCalender}
                     icon={selectedOption === "Now" ? <CheckOutlined /> : undefined}
