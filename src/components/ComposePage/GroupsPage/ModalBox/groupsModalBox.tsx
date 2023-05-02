@@ -27,10 +27,9 @@ interface MyModalProps {
   setVisible: (visible: boolean) => void;
   onCancel?: () => void;
   lastIndices: any[];
-  setLastIndices:any[];
+  setLastIndices: any[];
   onExport: (selectedData: any[]) => void;
   onCreatePipeline?: () => void;
-
 }
 
 const GroupsModalBox: React.FC<MyModalProps> = ({
@@ -42,25 +41,34 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   onExport,
   onCreatePipeline,
 }) => {
+  const [tableData,setTableData]=useState<TableProps>();
   const [groupModalBoxTreeView, setGroupModalBoxTreeView] = useState(true);
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
-  console.log(selectedNodeDetails,"groupmodalBox--selectedNodeDetails")
+  console.log(selectedNodeDetails, "groupmodalBox--selectedNodeDetails");
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
+  console.log(database, "databasedatabasedatabase");
+  const tablesAndColumns = database.map((node) => node.tables);
+  useEffect(() => {
+    setTableData(tablesAndColumns);
+  }, []);
+  
+  console.log(tableData,"tableData")
+  console.log(tablesAndColumns,"tablesAndColumns")
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(getSelectedArraySelector);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
   const lastIndexGroup = selectGroupdataData.slice(-1)[0];
-  const [attrName,setAttrName] = useState('Attribute Name')
-  const [datatype,setDatatype] = useState('VARCHAR')
-  const [render,setRender] = useState(false)
+  const [attrName, setAttrName] = useState("Attribute Name");
+  const [datatype, setDatatype] = useState("VARCHAR");
+  const [render, setRender] = useState(false);
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
-    dispatch(fetchGroupDataRequest());
+    // dispatch(fetchGroupDataRequest());
   }, []);
   useEffect(() => {
     if (lastIndexGroup && "name" in lastIndexGroup) {
@@ -77,8 +85,8 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
         ]);
       }
     }
-  }, [selectGroupdataData,attrName]);
-console.log("lastIndiceslastIndices",lastIndices)
+  }, [selectGroupdataData, attrName]);
+  console.log("lastIndiceslastIndices", lastIndices);
   const handleExport = () => {
     onExport(lastIndices);
   };
@@ -118,43 +126,44 @@ console.log("lastIndiceslastIndices",lastIndices)
   function handleAddIconClick(node: string) {
     setSchema(node);
   }
-  
 
   function contentToggle() {
     setDisplayAttributeSection(true);
-    setDisplayAttributeSection(true)
-    setRender(!render)
-    setAttrName("Attribute Name")
+    setDisplayAttributeSection(true);
+    setRender(!render);
+    setAttrName("Attribute Name");
     const newLastIndices = [...lastIndices];
-    newLastIndices.push({name: "Attribute Name", type: "VARCHAR"})
+    newLastIndices.push({ name: "Attribute Name", type: "VARCHAR" });
     setLastIndices(newLastIndices);
   }
 
-  function getValues(attributeName:string,selectedDataType:string){
-        setAttrName(attributeName)
-        setDatatype(selectedDataType)
-        selectGroupdataData.slice(-1)[0] = {name: attributeName, type: selectedDataType}
-        lastIndices[lastIndices.length-1] = {name: attributeName, type: selectedDataType}
-       }
+  function getValues(attributeName: string, selectedDataType: string) {
+    setAttrName(attributeName);
+    setDatatype(selectedDataType);
+    selectGroupdataData.slice(-1)[0] = {
+      name: attributeName,
+      type: selectedDataType,
+    };
+    lastIndices[lastIndices.length - 1] = {
+      name: attributeName,
+      type: selectedDataType,
+    };
+  }
 
-       const handleRowClick = (node: any) => {
-        setSelectedNodeDetails([node]);
-      
-        // Check if selected node details already exist in lastIndices
-        const isNodeAlreadySelected = lastIndices.some(
-          (selectedNode) => selectedNode.id === node.id
-        );
-      
-        if (!isNodeAlreadySelected) {
-          const updatedLastIndices = [...lastIndices, node];
-          setLastIndices(updatedLastIndices);
-          dispatch(addAttributeDetails(updatedLastIndices));
-        }
-      };
-      
-      
-      
-  
+  const handleRowClick = (node: any) => {
+    setSelectedNodeDetails([node]);
+
+    // Check if selected node details already exist in lastIndices
+    const isNodeAlreadySelected = lastIndices.some(
+      (selectedNode) => selectedNode.id === node.id
+    );
+
+    if (!isNodeAlreadySelected) {
+      const updatedLastIndices = [...lastIndices, node];
+      setLastIndices(updatedLastIndices);
+      dispatch(addAttributeDetails(updatedLastIndices));
+    }
+  };
 
   const swapElements = (array: array, index1: number, index2: number) => {
     const newArray = [...array];
@@ -163,6 +172,10 @@ console.log("lastIndiceslastIndices",lastIndices)
     newArray[index2] = temp;
     return newArray;
   };
+
+  function clickhandler() {
+    setDisplayAttributeSection(false);
+  }
 
   const handleArrowClick = (index: number, direction: "up" | "down") => {
     const newData = [...lastIndices];
@@ -182,7 +195,7 @@ console.log("lastIndiceslastIndices",lastIndices)
       width={1050}
       bodyStyle={{
         minHeight: "30rem",
-       overflowY:"auto",
+        overflowY: "auto",
         borderRadius: "5px",
       }}
     >
@@ -229,7 +242,14 @@ console.log("lastIndiceslastIndices",lastIndices)
         </Col>
       </Row>
       <Row>
-        <Col span={6} style={{ minHeight:"25rem", borderRight: "1px solid #ccc",marginTop: "0.5rem" }}>
+        <Col
+          span={6}
+          style={{
+            minHeight: "25rem",
+            borderRight: "1px solid #ccc",
+            marginTop: "0.5rem",
+          }}
+        >
           <Row style={{ marginTop: "1rem", width: "14rem" }}>
             <Col span={24} style={{ marginLeft: "0.15rem" }}>
               {/* <SearchBar /> */}
@@ -245,18 +265,30 @@ console.log("lastIndiceslastIndices",lastIndices)
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-              {groupdataDatabaseSelector && (
+              {database && (
                 <TreeView
-                  db={groupdataDatabaseSelector}
+                  db={database}
                   setGroupModalBoxTreeView={setGroupModalBoxTreeView}
                   groupModalBoxTreeView={groupModalBoxTreeView}
-                  iconImage={<PlusOutlined style={{width:'3rem',fontSize:'0.8rem',color:'#7E60BC',strokeWidth: '2' }}/>}
+                  iconImage={
+                    <PlusOutlined
+                      style={{
+                        width: "3rem",
+                        fontSize: "0.8rem",
+                        color: "#7E60BC",
+                        strokeWidth: "2",
+                      }}
+                    />
+                  }
                 />
               )}
             </Col>
           </Row>
         </Col>
-        <Col span={8} style={{ borderRight: "1px solid #ccc",marginTop: "0.5rem" }}>
+        <Col
+          span={8}
+          style={{ borderRight: "1px solid #ccc", marginTop: "0.5rem" }}
+        >
           <AttributeButton onClickAttribute={contentToggle} />
           {lastIndices?.map((node, index) => (
             <>
@@ -265,8 +297,9 @@ console.log("lastIndiceslastIndices",lastIndices)
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
-                  marginBottom:"-1rem"
+                  marginBottom: "-1rem",
                 }}
+                onClick={clickhandler}
               >
                 <Row
                   key={node.name}
@@ -278,10 +311,14 @@ console.log("lastIndiceslastIndices",lastIndices)
                   <Col span={28}>
                     {node.name && (
                       <p>
-                         <span style={{ color: 'black', fontWeight: '500' }}>{node.name}</span>
-                        
+                        <span style={{ color: "black", fontWeight: "500" }}>
+                          {node.name}
+                        </span>
+
                         <br />
-                        <span style={{ color: 'grey', fontSize: '12px' }}>{node.type.toUpperCase()}</span>
+                        <span style={{ color: "grey", fontSize: "12px" }}>
+                          {node.type.toUpperCase()}
+                        </span>
                       </p>
                     )}
                   </Col>
@@ -301,9 +338,18 @@ console.log("lastIndiceslastIndices",lastIndices)
         </Col>
         {/* third partition area */}
         {displayAttributeSection ? (
-          <NewAttributeContent attributeValues={getValues} reRender={render} key={render}/>
+          <NewAttributeContent
+            attributeValues={getValues}
+            reRender={render}
+            key={render}
+          />
         ) : (
-          <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails} lastIndices={lastIndices} setLastIndices={setLastIndices}/>
+          <GroupsThirdSide
+            selectedNodeDetails={selectedNodeDetails}
+            setSelectedNodeDetails={setSelectedNodeDetails}
+            lastIndices={lastIndices}
+            setLastIndices={setLastIndices}
+          />
         )}
         {/* {displayAttributeSection} */}
       </Row>

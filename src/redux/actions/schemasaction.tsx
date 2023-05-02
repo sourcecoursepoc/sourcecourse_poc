@@ -18,9 +18,9 @@ import {
   ADD_GROUPDATA_ARRAY,
   CLEAR_LAST_INDEXES,
   ADD_ATTRIBUTE_DETAILS,
-  DELETE_GROUP_MODAL_BOX
+  DELETE_GROUP_MODAL,
+  DELETE_GROUP_MODAL_BOX,
 } from "./schemaActionTypes";
-
 
 import {
   FetchSchemaRequest,
@@ -125,18 +125,22 @@ export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
 });
 
 //action for adding attribute details to an array
-export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction=> {
+
+export const addAttributeDetails = (
+  lastIndices: any
+): AddAttributeDetailsAction => {
   console.log("Received data in addAttributeDetails ---- action:", lastIndices);
+
   return {
     type: ADD_ATTRIBUTE_DETAILS,
+
     payload: lastIndices,
   };
 };
 
-//action for updating the array with new values 
-
 export function removeNode(uid: string): RemoveNodeAction {
   console.log("uiddddd", uid);
+
   return {
     type: REMOVE_NODE,
 
@@ -163,6 +167,7 @@ export const removeLastIndex = (uid: string): RemoveLastIndexAction => {
 export const clearLastIndex = (): ClearLastIndexAction => {
   return {
     type: CLEAR_LAST_INDEXES,
+
     payload: [],
   };
 };
@@ -170,9 +175,9 @@ export const clearLastIndex = (): ClearLastIndexAction => {
 //delete group data modal box
 
 export const deleteGroupModalBox = (): deleteGroupModalBoxAction => {
-  console.log("DELETE_GROUP_MODAL_BOX action triggered");
   return {
-    type:DELETE_GROUP_MODAL_BOX,
+    type: DELETE_GROUP_MODAL_BOX,
+
     payload: [],
   };
 };
