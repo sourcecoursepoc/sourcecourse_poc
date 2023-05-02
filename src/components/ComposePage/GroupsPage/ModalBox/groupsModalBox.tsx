@@ -138,24 +138,20 @@ console.log("lastIndiceslastIndices",lastIndices)
        }
 
        const handleRowClick = (node: any) => {
-        console.log("Getting innnnnn");
         setSelectedNodeDetails([node]);
-        console.log("check check", node);
-        console.log("last Indicesssssssssssssss", lastIndices);
+      
         // Check if selected node details already exist in lastIndices
         const isNodeAlreadySelected = lastIndices.some(
           (selectedNode) => selectedNode.id === node.id
-        );  
+        );
+      
         if (!isNodeAlreadySelected) {
-          const updatedLastIndices = [...lastIndices, ...selectedNodeDetails];
-          handleAddAttributeDetails(updatedLastIndices);
-          setLastIndices(selectedNodeDetails);
+          const updatedLastIndices = [...lastIndices, node];
+          setLastIndices(updatedLastIndices);
           dispatch(addAttributeDetails(updatedLastIndices));
-          console.log("Data getting printed on clicking the attribute", updatedLastIndices);
-        }  
-        console.log("selectedNodeDetails", selectedNodeDetails);
-        console.log("Getting outttttttt");
+        }
       };
+      
       
       
   
@@ -307,8 +303,9 @@ console.log("lastIndiceslastIndices",lastIndices)
         {displayAttributeSection ? (
           <NewAttributeContent attributeValues={getValues} reRender={render} key={render}/>
         ) : (
-          <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails}/>
+          <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails} lastIndices={lastIndices} setLastIndices={setLastIndices}/>
         )}
+        {/* {displayAttributeSection} */}
       </Row>
     </Modal>
   );

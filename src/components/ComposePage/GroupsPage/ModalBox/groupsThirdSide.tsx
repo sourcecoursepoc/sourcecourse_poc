@@ -10,14 +10,14 @@ import ConvertValues from "./convertValues";
 import FloatInput from "./floatInput";
 import InfoCircleOutlinedFunction from "./infoCircleOutlined";
 
-interface MyModalProps {
+interface MyGroupsThirdProps {
   selectedNodeDetails: any[];
   setSelectedNodeDetails: () => void;
   lastIndices: any[];
-  setLastIndices: Dispatch<SetStateAction<any[]>>;
+  setLastIndices:any[];
 }
 
-const GroupsThirdSide: React.FC<MyModalProps> = ({
+const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
   selectedNodeDetails,
   setSelectedNodeDetails,
   lastIndices,
@@ -26,37 +26,44 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
   const { Option } = Select;
   const { TextArea } = Input;
   const dispatch = useDispatch();
-  ////////
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    value: string | undefined,
-    key: string
-  ) => {
-    console.log(selectedNodeDetails,"first--selectedNodeDetails")
-    setSelectedNodeDetails((selectedNodeDetails) => {
-      console.log(selectedNodeDetails,"--in--selectedNodeDetails")
-      const updatedSelectedNodeDetails = selectedNodeDetails.map((node) => {
-        if (node?.metadata?.[key] === value) {
-          return {
-            ...node,
-            metadata: {
-              ...node.metadata,
-              [key]: e.target.value
-            }
-          };
-        } else {
-          return node;
-        }
-      });
-      // dispatch(addAttributeDetails(updatedSelectedNodeDetails));
-      console.log(updatedSelectedNodeDetails, "updatedSelectedNodeDetails--updatedSelectedNodeDetails");
-      return updatedSelectedNodeDetails;
+  //////////////////////////////////////////////////
+ const handleInputChange = (
+  e: React.ChangeEvent<HTMLInputElement>,
+  value: string | undefined,
+  key: string
+) => {
+  setSelectedNodeDetails((selectedNodeDetails) => {
+    const updatedSelectedNodeDetails = selectedNodeDetails.map((node) => {
+      if (node?.metadata?.[key] === value) {
+        return {
+          ...node,
+          metadata: {
+            ...node.metadata,
+            [key]: e.target.value
+          }
+        };
+      } else {
+        return node;
+      }
     });
-    
-  };
-  console.log(selectedNodeDetails, "--out--selectedNodeDetails--selectedNodeDetails");
+
+    // Update the selected node directly in lastIndices
+    const nodeIndexInLastIndices = lastIndices.findIndex(
+      (selectedNode) => selectedNode.id === updatedSelectedNodeDetails[0].id
+    );
+    const updatedLastIndices = [...lastIndices];
+    updatedLastIndices[nodeIndexInLastIndices] = updatedSelectedNodeDetails[0];
+    setLastIndices(updatedLastIndices);
+
+    return updatedSelectedNodeDetails;
+  });
+};
+
   
-  ////////
+  
+  // console.log(selectedNodeDetails, "--out--selectedNodeDetails--selectedNodeDetails");
+  
+  /////////////////////////////////////////////////////////////////////////
 
 
   // const { Panel } = Collapse;
