@@ -1,4 +1,4 @@
-import { ComposePipelineState, ComposePipelineActions, ComposeReportsPipelineActions, ComposeReportsPipelineState } from "../actions/composeTypes";
+import { ComposePipelineState, ComposePipelineActions, ComposeReportsPipelineActions, ComposeReportsPipelineState, ComposeNameDescState, ComposeNameDescActions } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
   FETCH_COMPOSE_PIPELINE_SUCCESS,
@@ -6,6 +6,10 @@ import {
   FETCH_REPORTS_PIPELINE,
   FETCH_REPORTS_PIPELINE_SUCCESS,
   FETCH_REPORTS_PIPELINE_FAILURE,
+  FETCH_SCHEMA_NAME_DESC,
+  FETCH_COMPOSE_NAME_DESC_SUCCESS,
+  FETCH_COMPOSE_NAME_DESC_FAILURE,
+  FETCH_COMPOSE_NAME_DESC,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -87,4 +91,46 @@ function composeReportsPipelineReducer(
   }
 }
 
-export { composeReducer, composeReportsPipelineReducer };
+//reducer for fetching compose page name and description
+
+const initialNameDescState: ComposeNameDescState = {
+  pending: false,
+  postData: [],
+  error: null,
+};
+
+function composeNameDescReducer(
+  state = initialNameDescState,
+  action: ComposeNameDescActions
+): ComposeNameDescState {
+  switch (action.type) {
+    case FETCH_COMPOSE_NAME_DESC:
+      console.log("FETCH_SCHEMA_NAME_DESC action dispatched.");
+      return {
+        ...state,
+        pending: true,
+      };
+    case FETCH_COMPOSE_NAME_DESC_SUCCESS:
+      console.log("FETCH_COMPOSE_NAME_DESC_SUCCESS action dispatched.");
+      return {
+        ...state,
+        pending: false,
+        postData: action.payload.postData,
+        error: null,
+      };
+    case FETCH_COMPOSE_NAME_DESC_FAILURE:
+      console.log("FETCH_COMPOSE_NAME_DESC_FAILURE action dispatched.");
+      return {
+        ...state,
+        pending: false,
+        postData: [],
+        error: action.payload.error,
+      };
+    default:
+      return state;
+  }
+}
+
+
+
+export { composeReducer, composeReportsPipelineReducer,composeNameDescReducer };

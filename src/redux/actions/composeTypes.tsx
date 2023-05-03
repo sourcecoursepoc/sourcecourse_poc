@@ -1,4 +1,4 @@
-import { FETCH_COMPOSE_PIPELINE, FETCH_COMPOSE_PIPELINE_SUCCESS, FETCH_COMPOSE_PIPELINE_FAILURE, FETCH_REPORTS_PIPELINE, FETCH_REPORTS_PIPELINE_SUCCESS, FETCH_REPORTS_PIPELINE_FAILURE } from "./composeActionTypes";
+import { FETCH_COMPOSE_PIPELINE, FETCH_COMPOSE_PIPELINE_SUCCESS, FETCH_COMPOSE_PIPELINE_FAILURE, FETCH_REPORTS_PIPELINE, FETCH_REPORTS_PIPELINE_SUCCESS, FETCH_REPORTS_PIPELINE_FAILURE, FETCH_SCHEMA_NAME_DESC_FAILURE, FETCH_SCHEMA_NAME_DESC_SUCCESS, FETCH_SCHEMA_NAME_DESC, FETCH_COMPOSE_NAME_DESC, FETCH_COMPOSE_NAME_DESC_SUCCESS, FETCH_COMPOSE_NAME_DESC_FAILURE } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
     id: any;
@@ -102,3 +102,47 @@ export type ComposeReportsPipelineActions =
     | FetchComposeReportsPipelineRequest
     | FetchComposeReportsPipelineSuccess
     | FetchComposeReportsPipelineFailure;
+
+
+    //compose page name & desc action
+
+    export interface ICOMPOSENAMEDESC {
+        name:any[];
+        description:any[];
+    }
+
+    export interface ComposeNameDescState {
+        pending: boolean;
+        postData: ICOMPOSENAMEDESC[];
+        error: string | null;
+    }
+    
+    export interface FetchComposeNameDescSuccessPayload {
+        postData: ICOMPOSENAMEDESC[];
+    }
+    
+    export interface FetchComposeNameDescFailurePayload {
+        error: string;
+    }
+    
+    export interface FetchComposeNameDescRequest {
+        type: typeof FETCH_COMPOSE_NAME_DESC;
+        params: any;
+    }
+    
+    export type FetchComposeNameDescSuccess = {
+        type: typeof FETCH_COMPOSE_NAME_DESC_SUCCESS;
+        payload: FetchComposeNameDescSuccessPayload;
+    };
+    
+    export type FetchComposeNameDescFailure = {
+        type: typeof FETCH_COMPOSE_NAME_DESC_FAILURE;
+        payload: FetchComposeNameDescFailurePayload;
+    };
+    
+    export type ComposeNameDescActions =
+        | FetchComposeNameDescRequest
+        | FetchComposeNameDescSuccess
+        | FetchComposeNameDescFailure;
+    
+    console.log("composeActionTypes: action types defined for fetching name and description");

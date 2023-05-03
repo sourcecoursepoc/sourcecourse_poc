@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Layout, Space, Col, Row, Image } from "antd";
 import Header from "../../components/header/header";
 import axios from 'axios';
@@ -22,36 +22,52 @@ import { useDispatch } from "react-redux";
 import Toast, { showSuccessToast } from "../schemas/toast";
 import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
+import { fetchComposeNameDescRequest } from "@/redux/actions/composeAction";
 
 const Compose = () => {
   const { Content } = Layout;
   const [selectedIcon, setSelectedIcon] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [saveClicked, setSaveClicked] = useState(false);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [isSidebutonClickable, setIsSidebuttonClickable] = useState(true)
-
   const dispatch = useDispatch();
+
+ //posting compose page name and description using action
+  useEffect(() => {
+    if ( saveClicked && name && description) {
+      console.log('Posting data...', name, description);
+      dispatch(fetchComposeNameDescRequest(name, description));
+      setSaveClicked(false);
+    }
+  }, [saveClicked,name, description]);
+
   const handleSaveProjectInfo = async () => { 
     setSaveModalVisible(false);
+    setSaveClicked(true);
     showSuccessToast("Saved Successfully")
     /* dispatch(clearLastIndex());
     setName(""); */
-    try {
-      const response = await axios.post('http://localhost:8080/sourcecourse/project', {
-        name: name,
-        description: description
-      });
-      if (response.data !== -1) {
-        setIsSidebuttonClickable(true); // Set the isclickable state to true
-        handleIconClick("HddFilled") //toggles schema
-      }
-    } catch (error) {
-      console.error(error);
-    }
+
+    //posting of name and description is being done using axios 
+
+    // try {
+    //   const response = await axios.post('http://localhost:8080/sourcecourse/project', {
+    //     name: name,
+    //     description: description
+    //   });
+    //   if (response.data !== -1) {
+    //     setIsSidebuttonClickable(true); // Set the isclickable state to true
+    //     handleIconClick("HddFilled") //toggles schema
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
+    
   };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
@@ -108,6 +124,8 @@ const Compose = () => {
       }
     }
   };
+
+  const canSave = name.trim() !== '' && description.trim() !== '';
 
   return (
     <>
