@@ -3,7 +3,7 @@ import fetchPipelineReducer from "./fetchDataReducer";
 import fetchRecordReducer from "./fetchRecordsReducer";
 import schemaReducer from "./schemaReducer";
 import projectReducer from "./projectReducer";
-import schemaDataBaseReducer from "./schemaDataBaseReducer";
+import schemaDataBaseReducer, { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import { composeReducer, composeReportsPipelineReducer } from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
@@ -22,6 +22,9 @@ const rootReducer = combineReducers({
   record: fetchRecordsReducer,
   group: groupReducer,
   composeReportsPipeline: composeReportsPipelineReducer,
+  postTagsAndDescription: postTagsAndDescriptionReducer,
+  postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer
+
 });
 
 

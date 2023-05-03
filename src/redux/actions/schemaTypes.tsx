@@ -21,7 +21,15 @@ import {
     POST_GROUPDATA,
     POST_GROUPDATA_SUCCESS,
     POST_GROUPDATA_FAILURE,
-    DELETE_GROUP_MODAL
+    DELETE_GROUP_MODAL,
+    POST_TAGS_DESCRIPTION_REQUEST,
+    POST_TAGS_DESCRIPTION_FAILURE,
+    POST_TAGS_DESCRIPTION_SUCCESS,
+    POST_COLUMN_TAGS_DESCRIPTION_REQUEST,
+    POST_COLUMN_TAGS_DESCRIPTION_SUCCESS,
+    POST_COLUMN_TAGS_DESCRIPTION_FAILURE,
+
+
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -64,13 +72,13 @@ export type SchemaActions =
     | FetchSchemaSuccess
     | FetchSchemaFailure;
 
-    
+
 export interface DataBaseState {
     pending: boolean;
     database: DBProps[];
     error: string | null;
     myArray: any[];
-    lastIndexes:any[];
+    lastIndexes: any[];
 }
 
 export interface FetchDataBaseSuccessPayload {
@@ -108,10 +116,10 @@ export type DataBaseActions =
     | FetchDataBaseSuccess
     | FetchDataBaseFailure
     | AddArrayAction
-    |RemoveNodeAction
+    | RemoveNodeAction
     | AddLastIndexAction
-    |RemoveLastIndexAction
-    |ClearLastIndexAction
+    | RemoveLastIndexAction
+    | ClearLastIndexAction
     ;
 
 
@@ -123,7 +131,7 @@ export interface GroupdataDataBaseState {
     error: string | null;
     myGroupdataArray: any[];
     myArray: any[];
-    lastIndices:any[];
+    lastIndices: any[];
 
 }
 
@@ -160,62 +168,62 @@ export interface AddGroupArrayAction {
 export interface AddAttributeDetailsAction {
     type: typeof ADD_ATTRIBUTE_DETAILS;
     payload: any;
-  }
+}
 
-  export const AddAttributeDetails = (lastIndices:any) => {
+export const AddAttributeDetails = (lastIndices: any) => {
     return {
-      type: ADD_LAST_INDEX,
-      payload: lastIndices,
+        type: ADD_LAST_INDEX,
+        payload: lastIndices,
     };
-  };
-  
+};
 
-export interface RemoveNodeAction  {
-    type:typeof REMOVE_NODE;
-    payload:  { uid: string }; // The ID of the node to remove
-  }
-  export interface AddLastIndexAction {
+
+export interface RemoveNodeAction {
+    type: typeof REMOVE_NODE;
+    payload: { uid: string }; // The ID of the node to remove
+}
+export interface AddLastIndexAction {
     type: typeof ADD_LAST_INDEX;
     payload: any;
-  }
-  
-  export  interface RemoveLastIndexAction {
+}
+
+export interface RemoveLastIndexAction {
     type: typeof REMOVE_LAST_INDEX;
     payload: string;
-  }
+}
 
-   export  interface ClearLastIndexAction {
+export interface ClearLastIndexAction {
     type: typeof CLEAR_LAST_INDEXES;
     payload: [];
-  }
+}
 
 
-  export const addLastIndex = (lastIndex:any) => {
+export const addLastIndex = (lastIndex: any) => {
     return {
-      type: ADD_LAST_INDEX,
-      payload: lastIndex,
+        type: ADD_LAST_INDEX,
+        payload: lastIndex,
     };
-  };
-  
-  export const removeLastIndex = (uid:any) => {
-    return {
-      type: REMOVE_LAST_INDEX,
-      payload: uid,
-    };
-  };
+};
 
-  export  interface deleteGroupModalBoxAction {
+export const removeLastIndex = (uid: any) => {
+    return {
+        type: REMOVE_LAST_INDEX,
+        payload: uid,
+    };
+};
+
+export interface deleteGroupModalBoxAction {
     type: typeof DELETE_GROUP_MODAL;
     payload: [];
-  }
+}
 
 export type GroupdataDataBaseActions =
     | FetchGroupdataDataBaseRequest
     | FetchGroupdataDataBaseSuccess
     | FetchGroupdataDataBaseFailure
     | AddGroupArrayAction
-    |AddAttributeDetailsAction
-    |deleteGroupModalBoxAction
+    | AddAttributeDetailsAction
+    | deleteGroupModalBoxAction
     ;
 
 // Post schemas tags and descriprion
@@ -268,3 +276,90 @@ export type PostGroupDataActionTypes =
     | PostGrooupDataRequestAction
     | PostGrooupDataSuccessAction
     | PostGrooupDataFailureAction;
+
+// post tags and description for table
+
+export interface PostTagsAndDescription {
+    tags: any;
+    description: any;
+}
+
+export interface PostTagsAndDescriptionState {
+    pending: boolean;
+    postData: PostTagsAndDescription[];
+    error: string | null;
+}
+
+export interface PostTagsAndDescriptionSuccessPayload {
+    postData: PostTagsAndDescription[];
+}
+
+export interface PostTagsAndDescriptionFailurePayload {
+    error: string;
+}
+
+export interface PostTagsAndDescriptionRequest {
+    type: typeof POST_TAGS_DESCRIPTION_REQUEST;
+    uid: any;
+    tags: string[];
+    description: string
+}
+
+export type PostTagsAndDescriptionSuccess = {
+    type: typeof POST_TAGS_DESCRIPTION_SUCCESS;
+    payload: PostTagsAndDescriptionSuccessPayload;
+};
+
+export type PostTagsAndDescriptionFailure = {
+    type: typeof POST_TAGS_DESCRIPTION_FAILURE;
+    payload: PostTagsAndDescriptionFailurePayload;
+};
+
+export type PostTagsAndDescriptionActions =
+    | PostTagsAndDescriptionRequest
+    | PostTagsAndDescriptionSuccess
+    | PostTagsAndDescriptionFailure;
+
+
+// post tags and description for column
+
+export interface PostColumnTagsAndDescription {
+    tags: any;
+    description: any;
+}
+
+export interface PostColumnTagsAndDescriptionState {
+    pending: boolean;
+    postColumnData: PostColumnTagsAndDescription[];
+    error: string | null;
+}
+
+export interface PostColumnTagsAndDescriptionSuccessPayload {
+    postColumnData: PostColumnTagsAndDescription[];
+}
+
+export interface PostColumnTagsAndDescriptionFailurePayload {
+    error: string;
+}
+
+export interface PostColumnTagsAndDescriptionRequest {
+    type: typeof POST_COLUMN_TAGS_DESCRIPTION_REQUEST;
+    uid: any;
+    tags: string[];
+    description: string
+}
+
+export type PostColumnTagsAndDescriptionSuccess = {
+    type: typeof POST_COLUMN_TAGS_DESCRIPTION_SUCCESS;
+    payload: PostColumnTagsAndDescriptionSuccessPayload;
+};
+
+export type PostColumnTagsAndDescriptionFailure = {
+    type: typeof POST_COLUMN_TAGS_DESCRIPTION_FAILURE;
+    payload: PostTagsAndDescriptionFailurePayload;
+};
+
+export type PostColumnTagsAndDescriptionActions =
+    | PostColumnTagsAndDescriptionRequest
+    | PostColumnTagsAndDescriptionSuccess
+    | PostColumnTagsAndDescriptionFailure;

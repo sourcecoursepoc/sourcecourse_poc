@@ -19,7 +19,13 @@ import {
   CLEAR_LAST_INDEXES,
   ADD_ATTRIBUTE_DETAILS,
   DELETE_GROUP_MODAL,
-  DELETE_GROUP_MODAL_BOX
+  DELETE_GROUP_MODAL_BOX,
+  POST_TAGS_DESCRIPTION_REQUEST,
+  POST_TAGS_DESCRIPTION_SUCCESS,
+  POST_TAGS_DESCRIPTION_FAILURE,
+  POST_COLUMN_TAGS_DESCRIPTION_REQUEST,
+  POST_COLUMN_TAGS_DESCRIPTION_SUCCESS,
+  POST_COLUMN_TAGS_DESCRIPTION_FAILURE,
 } from "./schemaActionTypes";
 
 
@@ -49,11 +55,19 @@ import {
   AddAttributeDetailsAction,
   deleteGroupModalAction,
   deleteGroupModalBoxAction,
+  UpdatePostAction,
+  PostTagsAndDescriptionRequest,
+  PostTagsAndDescriptionSuccessPayload,
+  PostTagsAndDescriptionSuccess,
+  PostTagsAndDescriptionFailurePayload,
+  PostTagsAndDescriptionFailure,
+  PostColumnTagsAndDescriptionRequest,
+  PostColumnTagsAndDescriptionSuccess,
+  PostColumnTagsAndDescriptionFailure,
 } from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
   type: FETCH_SCHEMA_SCHEMADATA,
-
   params,
 });
 
@@ -126,7 +140,7 @@ export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
 });
 
 //action for adding attribute details to an array
-export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction=> {
+export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction => {
   console.log("Received data in addAttributeDetails ---- action:", lastIndices);
   return {
     type: ADD_ATTRIBUTE_DETAILS,
@@ -169,7 +183,7 @@ export const clearLastIndex = (): ClearLastIndexAction => {
 //delete group data modal box
 export const deleteGroupModalBox = (): deleteGroupModalBoxAction => {
   return {
-    type:DELETE_GROUP_MODAL_BOX,
+    type: DELETE_GROUP_MODAL_BOX,
     payload: [],
   };
 };
@@ -188,4 +202,46 @@ export const postDataFailure = (error: string): PostDataActionTypes => ({
   type: POST_GROUPDATA_DATABASE_FAILURE,
 
   payload: error,
+});
+
+
+// post tags and description for column
+
+export const postColumnTagsAndDescriptionRequest = (uid: any, tags: string[], description: string): PostColumnTagsAndDescriptionRequest => ({
+  type: POST_COLUMN_TAGS_DESCRIPTION_REQUEST,
+  uid,
+  tags,
+  description,
+
+});
+
+export const postColumnTagsAndDescriptionSuccess = (postColumnData: any): PostColumnTagsAndDescriptionSuccess => ({
+  type: POST_COLUMN_TAGS_DESCRIPTION_SUCCESS,
+  payload: { postColumnData },
+});
+
+export const postColumnTagsAndDescriptionFailure = (error: any): PostColumnTagsAndDescriptionFailure => ({
+  type: POST_COLUMN_TAGS_DESCRIPTION_FAILURE,
+  payload: { error },
+});
+
+
+// post tags and description for table
+
+export const postTagsAndDescriptionRequest = (uid: any, tags: string[], description: string): PostTagsAndDescriptionRequest => ({
+  type: POST_TAGS_DESCRIPTION_REQUEST,
+  uid,
+  tags,
+  description,
+
+});
+
+export const postTagsAndDescriptionSuccess = (postData: any): PostTagsAndDescriptionSuccess => ({
+  type: POST_TAGS_DESCRIPTION_SUCCESS,
+  payload: { postData },
+});
+
+export const postTagsAndDescriptionFailure = (error: any): PostTagsAndDescriptionFailure => ({
+  type: POST_TAGS_DESCRIPTION_FAILURE,
+  payload: { error },
 });
