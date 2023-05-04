@@ -2,14 +2,21 @@ import {
   FETCH_SCHEMA_SCHEMADATA,
   FETCH_SCHEMA_SCHEMADATA_FAILURE,
   FETCH_SCHEMA_SCHEMADATA_SUCCESS,
+  
 } from "../actions/schemaActionTypes";
-import { SchemaState, SchemaActions } from "../actions/schemaTypes";
+import { SchemaState, SchemaActions,SchemaData,SchemaComposeState } from "../actions/schemaTypes";
 
 const initialState: SchemaState = {
   pending: false,
   schemas: [],
   error: null,
 };
+
+/* const initialStateSchema: SchemaData = {
+  data: [],
+  loading: false,
+  error: null,
+}; */
 
 export default (state = initialState, action: SchemaActions) => {
   switch (action.type) {

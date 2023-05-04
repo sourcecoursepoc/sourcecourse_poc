@@ -1,4 +1,11 @@
-import { ComposePipelineState, ComposePipelineActions, ComposeReportsPipelineActions, ComposeReportsPipelineState } from "../actions/composeTypes";
+import {
+  ComposePipelineState,
+  ComposePipelineActions,
+  ComposeReportsPipelineActions,
+  ComposeReportsPipelineState,
+  SchemaComposeActions,
+  SchemaComposeState,
+} from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
   FETCH_COMPOSE_PIPELINE_SUCCESS,
@@ -6,6 +13,9 @@ import {
   FETCH_REPORTS_PIPELINE,
   FETCH_REPORTS_PIPELINE_SUCCESS,
   FETCH_REPORTS_PIPELINE_FAILURE,
+  FETCH_SCHEMA_COMPOSE,
+  FETCH_SCHEMA_COMPOSE_SUCCESS,
+  FETCH_SCHEMA_COMPOSE_FAILURE,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -46,7 +56,6 @@ function composeReducer(
   }
 }
 
-
 // compose reports pipeline
 
 const initialReportsState: ComposeReportsPipelineState = {
@@ -54,7 +63,11 @@ const initialReportsState: ComposeReportsPipelineState = {
   composeReportsPipeline: [],
   error: null,
 };
-
+const initialStateCompose: SchemaComposeState = {
+  pending: false,
+  schemas: [],
+  error: null,
+  }; 
 function composeReportsPipelineReducer(
   state = initialReportsState,
   action: ComposeReportsPipelineActions
@@ -86,5 +99,39 @@ function composeReportsPipelineReducer(
       return state;
   }
 }
+//fetching schema details from compose page
 
-export { composeReducer, composeReportsPipelineReducer };
+
+  function composeSchemaReducer(
+    state = initialStateCompose,
+    action: SchemaComposeActions
+  ): SchemaComposeState {
+    switch (action.type) {
+    case FETCH_SCHEMA_COMPOSE:
+      return {
+        ...state,
+        pending: true,
+      };
+    case  FETCH_SCHEMA_COMPOSE_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        schemas: action.payload.schemas,
+        error: null,
+      };
+    case  FETCH_SCHEMA_COMPOSE_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        schemas: [],
+        error: action.payload.error,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+
+export { composeReducer, composeReportsPipelineReducer, composeSchemaReducer };

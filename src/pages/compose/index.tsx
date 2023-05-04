@@ -73,6 +73,7 @@ const Compose = () => {
   };
   const handleIconClick = (icon) => {
     setSelectedIcon(icon);
+
   };
 
   const handleDeleteModalOk = () => {

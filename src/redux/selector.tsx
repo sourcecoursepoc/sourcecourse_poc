@@ -4,6 +4,7 @@ import { AppState } from "./reducers/index";
 
 const getPending = (state: AppState) => state.schema.pending;
 const getSchemas = (state: AppState) => state.schema.schemas;
+const getSchemaCompose = (state: AppState) => state.schemaComposeData.schemas;
 const getProjects = (state: AppState) => state.project.projects;
 const getError = (state: AppState) => state.schema.error;
 const getDataBase = (state: AppState) => state.database.database;
@@ -25,11 +26,12 @@ export const getlastIndexesArraySelector = createSelector(getSelectedArray, (myA
 export const getDataBaseSelector = createSelector(getDataBase, (database) => database)
 export const getGroupdataDataBaseSelector = createSelector(getGroupdataDataBase, (groupdataDatabase) => groupdataDatabase)
 export const getSchemasSelector = createSelector(getSchemas, (schemas) => schemas);
+export const getSchemaComposeSelector = createSelector(getSchemaCompose, (schemas) => schemas);
 export const getProjectsSelector = createSelector(getProjects, (projects) => projects);
 export const getGroupSelector = createSelector(getGroups, (groups) => groups);
 export const getPendingSelector = createSelector(
   getPending,
   (pending) => pending
 );
-
+5
 export const getErrorSelector = createSelector(getError, (error) => error);

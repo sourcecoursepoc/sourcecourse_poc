@@ -21,7 +21,7 @@ import {
     POST_GROUPDATA,
     POST_GROUPDATA_SUCCESS,
     POST_GROUPDATA_FAILURE,
-    DELETE_GROUP_MODAL
+    DELETE_GROUP_MODAL_BOX,FETCH_SCHEMA_COMPOSE_FAILURE,FETCH_SCHEMA_COMPOSE_SUCCESS,FETCH_SCHEMA_COMPOSE 
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -35,6 +35,7 @@ export interface SchemaState {
     schemas: ISchema[];
     error: string | null;
 }
+
 
 export interface FetchSchemaSuccessPayload {
     schemas: ISchema[];
@@ -63,6 +64,52 @@ export type SchemaActions =
     | FetchSchemaRequest
     | FetchSchemaSuccess
     | FetchSchemaFailure;
+
+    //fetching schema inside compose page***************
+
+    export interface SchemaData {
+        uid: number;
+        tableName: string;
+        columns: {
+          uid: number;
+          columnName: string;
+          columnType: string;
+          nullable: boolean;
+        }[];
+      }
+     export  interface SchemaComposeState {
+        data: SchemaData[];
+        loading: boolean;
+        error: string | null;
+      }
+    export interface FetchSchemaComposeSuccessPayload {
+        schemas: SchemaData[];
+    }
+    
+    export interface FetchSchemaComposeFailurePayload {
+        error: string;
+    }
+    
+    export interface FetchSchemaComposeRequest {
+        type: typeof FETCH_SCHEMA_COMPOSE;
+        params: number;
+    }
+    
+    export type FetchSchemaComposeSuccess = {
+        type: typeof FETCH_SCHEMA_COMPOSE_SUCCESS;
+        payload: FetchSchemaComposeSuccessPayload;
+    };
+    
+    export type FetchSchemaComposeFailure = {
+        type: typeof FETCH_SCHEMA_COMPOSE_FAILURE;
+        payload: FetchSchemaComposeFailurePayload;
+    };
+    
+    export type SchemaComposeActions =
+    | FetchSchemaComposeRequest
+    | FetchSchemaComposeSuccess
+    | FetchSchemaComposeFailure;
+
 
     
 export interface DataBaseState {
@@ -103,6 +150,7 @@ export interface AddArrayAction {
     payload: any;
 
 }
+
 export type DataBaseActions =
     | FetchDataBaseRequest
     | FetchDataBaseSuccess

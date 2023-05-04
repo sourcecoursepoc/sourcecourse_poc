@@ -19,7 +19,7 @@ import {
   CLEAR_LAST_INDEXES,
   ADD_ATTRIBUTE_DETAILS,
   DELETE_GROUP_MODAL,
-  DELETE_GROUP_MODAL_BOX
+  DELETE_GROUP_MODAL_BOX,FETCH_SCHEMA_COMPOSE,FETCH_SCHEMA_COMPOSE_SUCCESS,FETCH_SCHEMA_COMPOSE_FAILURE
 } from "./schemaActionTypes";
 
 
@@ -49,6 +49,10 @@ import {
   AddAttributeDetailsAction,
   deleteGroupModalAction,
   deleteGroupModalBoxAction,
+  FetchSchemaComposeRequest,
+  FetchSchemaComposeSuccess,
+  FetchSchemaComposeFailure,
+  FetchSchemaComposeSuccessPayload,FetchSchemaComposeFailurePayload
 } from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
@@ -72,6 +76,27 @@ export const fetchSchemaFailure = (
 
   payload,
 });
+//*********************************************** */
+export const fetchSchemaComposeRequest = (params: number): FetchSchemaComposeRequest => ({
+  type: FETCH_SCHEMA_COMPOSE,
+
+  params,
+});
+
+export const fetchSchemaComposeSuccess = (
+  payload: FetchSchemaComposeSuccessPayload
+): FetchSchemaComposeSuccess => ({
+  type: FETCH_SCHEMA_COMPOSE_SUCCESS,
+  payload,
+});
+
+export const fetchSchemaComposeFailure = (
+  payload: FetchSchemaComposeFailurePayload
+): FetchSchemaComposeFailure => ({
+  type: FETCH_SCHEMA_COMPOSE_FAILURE,
+  payload,
+});
+// ******************************************
 
 export const fetchDataBaseRequest = (): FetchDataBaseRequest => ({
   type: FETCH_SCHEMA_DATABASE,
@@ -146,7 +171,6 @@ export function removeNode(uid: string): RemoveNodeAction {
 export const addLastIndex = (lastIndex: any): AddLastIndexAction => {
   return {
     type: ADD_LAST_INDEX,
-
     payload: lastIndex,
   };
 };
