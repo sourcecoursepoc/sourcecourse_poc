@@ -15,6 +15,7 @@ import {
 import { addLastIndex, removeLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
+import { fetchSchemaComposeRequest } from "@/redux/actions/composeAction";
 
 interface MyModalProps {
   visible: boolean;
@@ -25,13 +26,20 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  const getSchemaCompose=useSelector(getSchemaComposeSelector);
+  const getSchemaCompose = useSelector(getSchemaComposeSelector);
+  const [schemaCompose, setSchemaCompose] = useState([]);
   const selectedTableArray = useSelector(getSelectorTableNodes);
   const tableUidArray = selectedTableArray.map((table) => parseInt(table.uid));
-  console.log("tableUidArray", tableUidArray);
+  console.log("selectedData....selectedData", getSchemaCompose);
+
   useEffect(() => {
-    dispatch(addLastIndex(getSchemaCompose));
-  }, []);
+    const combinedArray: any = [...getSchemaCompose, ...selectedTableArray];
+    setSchemaCompose(combinedArray);
+    dispatch(addLastIndex(schemaCompose));
+    dispatch(fetchSchemaComposeRequest(3));
+  }, [getSchemaCompose, selectedTableArray]);
+  
+  console.log(schemaCompose, "schem");
   const handleImport = async () => {
     const requestBody = {
       projectUid: 3,
@@ -130,53 +138,54 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
               borderRight: "1px solid #ccc",
             }}
           >
-            {selectedTableArray?.map((node: any) => (
-              <>
-                {" "}
-                <Row align={"middle"}>
-                  <Col
-                    span={18}
-                    key={node.tableName}
-                    className={styles.rowTextStyle}
-                  >
-                    {node && node?.tableName && (
-                      <p>
-                        <span>
-                          {" "}
-                          <Image
-                            src="/Schemas.png"
-                            preview={false}
-                            style={{
-                              width: "1rem",
-                              height: "1rem",
-                              marginRight: "0.5rem",
-                              marginBottom: "0.3rem",
-                            }}
-                          ></Image>{" "}
-                        </span>
-                        {node?.tableName}
-                      </p>
-                    )}
-                  </Col>
-                  <Col span={1}>
-                    <Button
-                      style={{
-                        border: "none",
-                        color: "red",
-                        background: "white",
-                        fontWeight: "500",
-                        width: "1rem",
-                        fontSize: "0.7rem",
-                      }}
-                      onClick={() => handleRemove(node.uid)}
+            {schemaCompose &&
+              schemaCompose?.map((node: any) => (
+                <>
+                  {" "}
+                  <Row align={"middle"}>
+                    <Col
+                      span={18}
+                      key={node.tableName}
+                      className={styles.rowTextStyle}
                     >
-                      Remove
-                    </Button>
-                  </Col>{" "}
-                </Row>
-                <Row className={styles.lowerDivider}></Row>
-              </>
-            ))}
+                      {node && node?.tableName && (
+                        <p>
+                          <span>
+                            {" "}
+                            <Image
+                              src="/Schemas.png"
+                              preview={false}
+                              style={{
+                                width: "1rem",
+                                height: "1rem",
+                                marginRight: "0.5rem",
+                                marginBottom: "0.3rem",
+                              }}
+                            ></Image>{" "}
+                          </span>
+                          {node?.tableName}
+                        </p>
+                      )}
+                    </Col>
+                    <Col span={1}>
+                      <Button
+                        style={{
+                          border: "none",
+                          color: "red",
+                          background: "white",
+                          fontWeight: "500",
+                          width: "1rem",
+                          fontSize: "0.7rem",
+                        }}
+                        onClick={() => handleRemove(node.uid)}
+                      >
+                        Remove
+                      </Button>
+                    </Col>{" "}
+                  </Row>
+                  <Row className={styles.lowerDivider}></Row>
+                </>
+              ))}
           </Col>
         </Row>
       </Modal>

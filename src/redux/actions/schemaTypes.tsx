@@ -65,52 +65,6 @@ export type SchemaActions =
     | FetchSchemaSuccess
     | FetchSchemaFailure;
 
-    //fetching schema inside compose page***************
-
-    export interface SchemaData {
-        uid: number;
-        tableName: string;
-        columns: {
-          uid: number;
-          columnName: string;
-          columnType: string;
-          nullable: boolean;
-        }[];
-      }
-     export  interface SchemaComposeState {
-        data: SchemaData[];
-        loading: boolean;
-        error: string | null;
-      }
-    export interface FetchSchemaComposeSuccessPayload {
-        schemas: SchemaData[];
-    }
-    
-    export interface FetchSchemaComposeFailurePayload {
-        error: string;
-    }
-    
-    export interface FetchSchemaComposeRequest {
-        type: typeof FETCH_SCHEMA_COMPOSE;
-        params: number;
-    }
-    
-    export type FetchSchemaComposeSuccess = {
-        type: typeof FETCH_SCHEMA_COMPOSE_SUCCESS;
-        payload: FetchSchemaComposeSuccessPayload;
-    };
-    
-    export type FetchSchemaComposeFailure = {
-        type: typeof FETCH_SCHEMA_COMPOSE_FAILURE;
-        payload: FetchSchemaComposeFailurePayload;
-    };
-    
-    export type SchemaComposeActions =
-    | FetchSchemaComposeRequest
-    | FetchSchemaComposeSuccess
-    | FetchSchemaComposeFailure;
-
-
     
 export interface DataBaseState {
     pending: boolean;

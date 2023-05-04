@@ -119,24 +119,3 @@ export const fetchSchemaComposeFailure = (
   payload,
 });
 
-/* export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
-  type: FETCH_SCHEMA_SCHEMADATA,
-
-  params,
-});
-
-export const fetchSchemaSuccess = (
-  payload: FetchSchemaSuccessPayload
-): FetchSchemaSuccess => ({
-  type: FETCH_SCHEMA_SCHEMADATA_SUCCESS,
-
-  payload,
-});
-
-export const fetchSchemaFailure = (
-  payload: FetchSchemaFailurePayload
-): FetchSchemaFailure => ({
-  type: FETCH_SCHEMA_SCHEMADATA_FAILURE,
-
-  payload,
-}); */
