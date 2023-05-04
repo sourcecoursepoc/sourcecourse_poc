@@ -5,7 +5,7 @@ import {
   ICOMPOSENAMEDESC,
 } from "../actions/composeTypes";
 import {
-  FETCH_COMPOSE_NAME_DESC,
+  POST_COMPOSE_NAME_DESC,
   FETCH_COMPOSE_PIPELINE,
   FETCH_REPORTS_PIPELINE,
 } from "../actions/composeActionTypes";
@@ -13,9 +13,9 @@ import {
   fetchComposePipelineSuccess,
   fetchComposePipelineFailure,
   fetchComposeReportsPipelineRequestSuccess,
-  fetchComposeNameDescRequest,
-  fetchComposeNameDescRequestFailure,
-  fetchComposeNameDescRequestSuccess,
+  postComposeNameDescRequest,
+  postComposeNameDescRequestFailure,
+  postComposeNameDescRequestSuccess,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -95,7 +95,7 @@ function postNameAndDescriptionAPIcall(
 }
 
 function* postNameAndDescriptionSaga(
-  action: ReturnType<typeof fetchComposeNameDescRequest>
+  action: ReturnType<typeof postComposeNameDescRequest>
 ) {
   try {
     const { name, description } = action;
@@ -106,14 +106,14 @@ function* postNameAndDescriptionSaga(
       description
     );
 
-    yield put(fetchComposeNameDescRequestSuccess(response.data));
+    yield put(postComposeNameDescRequestSuccess(response.data));
   } catch (error) {
-    yield put(fetchComposeNameDescRequestFailure({ error }));
+    yield put(postComposeNameDescRequestFailure({ error }));
   }
 }
 
 export function* PostNameAndDescSaga() {
 
-  yield all([takeLatest(FETCH_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)])
+  yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)])
   
   }

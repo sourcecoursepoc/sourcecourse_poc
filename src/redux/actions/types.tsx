@@ -168,7 +168,7 @@ export type SchemaActions =
       totalSchemas:number,
       projects:[],
       projectDetails:IDETAILS;
-      projectId: number;
+      uid: number;
     projectName: string;
     description: string;
    

@@ -7,9 +7,9 @@ import {
   FETCH_REPORTS_PIPELINE_SUCCESS,
   FETCH_REPORTS_PIPELINE_FAILURE,
   FETCH_SCHEMA_NAME_DESC,
-  FETCH_COMPOSE_NAME_DESC_SUCCESS,
-  FETCH_COMPOSE_NAME_DESC_FAILURE,
-  FETCH_COMPOSE_NAME_DESC,
+  POST_COMPOSE_NAME_DESC_SUCCESS,
+  POST_COMPOSE_NAME_DESC_FAILURE,
+  POST_COMPOSE_NAME_DESC,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -104,13 +104,13 @@ function composeNameDescReducer(
   action: ComposeNameDescActions
 ): ComposeNameDescState {
   switch (action.type) {
-    case FETCH_COMPOSE_NAME_DESC:
+    case POST_COMPOSE_NAME_DESC:
       console.log("FETCH_SCHEMA_NAME_DESC action dispatched.");
       return {
         ...state,
         pending: true,
       };
-    case FETCH_COMPOSE_NAME_DESC_SUCCESS:
+    case POST_COMPOSE_NAME_DESC_SUCCESS:
       console.log("FETCH_COMPOSE_NAME_DESC_SUCCESS action dispatched.");
       return {
         ...state,
@@ -118,7 +118,7 @@ function composeNameDescReducer(
         postData: action.payload.postData,
         error: null,
       };
-    case FETCH_COMPOSE_NAME_DESC_FAILURE:
+    case POST_COMPOSE_NAME_DESC_FAILURE:
       console.log("FETCH_COMPOSE_NAME_DESC_FAILURE action dispatched.");
       return {
         ...state,

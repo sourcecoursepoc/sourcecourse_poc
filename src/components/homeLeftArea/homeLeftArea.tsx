@@ -13,6 +13,7 @@ import { getProjectsSelector } from "@/redux/selector";
 const HomeLeftArea: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
+  console.log(projectListData,"-----projectListData")
   const projectArray = projectListData[0]?.projects;
   const [parentArray, setParentArray] = useState<string[]>([]);
   const [isTabClicked, setIsTabClicked] = useState(true);
