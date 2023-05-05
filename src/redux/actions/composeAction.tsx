@@ -101,11 +101,11 @@ export const fetchComposeReportsPipelineFailure = (
 
 //COMPOSE NAME AND DESC
 
-export const fetchComposeNameDescRequest = (
+export const postComposeNameDescRequest = (
   name: any[],
   description: any[]
 ): PostComposeNameDescRequest => {
-  console.log("fetchComposeNameDescRequest action creator called");
+  console.log("postComposeNameDescRequest action creator called");
   return {
     type: POST_COMPOSE_NAME_DESC,
     name,
@@ -113,7 +113,7 @@ export const fetchComposeNameDescRequest = (
   };
 };
 
-export const fetchComposeNameDescRequestSuccess = (
+export const postComposeNameDescRequestSuccess = (
   postData: any
 ): PostComposeNameDescSuccess => ({
   type: POST_COMPOSE_NAME_DESC_SUCCESS,
@@ -121,7 +121,7 @@ export const fetchComposeNameDescRequestSuccess = (
   payload: { postData },
 });
 
-export const fetchComposeNameDescRequestFailure = (
+export const postComposeNameDescRequestFailure = (
   error: any
 ): PostComposeNameDescFailure => ({
   type: POST_COMPOSE_NAME_DESC_FAILURE,
