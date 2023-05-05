@@ -9,11 +9,14 @@ import {
   FetchComposeReportsPipelineSuccess,
   FetchComposeReportsPipelineFailurePayload,
   FetchComposeReportsPipelineFailure,
-  FetchComposeNameDescFailure as PostComposeNameDescFailure,
-  FetchComposeNameDescFailurePayload,
-  FetchComposeNameDescSuccess as PostComposeNameDescSuccess,
-  FetchComposeNameDescSuccessPayload,
-  FetchComposeNameDescRequest as PostComposeNameDescRequest,
+  PostComposeNameDescFailure as PostComposeNameDescFailure,
+  PostComposeNameDescFailurePayload,
+  PostComposeNameDescSuccess as PostComposeNameDescSuccess,
+  PostComposeNameDescSuccessPayload,
+  PostComposeNameDescRequest as PostComposeNameDescRequest,
+  SaveComposeNameDescSuccess,
+  SaveComposeNameDescFailure,
+  SaveComposeNameDescRequest,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -25,6 +28,9 @@ import {
   POST_COMPOSE_NAME_DESC_FAILURE,
   POST_COMPOSE_NAME_DESC_SUCCESS,
   POST_COMPOSE_NAME_DESC,
+  SAVE_COMPOSE_NAME_DESC_FAILURE,
+  SAVE_COMPOSE_NAME_DESC_SUCCESS,
+  SAVE_COMPOSE_NAME_DESC,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
@@ -106,7 +112,7 @@ export const postComposeNameDescRequest = (
   name: any[],
   description: any[]
 ): PostComposeNameDescRequest => {
-  console.log("fetchComposeNameDescRequest action creator called");
+  console.log("postComposeNameDescRequest action creator called");
   return {
     type: POST_COMPOSE_NAME_DESC,
     name,
@@ -114,15 +120,14 @@ export const postComposeNameDescRequest = (
   };
 };
 
-export const fetchComposeNameDescRequestSuccess = (
+export const postComposeNameDescRequestSuccess = (
   postData: any
 ): PostComposeNameDescSuccess => ({
   type: POST_COMPOSE_NAME_DESC_SUCCESS,
-
   payload: { postData },
 });
 
-export const fetchComposeNameDescRequestFailure = (
+export const postComposeNameDescRequestFailure = (
   error: any
 ): PostComposeNameDescFailure => ({
   type: POST_COMPOSE_NAME_DESC_FAILURE,
@@ -132,30 +137,32 @@ export const fetchComposeNameDescRequestFailure = (
 
 //SAVE COMPOSE NAME AND DESC
 
-// export const postComposeNameDescRequest = (
-//   name: any[],
-//   description: any[]
-// ): PostComposeNameDescRequest => {
-//   console.log("postComposeNameDescRequest action creator called");
-//   return {
-//     type: POST_COMPOSE_NAME_DESC,
-//     name,
-//     description,
-//   };
-// };
+export const saveComposeNameDescRequest = (
+  uid:any[],
+  name: any[],
+  description: any[]
+): SaveComposeNameDescRequest => {
+  console.log("saveComposeNameDescRequest action creator called");
+  return {
+    type: SAVE_COMPOSE_NAME_DESC,
+    uid,
+    name,
+    description,
+  };
+};
 
-// export const postComposeNameDescRequestSuccess = (
-//   postData: any
-// ): PostComposeNameDescSuccess => ({
-//   type: POST_COMPOSE_NAME_DESC_SUCCESS,
+export const saveComposeNameDescRequestSuccess = (
+  saveData: any
+): SaveComposeNameDescSuccess=> ({
+  type: SAVE_COMPOSE_NAME_DESC_SUCCESS,
 
-//   payload: { postData },
-// });
+  payload: { saveData },
+});
 
-// export const postComposeNameDescRequestFailure = (
-//   error: any
-// ): PostComposeNameDescFailure => ({
-//   type: POST_COMPOSE_NAME_DESC_FAILURE,
+export const saveComposeNameDescRequestFailure = (
+  error: any
+): SaveComposeNameDescFailure => ({
+  type: SAVE_COMPOSE_NAME_DESC_FAILURE,
 
-//   payload: { error },
-// });
+  payload: { error },
+});
