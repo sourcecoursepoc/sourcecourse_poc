@@ -45,6 +45,7 @@ const Compose = () => {
     console.log('Posting data...', name, description);
     dispatch(postComposeNameDescRequest(name, description));
     setSaveClicked(false);
+    
   }
 }, [saveClicked,name, description]);
 

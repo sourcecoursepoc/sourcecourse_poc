@@ -101,7 +101,8 @@ export const fetchComposeReportsPipelineFailure = (
 
 //COMPOSE NAME AND DESC
 
-export const fetchComposeNameDescRequest = (
+
+export const postComposeNameDescRequest = (
   name: any[],
   description: any[]
 ): PostComposeNameDescRequest => {
