@@ -5,7 +5,7 @@ import schemaReducer from "./schemaReducer";
 import projectReducer from "./projectReducer";
 import schemaDataBaseReducer from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
-import { composeNameDescReducer, composeReducer, composeReportsPipelineReducer } from "./composeReducer";
+import { composeNameDescReducer, composeReducer, composeReportsPipelineReducer, getComposeNameDescReducer, saveComposeNameDescReducer } from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
 import groupReducer from "./groupReducer";
@@ -23,6 +23,8 @@ const rootReducer = combineReducers({
   group: groupReducer,
   composeReportsPipeline: composeReportsPipelineReducer,
   composeNameDesc:composeNameDescReducer,
+  getComposeNameDesc:getComposeNameDescReducer,
+
 });
 
 

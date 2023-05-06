@@ -21,12 +21,13 @@ import { useDispatch } from "react-redux";
 import Toast, { showSuccessToast } from "../schemas/toast";
 import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
-import { postComposeNameDescRequest } from "@/redux/actions/composeAction";
+import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
 import { useSelector } from "react-redux";
 import { getProjectsSelector } from "@/redux/selector";
 const Compose = () => {
   const { Content } = Layout;
   const [selectedIcon, setSelectedIcon] = useState(null);
+  const[uid,setUid]=useState("");
   const [name, setName] = useState("");
   const [saveClicked, setSaveClicked] = useState(false);
   const [description, setDescription] = useState("");
@@ -35,19 +36,33 @@ const Compose = () => {
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [isSidebutonClickable, setIsSidebuttonClickable] = useState(true);
-  const projectNameDesc = useSelector(getProjectsSelector);
-  console.log(projectNameDesc,"--projectNameDesc--")
+ 
   const dispatch = useDispatch();
 
    //posting compose page name and description using action
- useEffect(() => {
-  if ( saveClicked && name && description) {
-    console.log('Posting data...', name, description);
-    dispatch(postComposeNameDescRequest(name, description));
-    setSaveClicked(false);
+   useEffect(() => {
+    const saveData = async () => {
+      if (saveClicked && name && description) {
+        console.log('Posting data...', name, description);
+        const savedData = await dispatch(postComposeNameDescRequest(name, description));
+        console.log('Saved data:', savedData);
+        console.log("Dispatching getComposeNameDescRequest action", savedData.uid, name, description);
+        dispatch(getComposeNameDescRequest(savedData.uid, name, description));
+        console.log('checking if second dispatch is working')
+        setSaveClicked(false);
+      }
+    };
+    saveData();
+  }, [saveClicked,uid, name, description, dispatch]);
+  
+//  useEffect(() => {
+//   if ( saveClicked && name && description) {
+//     console.log('Posting data...', name, description);
+//     dispatch(postComposeNameDescRequest(name, description));
+//     setSaveClicked(false);
     
-  }
-}, [saveClicked,name, description]);
+//   }
+// }, [saveClicked,name, description]);
 
   const handleSaveProjectInfo = async () => {
     setSaveModalVisible(false);

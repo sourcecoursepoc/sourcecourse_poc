@@ -8,6 +8,7 @@ import {
   POST_COMPOSE_NAME_DESC,
   FETCH_COMPOSE_PIPELINE,
   FETCH_REPORTS_PIPELINE,
+  GET_COMPOSE_NAME_DESC,
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -16,6 +17,9 @@ import {
   postComposeNameDescRequest,
   postComposeNameDescRequestFailure,
   postComposeNameDescRequestSuccess,
+  getComposeNameDescRequest,
+  getComposeNameDescRequestFailure,
+  getComposeNameDescRequestSuccess,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -80,7 +84,7 @@ export function* ComposeReportsPipelineSaga() {
   console.log("ComposePipelineSaga: watcher set up");
 }
 
-//saga for fetching compose page name and description
+//saga for posting compose page name and description
 
 const postNameAndDescriptionAPI = "http://localhost:8080/sourcecourse/project";
 
@@ -118,3 +122,43 @@ export function* PostNameAndDescSaga() {
   
   }
   
+//saga for getting compose page name,description, id
+
+const getNameAndDescriptionAPI = "http://localhost:8080/sourcecourse/project";
+
+function getNameAndDescriptionAPIcall(
+  uid:any[],
+  name: any[],
+  description: any[]
+): Promise<AxiosResponse<any, any>> {
+  return axios.get(`${getNameAndDescriptionAPI}`, {
+    uid,
+    name,
+    description,
+  });
+}
+
+function* getNameAndDescriptionSaga(
+  action: ReturnType<typeof getComposeNameDescRequest>
+) {
+  try {
+    const { uid,name, description } = action;
+
+    const response = yield call(
+      { fn: getNameAndDescriptionAPIcall, context: null },
+      uid,
+     name,
+      description
+    );
+
+    yield put(getComposeNameDescRequestSuccess(response.data));
+  } catch (error) {
+    yield put(getComposeNameDescRequestFailure({ error }));
+  }
+}
+
+export function* GetNameAndDescSaga() {
+
+  yield all([takeLatest(GET_COMPOSE_NAME_DESC, getNameAndDescriptionSaga)])
+  
+  }

@@ -12,6 +12,7 @@ import {
   ComposeReportsPipelineSaga,
   ComposePipelineSaga,
   PostNameAndDescSaga,
+  GetNameAndDescSaga,
 } from "./composeSaga";
 import groupSaga from "./groupSaga";
 import recordSaga from "../sagas/fetchRecordActionSaga";
@@ -30,6 +31,7 @@ export function* rootSaga() {
     groupSaga(),
     ComposeReportsPipelineSaga(),
     PostNameAndDescSaga(),
+    GetNameAndDescSaga(),
   ]);
 }
 

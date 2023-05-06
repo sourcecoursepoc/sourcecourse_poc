@@ -11,9 +11,9 @@ import {
   POST_COMPOSE_NAME_DESC,
   POST_COMPOSE_NAME_DESC_SUCCESS,
   POST_COMPOSE_NAME_DESC_FAILURE,
-  SAVE_COMPOSE_NAME_DESC_FAILURE,
-  SAVE_COMPOSE_NAME_DESC_SUCCESS,
-  SAVE_COMPOSE_NAME_DESC,
+  GET_COMPOSE_NAME_DESC_FAILURE,
+  GET_COMPOSE_NAME_DESC_SUCCESS,
+  GET_COMPOSE_NAME_DESC,
 } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
@@ -120,6 +120,7 @@ export type ComposeReportsPipelineActions =
 //compose page name & desc action
 
 export interface ICOMPOSENAMEDESC {
+    uid:any[];
   name: any[];
   description: any[];
 }
@@ -164,42 +165,42 @@ console.log(
 
 //save id,name,desc of project to the redux object
 
-export interface ISAVECOMPOSENAMEDESC {
+export interface IGETCOMPOSENAMEDESC {
     uid:any[],
   name: any[];
   description: any[];
 }
 
-export interface SaveComposeNameDescState {
+export interface GetComposeNameDescState {
   pending: boolean;
-  postData: ISAVECOMPOSENAMEDESC[];
+  saveData: IGETCOMPOSENAMEDESC[];
   error: string | null;
 }
 
-export interface SaveComposeNameDescSuccessPayload {
+export interface GetComposeNameDescSuccessPayload {
   saveData: ICOMPOSENAMEDESC[];
 }
 
-export interface SaveComposeNameDescFailurePayload {
+export interface GetComposeNameDescFailurePayload {
   error: string;
 }
 
-export interface SaveComposeNameDescRequest {
-  type: typeof SAVE_COMPOSE_NAME_DESC;
+export interface GetComposeNameDescRequest {
+  type: typeof GET_COMPOSE_NAME_DESC;
   params: any;
 }
 
-export type SaveComposeNameDescSuccess = {
-  type: typeof SAVE_COMPOSE_NAME_DESC_SUCCESS;
-  payload: SaveComposeNameDescSuccessPayload;
+export type GetComposeNameDescSuccess = {
+  type: typeof GET_COMPOSE_NAME_DESC_SUCCESS;
+  payload: GetComposeNameDescSuccessPayload;
 };
 
-export type SaveComposeNameDescFailure = {
-  type: typeof SAVE_COMPOSE_NAME_DESC_FAILURE;
-  payload: SaveComposeNameDescFailurePayload;
+export type GetComposeNameDescFailure = {
+  type: typeof GET_COMPOSE_NAME_DESC_FAILURE;
+  payload: GetComposeNameDescFailurePayload;
 };
 
-export type SaveComposeNameDescActions =
-  | SaveComposeNameDescRequest
-  | SaveComposeNameDescSuccess
-  | SaveComposeNameDescFailure;
+export type GetComposeNameDescActions =
+  | GetComposeNameDescRequest
+  | GetComposeNameDescSuccess
+  | GetComposeNameDescFailure;

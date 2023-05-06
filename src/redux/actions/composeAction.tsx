@@ -14,9 +14,9 @@ import {
   PostComposeNameDescSuccess as PostComposeNameDescSuccess,
   PostComposeNameDescSuccessPayload,
   PostComposeNameDescRequest as PostComposeNameDescRequest,
-  SaveComposeNameDescSuccess,
-  SaveComposeNameDescFailure,
-  SaveComposeNameDescRequest,
+  GetComposeNameDescSuccess as GetComposeNameDescSuccess,
+  GetComposeNameDescFailure as GetComposeNameDescFailure,
+  GetComposeNameDescRequest as GetComposeNameDescRequest,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -28,9 +28,9 @@ import {
   POST_COMPOSE_NAME_DESC_FAILURE,
   POST_COMPOSE_NAME_DESC_SUCCESS,
   POST_COMPOSE_NAME_DESC,
-  SAVE_COMPOSE_NAME_DESC_FAILURE,
-  SAVE_COMPOSE_NAME_DESC_SUCCESS,
-  SAVE_COMPOSE_NAME_DESC,
+  GET_COMPOSE_NAME_DESC_FAILURE as GET_COMPOSE_NAME_DESC_FAILURE,
+  GET_COMPOSE_NAME_DESC_SUCCESS as GET_COMPOSE_NAME_DESC_SUCCESS,
+  GET_COMPOSE_NAME_DESC as GET_COMPOSE_NAME_DESC,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
@@ -105,8 +105,7 @@ export const fetchComposeReportsPipelineFailure = (
   };
 };
 
-//COMPOSE NAME AND DESC
-
+// POST COMPOSE NAME AND DESC
 
 export const postComposeNameDescRequest = (
   name: any[],
@@ -131,38 +130,35 @@ export const postComposeNameDescRequestFailure = (
   error: any
 ): PostComposeNameDescFailure => ({
   type: POST_COMPOSE_NAME_DESC_FAILURE,
-
   payload: { error },
 });
 
-//SAVE COMPOSE NAME AND DESC
+// GET COMPOSE NAME AND DESC
 
-export const saveComposeNameDescRequest = (
-  uid:any[],
+export const getComposeNameDescRequest = (
+  uid: string,
   name: any[],
   description: any[]
-): SaveComposeNameDescRequest => {
-  console.log("saveComposeNameDescRequest action creator called");
+): GetComposeNameDescRequest => {
+  console.log("getComposeNameDescRequest action creator called");
   return {
-    type: SAVE_COMPOSE_NAME_DESC,
+    type: GET_COMPOSE_NAME_DESC,
     uid,
     name,
     description,
   };
 };
 
-export const saveComposeNameDescRequestSuccess = (
+export const getComposeNameDescRequestSuccess = (
   saveData: any
-): SaveComposeNameDescSuccess=> ({
-  type: SAVE_COMPOSE_NAME_DESC_SUCCESS,
-
+): GetComposeNameDescSuccess => ({
+  type: GET_COMPOSE_NAME_DESC_SUCCESS,
   payload: { saveData },
 });
 
-export const saveComposeNameDescRequestFailure = (
+export const getComposeNameDescRequestFailure = (
   error: any
-): SaveComposeNameDescFailure => ({
-  type: SAVE_COMPOSE_NAME_DESC_FAILURE,
-
+): GetComposeNameDescFailure => ({
+  type: GET_COMPOSE_NAME_DESC_FAILURE,
   payload: { error },
 });

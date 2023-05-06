@@ -1,4 +1,4 @@
-import { ComposePipelineState, ComposePipelineActions, ComposeReportsPipelineActions, ComposeReportsPipelineState, ComposeNameDescState, ComposeNameDescActions } from "../actions/composeTypes";
+import { ComposePipelineState, ComposePipelineActions, ComposeReportsPipelineActions, ComposeReportsPipelineState, ComposeNameDescState, ComposeNameDescActions, GetComposeNameDescState, GetComposeNameDescActions } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
   FETCH_COMPOSE_PIPELINE_SUCCESS,
@@ -10,6 +10,9 @@ import {
   POST_COMPOSE_NAME_DESC_SUCCESS,
   POST_COMPOSE_NAME_DESC_FAILURE,
   POST_COMPOSE_NAME_DESC,
+  GET_COMPOSE_NAME_DESC,
+  GET_COMPOSE_NAME_DESC_SUCCESS,
+  GET_COMPOSE_NAME_DESC_FAILURE,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -131,6 +134,45 @@ function composeNameDescReducer(
   }
 }
 
+//reducer for getting compose page name and description to a redux object
+
+const initialGetNameDescState: GetComposeNameDescState = {
+  pending: false,
+  saveData: [],
+  error: null,
+};
+
+function getComposeNameDescReducer(
+  state = initialGetNameDescState,
+  action: GetComposeNameDescActions
+): GetComposeNameDescState {
+  switch (action.type) {
+    case GET_COMPOSE_NAME_DESC:
+      console.log("GET_SCHEMA_NAME_DESC action dispatched.");
+      return {
+        ...state,
+        pending: true,
+      };
+    case GET_COMPOSE_NAME_DESC_SUCCESS:
+      console.log("GET_COMPOSE_NAME_DESC_SUCCESS action dispatched.");
+      return {
+        ...state,
+        pending: false,
+        saveData: action.payload.saveData,
+        error: null,
+      };
+    case GET_COMPOSE_NAME_DESC_FAILURE:
+      console.log("GET_COMPOSE_NAME_DESC_FAILURE action dispatched.");
+      return {
+        ...state,
+        pending: false,
+        saveData: [],
+        error: action.payload.error,
+      };
+    default:
+      return state;
+  }
+}
 
 
-export { composeReducer, composeReportsPipelineReducer,composeNameDescReducer };
+export { composeReducer, composeReportsPipelineReducer,composeNameDescReducer,getComposeNameDescReducer };
