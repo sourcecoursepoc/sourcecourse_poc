@@ -14,13 +14,13 @@ import MainIcons from './mainContentIcons';
 import DisplayBox from '@/pages/schemas/displaybox';
 import DisplaySchemaBox from './displaySchema';
 import { useSelector } from 'react-redux';
-import { getSchemaComposeSelector, getSelectedArraySelector, getSelectorTableNodes } from '@/redux/selector';
+import { projectSchemaInfoSelector, getSelectedArraySelector, getSelectorTableNodes } from '@/redux/selector';
 import { useDispatch } from 'react-redux';
 import { removeNode } from '@/redux/actions/schemasaction';
 import { DeleteFilled } from "@ant-design/icons";
 import axios from "axios";
 import Compose from "@/pages/compose";
-import { fetchSchemaComposeRequest } from "@/redux/actions/composeAction";
+import { fetchProjectSchemaInfoAction } from "@/redux/actions/composeAction";
 
 
 const MainContent = () => {
@@ -30,14 +30,14 @@ const MainContent = () => {
   const [tableData, setTableData] = useState([]);
   const dispatch = useDispatch();
   const selectedTableArray= useSelector(getSelectorTableNodes);
-const getSchemaCompose=useSelector(getSchemaComposeSelector);
-console.log("getSchemaCompose...getSchemaCompose",getSchemaCompose)
+  const fetchProjectSchemaInfo=useSelector(projectSchemaInfoSelector);
+  console.log("fetchProjectSchemaInfo...fetchProjectSchemaInfo",fetchProjectSchemaInfo)
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
   }, []);
   useEffect(() => {
-    dispatch(fetchSchemaComposeRequest(3));
-  }, []);
+    dispatch(fetchProjectSchemaInfoAction(3));
+  }, []); 
   const handleImport = () => {   
     setImportClicked(true);
   };
@@ -52,6 +52,7 @@ console.log("getSchemaCompose...getSchemaCompose",getSchemaCompose)
         "http://localhost:8080/sourcecourse/project-tables",
         { data: requestBody }
       );
+      dispatch(fetchProjectSchemaInfoAction(3));
       console.log("response after deleting",response.data);
     } catch (error) {
       console.error(error);
@@ -97,7 +98,7 @@ console.log("getSchemaCompose...getSchemaCompose",getSchemaCompose)
         
       
        <Row >               
-           {getSchemaCompose.map((node:any) => ( 
+           {fetchProjectSchemaInfo.map((node:any) => ( 
               <DisplaySchemaBox key={node.tableName} text={node.tableName} uid={node.uid} deleteIcon={<DeleteFilled style={{color:"red",height:'auto'}} onClick={() => handleRemove(node.uid)}/>}
               attribute={"ATTRIBUTES / "} icon={ <Image preview={false}src="/schemas-icon.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
               </Image> } 

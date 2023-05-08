@@ -5,9 +5,12 @@ import {
   FETCH_REPORTS_PIPELINE,
   FETCH_REPORTS_PIPELINE_SUCCESS,
   FETCH_REPORTS_PIPELINE_FAILURE,
-  FETCH_SCHEMA_COMPOSE,
-  FETCH_SCHEMA_COMPOSE_SUCCESS,
-  FETCH_SCHEMA_COMPOSE_FAILURE,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  POST_PROJECT_SCHEMA_INFO_ACTION,
+  POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
 } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
@@ -111,51 +114,85 @@ export type ComposeReportsPipelineActions =
   | FetchComposeReportsPipelineSuccess
   | FetchComposeReportsPipelineFailure;
 
-
-
 //fetch schema compose data
 
-
-export interface SchemaCompose {
+export interface projectSchemaInfo {
   id: number;
   name: string;
   type: string;
 }
 
-export interface SchemaComposeState {
+export interface projectSchemaInfoState {
   pending: boolean;
-  schemas: SchemaCompose[];
+  schemas: projectSchemaInfo[];
   error: string | null;
 }
 
-export interface FetchSchemaComposeSuccessPayload {
-  schemas: SchemaCompose[];
+export interface fetchProjectSchemaInfoActionSuccessPayload {
+  schemas: projectSchemaInfo[];
 }
 
-export interface FetchSchemaComposeFailurePayload {
+export interface fetchProjectSchemaInfoActionFailurePayload {
   error: string;
 }
 
 export interface FetchSchemaComposeRequest {
-  type: typeof FETCH_SCHEMA_COMPOSE;
+  type: typeof FETCH_PROJECT_SCHEMA_INFO_ACTION;
   params: number;
 }
 
-export type FetchSchemaComposeSuccess = {
-  type: typeof FETCH_SCHEMA_COMPOSE_SUCCESS;
-  payload: FetchSchemaComposeSuccessPayload;
+export type fetchProjectSchemaInfoActionSuccess = {
+  type: typeof FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS;
+  payload: fetchProjectSchemaInfoActionSuccessPayload;
 };
 
-export type FetchSchemaComposeFailure = {
-  type: typeof FETCH_SCHEMA_COMPOSE_FAILURE;
-  payload: FetchSchemaComposeFailurePayload;
+export type fetchProjectSchemaInfoActionFailure = {
+  type: typeof FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE;
+  payload: fetchProjectSchemaInfoActionFailurePayload;
 };
 
-export type SchemaComposeActions =
+export type projectSchemaInfoActions =
   | FetchSchemaComposeRequest
-  | FetchSchemaComposeSuccess
-  | FetchSchemaComposeFailure;
+  | fetchProjectSchemaInfoActionSuccess
+  | fetchProjectSchemaInfoActionFailure;
 
-console.log(
-  "composeActionTypes: action types defined for fetching name and description"
-);
+// post schemas in compose page
+
+export interface POSTSCHEMAREQUEST {
+  projectUid: any;
+  sourceTableUids: any[];
+}
+export interface PostProjectSchemaInfoState {
+  loading: boolean;
+  postData: POSTSCHEMAREQUEST[];
+  error: string | null;
+}
+export interface PostProjectSchemaInfoSuccessPayload {
+  postData: POSTSCHEMAREQUEST[];
+}
+
+export interface PostProjectSchemaInfoFailurePayload {
+  error: string;
+}
+
+export interface PostProjectSchemaInfo {
+  type: typeof POST_PROJECT_SCHEMA_INFO_ACTION;
+  params: any;
+}
+
+export type PostProjectSchemaInfoSuccess = {
+  type: typeof POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS;
+
+  payload: PostProjectSchemaInfoSuccessPayload;
+};
+
+export type PostProjectSchemaInfoFailure = {
+  type: typeof POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE;
+
+  payload: PostProjectSchemaInfoFailurePayload;
+};
+
+export type PostProjectSchemaInfoActionTypes =
+  | PostProjectSchemaInfo
+  | PostProjectSchemaInfoSuccess
+  | PostProjectSchemaInfoFailure;

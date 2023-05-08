@@ -9,9 +9,15 @@ import {
   FetchComposeReportsPipelineSuccess,
   FetchComposeReportsPipelineFailurePayload,
   FetchComposeReportsPipelineFailure,
-  FetchSchemaComposeRequest,FetchSchemaComposeSuccess,
-  FetchSchemaComposeFailure,FetchSchemaComposeSuccessPayload,
-  FetchSchemaComposeFailurePayload
+  FetchSchemaComposeRequest,
+  fetchProjectSchemaInfoActionSuccess,
+  fetchProjectSchemaInfoActionFailure,
+  fetchProjectSchemaInfoActionSuccessPayload,
+  fetchProjectSchemaInfoActionFailurePayload,
+  PostProjectSchemaInfoActionTypes,
+  PostProjectSchemaInfo,
+  PostProjectSchemaInfoSuccess,
+  PostProjectSchemaInfoFailure,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -20,8 +26,12 @@ import {
   FETCH_REPORTS_PIPELINE,
   FETCH_REPORTS_PIPELINE_SUCCESS,
   FETCH_REPORTS_PIPELINE_FAILURE,
-  FETCH_SCHEMA_COMPOSE,
-  FETCH_SCHEMA_COMPOSE_SUCCESS,FETCH_SCHEMA_COMPOSE_FAILURE
+  FETCH_PROJECT_SCHEMA_INFO_ACTION,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  POST_PROJECT_SCHEMA_INFO_ACTION,
+  POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
@@ -98,24 +108,76 @@ export const fetchComposeReportsPipelineFailure = (
 
 // fetch schema compose action
 
-export const fetchSchemaComposeRequest = (params: number): FetchSchemaComposeRequest => ({
-  type: FETCH_SCHEMA_COMPOSE,
+export const fetchProjectSchemaInfoAction = (
+  params: number
+): FetchSchemaComposeRequest => ({
+  type: FETCH_PROJECT_SCHEMA_INFO_ACTION,
   params,
 });
 
 export const fetchSchemaComposeSuccess = (
-  payload: FetchSchemaComposeSuccessPayload
-): FetchSchemaComposeSuccess => ({
-  type: FETCH_SCHEMA_COMPOSE_SUCCESS,
+  payload: fetchProjectSchemaInfoActionSuccessPayload
+): fetchProjectSchemaInfoActionSuccess => ({
+  type: FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
 
   payload,
 });
 
 export const fetchSchemaComposeFailure = (
-  payload: FetchSchemaComposeFailurePayload
-): FetchSchemaComposeFailure => ({
-  type: FETCH_SCHEMA_COMPOSE_FAILURE,
+  payload: fetchProjectSchemaInfoActionFailurePayload
+): fetchProjectSchemaInfoActionFailure => ({
+  type: FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
 
   payload,
 });
 
+//post schema compose
+/* export const postProjectSchemaInfoRequest =
+  (): PostProjectSchemaInfoActionTypes => ({
+    type: POST_PROJECT_SCHEMA_INFO_ACTION,
+  });
+
+export const postProjectSchemaInfoSuccess =
+  (): PostProjectSchemaInfoActionTypes => ({
+    type: POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  });
+
+export const postProjectSchemaInfoFailure = (
+  error: string
+): PostProjectSchemaInfoActionTypes => ({
+  type: POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+
+  payload: error,
+});
+ */
+export const postProjectSchemaInfoRequest = (
+  projectUid: any,
+
+  sourceTableUids: any[]
+): PostProjectSchemaInfo => {
+  console.log("PostProjectSchemaInfo action creator called");
+
+  return {
+    type: POST_PROJECT_SCHEMA_INFO_ACTION,
+
+    projectUid,
+
+    sourceTableUids,
+  };
+};
+
+export const postProjectSchemaInfoSuccess = (
+  postData: any
+): PostProjectSchemaInfoSuccess => ({
+  type: POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+
+  payload: { postData },
+});
+
+export const postProjectSchemaInfoFailure = (
+  error: any
+): PostProjectSchemaInfoFailure => ({
+  type: POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+
+  payload: { error },
+});

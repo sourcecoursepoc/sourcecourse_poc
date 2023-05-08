@@ -3,12 +3,15 @@ import {
   FetchComposePipelineRequest,
   ICOMPOSEREPORTSPIPELINE,
   FetchSchemaComposeRequest,
-  SchemaCompose,
+  projectSchemaInfo,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
   FETCH_REPORTS_PIPELINE,
-  FETCH_SCHEMA_COMPOSE,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION,
+  POST_PROJECT_SCHEMA_INFO_ACTION,
+  POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -16,22 +19,27 @@ import {
   fetchComposeReportsPipelineRequestSuccess,
   fetchSchemaComposeSuccess,
   fetchSchemaComposeFailure,
+  postProjectSchemaInfoFailure,
+  postProjectSchemaInfoRequest,
+  postProjectSchemaInfoSuccess,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 
-const getSchemaCompose = (requestParams: any) =>
-  axios.get<SchemaCompose[]>(
+const fetchProjectSchemaInfo = (requestParams: any) =>
+  axios.get<projectSchemaInfo[]>(
     "http://localhost:8080/sourcecourse/project-tables/" + requestParams
   );
 
 /*
-  Worker Saga: Fired on FETCH_SCHEMA_COMPOSE action
+  Worker Saga: Fired on FETCH_PROJECT_SCHEMA_INFO_ACTION action
 */
-function* fetchSchemaComposeSaga(requestParams: FetchSchemaComposeRequest) {
+function* fetchProjectSchemaInfoSaga(requestParams: FetchSchemaComposeRequest) {
   console.log("saga call", requestParams);
   try {
-    const response = yield call(() => getSchemaCompose(requestParams.params));
+    const response = yield call(() =>
+      fetchProjectSchemaInfo(requestParams.params)
+    );
     yield put(
       fetchSchemaComposeSuccess({
         schemas: response.data,
@@ -46,7 +54,9 @@ function* fetchSchemaComposeSaga(requestParams: FetchSchemaComposeRequest) {
   }
 }
 export function* schemaComposeSaga() {
-  yield all([takeLatest(FETCH_SCHEMA_COMPOSE, fetchSchemaComposeSaga)]);
+  yield all([
+    takeLatest(FETCH_PROJECT_SCHEMA_INFO_ACTION, fetchProjectSchemaInfoSaga),
+  ]);
 }
 
 const getComposePipelines = (requestParams?: any) =>
@@ -109,4 +119,41 @@ export function* ComposeReportsPipelineSaga() {
   console.log("ComposePipelineSaga: watcher set up");
 }
 
-//fetching schemas in compose
+//posting schemas in compose
+const postProjectSchemaInfoAPI = "http://localhost:8080/sourcecourse/project-tables";
+
+function postProjectSchemaInfocall(
+  projectUid: any[],
+
+  sourceTableUids: any[]
+): Promise<AxiosResponse<any, any>> {
+  return axios.post(`${postProjectSchemaInfoAPI}`, {
+    projectUid,
+
+    sourceTableUids,
+  });
+}
+
+function* postProjectSchemaInfoSaga(
+  action: ReturnType<typeof postProjectSchemaInfoRequest>
+) {
+  try {
+    const { projectUid, sourceTableUids } = action;
+
+    const response = yield call(
+      { fn: postProjectSchemaInfocall, context: null },
+
+      projectUid,
+
+      sourceTableUids
+    );
+
+    yield put(postProjectSchemaInfoSuccess(response.data));
+  } catch (error) {
+    yield put(postProjectSchemaInfoFailure({ error }));
+  }
+}
+
+export function* PostSchemaRequestSaga() {
+  yield all([takeLatest(POST_PROJECT_SCHEMA_INFO_ACTION, postProjectSchemaInfoSaga)]);
+}

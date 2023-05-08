@@ -8,14 +8,14 @@ import { useSelector } from "react-redux";
 import {
   getDataBaseSelector,
   getlastIndexesArraySelector,
-  getSchemaComposeSelector,
+  projectSchemaInfoSelector,
   getSelectedArraySelector,
   getSelectorTableNodes,
 } from "@/redux/selector";
 import { addLastIndex, removeLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { fetchSchemaComposeRequest } from "@/redux/actions/composeAction";
+import { fetchProjectSchemaInfoAction, postProjectSchemaInfoRequest } from "@/redux/actions/composeAction";
 
 interface MyModalProps {
   visible: boolean;
@@ -26,21 +26,38 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  const getSchemaCompose = useSelector(getSchemaComposeSelector);
   const [schemaCompose, setSchemaCompose] = useState([]);
-  const selectedTableArray = useSelector(getSelectorTableNodes);
-  const tableUidArray = selectedTableArray.map((table) => parseInt(table.uid));
-  console.log("selectedData....selectedData", getSchemaCompose);
-
-  useEffect(() => {
-    const combinedArray: any = [...getSchemaCompose, ...selectedTableArray];
-    setSchemaCompose(combinedArray);
-    dispatch(addLastIndex(schemaCompose));
-    dispatch(fetchSchemaComposeRequest(3));
-  }, [getSchemaCompose, selectedTableArray]);
   
-  console.log(schemaCompose, "schem");
-  const handleImport = async () => {
+  const projectSchemaInfo = useSelector(projectSchemaInfoSelector);//tables in the database
+  const selectedTableArray = useSelector(getSelectorTableNodes);//selected tables from the tree
+
+  const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
+  
+  console.log("projectSchemaInfo = ",projectSchemaInfo);
+  console.log("selectedTableArray = ",selectedTableArray);
+
+  //console.log("combinedArray combinedArray = ",combinedArray);
+  /*  useEffect(() => {
+   /// setSchemaCompose(combinedArray);
+    dispatch(addLastIndex([...projectSchemaInfo, ...selectedTableArray]));
+  }, [ projectSchemaInfo, selectedTableArray]); 
+ */
+
+  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid)); //taking uid's of selected tables
+
+  //POST action
+    const handleImport = () => {
+    const requestBody = {
+      projectUid: 3,
+      sourceTableUids: tableUidArray,
+    };
+  
+    dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
+    dispatch(fetchProjectSchemaInfoAction(3));
+    
+    onExport();
+  };  
+  /*   const handleImport = async () => {
     const requestBody = {
       projectUid: 3,
       sourceTableUids: tableUidArray,
@@ -52,18 +69,20 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
         requestBody
       );
       dispatch(addLastIndex(response.data));
-      console.log(response.data);
+      dispatch(fetchProjectSchemaInfoAction(3));
+      console.log("response post schema api = ",response.data);
       onExport();
     } catch (error) {
       console.error(error);
     }
-  };
-
+  }; */
+  
   const handleImportButton = () => {
     handleImport();
     onCancel();
   };
-  /*   const handleRemove = async (uid: string) => {
+ 
+  const handleRemove = async (uid: string) => {
     const requestBody = {
       projectUid: 3,
       sourceTableUids: [uid],
@@ -73,13 +92,11 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
         "http://localhost:8080/sourcecourse/project-tables",
         { data: requestBody }
       );
+      dispatch(fetchProjectSchemaInfoAction(3));
       console.log("response after deleting",response.data);
     } catch (error) {
       console.error(error);
     }
-  }; */
-  const handleRemove = (uid: string) => {
-    dispatch(removeLastIndex(uid));
   };
 
   return (
@@ -138,8 +155,8 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
               borderRight: "1px solid #ccc",
             }}
           >
-            {schemaCompose &&
-              schemaCompose?.map((node: any) => (
+            {combinedArray &&
+              combinedArray?.map((node: any) => (
                 <>
                   {" "}
                   <Row align={"middle"}>

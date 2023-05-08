@@ -4,7 +4,7 @@ import {
   FETCH_SCHEMA_SCHEMADATA_SUCCESS,
   
 } from "../actions/schemaActionTypes";
-import { SchemaState, SchemaActions,SchemaData,SchemaComposeState } from "../actions/schemaTypes";
+import { SchemaState, SchemaActions,SchemaData,projectSchemaInfoState } from "../actions/schemaTypes";
 
 const initialState: SchemaState = {
   pending: false,
