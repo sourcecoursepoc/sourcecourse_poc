@@ -9,6 +9,7 @@ import { composeReducer, composeReportsPipelineReducer } from "./composeReducer"
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
 import groupReducer from "./groupReducer";
+import projectByIdReducer from "./projectByIdReducer";
 
 console.log("Creating root reducer...");
 
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   database: schemaDataBaseReducer,
   groupdataDatabase: groupdataDatabaseReducer,
   project: projectReducer,
+  projectById: projectByIdReducer,
   composePipeline: composeReducer,
   record: fetchRecordsReducer,
   group: groupReducer,
