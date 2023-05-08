@@ -47,7 +47,7 @@ const TopInnerBox: React.FC = () => {
                 {projectListData[0]?.totalSchemas}
               </p>
             </div>
-            <p className={styles.schemaStyle}>SCHEMA'S</p>
+            <p className={styles.schemaStyle}>SCHEMAS</p>
           </div>
         </div>
       </div>

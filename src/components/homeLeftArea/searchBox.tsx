@@ -25,12 +25,12 @@ useEffect(() => {
 
   const handleSearchItems = (searchValue: string) => {
     console.log("searchValue", searchValue);
-    if (searchValue !== "") {
+    // if (searchValue !== "") {
       const filteredData = searchData?.filter((item) =>
         item?.projectName.toLowerCase().includes(searchValue.toLowerCase())
       );
       searchArray(filteredData, true);
-    }
+    // }
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
