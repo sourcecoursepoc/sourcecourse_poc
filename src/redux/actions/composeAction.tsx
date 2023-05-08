@@ -17,6 +17,7 @@ import {
   GetComposeNameDescSuccess as GetComposeNameDescSuccess,
   GetComposeNameDescFailure as GetComposeNameDescFailure,
   GetComposeNameDescRequest as GetComposeNameDescRequest,
+  AddNameDescArrayAction,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -31,6 +32,7 @@ import {
   GET_COMPOSE_NAME_DESC_FAILURE as GET_COMPOSE_NAME_DESC_FAILURE,
   GET_COMPOSE_NAME_DESC_SUCCESS as GET_COMPOSE_NAME_DESC_SUCCESS,
   GET_COMPOSE_NAME_DESC as GET_COMPOSE_NAME_DESC,
+  ADD_NAME_DESC_ARRAY,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
@@ -136,16 +138,16 @@ export const postComposeNameDescRequestFailure = (
 // GET COMPOSE NAME AND DESC
 
 export const getComposeNameDescRequest = (
-  uid: string,
-  name: any[],
-  description: any[]
+  // uid: any,
+  // name: any,
+  // description: any
 ): GetComposeNameDescRequest => {
   console.log("getComposeNameDescRequest action creator called");
   return {
     type: GET_COMPOSE_NAME_DESC,
-    uid,
-    name,
-    description,
+    // uid,
+    // name,
+    // description,
   };
 };
 
@@ -161,4 +163,10 @@ export const getComposeNameDescRequestFailure = (
 ): GetComposeNameDescFailure => ({
   type: GET_COMPOSE_NAME_DESC_FAILURE,
   payload: { error },
+});
+
+//action to store the uid,name,desc in a array
+export const addNameDescArray = (payload: any): AddNameDescArrayAction => ({
+  type: ADD_NAME_DESC_ARRAY,
+  payload,
 });

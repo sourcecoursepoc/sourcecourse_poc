@@ -13,12 +13,13 @@ const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.m
 const getComposePipeline = (state: AppState) => state.composePipeline.composePipeline;
 const getGroups = (state: AppState) => state.group.groups;
 const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipeline.composeReportsPipeline;
+const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
+const getComposePageNameDesc = (state: AppState) => state.getComposeNameDesc.saveData;
+
+export const getComposeNameDescSelector = createSelector(getComposePageNameDesc, (saveData) => saveData)
 export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
-
-
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
-const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
 export const getSelectorTableNodes = createSelector(getLastIndexesArray, (lastIndexes) => lastIndexes)
 export const getComposePipelineSelector = createSelector(getComposePipeline, (composePipeline) => composePipeline);
 export const getlastIndexesArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
@@ -31,5 +32,4 @@ export const getPendingSelector = createSelector(
   getPending,
   (pending) => pending
 );
-
 export const getErrorSelector = createSelector(getError, (error) => error);

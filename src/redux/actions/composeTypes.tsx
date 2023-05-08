@@ -14,6 +14,7 @@ import {
   GET_COMPOSE_NAME_DESC_FAILURE,
   GET_COMPOSE_NAME_DESC_SUCCESS,
   GET_COMPOSE_NAME_DESC,
+  ADD_NAME_DESC_ARRAY,
 } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
@@ -187,7 +188,7 @@ export interface GetComposeNameDescFailurePayload {
 
 export interface GetComposeNameDescRequest {
   type: typeof GET_COMPOSE_NAME_DESC;
-  params: any;
+//   params: any;
 }
 
 export type GetComposeNameDescSuccess = {
@@ -200,7 +201,14 @@ export type GetComposeNameDescFailure = {
   payload: GetComposeNameDescFailurePayload;
 };
 
+//to add uid,name,desc to an array 
+export interface AddNameDescArrayAction {
+    type: typeof ADD_NAME_DESC_ARRAY;
+    payload: any;
+  }
+
 export type GetComposeNameDescActions =
   | GetComposeNameDescRequest
   | GetComposeNameDescSuccess
-  | GetComposeNameDescFailure;
+  | GetComposeNameDescFailure
+  |AddNameDescArrayAction;

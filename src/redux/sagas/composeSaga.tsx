@@ -106,7 +106,7 @@ function* postNameAndDescriptionSaga(
 
     const response = yield call(
       { fn: postNameAndDescriptionAPIcall, context: null },
-     name,
+      name,
       description
     );
 
@@ -117,40 +117,34 @@ function* postNameAndDescriptionSaga(
 }
 
 export function* PostNameAndDescSaga() {
+  yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)]);
+}
 
-  yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)])
-  
-  }
-  
 //saga for getting compose page name,description, id
 
 const getNameAndDescriptionAPI = "http://localhost:8080/sourcecourse/project";
+console.log(getNameAndDescriptionAPI, "getNameAndDescriptionAPI");
 
-function getNameAndDescriptionAPIcall(
-  uid:any[],
-  name: any[],
-  description: any[]
-): Promise<AxiosResponse<any, any>> {
-  return axios.get(`${getNameAndDescriptionAPI}`, {
-    uid,
-    name,
-    description,
-  });
+function getNameAndDescriptionAPIcall(): Promise<AxiosResponse<any, any>> {
+// uid:any[],
+// name: any[],
+// description: any[]
+  return axios.get(getNameAndDescriptionAPI);
 }
 
 function* getNameAndDescriptionSaga(
   action: ReturnType<typeof getComposeNameDescRequest>
 ) {
   try {
-    const { uid,name, description } = action;
+    // const { uid,name, description } = action;
 
     const response = yield call(
-      { fn: getNameAndDescriptionAPIcall, context: null },
-      uid,
-     name,
-      description
+      { fn: getNameAndDescriptionAPIcall, context: null }
+      //   uid,
+      //  name,
+      //   description
     );
-
+    console.log("response.data", response.data);
     yield put(getComposeNameDescRequestSuccess(response.data));
   } catch (error) {
     yield put(getComposeNameDescRequestFailure({ error }));
@@ -158,7 +152,5 @@ function* getNameAndDescriptionSaga(
 }
 
 export function* GetNameAndDescSaga() {
-
-  yield all([takeLatest(GET_COMPOSE_NAME_DESC, getNameAndDescriptionSaga)])
-  
-  }
+  yield all([takeLatest(GET_COMPOSE_NAME_DESC, getNameAndDescriptionSaga)]);
+}

@@ -13,6 +13,7 @@ import {
   GET_COMPOSE_NAME_DESC,
   GET_COMPOSE_NAME_DESC_SUCCESS,
   GET_COMPOSE_NAME_DESC_FAILURE,
+  ADD_NAME_DESC_ARRAY,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -136,11 +137,17 @@ function composeNameDescReducer(
 
 //reducer for getting compose page name and description to a redux object
 
+export interface ComposeState {
+  nameDescArray: { uid: string; name: string; description: string }[];
+}
+
 const initialGetNameDescState: GetComposeNameDescState = {
   pending: false,
   saveData: [],
   error: null,
+  nameDescArray: [],
 };
+
 
 function getComposeNameDescReducer(
   state = initialGetNameDescState,
@@ -168,6 +175,11 @@ function getComposeNameDescReducer(
         pending: false,
         saveData: [],
         error: action.payload.error,
+      };
+      case ADD_NAME_DESC_ARRAY:
+      return {
+        ...state,
+        nameDescArray: [...state.nameDescArray, action.payload],
       };
     default:
       return state;
