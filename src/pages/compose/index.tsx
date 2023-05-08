@@ -32,7 +32,7 @@ const Compose = () => {
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [projectId, setProjectId] = useState(null);
+  const [projectId, setProjectId] = useState(1);
 
   const dispatch = useDispatch();
   const handleSaveProjectInfo = async () => { 

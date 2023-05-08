@@ -9,16 +9,13 @@ const getComposePipelines = (requestParams?: any) =>
 
 function* fetchComposePipelineSaga(requestParams: FetchComposePipelineRequest) {
   try {
-    console.log("fetchComposePipelineSaga: calling API...");
     const response = yield call(() => getComposePipelines(requestParams.params));
-    console.log("fetchComposePipelineSaga: response =", response.data);
     yield put(
       fetchComposePipelineSuccess({
         composePipeline: response.data,
       })
     );
   } catch (e) {
-    console.error("fetchComposePipelineSaga: error =", e.message);
     yield put(
       fetchComposePipelineFailure({
         error: e.message,
@@ -55,7 +52,5 @@ function* fetchComposeReportsPipelineSaga() {
 
 
 export function* ComposeReportsPipelineSaga() {
-  console.log("ComposePipelineSaga: setting up watcher...");
   yield takeLatest(FETCH_REPORTS_PIPELINE, fetchComposeReportsPipelineSaga);
-  console.log("ComposePipelineSaga: watcher set up");
 }

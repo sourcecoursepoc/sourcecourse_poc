@@ -12,7 +12,7 @@ import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySc
 import ConfirmationModal from '../../components/ComposePage/GroupsPage/ModalBox/ConfirmationModal';
 import { CloseOutlined, SaveFilled } from '@ant-design/icons';
 import { showSuccessToast, showErrorToast } from './toast';
-import { postTagsAndDescriptionRequest, postColumnTagsAndDescriptionRequest } from '../../redux/actions/schemasaction';
+import { postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoAction, fetchDataBaseInfoAction } from '../../redux/actions/schemasaction';
 
 const { Content } = Layout;
 
@@ -37,24 +37,22 @@ export default function SchemaContent() {
 
     const [description, setDescription] = useState('');
     const [tags, setTags] = useState<string[]>([]);
-    console.log(tags, "tags")
 
     const dispatch = useDispatch();
     const handleSaveClick = () => {
         setSaveModalVisible(true);
     };
 
-    const handleSaveModalOk = () => {
+    const handleSaveModalOk = async () => {
         setSaveModalVisible(false);
         if ('tableName' in selcectedDataLastElement) {
-            dispatch(postTagsAndDescriptionRequest(selectedUid, tags, description));
+            await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
         } else if ('name' in selcectedDataLastElement) {
-            dispatch(postColumnTagsAndDescriptionRequest(selectedUid, tags, description));
+            await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
         }
-        dispatch(fetchDataBaseRequest());
         showSuccessToast("saved successfully");
+        dispatch(fetchDataBaseInfoAction());
     };
-
     const handleSaveModalCancel = () => {
         setSaveModalVisible(false);
     };
@@ -115,7 +113,7 @@ export default function SchemaContent() {
             }
         }
     }, [selectedData]);
-    console.log(selectedUid, "selectedUid")
+
     const transcriptList: any = Transcription(selectedMetaDataLastItem);
     const listItems: any = [];
     for (const item in transcriptList) {

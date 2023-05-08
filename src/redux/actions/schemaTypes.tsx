@@ -1,10 +1,5 @@
 import {
-    FETCH_SCHEMA_SCHEMADATA,
-    FETCH_SCHEMA_SCHEMADATA_FAILURE,
-    FETCH_SCHEMA_SCHEMADATA_SUCCESS,
-    FETCH_SCHEMA_DATABASE,
-    FETCH_SCHEMA_DATABASE_FAILURE,
-    FETCH_SCHEMA_DATABASE_SUCCESS,
+
     FETCH_GROUPDATA_DATABASE,
     FETCH_GROUPDATA_DATABASE_FAILURE,
     FETCH_GROUPDATA_DATABASE_SUCCESS,
@@ -22,12 +17,19 @@ import {
     POST_GROUPDATA_SUCCESS,
     POST_GROUPDATA_FAILURE,
     DELETE_GROUP_MODAL,
-    POST_TAGS_DESCRIPTION_REQUEST,
-    POST_TAGS_DESCRIPTION_FAILURE,
-    POST_TAGS_DESCRIPTION_SUCCESS,
-    POST_COLUMN_TAGS_DESCRIPTION_REQUEST,
-    POST_COLUMN_TAGS_DESCRIPTION_SUCCESS,
-    POST_COLUMN_TAGS_DESCRIPTION_FAILURE,
+    FETCH_SCHEMA_SCHEMADATA_INFO_ACTION,
+    FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_SUCCESS,
+    FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_FAILURE,
+    FETCH_SCHEMA_DATABASE_INFO_ACTION,
+    FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS,
+    FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE,
+    POST_TAGS_DESCRIPTION_INFO_ACTION,
+    POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+    POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+    POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION,
+    POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+    POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+
 
 
 } from "./schemaActionTypes";
@@ -53,17 +55,17 @@ export interface FetchSchemaFailurePayload {
 }
 
 export interface FetchSchemaRequest {
-    type: typeof FETCH_SCHEMA_SCHEMADATA;
+    type: typeof FETCH_SCHEMA_SCHEMADATA_INFO_ACTION;
     params: number;
 }
 
 export type FetchSchemaSuccess = {
-    type: typeof FETCH_SCHEMA_SCHEMADATA_SUCCESS;
+    type: typeof FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_SUCCESS;
     payload: FetchSchemaSuccessPayload;
 };
 
 export type FetchSchemaFailure = {
-    type: typeof FETCH_SCHEMA_SCHEMADATA_FAILURE;
+    type: typeof FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_FAILURE;
     payload: FetchSchemaFailurePayload;
 };
 
@@ -73,7 +75,7 @@ export type SchemaActions =
     | FetchSchemaFailure;
 
 
-export interface DataBaseState {
+export interface DataBaseInfoState {
     pending: boolean;
     database: DBProps[];
     error: string | null;
@@ -81,29 +83,29 @@ export interface DataBaseState {
     lastIndexes: any[];
 }
 
-export interface FetchDataBaseSuccessPayload {
+export interface FetchDataBaseInfoActionSuccessPayload {
     database: DBProps[];
 }
 
-export interface FetchDataBaseFailurePayload {
+export interface FetchDataBaseInfoActionFailurePayload {
     error: string;
 }
 
 
 
-export interface FetchDataBaseRequest {
-    type: typeof FETCH_SCHEMA_DATABASE;
+export interface FetchDataBaseInfoAction {
+    type: typeof FETCH_SCHEMA_DATABASE_INFO_ACTION;
 
 }
 
-export type FetchDataBaseSuccess = {
-    type: typeof FETCH_SCHEMA_DATABASE_SUCCESS;
-    payload: FetchDataBaseSuccessPayload;
+export type FetchDataBaseInfoActionSuccess = {
+    type: typeof FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS;
+    payload: FetchDataBaseInfoActionSuccessPayload;
 };
 
-export type FetchDataBaseFailure = {
-    type: typeof FETCH_SCHEMA_DATABASE_FAILURE;
-    payload: FetchDataBaseFailurePayload;
+export type FetchDataBaseInfoActionFailure = {
+    type: typeof FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE;
+    payload: FetchDataBaseInfoActionFailurePayload;
 };
 
 export interface AddArrayAction {
@@ -112,9 +114,9 @@ export interface AddArrayAction {
 
 }
 export type DataBaseActions =
-    | FetchDataBaseRequest
-    | FetchDataBaseSuccess
-    | FetchDataBaseFailure
+    | FetchDataBaseInfoAction
+    | FetchDataBaseInfoActionSuccess
+    | FetchDataBaseInfoActionFailure
     | AddArrayAction
     | RemoveNodeAction
     | AddLastIndexAction
@@ -279,87 +281,87 @@ export type PostGroupDataActionTypes =
 
 // post tags and description for table
 
-export interface PostTagsAndDescription {
+export interface PostTagsAndDescriptionInfo {
     tags: any;
     description: any;
 }
 
-export interface PostTagsAndDescriptionState {
+export interface PostTagsAndDescriptionInfoState {
     pending: boolean;
-    postData: PostTagsAndDescription[];
+    postData: PostTagsAndDescriptionInfo[];
     error: string | null;
 }
 
-export interface PostTagsAndDescriptionSuccessPayload {
-    postData: PostTagsAndDescription[];
+export interface PostTagsAndDescriptionInfoActionSuccessPayload {
+    postData: PostTagsAndDescriptionInfo[];
 }
 
-export interface PostTagsAndDescriptionFailurePayload {
+export interface PostTagsAndDescriptionInfoActionFailurePayload {
     error: string;
 }
 
-export interface PostTagsAndDescriptionRequest {
-    type: typeof POST_TAGS_DESCRIPTION_REQUEST;
+export interface PostTagsAndDescriptionInfoAction {
+    type: typeof POST_TAGS_DESCRIPTION_INFO_ACTION;
     uid: any;
     tags: string[];
     description: string
 }
 
-export type PostTagsAndDescriptionSuccess = {
-    type: typeof POST_TAGS_DESCRIPTION_SUCCESS;
-    payload: PostTagsAndDescriptionSuccessPayload;
+export type PostTagsAndDescriptionInfoActionSuccess = {
+    type: typeof POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS;
+    payload: PostTagsAndDescriptionInfoActionSuccessPayload;
 };
 
-export type PostTagsAndDescriptionFailure = {
-    type: typeof POST_TAGS_DESCRIPTION_FAILURE;
-    payload: PostTagsAndDescriptionFailurePayload;
+export type PostTagsAndDescriptionInfoActionFailure = {
+    type: typeof POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE;
+    payload: PostTagsAndDescriptionInfoActionFailurePayload;
 };
 
 export type PostTagsAndDescriptionActions =
-    | PostTagsAndDescriptionRequest
-    | PostTagsAndDescriptionSuccess
-    | PostTagsAndDescriptionFailure;
+    | PostTagsAndDescriptionInfoAction
+    | PostTagsAndDescriptionInfoActionSuccess
+    | PostTagsAndDescriptionInfoActionFailure;
 
 
 // post tags and description for column
 
-export interface PostColumnTagsAndDescription {
+export interface PostColumnTagsAndDescriptionInfo {
     tags: any;
     description: any;
 }
 
-export interface PostColumnTagsAndDescriptionState {
+export interface PostColumnTagsAndDescriptionInfoState {
     pending: boolean;
-    postColumnData: PostColumnTagsAndDescription[];
+    postColumnData: PostColumnTagsAndDescriptionInfo[];
     error: string | null;
 }
 
-export interface PostColumnTagsAndDescriptionSuccessPayload {
-    postColumnData: PostColumnTagsAndDescription[];
+export interface PostColumnTagsAndDescriptionInfoActionSuccessPayload {
+    postColumnData: PostColumnTagsAndDescriptionInfo[];
 }
 
-export interface PostColumnTagsAndDescriptionFailurePayload {
+export interface PostColumnTagsAndDescriptionInfoActionFailurePayload {
     error: string;
 }
 
-export interface PostColumnTagsAndDescriptionRequest {
-    type: typeof POST_COLUMN_TAGS_DESCRIPTION_REQUEST;
+export interface PostColumnTagsAndDescriptionInfoAction {
+    type: typeof POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION;
     uid: any;
     tags: string[];
     description: string
 }
 
-export type PostColumnTagsAndDescriptionSuccess = {
-    type: typeof POST_COLUMN_TAGS_DESCRIPTION_SUCCESS;
-    payload: PostColumnTagsAndDescriptionSuccessPayload;
+export type PostColumnTagsAndDescriptionInfoActionSuccess = {
+    type: typeof POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS;
+    payload: PostColumnTagsAndDescriptionInfoActionSuccessPayload;
 };
 
-export type PostColumnTagsAndDescriptionFailure = {
-    type: typeof POST_COLUMN_TAGS_DESCRIPTION_FAILURE;
-    payload: PostTagsAndDescriptionFailurePayload;
+export type PostColumnTagsAndDescriptionInfoActionFailure = {
+    type: typeof POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE;
+    payload: PostTagsAndDescriptionInfoActionFailurePayload;
 };
 
 export type PostColumnTagsAndDescriptionActions =
-    | PostColumnTagsAndDescriptionRequest
-    | PostColumnTagsAndDescriptionSuccess
-    | PostColumnTagsAndDescriptionFailure;
+    | PostColumnTagsAndDescriptionInfoAction
+    | PostColumnTagsAndDescriptionInfoActionSuccess
+    | PostColumnTagsAndDescriptionInfoActionFailure;

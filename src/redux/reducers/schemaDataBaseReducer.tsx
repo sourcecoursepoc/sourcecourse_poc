@@ -1,7 +1,5 @@
 import {
-  FETCH_SCHEMA_DATABASE,
-  FETCH_SCHEMA_DATABASE_FAILURE,
-  FETCH_SCHEMA_DATABASE_SUCCESS,
+  
   ADD_ARRAY,
   POST_GROUPDATA_DATABASE_FAILURE,
   POST_GROUPDATA_DATABASE_SUCCESS,
@@ -9,18 +7,19 @@ import {
   ADD_LAST_INDEX,
   REMOVE_LAST_INDEX,
   CLEAR_LAST_INDEXES,
-  UPDATE_POST_REQUEST,
-  UPDATE_POST_SUCCESS,
-  UPDATE_POST_FAILURE,
-  POST_TAGS_DESCRIPTION_REQUEST,
-  POST_TAGS_DESCRIPTION_SUCCESS,
-  POST_TAGS_DESCRIPTION_FAILURE,
-  POST_COLUMN_TAGS_DESCRIPTION_REQUEST,
-  POST_COLUMN_TAGS_DESCRIPTION_SUCCESS,
-  POST_COLUMN_TAGS_DESCRIPTION_FAILURE,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE,
+  POST_TAGS_DESCRIPTION_INFO_ACTION,
+  POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+  
   // CLEAR_LAST_INDEXES,
 } from "../actions/schemaActionTypes";
-import { DataBaseState, DataBaseActions, PostDataActionTypes, PostDataState, UpdatePostAction, postTagsAndDescriptionState, postTagsAndDescriptionActions, PostColumnTagsAndDescriptionState, PostColumnTagsAndDescriptionActions } from "../actions/schemaTypes";
+import { DataBaseState, DataBaseActions, PostDataActionTypes, PostDataState, UpdatePostAction, postTagsAndDescriptionState, postTagsAndDescriptionActions, PostColumnTagsAndDescriptionState, PostColumnTagsAndDescriptionActions, PostTagsAndDescriptionInfoState, PostColumnTagsAndDescriptionInfoState } from "../actions/schemaTypes";
 
 const initialDataBaseState: DataBaseState = {
   pending: false,
@@ -32,14 +31,14 @@ const initialDataBaseState: DataBaseState = {
 
 export default (state = initialDataBaseState, action: DataBaseActions) => {
   switch (action.type) {
-    case FETCH_SCHEMA_DATABASE:
+    case FETCH_SCHEMA_DATABASE_INFO_ACTION:
       return {
         ...state,
 
         pending: true,
       };
 
-    case FETCH_SCHEMA_DATABASE_SUCCESS:
+    case FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS:
       return {
         ...state,
 
@@ -50,7 +49,7 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
         error: null,
       };
 
-    case FETCH_SCHEMA_DATABASE_FAILURE:
+    case FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE:
       return {
         ...state,
 
@@ -63,7 +62,6 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
 
     case ADD_ARRAY:
       if (Array.isArray(action.payload)) {
-        console.log(action.payload, "payload");
 
         return {
           ...state,
@@ -145,21 +143,21 @@ const initialPostState: postTagsAndDescriptionState = {
 export const postTagsAndDescriptionReducer = (
   state = initialPostState,
   action: postTagsAndDescriptionActions
-): postTagsAndDescriptionState => {
+): PostTagsAndDescriptionInfoState => {
   switch (action.type) {
-    case POST_TAGS_DESCRIPTION_REQUEST:
+    case POST_TAGS_DESCRIPTION_INFO_ACTION:
       return {
         ...state,
         pending: true,
       };
-    case POST_TAGS_DESCRIPTION_SUCCESS:
+    case POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS:
       return {
         ...state,
         pending: false,
         postData: action.payload.postData,
         error: null,
       };
-    case POST_TAGS_DESCRIPTION_FAILURE:
+    case POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE:
       return {
         ...state,
         pending: false,
@@ -172,7 +170,7 @@ export const postTagsAndDescriptionReducer = (
 };
 
 // post column description and tags
-const initialColumnPostState: PostColumnTagsAndDescriptionState = {
+const initialColumnPostState: PostColumnTagsAndDescriptionInfoState = {
   pending: false,
   postColumnData: [],
   error: null,
@@ -181,21 +179,21 @@ const initialColumnPostState: PostColumnTagsAndDescriptionState = {
 export const postColumnTagsAndDescriptionReducer = (
   state = initialColumnPostState,
   action: PostColumnTagsAndDescriptionActions
-): PostColumnTagsAndDescriptionState => {
+): PostColumnTagsAndDescriptionInfoState => {
   switch (action.type) {
-    case POST_COLUMN_TAGS_DESCRIPTION_REQUEST:
+    case POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION:
       return {
         ...state,
         pending: true,
       };
-    case POST_COLUMN_TAGS_DESCRIPTION_SUCCESS:
+    case POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS:
       return {
         ...state,
         pending: false,
         postColumnData: action.payload.postColumnData,
         error: null,
       };
-    case POST_COLUMN_TAGS_DESCRIPTION_FAILURE:
+    case POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE:
       return {
         ...state,
         pending: false,
