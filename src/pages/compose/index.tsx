@@ -14,33 +14,20 @@ import {
 import MainIcons from "../../components/ComposePage/MainContent/mainContentIcons";
 import MainContent from "../../components/ComposePage/MainContent/mainContent";
 import ButtonComponent from "@/components/ComposePage/buttons/buttonComponent";
+
 import GroupsMainContent from "@/components/ComposePage/GroupsPage/groupsMainContent";
 import TextAreaComponent from "@/components/ComposePage/TextArea/textArea";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import Toast, { showSuccessToast } from "../schemas/toast";
 import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
-import {
-  getComposeNameDescRequest,
-  postComposeNameDescRequest,
-} from "@/redux/actions/composeAction";
-import {
-  getComposeNameDescSelector,
-  getProjectsSelector,
-} from "@/redux/selector";
-const Compose = () => {
-  const { Content } = Layout;
-  const [selectedIcon, setSelectedIcon] = useState(null);
-  const [uid, setUid] = useState("");
-  const [name, setName] = useState("");
-  const [saveClicked, setSaveClicked] = useState(false);
-  const [description, setDescription] = useState("");
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { getProjectByIdSelector } from "@/redux/selector";
+import { getComposeNameDescSelector, getProjectByIdSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
+import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -49,11 +36,28 @@ const Compose = () => {
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [isSidebutonClickable, setIsSidebuttonClickable] = useState(true);
+  const [projectId, setProjectId] = useState(1);
+  const [saveClicked, setSaveClicked] = useState(false);
+  const router = useRouter();
+  const {
+    query: { id },
+  } = router;
 
   const dispatch = useDispatch();
 
-  //posting compose page name and description using action
+  const { projectById: projectData, pending } = useSelector(
+    getProjectByIdSelector
+  );
+  const [name, setName] = useState(projectData.name);
+  const [description, setDescription] = useState(projectData.description);
+
+  useEffect(() => {
+    dispatch(fetchProjectByIdRequest(id));
+    setName(projectData.name);
+    setDescription(projectData.description);
+  }, [projectData.name, projectData.description]);
+
+   //posting compose page name and description using action
   //dispatch(getComposeNameDescRequest());
   const getNameDescData = useSelector(getComposeNameDescSelector);
   const composeUidNameDesc = getNameDescData.slice(-1)[0];
@@ -74,42 +78,6 @@ const Compose = () => {
       console.log("Saved data:", data);
       if (data) {
         setSavedData(data);
-  const [projectId, setProjectId] = useState(1);
-
-  const router = useRouter();
-  const {
-    query: { id },
-  } = router;
-
-  const dispatch = useDispatch();
-
-  const { projectById: projectData, pending } = useSelector(
-    getProjectByIdSelector
-  );
-
-  const [name, setName] = useState(projectData.name);
-  const [description, setDescription] = useState(projectData.description);
-
-  useEffect(() => {
-    dispatch(fetchProjectByIdRequest(id));
-    setName(projectData.name);
-    setDescription(projectData.description);
-  }, [projectData.name, projectData.description]);
-
-  const handleSaveProjectInfo = async () => {
-    setSaveModalVisible(false);
-    showSuccessToast("Saved Successfully");
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/sourcecourse/project",
-        {
-          name: name,
-          description: description,
-        }
-      );
-      if (response.data !== -1) {
-        setProjectId(response.data.uid);
-        handleIconClick("HddFilled");
       }
       setSaveClicked(false);
     }
@@ -118,16 +86,11 @@ const Compose = () => {
   useEffect(() => {
     saveData();
   }, [saveClicked, name, description]);
-  
+
+
   const handleSaveProjectInfo = async () => {
     setSaveModalVisible(false);
-    setSaveClicked(true);
     showSuccessToast("Saved Successfully");
-
-    /* dispatch(clearLastIndex());
-
-setName(""); */
-
     // try {
     //   const response = await axios.post(
     //     "http://localhost:8080/sourcecourse/project",
@@ -136,20 +99,17 @@ setName(""); */
     //       description: description,
     //     }
     //   );
-
     //   if (response.data !== -1) {
-    //     setIsSidebuttonClickable(true); // Set the isclickable state to true
-    //     handleIconClick("HddFilled"); //toggles schema
+    //     setProjectId(response.data.uid);
+    //     handleIconClick("HddFilled");
     //   }
     // } catch (error) {
     //   console.error(error);
     // }
   };
-
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
   };
-
   const handleSaveClick = () => {
     if (name.trim() === "") {
       setNameError(true);
@@ -165,7 +125,6 @@ setName(""); */
 
     setSaveModalVisible(true);
   };
-
   const handleIconClick = (icon) => {
     setSelectedIcon(icon);
   };
@@ -182,23 +141,17 @@ setName(""); */
   };
   const handleDeleteModalOk = () => {
     setDeleteModalVisible(false);
-
     dispatch(clearLastIndex());
-
     setName("");
-
     setDescription("");
     showSuccessToast(DELETE_TOAST);
   };
-
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
   };
-
   const handleDeleteModalCancel = () => {
     setDeleteModalVisible(false);
   };
-
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
       return <MainContent />;
@@ -206,7 +159,6 @@ setName(""); */
       switch (selectedIcon) {
         case "HddFilled":
           return <MainContent />;
-
         case "ContainerFilled":
           return <GroupsMainContent />;
         case "Reports":
@@ -240,7 +192,6 @@ setName(""); */
                 className={styles.textAreaBorder}
                 style={{ borderRight: "1px solid #ccc" }}
               ></Col>
-
               <ButtonComponent
                 saveModalVisible={saveModalVisible}
                 handleSaveModalOk={handleSaveProjectInfo}

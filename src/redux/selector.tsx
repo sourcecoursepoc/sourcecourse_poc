@@ -23,6 +23,7 @@ export const getComposeReportsPipelineSelector = createSelector(getComposeReport
 
 
 export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)
+export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
 export const getSelectorTableNodes = createSelector(getLastIndexesArray, (lastIndexes) => lastIndexes)
 export const getComposePipelineSelector = createSelector(getComposePipeline, (composePipeline) => composePipeline);
@@ -38,5 +39,4 @@ export const getPendingSelector = createSelector(
   getPending,
   (pending) => pending
 );
-
 export const getErrorSelector = createSelector(getError, (error) => error);
