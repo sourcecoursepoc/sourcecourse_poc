@@ -1,4 +1,13 @@
-import { ComposePipelineState, ComposePipelineActions, ComposeReportsPipelineActions, ComposeReportsPipelineState } from "../actions/composeTypes";
+import {
+  ComposePipelineState,
+  ComposePipelineActions,
+  ComposeReportsPipelineActions,
+  ComposeReportsPipelineState,
+  projectSchemaInfoActions,
+  projectSchemaInfoState,
+  PostProjectSchemaInfoState,
+  PostProjectSchemaInfoActionTypes,
+} from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
   FETCH_COMPOSE_PIPELINE_SUCCESS,
@@ -6,6 +15,12 @@ import {
   FETCH_REPORTS_PIPELINE,
   FETCH_REPORTS_PIPELINE_SUCCESS,
   FETCH_REPORTS_PIPELINE_FAILURE,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  POST_PROJECT_SCHEMA_INFO_ACTION,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -46,15 +61,22 @@ function composeReducer(
   }
 }
 
-
 // compose reports pipeline
-
 const initialReportsState: ComposeReportsPipelineState = {
   pending: false,
   composeReportsPipeline: [],
   error: null,
 };
-
+const initialStateCompose: projectSchemaInfoState = {
+  pending: false,
+  schemas: [],
+  error: null,
+};
+const initialPostStateSchema: PostProjectSchemaInfoState = {
+  loading: false,
+  postData: [],
+  error: null,
+};
 function composeReportsPipelineReducer(
   state = initialReportsState,
   action: ComposeReportsPipelineActions
@@ -87,4 +109,55 @@ function composeReportsPipelineReducer(
   }
 }
 
-export { composeReducer, composeReportsPipelineReducer };
+//fetching schema details from compose page
+function composeSchemaReducer(
+  state = initialStateCompose,
+  action: projectSchemaInfoActions | PostProjectSchemaInfoActionTypes
+): projectSchemaInfoState {
+  switch (action.type) {
+    case FETCH_PROJECT_SCHEMA_INFO_ACTION:
+      return {
+        ...state,
+        pending: true,
+      };
+    case FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        schemas: action.payload.schemas,
+        error: null,
+      };
+    case FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        schemas: [],
+        error: action.payload.error,
+      };
+      case POST_PROJECT_SCHEMA_INFO_ACTION:
+      return {
+        ...state,
+        loading: true,
+      };
+    case POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
+        return {
+          ...state,
+          loading: false,
+          schemas: action.payload.postData,
+          error: null,
+        };
+      case POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        schemas: [],
+        error: action.payload.error,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+}
+
+export { composeReducer, composeReportsPipelineReducer, composeSchemaReducer };

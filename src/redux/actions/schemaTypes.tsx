@@ -21,7 +21,7 @@ import {
     POST_GROUPDATA,
     POST_GROUPDATA_SUCCESS,
     POST_GROUPDATA_FAILURE,
-    DELETE_GROUP_MODAL
+    DELETE_GROUP_MODAL_BOX,
 } from "./schemaActionTypes";
 
 export interface ISchema {
@@ -35,6 +35,7 @@ export interface SchemaState {
     schemas: ISchema[];
     error: string | null;
 }
+
 
 export interface FetchSchemaSuccessPayload {
     schemas: ISchema[];
@@ -103,6 +104,7 @@ export interface AddArrayAction {
     payload: any;
 
 }
+
 export type DataBaseActions =
     | FetchDataBaseRequest
     | FetchDataBaseSuccess
