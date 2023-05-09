@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { removeNode } from '@/redux/actions/schemasaction';
 import { removeLastIndex } from '@/redux/actions/schemaTypes';
 import { DeleteFilled } from "@ant-design/icons";
+import { fetchDataBaseInfoAction } from "../../../redux/actions/schemasaction";
 
 
 const MainContent = () => {
@@ -28,7 +29,7 @@ const MainContent = () => {
   const selectedTableArray= useSelector(getSelectorTableNodes);
 
   useEffect(() => {
-    dispatch(fetchDataBaseRequest());
+    dispatch(fetchDataBaseInfoAction());
   }, []);
 
   const handleImport = () => {   

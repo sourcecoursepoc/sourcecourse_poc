@@ -53,37 +53,6 @@ function* fetchDataBaseInfoSaga() {
   }
 };
 
-//Post Data
-
-const API_URL = 'https://example.com/api';
-
-export const postData = async (data: any) => {
-  const response = await fetch(`${API_URL}/post-data`, {
-    method: 'POST',
-    body: JSON.stringify(data),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
-
-  const responseData = await response.json();
-
-  if (!response.ok) {
-    throw new Error(responseData.message || 'Failed to post data.');
-  }
-
-  return responseData;
-};
-
-export const postFormData = (data: any) => async (dispatch: any) => {
-  try {
-    dispatch(postDataRequest());
-    await postData(data);
-    dispatch(postDataSuccess());
-  } catch (error) {
-    dispatch(postDataFailure(error.message));
-  }
-};
 
 
 /*
@@ -133,7 +102,7 @@ export function* schemaSaga() {
 export function* DataBaseSaga() {
   yield all([takeLatest(FETCH_SCHEMA_DATABASE_INFO_ACTION, fetchDataBaseInfoSaga)]);
 }
-export function* PostSaga() {
+export function* PostTableTagsAndDescriptionSaga() {
   yield all([takeLatest(POST_TAGS_DESCRIPTION_INFO_ACTION, postTagsAndDescriptionInfoSaga)])
 }
 

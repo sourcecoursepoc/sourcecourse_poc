@@ -5,7 +5,7 @@ import DescriptionBox from './descriptionbox';
 import DisplayBox from './displaybox';
 import TagBox from './tagbox';
 import { useSelector, useDispatch } from 'react-redux';
-import { getSelectedArraySelector } from '../../redux/selector';
+import { SelectedTreeNodeInfo } from '../../redux/selector';
 import { Transcription } from './transcriptionFile';
 import Buttons from '../../components/ComposePage/buttons/buttons';
 import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
@@ -18,16 +18,16 @@ const { Content } = Layout;
 
 export default function SchemaContent() {
 
-    const selectedData = useSelector(getSelectedArraySelector);
-    const selectedMetaData = selectedData.map(node => node ?.metadata);
-    const selectedTags = selectedData.map((node) => node.tags);
+    const selectedTreeData = useSelector(SelectedTreeNodeInfo);
+    const selectedMetaData = selectedTreeData.map(node => node ?.metadata);
+    const selectedTags = selectedTreeData.map((node) => node.tags);
     const selcectedTagsLastElement = selectedTags.slice(-1)[0];
-    const Description = selectedData.map(node => node.description);
+    const Description = selectedTreeData.map(node => node.description);
     const descriptionLastIndex = Description.length - 1;
     const descriptionLastItem = Description[descriptionLastIndex];
     const selectedMetaDataLastIndex = selectedMetaData.length - 1;
     const selectedMetaDataLastItem = selectedMetaData[selectedMetaDataLastIndex];
-    const selcectedDataLastElement = selectedData.slice(-1)[0];
+    const selcectedDataLastElement = selectedTreeData.slice(-1)[0];
     const [columnData, setColumnData] = useState([]);
     const [saveModalVisible, setSaveModalVisible] = useState(false);
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
@@ -99,7 +99,7 @@ export default function SchemaContent() {
     }
 
     useEffect(() => {
-        const selectedDataLastElement = selectedData[selectedData.length - 1];
+        const selectedDataLastElement = selectedTreeData[selectedTreeData.length - 1];
         if (selectedDataLastElement) {
             if ('dbName' in selectedDataLastElement) {
                 setSelectedValueName(selectedDataLastElement.dbName);
@@ -112,7 +112,7 @@ export default function SchemaContent() {
                 setSelectedUid(selectedDataLastElement.uid);
             }
         }
-    }, [selectedData]);
+    }, [selectedTreeData]);
 
     const transcriptList: any = Transcription(selectedMetaDataLastItem);
     const listItems: any = [];

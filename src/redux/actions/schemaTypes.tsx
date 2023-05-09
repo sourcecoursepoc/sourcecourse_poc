@@ -288,12 +288,12 @@ export interface PostTagsAndDescriptionInfo {
 
 export interface PostTagsAndDescriptionInfoState {
     pending: boolean;
-    postData: PostTagsAndDescriptionInfo[];
+    postTableData: PostTagsAndDescriptionInfo[];
     error: string | null;
 }
 
 export interface PostTagsAndDescriptionInfoActionSuccessPayload {
-    postData: PostTagsAndDescriptionInfo[];
+    postTableData: PostTagsAndDescriptionInfo[];
 }
 
 export interface PostTagsAndDescriptionInfoActionFailurePayload {

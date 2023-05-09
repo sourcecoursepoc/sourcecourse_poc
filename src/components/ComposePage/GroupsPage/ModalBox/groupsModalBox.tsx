@@ -21,6 +21,7 @@ import MiddleIcons from "./middleIcons";
 import { removeNode } from "@/redux/actions/schemasaction";
 import NewAttributeContent from "./newAttributeContent";
 import { PlusOutlined } from "@ant-design/icons";
+import { fetchDataBaseInfoAction } from "../../../../redux/actions/schemasaction";
 
 interface MyModalProps {
   visible?: boolean;
@@ -57,7 +58,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [render,setRender] = useState(false)
 
   useEffect(() => {
-    dispatch(fetchDataBaseRequest());
+    dispatch(fetchDataBaseInfoAction());
     dispatch(fetchGroupDataRequest());
   }, []);
   useEffect(() => {

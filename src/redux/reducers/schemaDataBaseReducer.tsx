@@ -136,7 +136,7 @@ export const postDataReducer = (state = initialState, action: PostDataActionType
 
 const initialPostState: postTagsAndDescriptionState = {
   pending: false,
-  postData: [],
+  postTableData: [],
   error: null,
 };
 
@@ -161,7 +161,7 @@ export const postTagsAndDescriptionReducer = (
       return {
         ...state,
         pending: false,
-        postData: [],
+        postTableData: [],
         error: action.payload.error,
       };
     default:

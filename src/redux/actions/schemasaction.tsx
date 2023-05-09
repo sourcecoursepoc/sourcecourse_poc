@@ -241,9 +241,9 @@ export const postTagsAndDescriptionInfoAction = (uid: any, tags: string[], descr
 
 });
 
-export const postTagsAndDescriptionInfoActionSuccess = (postData: any): PostTagsAndDescriptionInfoActionSuccess => ({
+export const postTagsAndDescriptionInfoActionSuccess = (postTableData: any): PostTagsAndDescriptionInfoActionSuccess => ({
   type: POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
-  payload: { postData },
+  payload: { postTableData },
 });
 
 export const postTagsAndDescriptionInfoActionFailure = (error: any): PostTagsAndDescriptionInfoActionFailure => ({

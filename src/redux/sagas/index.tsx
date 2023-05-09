@@ -5,7 +5,7 @@ import { all, fork } from "redux-saga/effects";
 
 import pipelineSaga from "../sagas/fetchDataActionSaga";
 
-import { schemaSaga, DataBaseSaga, PostSaga, PostColumnTagsSaga } from "../sagas/schemaActionSaga";
+import { schemaSaga, DataBaseSaga, PostTableTagsAndDescriptionSaga, PostColumnTagsSaga } from "../sagas/schemaActionSaga";
 
 import projectSaga from "../sagas/projectSaga";
 
@@ -20,6 +20,6 @@ import recordSaga from "../sagas/fetchRecordActionSaga";
 export function* rootSaga() {
 
 
-    yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()), (groupdataDataBaseSaga()), (recordSaga()), (projectSaga()), (ComposePipelineSaga()), (groupSaga()), (ComposeReportsPipelineSaga()), (PostSaga()), (PostColumnTagsSaga())]);
+    yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()), (groupdataDataBaseSaga()), (recordSaga()), (projectSaga()), (ComposePipelineSaga()), (groupSaga()), (ComposeReportsPipelineSaga()), (PostTableTagsAndDescriptionSaga()), (PostColumnTagsSaga())]);
 
 }

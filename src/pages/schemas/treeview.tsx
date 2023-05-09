@@ -8,7 +8,7 @@ import {
   addGroupdataArray,
 } from "../../redux/actions/schemasaction";
 import {
-  getSelectedArraySelector,
+  SelectedTreeNodeInfo,
 } from "../../redux/selector";
 import {
   RightOutlined,
@@ -25,7 +25,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   iconImage,
 }) => {
   const dispatch = useDispatch();
-  const selcectedData = useSelector(getSelectedArraySelector);
+  const selcectedTreeData = useSelector(SelectedTreeNodeInfo);
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
 
   useEffect(() => {
@@ -188,7 +188,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       style={{ fontSize: "15px", fontWeight: "500", alignText: "left" }}
       showIcon
       expandedKeys={expandedKeys}
-      selectedKeys={selcectedData.map((node) => node.uid)}
+      selectedKeys={selcectedTreeData.map((node) => node.uid)}
       onExpand={(keys) => setExpandedKeys(keys)}
       defaultSelectedKeys={db ?.[0] ?.uid}
       height={1000}
