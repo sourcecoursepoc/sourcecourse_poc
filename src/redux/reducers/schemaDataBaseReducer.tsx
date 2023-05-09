@@ -154,7 +154,7 @@ export const postTagsAndDescriptionReducer = (
       return {
         ...state,
         pending: false,
-        postData: action.payload.postData,
+        postTableData: action.payload.postTableData,
         error: null,
       };
     case POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE:
