@@ -139,15 +139,11 @@ function* postProjectSchemaInfoSaga(
 ) {
   try {
     const { projectUid, sourceTableUids } = action;
-
     const response = yield call(
       { fn: postProjectSchemaInfocall, context: null },
-
       projectUid,
-
       sourceTableUids
     );
-
     yield put(postProjectSchemaInfoSuccess(response.data));
   } catch (error) {
     yield put(postProjectSchemaInfoFailure({ error }));

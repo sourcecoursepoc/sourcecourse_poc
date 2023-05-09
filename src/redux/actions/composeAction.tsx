@@ -71,7 +71,6 @@ export const fetchComposePipelineFailure = (
 };
 
 // REPORTS PIPELINE ACTION
-
 export const fetchComposeReportsPipelineRequest =
   (): FetchComposeReportsPipelineRequest => {
     console.log("fetchComposePipelineRequest action creator called");
@@ -107,7 +106,6 @@ export const fetchComposeReportsPipelineFailure = (
 };
 
 // fetch schema compose action
-
 export const fetchProjectSchemaInfoAction = (
   params: number
 ): FetchSchemaComposeRequest => ({
@@ -119,7 +117,6 @@ export const fetchSchemaComposeSuccess = (
   payload: fetchProjectSchemaInfoActionSuccessPayload
 ): fetchProjectSchemaInfoActionSuccess => ({
   type: FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
-
   payload,
 });
 
@@ -127,41 +124,16 @@ export const fetchSchemaComposeFailure = (
   payload: fetchProjectSchemaInfoActionFailurePayload
 ): fetchProjectSchemaInfoActionFailure => ({
   type: FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
-
   payload,
 });
 
-//post schema compose
-/* export const postProjectSchemaInfoRequest =
-  (): PostProjectSchemaInfoActionTypes => ({
-    type: POST_PROJECT_SCHEMA_INFO_ACTION,
-  });
-
-export const postProjectSchemaInfoSuccess =
-  (): PostProjectSchemaInfoActionTypes => ({
-    type: POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
-  });
-
-export const postProjectSchemaInfoFailure = (
-  error: string
-): PostProjectSchemaInfoActionTypes => ({
-  type: POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
-
-  payload: error,
-});
- */
 export const postProjectSchemaInfoRequest = (
   projectUid: any,
-
   sourceTableUids: any[]
 ): PostProjectSchemaInfo => {
-  console.log("PostProjectSchemaInfo action creator called");
-
   return {
     type: POST_PROJECT_SCHEMA_INFO_ACTION,
-
     projectUid,
-
     sourceTableUids,
   };
 };
@@ -170,7 +142,6 @@ export const postProjectSchemaInfoSuccess = (
   postData: any
 ): PostProjectSchemaInfoSuccess => ({
   type: POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
-
   payload: { postData },
 });
 
@@ -178,6 +149,5 @@ export const postProjectSchemaInfoFailure = (
   error: any
 ): PostProjectSchemaInfoFailure => ({
   type: POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
-
   payload: { error },
 });

@@ -23,7 +23,7 @@ const rootReducer = combineReducers({
   record: fetchRecordsReducer,
   group: groupReducer,
   composeReportsPipeline: composeReportsPipelineReducer,
-schemaComposeData:composeSchemaReducer,
+  schemaComposeData:composeSchemaReducer,
 });
 
 
