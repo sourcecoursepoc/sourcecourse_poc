@@ -14,6 +14,7 @@ import { groupdataDataBaseSaga } from "./groupdataDatabaseSaga";
 import { ComposeReportsPipelineSaga,ComposePipelineSaga,schemaComposeSaga,PostSchemaRequestSaga } from "./composeSaga";
 import groupSaga from "./groupSaga";
 import recordSaga from "../sagas/fetchRecordActionSaga";
+import projectByIdSaga from "../sagas/projectByIdSaga";
 
 
 
@@ -21,6 +22,6 @@ export function* rootSaga() {
 
   console.log("rootSaga: running...");
 
-  yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()),(groupdataDataBaseSaga()),(recordSaga()),(projectSaga()),(ComposePipelineSaga()),(groupSaga()),(ComposeReportsPipelineSaga()),(schemaComposeSaga()),(PostSchemaRequestSaga())]);
+  yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()),(groupdataDataBaseSaga()),(recordSaga()),(projectSaga()),(ComposePipelineSaga()),(groupSaga()),(ComposeReportsPipelineSaga()),(schemaComposeSaga()),(PostSchemaRequestSaga(),(projectByIdSaga()))]);
 
 }

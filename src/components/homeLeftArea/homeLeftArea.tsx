@@ -51,6 +51,7 @@ const HomeLeftArea: React.FunctionComponent = () => {
                 <ProjectContent
                   heading={item.projectName}
                   projectDescription={item.description}
+                  uid={item.uid}
                 ></ProjectContent>
               </Row>
             ))
@@ -62,6 +63,7 @@ const HomeLeftArea: React.FunctionComponent = () => {
                 <ProjectContent
                   heading={item.projectName}
                   projectDescription={item.description}
+                  uid={item.uid}
                 ></ProjectContent>
               </Row>
             ))
