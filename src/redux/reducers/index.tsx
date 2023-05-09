@@ -5,10 +5,12 @@ import schemaReducer from "./schemaReducer";
 import projectReducer from "./projectReducer";
 import schemaDataBaseReducer, { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
-import { composeReducer, composeReportsPipelineReducer } from "./composeReducer";
+import { composeReducer, composeReportsPipelineReducer,composeSchemaReducer } from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
+
 import groupReducer from "./groupReducer";
+import projectByIdReducer from "./projectByIdReducer";
 
 console.log("Creating root reducer...");
 
@@ -18,6 +20,7 @@ const rootReducer = combineReducers({
   database: schemaDataBaseReducer,
   groupdataDatabase: groupdataDatabaseReducer,
   project: projectReducer,
+  projectById: projectByIdReducer,
   composePipeline: composeReducer,
   record: fetchRecordsReducer,
   group: groupReducer,

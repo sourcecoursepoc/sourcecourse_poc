@@ -22,6 +22,7 @@ import { removeNode } from "@/redux/actions/schemasaction";
 import NewAttributeContent from "./newAttributeContent";
 import { PlusOutlined } from "@ant-design/icons";
 import { fetchDataBaseInfoAction } from "../../../../redux/actions/schemasaction";
+import { SelectedTreeNodeInfo } from "../../../../redux/selector";
 
 interface MyModalProps {
   visible?: boolean;
@@ -50,7 +51,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
-  const selcectData = useSelector(getSelectedArraySelector);
+  const selcectData = useSelector(SelectedTreeNodeInfo);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
   const lastIndexGroup = selectGroupdataData.slice(-1)[0];
   const [attrName,setAttrName] = useState('Attribute Name')

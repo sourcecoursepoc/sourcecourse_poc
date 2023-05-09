@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Layout, Space, Col, Row, Image } from "antd";
 import Header from "../../components/header/header";
 import axios from 'axios';
@@ -22,6 +22,10 @@ import { useDispatch } from "react-redux";
 import Toast, { showSuccessToast } from "../schemas/toast";
 import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { getProjectByIdSelector } from "@/redux/selector";
+import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -34,7 +38,24 @@ const Compose = () => {
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [projectId, setProjectId] = useState(1);
 
+  useEffect(() => {
+    
+    const data = dispatch(fetchProjectByIdRequest(id));
+    console.log("USEEFFECT")
+    
+    
+  }, []);
+
+
+  const router = useRouter()
+  const {
+    query: { id }
+  } = router
+
   const dispatch = useDispatch();
+
+  const {projectById : projectData, pending} = useSelector(getProjectByIdSelector);
+
   const handleSaveProjectInfo = async () => { 
     setSaveModalVisible(false);
     showSuccessToast("Saved Successfully")
@@ -73,6 +94,7 @@ const Compose = () => {
   };
   const handleIconClick = (icon) => {
     setSelectedIcon(icon);
+
   };
 
   const handleDeleteModalOk = () => {
@@ -118,9 +140,9 @@ const Compose = () => {
           <Row>
             <TextAreaComponent
               onNameChange={setName}
-              nameValue={name}
+              nameValue={projectData.name}
               onDescriptionChange={setDescription}
-              descriptionValue={description}
+              descriptionValue={projectData.description}
               nameError={nameError}
               descriptionError={descriptionError}
               className={nameError ? "textAreaError" : ""}

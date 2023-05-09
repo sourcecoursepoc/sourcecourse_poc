@@ -46,6 +46,7 @@ export interface SchemaState {
     error: string | null;
 }
 
+
 export interface FetchSchemaSuccessPayload {
     schemas: ISchema[];
 }
@@ -113,6 +114,7 @@ export interface AddArrayAction {
     payload: any;
 
 }
+
 export type DataBaseActions =
     | FetchDataBaseInfoAction
     | FetchDataBaseInfoActionSuccess

@@ -91,6 +91,7 @@ export const fetchSchemaFailure = (
 
   payload,
 });
+// ******************************************
 
 export const fetchDataBaseInfoAction = (): FetchDataBaseInfoAction => ({
   type: FETCH_SCHEMA_DATABASE_INFO_ACTION,
@@ -165,7 +166,6 @@ export function removeNode(uid: string): RemoveNodeAction {
 export const addLastIndex = (lastIndex: any): AddLastIndexAction => {
   return {
     type: ADD_LAST_INDEX,
-
     payload: lastIndex,
   };
 };
@@ -173,7 +173,6 @@ export const addLastIndex = (lastIndex: any): AddLastIndexAction => {
 export const removeLastIndex = (uid: string): RemoveLastIndexAction => {
   return {
     type: REMOVE_LAST_INDEX,
-
     payload: uid,
   };
 };

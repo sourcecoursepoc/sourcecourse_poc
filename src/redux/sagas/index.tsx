@@ -8,14 +8,12 @@ import pipelineSaga from "../sagas/fetchDataActionSaga";
 import { schemaSaga, DataBaseSaga, PostTableTagsAndDescriptionSaga, PostColumnTagsSaga } from "../sagas/schemaActionSaga";
 
 import projectSaga from "../sagas/projectSaga";
-
 import { groupdataDataBaseSaga } from "./groupdataDatabaseSaga";
 
 import { ComposeReportsPipelineSaga, ComposePipelineSaga } from "./composeSaga";
 import groupSaga from "./groupSaga";
 import recordSaga from "../sagas/fetchRecordActionSaga";
-
-
+import projectByIdSaga from "../sagas/projectByIdSaga";
 
 export function* rootSaga() {
 

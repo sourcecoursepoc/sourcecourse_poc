@@ -53,7 +53,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     } else if (treeKeys.length > 1) {
       const tables = db.find(val => val.uid.toString() === treeKeys[0]) ?.tables;
       element = tables.find(val => val.uid.toString() === treeKeys[1]);
-    
+
       dispatch(addLastIndex(element));
     } else if (treeKeys.length > 0) {
       element = db.find(val => val.uid.toString() === treeKeys[0]);
@@ -62,7 +62,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       dispatch(addArray([element]));
       // dispatch(addGroupdataArray([element]));
     }
-  }
+  };
 
 
   const renderColumns = (columns: ColumnProps[] | undefined, dbUid: string, tableUid: string) => {

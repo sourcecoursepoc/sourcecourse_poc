@@ -7,7 +7,6 @@ import { FETCH_SCHEMA_SCHEMADATA_INFO_ACTION, FETCH_SCHEMA_DATABASE_INFO_ACTION,
 const getSchema = (requestParams: any) =>
   axios.get<ISchema[]>("http://localhost:8000/schemas?id=" + requestParams);
 
-
 /*
   Worker Saga: Fired on FETCH_SCHEMA_REQUEST action
 */
