@@ -155,7 +155,6 @@ export const addLastIndex = (lastIndex: any): AddLastIndexAction => {
 export const removeLastIndex = (uid: string): RemoveLastIndexAction => {
   return {
     type: REMOVE_LAST_INDEX,
-
     payload: uid,
   };
 };

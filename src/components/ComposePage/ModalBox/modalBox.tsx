@@ -12,10 +12,10 @@ import {
   getSelectedArraySelector,
   getSelectorTableNodes,
 } from "@/redux/selector";
-import { addLastIndex, removeLastIndex } from "@/redux/actions/schemasaction";
+import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { fetchProjectSchemaInfoAction, postProjectSchemaInfoRequest } from "@/redux/actions/composeAction";
+import { postProjectSchemaInfoRequest } from "@/redux/actions/composeAction";
 
 interface MyModalProps {
   visible: boolean;
@@ -26,22 +26,17 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  const [schemaCompose, setSchemaCompose] = useState([]);
   
   const projectSchemaInfo = useSelector(projectSchemaInfoSelector);//tables in the database
   const selectedTableArray = useSelector(getSelectorTableNodes);//selected tables from the tree
 
-  const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
-  
-  console.log("projectSchemaInfo = ",projectSchemaInfo);
-  console.log("selectedTableArray = ",selectedTableArray);
+  useEffect(() => {
+    if (projectSchemaInfo?.length > 0) {
+      dispatch(clearLastIndex());
+    }
+  }, [projectSchemaInfo]);
 
-  //console.log("combinedArray combinedArray = ",combinedArray);
-  /*  useEffect(() => {
-   /// setSchemaCompose(combinedArray);
-    dispatch(addLastIndex([...projectSchemaInfo, ...selectedTableArray]));
-  }, [ projectSchemaInfo, selectedTableArray]); 
- */
+  const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
 
   const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid)); //taking uid's of selected tables
 
@@ -51,31 +46,9 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
       projectUid: 3,
       sourceTableUids: tableUidArray,
     };
-  
     dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
-    dispatch(fetchProjectSchemaInfoAction(3));
-    
     onExport();
-  };  
-  /*   const handleImport = async () => {
-    const requestBody = {
-      projectUid: 3,
-      sourceTableUids: tableUidArray,
-    };
-    console.log(requestBody);
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/sourcecourse/project-tables",
-        requestBody
-      );
-      dispatch(addLastIndex(response.data));
-      dispatch(fetchProjectSchemaInfoAction(3));
-      console.log("response post schema api = ",response.data);
-      onExport();
-    } catch (error) {
-      console.error(error);
-    }
-  }; */
+  };
   
   const handleImportButton = () => {
     handleImport();
@@ -92,8 +65,6 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
         "http://localhost:8080/sourcecourse/project-tables",
         { data: requestBody }
       );
-      dispatch(fetchProjectSchemaInfoAction(3));
-      console.log("response after deleting",response.data);
     } catch (error) {
       console.error(error);
     }
