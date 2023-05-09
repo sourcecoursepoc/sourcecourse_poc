@@ -30,21 +30,11 @@ import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 const Compose = () => {
   const { Content } = Layout;
   const [selectedIcon, setSelectedIcon] = useState(null);
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [projectId, setProjectId] = useState(1);
-
-  useEffect(() => {
-    
-    const data = dispatch(fetchProjectByIdRequest(id));
-    console.log("USEEFFECT")
-    
-    
-  }, []);
 
 
   const router = useRouter()
@@ -55,6 +45,19 @@ const Compose = () => {
   const dispatch = useDispatch();
 
   const {projectById : projectData, pending} = useSelector(getProjectByIdSelector);
+
+   const [name, setName] = useState(projectData.name);
+ const [description, setDescription] = useState(projectData.description);
+
+  useEffect(() => {
+    
+    const data = dispatch(fetchProjectByIdRequest(id));
+    setName(projectData.name)
+    setDescription(projectData.description)
+    console.log(nameError, descriptionError)
+    
+    
+  }, [projectData.name,projectData.description]);
 
   const handleSaveProjectInfo = async () => { 
     setSaveModalVisible(false);
@@ -140,9 +143,9 @@ const Compose = () => {
           <Row>
             <TextAreaComponent
               onNameChange={setName}
-              nameValue={projectData.name}
+              nameValue={name}
               onDescriptionChange={setDescription}
-              descriptionValue={projectData.description}
+              descriptionValue={description}
               nameError={nameError}
               descriptionError={descriptionError}
               className={nameError ? "textAreaError" : ""}
