@@ -4,7 +4,7 @@ import { AppState } from "./reducers/index";
 
 const getPending = (state: AppState) => state.schema.pending;
 const getSchemas = (state: AppState) => state.schema.schemas;
-const fetchProjectSchemaInfo = (state: AppState) => state.schemaComposeData.schemas;
+const fetchProjectSchemaInfo = (state: AppState) => state?.schemaComposeData?.schemas;
 const getProjects = (state: AppState) => state.project.projects;
 const getProjectById = (state: AppState) => state.projectById;
 const getError = (state: AppState) => state.schema.error;
@@ -18,7 +18,7 @@ const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipel
 export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
 
 
-export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
+export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
 const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
 export const getSelectorTableNodes = createSelector(getLastIndexesArray, (lastIndexes) => lastIndexes)
