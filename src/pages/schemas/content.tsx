@@ -19,14 +19,14 @@ const { Content } = Layout;
 export default function SchemaContent() {
 
     const selectedTreeData = useSelector(SelectedTreeNodeInfo);
-    const selectedMetaData = selectedTreeData.map(node => node ?.metadata);
-    const selectedTags = selectedTreeData.map((node) => node.tags);
-    const selcectedTagsLastElement = selectedTags.slice(-1)[0];
-    const Description = selectedTreeData.map(node => node.description);
-    const descriptionLastIndex = Description.length - 1;
-    const descriptionLastItem = Description[descriptionLastIndex];
-    const selectedMetaDataLastIndex = selectedMetaData.length - 1;
-    const selectedMetaDataLastItem = selectedMetaData[selectedMetaDataLastIndex];
+    const selectedTreeNodeMetaData = selectedTreeData.map(node => node ?.metadata);
+    const selectedTreeNodeTags = selectedTreeData.map((node) => node.tags);
+    const selcectedTagsLastElement = selectedTreeNodeTags.slice(-1)[0];
+    const selctedTreeNodeDescription = selectedTreeData.map(node => node.description);
+    const selctedTreeNodescriptionLastIndex = selctedTreeNodeDescription.length - 1;
+    const descriptionLastItem = selctedTreeNodeDescription[selctedTreeNodescriptionLastIndex];
+    const selectedMetaDataLastIndex = selectedTreeNodeMetaData.length - 1;
+    const selectedMetaDataLastItem = selectedTreeNodeMetaData[selectedMetaDataLastIndex];
     const selcectedDataLastElement = selectedTreeData.slice(-1)[0];
     const [columnData, setColumnData] = useState([]);
     const [saveModalVisible, setSaveModalVisible] = useState(false);

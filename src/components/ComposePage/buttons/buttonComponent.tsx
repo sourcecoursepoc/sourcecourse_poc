@@ -52,7 +52,7 @@ const ButtonComponent = ({
 
 /*   const handleDeleteModalOk = () => {
     setDeleteModalVisible(false);
-    dispatch(clearLastIndex());
+    // dispatch(clearLastIndex());
 
   };
  */
@@ -77,6 +77,8 @@ const ButtonComponent = ({
           onCancel={handleDeleteModalCancel}
           title="Delete Confirmation"
           message="are you sure want to delete"
+          href="/"
+
         />
 
         <Buttons

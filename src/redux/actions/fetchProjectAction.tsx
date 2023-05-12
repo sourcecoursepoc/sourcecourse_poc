@@ -16,43 +16,97 @@ import {
   FetchProjectByIdFailure,
   FetchProjectFailurePayload,
   FetchProjectByIdSuccess,
-  FetchProjectByIdFailurePayload
+  FetchProjectByIdFailurePayload,
+  DeleteProjectInfoAction,
+  DeleteProjectInfoActionSuccess,
+  DeleteProjectInfoActionFailure,
+  DeleteProjectGroupsInfoAction,
+  DeleteProjectGroupsInfoActionSuccess,
+  DeleteProjectGroupsInfoActionFailure
 } from "../actions/types";
+
+import { DELETE_PROJECTS_INFO_ACTION, DELETE_PROJECTS_INFO_ACTION_SUCCESS, DELETE_PROJECTS_INFO_ACTION_FAILURE, DELETE_PROJECTGROUPS_INFO_ACTION, DELETE_PROJECTGROUPS_ACTION_SUCCESS, DELETE_PROJECTGROUPS_INFO_ACTION_FAILURE } from "./projectActionTypes";
 
 export const fetchProjectRequest = (): FetchProjectRequest => ({
   type: FETCH_ALLPROJECTS_REQUEST,
 });
 
 export const fetchProjectByIdRequest = (params: number): FetchProjectByIdRequest => ({
-    type: FETCH_PROJECT_BYID_REQUEST,
-    params
-  });
+  type: FETCH_PROJECT_BYID_REQUEST,
+  params
+});
 
 export const fetchProjectSuccess = (
   payload: FetchProjectSuccessPayload
 ): FetchProjectSuccess => ({
-  type:  FETCH_ALLPROJECTS_SUCCESS,
+  type: FETCH_ALLPROJECTS_SUCCESS,
   payload,
 });
 
 export const fetchProjectByIdSuccess = (
-    payload: FetchProjectByIdSuccessPayload
-  ): FetchProjectByIdSuccess => ({
-    type:  FETCH_PROJECT_BYID_SUCCESS,
-    payload,
-  });
+  payload: FetchProjectByIdSuccessPayload
+): FetchProjectByIdSuccess => ({
+  type: FETCH_PROJECT_BYID_SUCCESS,
+  payload,
+});
 
 export const fetchProjectFailure = (
   payload: FetchProjectFailurePayload
 ): FetchProjectFailure => ({
-  type:  FETCH_ALLPROJECTS_FAILURE,
+  type: FETCH_ALLPROJECTS_FAILURE,
   payload,
 });
 
 export const fetchProjectByIdFailure = (
-    payload: FetchProjectByIdFailurePayload
-  ): FetchProjectByIdFailure => ({
-    type:  FETCH_PROJECT_BYID_FAILURE,
-    payload,
-  });
-  
+  payload: FetchProjectByIdFailurePayload
+): FetchProjectByIdFailure => ({
+  type: FETCH_PROJECT_BYID_FAILURE,
+  payload,
+});
+
+
+// delete project action
+
+export const deleteProjectInfoAction = (id: any): DeleteProjectInfoAction => {
+  return {
+    type: DELETE_PROJECTS_INFO_ACTION,
+    payload: id,
+  };
+};
+
+export const deleteProjectInfoActionSuccess = (id: any): DeleteProjectInfoActionSuccess => {
+  return {
+    type: DELETE_PROJECTS_INFO_ACTION_SUCCESS,
+    payload: { id },
+  };
+};
+
+export const deleteProjectInfoActionFailure = (error: any): DeleteProjectInfoActionFailure => {
+  return {
+    type: DELETE_PROJECTS_INFO_ACTION_FAILURE,
+    payload: { error },
+  };
+};
+
+//delete project groups
+
+export const deleteProjectGroupsInfoAction = (id: any): DeleteProjectGroupsInfoAction => {
+  return {
+    type: DELETE_PROJECTGROUPS_INFO_ACTION,
+    payload: { id }
+  };
+};
+
+export const deleteProjectGroupsInfoActionSuccess = (id: any): DeleteProjectGroupsInfoActionSuccess => {
+  return {
+    type: DELETE_PROJECTGROUPS_ACTION_SUCCESS,
+    payload: { id }
+  };
+};
+
+export const deleteProjectGroupsInfoActionFailure = (error: any): DeleteProjectGroupsInfoActionFailure => {
+  return {
+    type: DELETE_PROJECTGROUPS_INFO_ACTION_FAILURE,
+    payload: { error }
+  };
+};

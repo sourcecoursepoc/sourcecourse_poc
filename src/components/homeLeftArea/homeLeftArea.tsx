@@ -13,7 +13,7 @@ import { getProjectsSelector } from "@/redux/selector";
 const HomeLeftArea: React.FunctionComponent = () => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
-  const projectArray = projectListData[0]?.projects;
+  const projectArray = projectListData[0] ?.projects;
   const [parentArray, setParentArray] = useState<string[]>([]);
   const [isTabClicked, setIsTabClicked] = useState(true);
   const [isSearch, setIsSearch] = useState(false);
@@ -46,28 +46,28 @@ const HomeLeftArea: React.FunctionComponent = () => {
         </Row>
 
         {isSearch
-          ? parentArray?.map((item) => (
-              <Row className={styles.contentStyle} key={item.projectName}>
-                <ProjectContent
-                  heading={item.projectName}
-                  projectDescription={item.description}
-                  uid={item.uid}
-                ></ProjectContent>
-              </Row>
-            ))
-          : []}
+          ? parentArray ?.map((item) => (
+            <Row className={styles.contentStyle} key={item.projectName}>
+              <ProjectContent
+                heading={item.projectName}
+                projectDescription={item.description}
+                uid={item.uid}
+              ></ProjectContent>
+            </Row>
+          ))
+            : []}
 
-        {isTabClicked && !isSearch
-          ? projectListData?.map((item) => (
-              <Row className={styles.contentStyle} key={item.projectName}>
-                <ProjectContent
-                  heading={item.projectName}
-                  projectDescription={item.description}
-                  uid={item.uid}
-                ></ProjectContent>
-              </Row>
-            ))
-          : []}
+        {isTabClicked && !isSearch && Array.isArray(projectListData)
+          ? projectListData ?.map((item) => (
+            <Row className={styles.contentStyle} key={item.projectName}>
+              <ProjectContent
+                heading={item.projectName}
+                projectDescription={item.description}
+                uid={item.uid}
+              ></ProjectContent>
+            </Row>
+          ))
+            : []}
       </div>
     </div>
   );

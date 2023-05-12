@@ -165,7 +165,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
                           width: "1rem",
                           fontSize: "0.7rem",
                         }}
-                        onClick={() => handleRemove(node.uid)}
+                        onClick={() => handleRemove(node?.uid)}
                       >
                         Remove
                       </Button>

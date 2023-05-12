@@ -25,15 +25,21 @@ const Schemas = () => {
         <Header />
         <SchemaMenu />
         <Content>
-          <Row>
-            <Col span={6} className={styles.treeview}>
-              {database.length>0 && <TreeView db={database} />}
-            </Col>
-            <Col span={16}>
-              <SchemaContent />
-            </Col>
-          </Row>
-          <Toast/>
+          {database.pending ? (
+            <p>Loading...</p>
+          ) : database.length > 0 ? (
+            <Row>
+              <Col span={6} className={styles.treeview}>
+                <TreeView db={database} />
+              </Col>
+              <Col span={16}>
+                <SchemaContent />
+              </Col>
+            </Row>
+          ) : (
+                <p>{database.error}</p>
+              )}
+          <Toast />
         </Content>
       </Layout>
     </Space>

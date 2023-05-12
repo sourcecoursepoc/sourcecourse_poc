@@ -37,11 +37,14 @@ const DescriptionBox: React.FC<DescriptionBoxProps> = ({
     };
 
     const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-        if (e.keyCode === 8) {
-            onChange("");
+        if (e.keyCode === 8 && value.length === 0) {
+          e.preventDefault(); // Prevent default behavior of clearing the input field
+        } else if (e.keyCode === 8) {
+          const newValue = value.slice(0, value.length - 1); // Remove the last character from the value
+          onChange(newValue);
         }
-    };
-
+      };
+      
     return (
         <div className={styles.floatlabel} onBlur={handleBlur} onFocus={handleFocus}>
             <TextArea className={styles.textArea}

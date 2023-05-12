@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./textArea.module.css";
 
 const TextAreaComponent = (props) => {
+  console.log(props,"ppppppp")
   return (
     <Col
       span={15}
