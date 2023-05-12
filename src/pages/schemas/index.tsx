@@ -8,14 +8,14 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { getDataBaseSelector } from "../../redux/selector";
 import { useEffect, useState } from "react";
-import { fetchDataBaseRequest } from "../../redux/actions/schemasaction";
+import { fetchDataBaseInfoAction } from "../../redux/actions/schemasaction";
 import Toast from "./toast";
 const Schemas = () => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
 
   useEffect(() => {
-    dispatch(fetchDataBaseRequest());
+    dispatch(fetchDataBaseInfoAction());
   }, []);
 
   const { Content } = Layout;

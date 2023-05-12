@@ -12,8 +12,8 @@ import { useSelector } from 'react-redux';
 import { projectSchemaInfoSelector} from '@/redux/selector';
 import { useDispatch } from 'react-redux';
 import { DeleteFilled } from "@ant-design/icons";
-import axios from "axios";
-import { fetchProjectSchemaInfoAction } from "@/redux/actions/composeAction";
+import { fetchDataBaseInfoAction } from "../../../redux/actions/schemasaction";
+import { fetchProjectSchemaInfoAction } from "../../../redux/actions/composeAction";
 
 
 const MainContent = () => {
@@ -23,7 +23,7 @@ const MainContent = () => {
   const dispatch = useDispatch();
   const fetchProjectSchemaInfo=useSelector(projectSchemaInfoSelector);
   useEffect(() => {
-    dispatch(fetchDataBaseRequest());
+    dispatch(fetchDataBaseInfoAction());
   }, []);
   useEffect(() => {
     dispatch(fetchProjectSchemaInfoAction(3));
@@ -67,7 +67,7 @@ const MainContent = () => {
         onExport={handleImport}
       />
        <Row >               
-           {fetchProjectSchemaInfo.map((node:any) => ( 
+           {fetchProjectSchemaInfo?.map((node:any) => ( 
               <DisplaySchemaBox key={node.tableName} text={node.tableName} uid={node.uid} deleteIcon={<DeleteFilled style={{color:"red",height:'auto'}} onClick={() => handleRemove(node.uid)}/>}
               attribute={"ATTRIBUTES / "} icon={ <Image preview={false}src="/schemas-icon.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }}>
               </Image> } 
