@@ -51,10 +51,9 @@ const Compose = () => {
 
   useEffect(() => {
     
-    const data = dispatch(fetchProjectByIdRequest(id));
+    dispatch(fetchProjectByIdRequest(id));
     setName(projectData.name)
     setDescription(projectData.description)
-    console.log(nameError, descriptionError)
     
     
   }, [projectData.name,projectData.description]);
