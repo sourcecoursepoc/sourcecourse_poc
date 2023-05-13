@@ -11,11 +11,9 @@ import {
 const getGroups = () => {
   return axios.get<IGROUPDATA[]>("http://localhost:8000/allGroupData");
 };
-  console.log(getGroups,"getGroups")
 function* fetchGroupSaga(): any {
   try {
     const response = yield call(getGroups);
-    console.log("response", response);
     yield put(
       fetchGroupSuccess({
         groups: response.data,

@@ -36,9 +36,9 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
     }
   }, [projectSchemaInfo]);
 
-  const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
+  const combinedArray: any = [projectSchemaInfo, ...selectedTableArray];
 
-  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid)); //taking uid's of selected tables
+  const tableUidArray = combinedArray.map((table:any) => parseInt(table?.uid)); //taking uid's of selected tables
 
   //POST action
     const handleImport = () => {
@@ -133,7 +133,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
                   <Row align={"middle"}>
                     <Col
                       span={18}
-                      key={node.tableName}
+                      key={node?.tableName}
                       className={styles.rowTextStyle}
                     >
                       {node && node?.tableName && (
