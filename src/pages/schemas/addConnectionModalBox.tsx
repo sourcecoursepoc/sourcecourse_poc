@@ -1,12 +1,13 @@
 import Buttons from '@/components/ComposePage/buttons/buttons';
-import { Col, Form, Input, Modal, Row } from 'antd'
-import Item from 'antd/es/descriptions/Item';
-import TextArea from 'antd/es/input/TextArea';
+import { dBConnectionPostAction } from '@/redux/actions/dbConnectionAction';
+import {Input, Modal} from 'antd'
+import axios from 'axios';
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { cancel } from 'redux-saga/effects';
 import styles from './connectionbox.module.css'
 import { showSuccessToast } from './toast';
+
 
 interface MyModalProps {
     showConnectionBox?: boolean;
@@ -20,36 +21,41 @@ function showWarningToast(message: string) {
 const addConnectionModalBox: React.FC<MyModalProps> = ({ showConnectionBox, onCancel }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [connectionUrl, setConnectionUrl] = useState('');
+    const [connectionURL, setconnectionURL] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    const dispatch = useDispatch();
 
     const handleOnClickCancel = () => {
         setName('')
         setDescription('')
-        setConnectionUrl('')
+        setconnectionURL('')
         setUsername('')
         setPassword('')
         onCancel()
     }
 
-    const handleOnClickConnect = () => {
+    const handleOnClickConnect = async () => {
 
-        if (!name || !connectionUrl || !username || !password) {
+        if (!name || !connectionURL || !username || !password) {
             showWarningToast('Please fill in all required fields.');
             return;
           }
 
+          dispatch(
+            dBConnectionPostAction(name,description,connectionURL,username,password)
+          )
 
         console.log('name: ',name)
         console.log('description: ', description)
-        console.log('connection url: ', connectionUrl)
+        console.log('connection url: ', connectionURL)
         console.log('username: ',username)
         console.log('password: ', password)
 
         setName('')
         setDescription('')
-        setConnectionUrl('')
+        setconnectionURL('')
         setUsername('')
         setPassword('')
         
@@ -80,8 +86,8 @@ const addConnectionModalBox: React.FC<MyModalProps> = ({ showConnectionBox, onCa
                         <Input id="description" value={description} onChange={(e) => setDescription(e.target.value)} className={styles.input} />
                     </div>
                     <div className={styles.inputDiv}>
-                        <label htmlFor="connectionUrl" className={styles.label}>Connection URL:<span className={styles.required}>*</span></label>
-                        <Input id="connectionUrl" value={connectionUrl} onChange={(e) => setConnectionUrl(e.target.value)} className={styles.input} />
+                        <label htmlFor="connectionURL" className={styles.label}>Connection URL:<span className={styles.required}>*</span></label>
+                        <Input id="connectionURL" value={connectionURL} onChange={(e) => setconnectionURL(e.target.value)} className={styles.input} />
                     </div>
                     <div className={styles.inputDiv}>
                         <label htmlFor="username" className={styles.label}>Username:<span className={styles.required}>*</span></label>

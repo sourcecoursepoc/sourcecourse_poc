@@ -14,10 +14,10 @@ import { ComposeReportsPipelineSaga, ComposePipelineSaga } from "./composeSaga";
 import groupSaga from "./groupSaga";
 import recordSaga from "../sagas/fetchRecordActionSaga";
 import projectByIdSaga from "../sagas/projectByIdSaga";
+import dBConnectionSaga from "./dBConnectionSaga";
 
 export function* rootSaga() {
 
-
-    yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()), (groupdataDataBaseSaga()), (recordSaga()), (projectSaga()), (ComposePipelineSaga()), (groupSaga()), (ComposeReportsPipelineSaga()), (PostTableTagsAndDescriptionSaga()), (PostColumnTagsSaga())]);
+    yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()), (groupdataDataBaseSaga()), (recordSaga()), (projectSaga()), (ComposePipelineSaga()), (groupSaga()), (ComposeReportsPipelineSaga()), (PostTableTagsAndDescriptionSaga()), (PostColumnTagsSaga()) , (dBConnectionSaga())]);
 
 }
