@@ -16,6 +16,8 @@ import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { postProjectSchemaInfoRequest } from "@/redux/actions/composeAction";
+import Toast, { showSuccessToast } from "../../../pages/schemas/toast";
+import { AppState } from "@/redux/reducers";
 
 interface MyModalProps {
   visible: boolean;
@@ -26,9 +28,11 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  
-  const projectSchemaInfo = useSelector(projectSchemaInfoSelector);//tables in the database
-  const selectedTableArray = useSelector(getSelectorTableNodes);//selected tables from the tree
+  const projectSchemaInfo = useSelector(projectSchemaInfoSelector); //tables in the database
+  const selectedTableArray = useSelector(getSelectorTableNodes);
+  //selected tables from the tree
+  // const addSchemaCompose=useSelector((state:AppState)=>state?.schemaComposeData?.schemas);
+  // const addSchema=useSelector(addSchemaCompose);
 
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
@@ -38,23 +42,28 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
 
   const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
 
-  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid)); //taking uid's of selected tables
+  const tableUidArray = combinedArray.map((table: any) => parseInt(table?.uid)); //taking uid's of selected tables
 
   //POST action
-    const handleImport = () => {
+  const handleImport = () => {
     const requestBody = {
       projectUid: 3,
       sourceTableUids: tableUidArray,
     };
-    dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
+    dispatch(
+      postProjectSchemaInfoRequest(
+        requestBody.projectUid,
+        requestBody.sourceTableUids
+      )
+    );
+
     onExport();
   };
-  
   const handleImportButton = () => {
     handleImport();
     onCancel();
   };
- 
+
   const handleRemove = async (uid: string) => {
     const requestBody = {
       projectUid: 3,
@@ -65,9 +74,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
         "http://localhost:8080/sourcecourse/project-tables",
         { data: requestBody }
       );
-    } catch (error) {
-      console.error(error);
-    }
+    } catch (error) {}
   };
 
   return (

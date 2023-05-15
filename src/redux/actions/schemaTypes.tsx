@@ -191,7 +191,6 @@ export interface RemoveNodeAction  {
     payload: [];
   }
 
-
   export const addLastIndex = (lastIndex:any) => {
     return {
       type: ADD_LAST_INDEX,
