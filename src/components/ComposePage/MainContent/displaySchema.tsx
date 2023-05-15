@@ -15,16 +15,17 @@ interface MyComponentProps {
   uid: string; // new prop for the uid of the node
   handleRemove: (uid: string) => void;
   lengthOfColums: any;
-  width?: any;
+  minWidth?: any;
+  width?:any;
   status: any;
   padding?: any;
   paddingLeft: any;
 }
-const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, uid, handleRemove, lengthOfColums, deleteIcon, width, status, padding, paddingLeft }) => {
+const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, uid, handleRemove, lengthOfColums, deleteIcon, minWidth, status, padding, paddingLeft,width }) => {
 
   return (
     <>
-      <div className={styles.outerbox} style={{ width: width }}>
+      <div className={styles.outerbox} style={{ minWidth: minWidth,width:width }}>
         <div className={styles.innerright}>
           <Col className={styles.image}>
             {icon}

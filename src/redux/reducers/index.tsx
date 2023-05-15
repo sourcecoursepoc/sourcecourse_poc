@@ -3,7 +3,7 @@ import fetchPipelineReducer from "./fetchDataReducer";
 import fetchRecordReducer from "./fetchRecordsReducer";
 import schemaReducer from "./schemaReducer";
 import projectReducer from "./projectReducer";
-import schemaDataBaseReducer from "./schemaDataBaseReducer";
+import schemaDataBaseReducer, { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import {
   composeReducer,
@@ -27,6 +27,9 @@ const rootReducer = combineReducers({
   group: groupReducer,
   composeReportsPipeline: composeReportsPipelineReducer,
   schemaComposeData: projectSchemaInfoReducer,
+  postTagsAndDescription: postTagsAndDescriptionReducer,
+  postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer
+
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

@@ -70,10 +70,7 @@ const getComposePipelines = (requestParams?: any) =>
 
 function* fetchComposePipelineSaga(requestParams: FetchComposePipelineRequest) {
   try {
-    const response = yield call(() =>
-      getComposePipelines(requestParams.params)
-    );
-
+    const response = yield call(() => getComposePipelines(requestParams.params));
     yield put(
       fetchComposePipelineSuccess({
         composePipeline: response.data,

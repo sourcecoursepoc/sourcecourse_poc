@@ -59,3 +59,12 @@
     width: 96%;
     margin-top: 15px;
 }
+
+.tagBox {
+    display: flex;
+    width: 96%;
+    border: 0.0625rem solid #d9d9d9;
+    margin-top: 1.875rem;
+    margin-left: 1.1875rem;
+    border-radius: 0.3125rem;
+}

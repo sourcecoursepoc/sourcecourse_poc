@@ -15,6 +15,7 @@ import {
   fetchProjectSchemaInfoAction,
 } from "@/redux/actions/composeAction";
 import { AppState } from "@/redux/reducers";
+import { fetchDataBaseInfoAction } from "../../../redux/actions/schemasaction";
 import Toast, { showSuccessToast } from "../../../pages/schemas/toast";
 
 const MainContent = () => {
@@ -24,7 +25,7 @@ const MainContent = () => {
   const dispatch = useDispatch();
   const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
   useEffect(() => {
-    dispatch(fetchDataBaseRequest());
+    dispatch(fetchDataBaseInfoAction());
   }, []);
   useEffect(() => {
     dispatch(fetchProjectSchemaInfoAction(3));
