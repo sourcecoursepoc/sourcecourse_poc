@@ -193,10 +193,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       defaultSelectedKeys={db ?.[0] ?.uid}
       height={1000}
     >
-      {db.pending && <p>Loading...</p>}
-      {db.error && <p>{db.error}</p>}
-      {!db.pending && !db.error && renderDB(db)}
-      {/* {renderDB(db)} */}
+      {renderDB(db)}
     </Tree>
   );
 };

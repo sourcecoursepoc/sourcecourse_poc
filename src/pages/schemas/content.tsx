@@ -51,7 +51,7 @@ export default function SchemaContent() {
             await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
         }
         showSuccessToast("saved successfully");
-        dispatch(fetchDataBaseInfoAction());
+        // dispatch(fetchDataBaseInfoAction());
     };
     const handleSaveModalCancel = () => {
         setSaveModalVisible(false);
