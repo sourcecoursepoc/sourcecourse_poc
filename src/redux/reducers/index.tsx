@@ -5,14 +5,15 @@ import schemaReducer from "./schemaReducer";
 import projectReducer from "./projectReducer";
 import schemaDataBaseReducer, { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer, dBconnectionReducer } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
-import { composeReducer, composeReportsPipelineReducer,composeSchemaReducer } from "./composeReducer";
+import {
+  composeReducer,
+  composeReportsPipelineReducer,
+  projectSchemaInfoReducer,
+} from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
-
 
 import groupReducer from "./groupReducer";
 import projectByIdReducer from "./projectByIdReducer";
-
-console.log("Creating root reducer...");
 
 const rootReducer = combineReducers({
   pipeline: fetchPipelineReducer,
@@ -25,11 +26,11 @@ const rootReducer = combineReducers({
   record: fetchRecordsReducer,
   group: groupReducer,
   composeReportsPipeline: composeReportsPipelineReducer,
+  schemaComposeData: projectSchemaInfoReducer,
   postTagsAndDescription: postTagsAndDescriptionReducer,
   postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer,
   dBconnection: dBconnectionReducer
 });
-
 
 export type AppState = ReturnType<typeof rootReducer>;
 

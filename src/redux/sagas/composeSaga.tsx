@@ -12,6 +12,7 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION,
   POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION,
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -22,6 +23,9 @@ import {
   postProjectSchemaInfoFailure,
   postProjectSchemaInfoRequest,
   postProjectSchemaInfoSuccess,
+  deleteProjectSchemaInfoSuccess,
+  deleteProjectSchemaInfoFailure,
+  deleteProjectSchemaInfoRequest,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -35,7 +39,6 @@ const fetchProjectSchemaInfo = (requestParams: any) =>
   Worker Saga: Fired on FETCH_PROJECT_SCHEMA_INFO_ACTION action
 */
 function* fetchProjectSchemaInfoSaga(requestParams: FetchSchemaComposeRequest) {
-  console.log("saga call", requestParams);
   try {
     const response = yield call(() =>
       fetchProjectSchemaInfo(requestParams.params)
@@ -113,7 +116,8 @@ export function* ComposeReportsPipelineSaga() {
 }
 
 //posting schemas in compose
-const postProjectSchemaInfoAPI = "http://localhost:8080/sourcecourse/project-tables";
+const postProjectSchemaInfoAPI =
+  "http://localhost:8080/sourcecourse/project-tables";
 
 function postProjectSchemaInfocall(
   projectUid: any[],
@@ -144,5 +148,50 @@ function* postProjectSchemaInfoSaga(
 }
 
 export function* PostSchemaRequestSaga() {
-  yield all([takeLatest(POST_PROJECT_SCHEMA_INFO_ACTION, postProjectSchemaInfoSaga)]);
+  yield all([
+    takeLatest(POST_PROJECT_SCHEMA_INFO_ACTION, postProjectSchemaInfoSaga),
+  ]);
+}
+
+//DELETE SCHEMA SAGA
+
+const deleteProjectSchemaInfoAPI =
+  "http://localhost:8080/sourcecourse/project-tables";
+
+function deleteProjectSchemaInfoCall(
+  projectUid: any,
+  sourceTableUids: any[]
+): Promise<AxiosResponse<any, any>> {
+  return axios.delete(`${deleteProjectSchemaInfoAPI}`, {
+    data: {
+      projectUid,
+      sourceTableUids,
+    },
+  });
+}
+
+function* deleteProjectSchemaInfoSaga(
+  action: ReturnType<typeof deleteProjectSchemaInfoRequest>
+) {
+  try {
+    const response = yield call(
+      deleteProjectSchemaInfoCall,
+      action.projectUid,
+      action.sourceTableUids
+    );
+    yield put(
+      deleteProjectSchemaInfoSuccess(
+        response.data.isDelete,
+        action.sourceTableUids
+      )
+    );
+  } catch (error) {
+    yield put(deleteProjectSchemaInfoFailure(error.message));
+  }
+}
+
+export function* deleteSchemaRequestSaga() {
+  yield all([
+    takeLatest(DELETE_PROJECT_SCHEMA_INFO_ACTION, deleteProjectSchemaInfoSaga),
+  ]);
 }

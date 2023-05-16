@@ -7,6 +7,8 @@ import {
   projectSchemaInfoState,
   PostProjectSchemaInfoState,
   PostProjectSchemaInfoActionTypes,
+  DeleteProjectSchemaInfoState,
+  DeleteProjectSchemaInfoActionTypes,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -21,6 +23,9 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   POST_PROJECT_SCHEMA_INFO_ACTION,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -28,20 +33,22 @@ const initialState: ComposePipelineState = {
   composePipeline: [],
   error: null,
 };
-
+interface ProjectTablesState {
+  loading: boolean;
+  error: string | null;
+  // Define any state properties you need
+}
 function composeReducer(
   state = initialState,
   action: ComposePipelineActions
 ): ComposePipelineState {
   switch (action.type) {
     case FETCH_COMPOSE_PIPELINE:
-      console.log("FETCH_COMPOSE_PIPELINE action dispatched.");
       return {
         ...state,
         pending: true,
       };
     case FETCH_COMPOSE_PIPELINE_SUCCESS:
-      console.log("FETCH_COMPOSE_PIPELINE_SUCCESS action dispatched.");
       return {
         ...state,
         pending: false,
@@ -49,7 +56,6 @@ function composeReducer(
         error: null,
       };
     case FETCH_COMPOSE_PIPELINE_FAILURE:
-      console.log("FETCH_COMPOSE_PIPELINE_FAILURE action dispatched.");
       return {
         ...state,
         pending: false,
@@ -67,29 +73,17 @@ const initialReportsState: ComposeReportsPipelineState = {
   composeReportsPipeline: [],
   error: null,
 };
-const initialStateCompose: projectSchemaInfoState = {
-  pending: false,
-  schemas: [],
-  error: null,
-};
-const initialPostStateSchema: PostProjectSchemaInfoState = {
-  loading: false,
-  postData: [],
-  error: null,
-};
 function composeReportsPipelineReducer(
   state = initialReportsState,
   action: ComposeReportsPipelineActions
 ): ComposeReportsPipelineState {
   switch (action.type) {
     case FETCH_REPORTS_PIPELINE:
-      console.log("FETCH_COMPOSE_PIPELINE action dispatched.");
       return {
         ...state,
         pending: true,
       };
     case FETCH_REPORTS_PIPELINE_SUCCESS:
-      console.log("FETCH_COMPOSE_PIPELINE_SUCCESS action dispatched.");
       return {
         ...state,
         pending: false,
@@ -97,7 +91,6 @@ function composeReportsPipelineReducer(
         error: null,
       };
     case FETCH_REPORTS_PIPELINE_FAILURE:
-      console.log("FETCH_COMPOSE_PIPELINE_FAILURE action dispatched.");
       return {
         ...state,
         pending: false,
@@ -109,55 +102,92 @@ function composeReportsPipelineReducer(
   }
 }
 
-//fetching schema details from compose page
-function composeSchemaReducer(
+//GET,POST and DELETE Schema Compose
+const initialStateCompose: projectSchemaInfoState = {
+  isFetching: false,
+  schemas: [],
+  error: null,
+  postData: [],
+  isDelete: false,
+};
+function projectSchemaInfoReducer(
   state = initialStateCompose,
-  action: projectSchemaInfoActions | PostProjectSchemaInfoActionTypes
+  action:
+    | projectSchemaInfoActions
+    | PostProjectSchemaInfoActionTypes
+    | DeleteProjectSchemaInfoActionTypes
 ): projectSchemaInfoState {
   switch (action.type) {
     case FETCH_PROJECT_SCHEMA_INFO_ACTION:
       return {
         ...state,
-        pending: true,
+        isFetching: true,
       };
     case FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
       return {
         ...state,
-        pending: false,
+        isFetching: false,
         schemas: action.payload.schemas,
         error: null,
       };
     case FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
       return {
         ...state,
-        pending: false,
+        isFetching: false,
         schemas: [],
         error: action.payload.error,
       };
-      case POST_PROJECT_SCHEMA_INFO_ACTION:
+    case POST_PROJECT_SCHEMA_INFO_ACTION:
       return {
         ...state,
-        loading: true,
+        isFetching: true,
       };
     case POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          schemas: action.payload.postData,
-          error: null,
-        };
-      case POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
       return {
         ...state,
-        loading: false,
+        isFetching: false,
+        schemas: action.payload.postData,
+        error: null,
+      };
+    case POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
         schemas: [],
+        error: action.payload.error,
+      };
+    case DELETE_PROJECT_SCHEMA_INFO_ACTION:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
+      const { schemas } = state;
+      const { sourceTableUids } = action?.payload;
+      const newSchemas = schemas.filter(
+        (val) => val?.uid !== sourceTableUids?.[0]
+      );
+      return {
+        ...state,
+        schemas: newSchemas,
+        isFetching: false,
+        isDelete: action.payload.isDelete,
+        error: null,
+      };
+    case DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isDelete: false,
         error: action.payload.error,
       };
     default:
-      return {
-        ...state,
-      };
+      return state;
   }
 }
 
-export { composeReducer, composeReportsPipelineReducer, composeSchemaReducer };
+export {
+  composeReducer,
+  composeReportsPipelineReducer,
+  projectSchemaInfoReducer,
+};
