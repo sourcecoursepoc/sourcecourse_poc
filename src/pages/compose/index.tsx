@@ -61,7 +61,7 @@ const Compose = () => {
 
   const handleSaveProjectInfo = async () => { 
     setSaveModalVisible(false);
-    showSuccessToast("Saved Successfully")
+    showSuccessToast("Project Saved Successfully")
     /* dispatch(clearLastIndex());
     setName(""); */
     try {
@@ -107,7 +107,7 @@ const Compose = () => {
     setDescription("");
     dispatch(deleteProjectInfoAction(id));
     // dispatch(deleteProjectGroupsInfoAction(5));
-    showSuccessToast("Deleted Successfully");
+    showSuccessToast("Project Deleted Successfully");
     setProjectId("");
     window.location.href = "/";
   };

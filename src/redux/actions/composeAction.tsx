@@ -18,6 +18,12 @@ import {
   PostProjectSchemaInfo,
   PostProjectSchemaInfoSuccess,
   PostProjectSchemaInfoFailure,
+  DeleteProjectSchemaInfoAction,
+  DeleteProjectSchemaInfoSuccessAction,
+  DeleteProjectSchemaInfoFailureAction,
+  /* DELETESCHEMAREQUEST, */
+  DeleteProjectSchemaInfoSuccessPayload,
+  DeleteProjectSchemaInfoFailurePayload,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -32,12 +38,14 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION,
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
   params: any
 ): FetchComposePipelineRequest => {
-  console.log("fetchComposePipelineRequest action creator called");
   return {
     type: FETCH_COMPOSE_PIPELINE,
     params,
@@ -47,10 +55,6 @@ export const fetchComposePipelineRequest = (
 export const fetchComposePipelineSuccess = (
   payload: FetchComposePipelineSuccessPayload
 ): FetchComposePipelineSuccess => {
-  console.log(
-    "fetchComposePipelineSuccess action creator called with payload: ",
-    payload
-  );
   return {
     type: FETCH_COMPOSE_PIPELINE_SUCCESS,
     payload,
@@ -60,10 +64,6 @@ export const fetchComposePipelineSuccess = (
 export const fetchComposePipelineFailure = (
   payload: FetchComposePipelineFailurePayload
 ): FetchComposePipelineFailure => {
-  console.log(
-    "fetchComposePipelineFailure action creator called with payload: ",
-    payload
-  );
   return {
     type: FETCH_COMPOSE_PIPELINE_FAILURE,
     payload,
@@ -73,7 +73,6 @@ export const fetchComposePipelineFailure = (
 // REPORTS PIPELINE ACTION
 export const fetchComposeReportsPipelineRequest =
   (): FetchComposeReportsPipelineRequest => {
-    console.log("fetchComposePipelineRequest action creator called");
     return {
       type: FETCH_REPORTS_PIPELINE,
     };
@@ -82,10 +81,6 @@ export const fetchComposeReportsPipelineRequest =
 export const fetchComposeReportsPipelineRequestSuccess = (
   payload: FetchComposeReportsPipelineSuccessPayload
 ): FetchComposeReportsPipelineSuccess => {
-  console.log(
-    "fetchComposePipelineSuccess action creator called with payload: ",
-    payload
-  );
   return {
     type: FETCH_REPORTS_PIPELINE_SUCCESS,
     payload,
@@ -95,17 +90,14 @@ export const fetchComposeReportsPipelineRequestSuccess = (
 export const fetchComposeReportsPipelineFailure = (
   payload: FetchComposeReportsPipelineFailurePayload
 ): FetchComposeReportsPipelineFailure => {
-  console.log(
-    "fetchComposePipelineFailure action creator called with payload: ",
-    payload
-  );
   return {
     type: FETCH_REPORTS_PIPELINE_FAILURE,
     payload,
   };
 };
 
-// fetch schema compose action
+// GET schema compose action
+
 export const fetchProjectSchemaInfoAction = (
   params: number
 ): FetchSchemaComposeRequest => ({
@@ -127,16 +119,15 @@ export const fetchSchemaComposeFailure = (
   payload,
 });
 
+//POST schema compose
 export const postProjectSchemaInfoRequest = (
   projectUid: any,
   sourceTableUids: any[]
-): PostProjectSchemaInfo => {
-  return {
-    type: POST_PROJECT_SCHEMA_INFO_ACTION,
-    projectUid,
-    sourceTableUids,
-  };
-};
+): PostProjectSchemaInfo => ({
+  type: POST_PROJECT_SCHEMA_INFO_ACTION,
+  projectUid,
+  sourceTableUids,
+});
 
 export const postProjectSchemaInfoSuccess = (
   postData: any
@@ -149,5 +140,30 @@ export const postProjectSchemaInfoFailure = (
   error: any
 ): PostProjectSchemaInfoFailure => ({
   type: POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  payload: { error },
+});
+
+//DELETE schema compose
+export const deleteProjectSchemaInfoRequest = (
+  projectUid: any,
+  sourceTableUids: any[]
+): DeleteProjectSchemaInfoAction => ({
+  type: DELETE_PROJECT_SCHEMA_INFO_ACTION,
+  projectUid,
+  sourceTableUids,
+});
+
+export const deleteProjectSchemaInfoSuccess = (
+  isDelete: boolean,
+  sourceTableUids: any[]
+): DeleteProjectSchemaInfoSuccessAction => ({
+  type: DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  payload: { isDelete, sourceTableUids },
+});
+
+export const deleteProjectSchemaInfoFailure = (
+  error: string
+): DeleteProjectSchemaInfoFailureAction => ({
+  type: DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   payload: { error },
 });

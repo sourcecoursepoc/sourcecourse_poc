@@ -4,7 +4,7 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import { IPROJECT, DeleteProjectInfoAction, DeleteProjectGroupsInfoAction } from "../actions/types";
 import { FETCH_ALLPROJECTS_REQUEST } from "../actions/actionTypes";
 import { fetchProjectFailure, fetchProjectSuccess, deleteProjectInfoActionSuccess, deleteProjectInfoActionFailure, deleteProjectGroupsInfoAction, deleteProjectGroupsInfoActionSuccess, deleteProjectGroupsInfoActionFailure } from "../actions/fetchProjectAction";
-import { DELETE_PROJECTS_INFO_ACTION, DELETE_PROJECTGROUPS_INFO_ACTION } from "../actions/projectActionTypes";
+import { DELETE_PROJECTS_INFO_ACTION } from "../actions/projectActionTypes";
 
 
 const getProjects = () =>
@@ -57,7 +57,6 @@ function* deleteProjectSaga(requestParams: DeleteProjectInfoAction) {
 
   try {
     const response = yield call(() => deleteProject(requestParams.payload));
-    console.log(response,requestParams,"rrrrrrrr")
     yield put(deleteProjectInfoActionSuccess(requestParams.payload));
   } catch (e) {
     yield put(
@@ -65,21 +64,6 @@ function* deleteProjectSaga(requestParams: DeleteProjectInfoAction) {
         error: e.message,
       })
     );
-  }
-}
-
-
-const deleteProjectGroups = (requestParams: any) =>
-  axios.delete("http://localhost:8080/sourcecourse/project-groups/" + requestParams);
-
-function* deleteProjectGroupSaga(requestParams: DeleteProjectGroupsInfoAction) {
-  try {
-    const response = yield call(() => deleteProjectGroups(requestParams.payload.id));
-    yield put(deleteProjectGroupsInfoActionSuccess(requestParams.payload));
-  } catch (e) {
-    yield put(deleteProjectGroupsInfoActionFailure({
-      error: e.message,
-    }))
   }
 }
 
@@ -91,7 +75,7 @@ function* projectSaga() {
   yield all([
     takeLatest(FETCH_ALLPROJECTS_REQUEST, fetchProjectSaga),
     takeLatest(DELETE_PROJECTS_INFO_ACTION, deleteProjectSaga),
-    takeLatest(DELETE_PROJECTGROUPS_INFO_ACTION, deleteProjectGroupSaga)
+    
   ]);
 }
 

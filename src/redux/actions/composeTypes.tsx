@@ -11,6 +11,9 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION,
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
 } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
@@ -55,8 +58,6 @@ export type ComposePipelineActions =
   | FetchComposePipelineRequest
   | FetchComposePipelineSuccess
   | FetchComposePipelineFailure;
-
-console.log("composeActionTypes: action types defined");
 
 // compose reports pipeline
 export interface ICOMPOSEREPORTSPIPELINE {
@@ -114,20 +115,24 @@ export type ComposeReportsPipelineActions =
   | FetchComposeReportsPipelineSuccess
   | FetchComposeReportsPipelineFailure;
 
-//fetch schema compose data
-
 export interface projectSchemaInfo {
-  id: number;
-  name: string;
-  type: string;
+  uid: any;
+  projectUid: any;
+  sourceTableUids: any[];
 }
-
+export interface POSTSCHEMAREQUEST {
+  projectUid: any;
+  sourceTableUids: any[];
+}
 export interface projectSchemaInfoState {
-  pending: boolean;
+  isFetching: boolean;
   schemas: projectSchemaInfo[];
+  postData: projectSchemaInfo[];
+  isDelete: boolean;
   error: string | null;
 }
 
+//GET schema compose
 export interface fetchProjectSchemaInfoActionSuccessPayload {
   schemas: projectSchemaInfo[];
 }
@@ -156,19 +161,10 @@ export type projectSchemaInfoActions =
   | fetchProjectSchemaInfoActionSuccess
   | fetchProjectSchemaInfoActionFailure;
 
-// post schemas in compose page
+// POST schemas compose
 
-export interface POSTSCHEMAREQUEST {
-  projectUid: any;
-  sourceTableUids: any[];
-}
-export interface PostProjectSchemaInfoState {
-  loading: boolean;
-  postData: POSTSCHEMAREQUEST[];
-  error: string | null;
-}
 export interface PostProjectSchemaInfoSuccessPayload {
-  postData: POSTSCHEMAREQUEST[];
+  postData: projectSchemaInfo[];
 }
 
 export interface PostProjectSchemaInfoFailurePayload {
@@ -177,7 +173,8 @@ export interface PostProjectSchemaInfoFailurePayload {
 
 export interface PostProjectSchemaInfo {
   type: typeof POST_PROJECT_SCHEMA_INFO_ACTION;
-  params: any;
+  projectUid: any;
+  sourceTableUids: any[];
 }
 
 export type PostProjectSchemaInfoSuccess = {
@@ -196,3 +193,34 @@ export type PostProjectSchemaInfoActionTypes =
   | PostProjectSchemaInfo
   | PostProjectSchemaInfoSuccess
   | PostProjectSchemaInfoFailure;
+
+//delete schema compose
+
+export interface DeleteProjectSchemaInfoSuccessPayload {
+  isDelete: boolean;
+}
+
+export interface DeleteProjectSchemaInfoFailurePayload {
+  error: string;
+}
+
+export interface DeleteProjectSchemaInfoAction {
+  type: typeof DELETE_PROJECT_SCHEMA_INFO_ACTION;
+  projectUid: any;
+  sourceTableUids: any[];
+}
+
+export interface DeleteProjectSchemaInfoSuccessAction {
+  type: typeof DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS;
+  payload: DeleteProjectSchemaInfoSuccessPayload;
+}
+
+export interface DeleteProjectSchemaInfoFailureAction {
+  type: typeof DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE;
+  payload: DeleteProjectSchemaInfoFailurePayload;
+}
+
+export type DeleteProjectSchemaInfoActionTypes =
+  | DeleteProjectSchemaInfoAction
+  | DeleteProjectSchemaInfoSuccessAction
+  | DeleteProjectSchemaInfoFailureAction;

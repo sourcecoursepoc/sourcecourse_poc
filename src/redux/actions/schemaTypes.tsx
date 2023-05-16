@@ -201,8 +201,7 @@ export interface ClearLastIndexAction {
     payload: [];
 }
 
-
-export const addLastIndex = (lastIndex: any) => {
+  export const addLastIndex = (lastIndex:any) => {
     return {
         type: ADD_LAST_INDEX,
         payload: lastIndex,

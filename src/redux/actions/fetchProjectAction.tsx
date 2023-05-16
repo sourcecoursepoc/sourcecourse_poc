@@ -20,12 +20,9 @@ import {
   DeleteProjectInfoAction,
   DeleteProjectInfoActionSuccess,
   DeleteProjectInfoActionFailure,
-  DeleteProjectGroupsInfoAction,
-  DeleteProjectGroupsInfoActionSuccess,
-  DeleteProjectGroupsInfoActionFailure
 } from "../actions/types";
 
-import { DELETE_PROJECTS_INFO_ACTION, DELETE_PROJECTS_INFO_ACTION_SUCCESS, DELETE_PROJECTS_INFO_ACTION_FAILURE, DELETE_PROJECTGROUPS_INFO_ACTION, DELETE_PROJECTGROUPS_ACTION_SUCCESS, DELETE_PROJECTGROUPS_INFO_ACTION_FAILURE } from "./projectActionTypes";
+import { DELETE_PROJECTS_INFO_ACTION, DELETE_PROJECTS_INFO_ACTION_SUCCESS, DELETE_PROJECTS_INFO_ACTION_FAILURE  } from "./projectActionTypes";
 
 export const fetchProjectRequest = (): FetchProjectRequest => ({
   type: FETCH_ALLPROJECTS_REQUEST,
@@ -88,25 +85,3 @@ export const deleteProjectInfoActionFailure = (error: any): DeleteProjectInfoAct
   };
 };
 
-//delete project groups
-
-export const deleteProjectGroupsInfoAction = (id: any): DeleteProjectGroupsInfoAction => {
-  return {
-    type: DELETE_PROJECTGROUPS_INFO_ACTION,
-    payload: { id }
-  };
-};
-
-export const deleteProjectGroupsInfoActionSuccess = (id: any): DeleteProjectGroupsInfoActionSuccess => {
-  return {
-    type: DELETE_PROJECTGROUPS_ACTION_SUCCESS,
-    payload: { id }
-  };
-};
-
-export const deleteProjectGroupsInfoActionFailure = (error: any): DeleteProjectGroupsInfoActionFailure => {
-  return {
-    type: DELETE_PROJECTGROUPS_INFO_ACTION_FAILURE,
-    payload: { error }
-  };
-};
