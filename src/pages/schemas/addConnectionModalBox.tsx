@@ -77,11 +77,7 @@ const addConnectionModalBox: React.FC<MyModalProps> = (props) => {
             onCancel={onCancel}
             footer={null}
             closable={false}
-            bodyStyle={{
-                borderRadius: "5px", minWidth: "18rem", minHeight: "17rem", display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-            }}
+            bodyStyle={styles.bodyStyle}
         >
             <div className={styles.inputSection}>
                 <div className={styles.inputDiv}>
