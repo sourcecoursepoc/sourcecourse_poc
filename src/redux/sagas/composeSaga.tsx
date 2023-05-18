@@ -29,10 +29,11 @@ import {
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
+import { BASE_URL } from "@/constants/config";
 
 const fetchProjectSchemaInfo = (requestParams: any) =>
   axios.get<projectSchemaInfo[]>(
-    "http://localhost:8080/sourcecourse/project-tables/" + requestParams
+   BASE_URL+ "/project-tables/" + requestParams
   );
 
 /*
@@ -117,7 +118,7 @@ export function* ComposeReportsPipelineSaga() {
 
 //posting schemas in compose
 const postProjectSchemaInfoAPI =
-  "http://localhost:8080/sourcecourse/project-tables";
+  BASE_URL+"/project-tables";
 
 function postProjectSchemaInfocall(
   projectUid: any[],
@@ -155,8 +156,7 @@ export function* PostSchemaRequestSaga() {
 
 //DELETE SCHEMA SAGA
 
-const deleteProjectSchemaInfoAPI =
-  "http://localhost:8080/sourcecourse/project-tables";
+const deleteProjectSchemaInfoAPI =BASE_URL+ "/project-tables";
 
 function deleteProjectSchemaInfoCall(
   projectUid: any,
