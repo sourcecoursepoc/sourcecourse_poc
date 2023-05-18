@@ -1,7 +1,7 @@
 import Buttons from '@/components/ComposePage/buttons/buttons';
+import { CONNECTION_FAILURE_MESSAGE, CONNECTION_SUCCESS_MESSAGE, FILL_IN_ALL_REQUIRED_FILEDS } from '@/constants/constants';
 import { dBConnectionPostAction } from '@/redux/actions/dbConnectionAction';
 import { Input, Modal } from 'antd'
-import axios from 'axios';
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -18,7 +18,13 @@ function showWarningToast(message: string) {
     toast.warn(message);
 }
 
-const addConnectionModalBox: React.FC<MyModalProps> = ({ showConnectionBox, onCancel }) => {
+const addConnectionModalBox: React.FC<MyModalProps> = (props) => {
+
+    const {
+        showConnectionBox,
+        onCancel
+      } = props;
+
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [connectionURL, setconnectionURL] = useState('');
@@ -39,7 +45,7 @@ const addConnectionModalBox: React.FC<MyModalProps> = ({ showConnectionBox, onCa
     const handleOnClickConnect = async () => {
 
         if (!name || !connectionURL || !username || !password) {
-            showWarningToast('Please fill in all required fields.');
+            showWarningToast(FILL_IN_ALL_REQUIRED_FILEDS);
             return;
         }
 
@@ -55,11 +61,11 @@ const addConnectionModalBox: React.FC<MyModalProps> = ({ showConnectionBox, onCa
             setPassword('')
 
             onCancel()
-            showSuccessToast("Connection Successfull")
+            showSuccessToast(CONNECTION_SUCCESS_MESSAGE)
         } else {
             setUsername('')
             setPassword('')
-            showErrorToast("Connection Failed")
+            showErrorToast(CONNECTION_FAILURE_MESSAGE)
         }
 
     }

@@ -18,7 +18,7 @@ import {
   POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
   POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
 
-  // CLEAR_LAST_INDEXES,
+
 } from "../actions/schemaActionTypes";
 import { DataBaseState, DataBaseActions, PostDataActionTypes, PostDataState, UpdatePostAction, postTagsAndDescriptionState, postTagsAndDescriptionActions, PostColumnTagsAndDescriptionState, PostColumnTagsAndDescriptionActions, PostTagsAndDescriptionInfoState, PostColumnTagsAndDescriptionInfoState } from "../actions/schemaTypes";
 import { dbConnecionActions, IDBState } from '../actions/types'
