@@ -4,10 +4,11 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import {  IPROJECTBYID, FetchProjectByIdRequest } from "../actions/types";
 import {  FETCH_PROJECT_BYID_REQUEST} from "../actions/actionTypes";
 import { fetchProjectByIdSuccess,fetchProjectByIdFailure } from "../actions/fetchProjectAction";
+import { BASE_URL } from "@/constants/config";
 
 
 const getProject = (requestParams: any) =>
-axios.get<IPROJECTBYID>("http://localhost:8080/sourcecourse/project/" + requestParams);
+axios.get<IPROJECTBYID>(BASE_URL+"/project/" + requestParams);
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */

@@ -4,10 +4,10 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import {  IPROJECT } from "../actions/types";
 import {  FETCH_ALLPROJECTS_REQUEST} from "../actions/actionTypes";
 import { fetchProjectFailure, fetchProjectSuccess } from "../actions/fetchProjectAction";
-
+import { GET_PROJECTS } from "../../constants/config"
 
 const getProjects = () =>
-axios.get<IPROJECT[]>("http://localhost:8080/sourcecourse/home");
+axios.get<IPROJECT[]>(GET_PROJECTS);
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */
