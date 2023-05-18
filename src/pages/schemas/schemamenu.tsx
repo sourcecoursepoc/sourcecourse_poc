@@ -5,7 +5,6 @@ import { CloseOutlined, PlusOutlined, PartitionOutlined, AppstoreOutlined } from
 import { useState } from 'react';
 import AddConnectionModalBox from './addConnectionModalBox';
 
-// const { SubMenu } = Menu;
 const SchemaMenu: React.FC = () => {
 
     const [showConnectionBox, setShowConnectionBox] = useState(false);

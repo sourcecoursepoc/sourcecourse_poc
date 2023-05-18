@@ -268,7 +268,7 @@ export interface IDBCONNECTION {
 export interface IDBState {
   pending: boolean,
   error: any,
-  dataConnection: IDBCONNECTION []
+  dataConnection: IDBCONNECTION[]
 }
 
 export type DBConnectionPostRequest = {
