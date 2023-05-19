@@ -1,8 +1,24 @@
+.selectedIcon{
+
+  border-bottom: "1px solid #000";
+  
+}
+.icon{
+  
+  border-bottom: "1px solid #ccc";
+
+}
+
+
+
+
+
 .space {
   width: 100%;
   height: 100%;
   background-color: white;
 }
+
 .textAreaerror {
   border-color: red;
 }

@@ -29,7 +29,7 @@ import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 
 const Compose = () => {
   const { Content } = Layout;
-  const [selectedIcon, setSelectedIcon] = useState(null);
+  const [selectedIcon, setSelectedIcon] = useState("HddFilled");
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
@@ -98,7 +98,17 @@ const Compose = () => {
     setSelectedIcon(icon);
 
   };
-
+  const getIconStyle = (icon) => {
+    if (selectedIcon === icon) {
+      return {
+        borderBottom: "2px solid #7E60BC", // desired color
+      };
+    } else {
+      return {
+        borderBottom: "1px solid #ccc",
+      };
+    }
+  };
   const handleDeleteModalOk = () => {
     setDeleteModalVisible(false);
     dispatch(clearLastIndex());
@@ -114,7 +124,7 @@ const Compose = () => {
   };
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
-      return null; // or handle this case however is appropriate for your application
+      return <MainContent />; // or handle this case however is appropriate for your application
     }
     else {
       switch (selectedIcon) {
@@ -183,14 +193,16 @@ const Compose = () => {
               <Image
                 preview={false}
                 src="/schemas-icon.png"
+               
                 style={{
+                  ...getIconStyle("HddFilled"),
                   width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
                   padding:"0.5rem",
                   opacity: projectId ? 1 : 0.5
                 }}
+                
                 onClick={projectId ? () => handleIconClick("HddFilled") : () => {} }
                 alt=""
               />{" "}
@@ -200,11 +212,11 @@ const Compose = () => {
                 preview={false}
                 src="/groups-icon.png"
                 style={{
+                  ...getIconStyle("ContainerFilled"),
                   width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
-                  padding:"0.5rem",
+                 padding:"0.5rem",
                   opacity: projectId ? 1 : 0.5
                 }}
                 alt=""
@@ -216,10 +228,11 @@ const Compose = () => {
                 preview={false}
                 src="/compose-pipeline.png"
                 style={{
+                  ...getIconStyle("ComposePipeline"),
                   width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
+               
                   padding:"0.3rem",
                   opacity: projectId ? 1 : 0.5
                 }}
@@ -232,10 +245,11 @@ const Compose = () => {
                 preview={false}
                 src="/reports-icon.png"
                 style={{
+                  ...getIconStyle("Reports"),
                   width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
+                
                   padding:"0.3rem",
                   opacity: projectId ? 1 : 0.5
                 }}
@@ -248,15 +262,16 @@ const Compose = () => {
                 preview={false}
                 src="/users-Icon1.png"
                 style={{
+                  ...getIconStyle("Users"),
                   width: "3.5rem",
                   height: "3.5rem",
                   marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
+                
                   padding:"0.3rem",
                   opacity: projectId ? 1 : 0.5
                 }}
                 alt=""
-                onClick={projectId ? () => handleIconClick("Reports"): () => {}}
+                onClick={projectId ? () => handleIconClick("Users"): () => {}}
               />
          
             </Col>
