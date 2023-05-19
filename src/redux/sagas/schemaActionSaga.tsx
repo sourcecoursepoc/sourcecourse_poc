@@ -3,6 +3,7 @@ import { all, call, put, takeLatest } from "redux-saga/effects";
 import { fetchSchemaSuccess, fetchSchemaFailure, fetchDataBaseSuccess, fetchDataBaseFailure, postDataRequest, postDataSuccess, postDataFailure, updatePostRequest, updatePostFailure, postTagsAndDescriptionRequest, postTagsAndDescriptionSuccess, postTagsAndDescriptionFailure, postColumnTagsAndDescriptionRequest, postColumnTagsAndDescriptionSuccess, postColumnTagsAndDescriptionFailure, fetchDataBaseInfoActionSuccess, fetchDataBaseInfoActionFailure, postTagsAndDescriptionInfoActionSuccess, postTagsAndDescriptionInfoActionFailure, postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoActionSuccess, postColumnTagsAndDescriptionInfoActionFailure } from "../actions/schemasaction";
 import { ISchema, FetchSchemaRequest, } from "../actions/schemaTypes";
 import { FETCH_SCHEMA_SCHEMADATA_INFO_ACTION, FETCH_SCHEMA_DATABASE_INFO_ACTION, POST_TAGS_DESCRIPTION_INFO_ACTION, POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION } from "../actions/schemaActionTypes";
+import { BASE_URL } from "@/constants/config";
 
 const getSchema = (requestParams: any) =>
   axios.get<ISchema[]>("http://localhost:8000/schemas?id=" + requestParams);
@@ -30,7 +31,7 @@ function* fetchSchemaSaga(requestParams: FetchSchemaRequest) {
 
 
 const getDatabase = () =>
-  axios.get<DBProps[]>("http://localhost:8080/sourcecourse/db");
+  axios.get<DBProps[]>(BASE_URL+"/db");
 
 /*
   Worker Saga: Fired on FETCH_DATABASE_REQUEST action
@@ -60,7 +61,7 @@ function* fetchDataBaseInfoSaga() {
 */
 
 // saga for post tags and description
-const postTagsAndDescriptionAPI = 'http://localhost:8080/sourcecourse/db/table';
+const postTagsAndDescriptionAPI = BASE_URL+'/db/table';
 
 function postTagsAndDescriptionAPIcall(uid: any, tags: string[], description: string): Promise<AxiosResponse<any, any>> {
   return axios.post(`${postTagsAndDescriptionAPI}/${uid}`, { tags, description });
@@ -77,7 +78,7 @@ function* postTagsAndDescriptionInfoSaga(action: ReturnType<typeof postTagsAndDe
 }
 
 // saga for posting column description and tags
-const postColumnTagsAndDescriptionAPI = 'http://localhost:8080/sourcecourse/db/column';
+const postColumnTagsAndDescriptionAPI = BASE_URL+'/db/column';
 
 function postColumnTagsAndDescriptionAPIcall(uid: any, tags: string[], description: string): Promise<AxiosResponse<any, any>> {
   return axios.post(`${postColumnTagsAndDescriptionAPI}/${uid}`, { tags, description });
