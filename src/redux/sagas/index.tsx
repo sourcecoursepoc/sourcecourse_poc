@@ -21,8 +21,8 @@ import dBConnectionSaga from "./dBConnectionSaga";
 export function* rootSaga() {
 
 
-    yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()), (groupdataDataBaseSaga()), (recordSaga()), (projectSaga()), (ComposePipelineSaga()), (groupSaga()), (ComposeReportsPipelineSaga()), (PostTableTagsAndDescriptionSaga()), (PostColumnTagsSaga()), (dBConnectionSaga()),
-      schemaComposeSaga(),
-      PostSchemaRequestSaga(), projectByIdSaga(),deleteSchemaRequestSaga()]);
+  yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()), (groupdataDataBaseSaga()), (recordSaga()), (projectSaga()), (ComposePipelineSaga()), (groupSaga()), (ComposeReportsPipelineSaga()), (PostTableTagsAndDescriptionSaga()), (PostColumnTagsSaga()), (dBConnectionSaga()),
+  schemaComposeSaga(),
+  PostSchemaRequestSaga(), projectByIdSaga(), deleteSchemaRequestSaga()]);
 
 }

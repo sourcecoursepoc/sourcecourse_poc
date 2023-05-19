@@ -11,11 +11,11 @@ const SchemaMenu: React.FC = () => {
 
     const handleAddButtonClick = () => {
         setShowConnectionBox(true)
-      }
+    }
 
-      const handleConnectionBoxCancel = () => {
+    const handleConnectionBoxCancel = () => {
         setShowConnectionBox(false);
-      };
+    };
 
     return (
         <Menu className={styles.menu}>

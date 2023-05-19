@@ -11,7 +11,7 @@ import {
 } from "./types";
 
 
-export const dBConnectionPostAction = (name: any, description: any, connectionURL: any, username: any, password:any ): DBConnectionPostRequest => {
+export const dBConnectionPostAction = (name: any, description: any, connectionURL: any, username: any, password: any): DBConnectionPostRequest => {
   return {
     type: DB_CONNECTION_REQUEST,
     name,
@@ -36,4 +36,3 @@ export const dBConnectionPostFailure = (error: any): DBConnectionPostFailure => 
   };
 }
 
-  

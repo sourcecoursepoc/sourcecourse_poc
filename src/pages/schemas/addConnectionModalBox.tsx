@@ -23,7 +23,7 @@ const addConnectionModalBox: React.FC<MyModalProps> = (props) => {
     const {
         showConnectionBox,
         onCancel
-      } = props;
+    } = props;
 
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
