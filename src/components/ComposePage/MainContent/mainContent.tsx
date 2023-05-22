@@ -28,7 +28,7 @@ const MainContent = () => {
     dispatch(fetchDataBaseInfoAction());
   }, []);
   useEffect(() => {
-    dispatch(fetchProjectSchemaInfoAction(3));
+    dispatch(fetchProjectSchemaInfoAction(2));
   }, []);
   const handleImport = () => {
     setImportClicked(true);
@@ -36,7 +36,7 @@ const MainContent = () => {
   //DELETE action
   const handleRemove = (uid: string) => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: 2,
       sourceTableUids: [uid],
     };
     dispatch(

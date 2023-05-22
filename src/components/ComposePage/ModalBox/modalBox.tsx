@@ -43,7 +43,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   //POST action
     const handleImport = () => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: 2,
       sourceTableUids: tableUidArray,
     };
     dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
@@ -57,7 +57,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
  
   const handleRemove = async (uid: string) => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: 2,
       sourceTableUids: [uid],
     };
     try {
