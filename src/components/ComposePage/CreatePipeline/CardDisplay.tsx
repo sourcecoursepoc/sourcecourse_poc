@@ -2,14 +2,14 @@ import { Col, Row, Image } from 'antd'
 import React from 'react'
 import styles from "./CardDisplay.module.css";
 
-const CardDisplay = ({ alt, src, title }) => {
-    return (
-        <>
-      <div className={styles.outerbox}>
+const CardDisplay = ({ alt, src, title, onSelectCard, isThisCardSelected }) => {
+  return (
+    <>
+      <div className={`${styles.outerbox} ${isThisCardSelected ? styles.outerboxSelected : ''}`} onClick={onSelectCard}>
         <div className={styles.innerright}>
           <Row className={styles.image}
           ><Col>
-               <Image preview={false} src={src} alt={alt} style={{ width: "3rem", height: "3rem", marginRight: "0.5rem" }} />
+              <Image preview={false} src={src} alt={alt} style={{ width: "3rem", height: "3rem", marginRight: "0.5rem" }} />
             </Col>
           </Row>
         </div>
@@ -19,7 +19,7 @@ const CardDisplay = ({ alt, src, title }) => {
       </div>
 
     </>
-    )
+  )
 }
 
 export default CardDisplay

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import OutputType from './OutputType';
 import Schedule from './Schedule';
 
-const BottomSection = () => {
+const BottomSection = ({ cardSelected }) => {
   const [isScheduleActive, setIsScheduleActive] = useState(true);
 
   return (
@@ -55,7 +55,7 @@ const BottomSection = () => {
 
 
       {isScheduleActive ? (
-        <Schedule />
+        <Schedule cardSelected={cardSelected} />
       ) : (
         <OutputType />
       )}
