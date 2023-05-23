@@ -15,7 +15,7 @@ const { Content } = Layout;
 const PipelineQueues: React.FC = () => {
   const dispatch = useDispatch();
   const pipelineList = useSelector(getPipelineSelector);
-  const isDataAvailable = pipelineList.length > 0;
+  const isDataAvailable = pipelineList?.length > 0;
 
   useEffect(() => {
     dispatch(fetchPipeline());
@@ -74,11 +74,7 @@ const PipelineQueues: React.FC = () => {
         <Button
           type="link"
           href="/pipeline"
-          style={{
-            color: "#7a63a9",
-            marginLeft: "75%",
-            fontWeight: "500",
-          }}
+          className={styles.button}
         >
           View All
         </Button>
@@ -88,11 +84,8 @@ const PipelineQueues: React.FC = () => {
         <Button
           type="link"
           disabled
-          style={{
-            color: "#7a63a9",
-            marginLeft: "75%",
-            fontWeight: "500",
-          }}
+          className={styles.button}
+         
         >
           View All
         </Button>)}
