@@ -36,10 +36,8 @@ export default function SchemaContent() {
 
     const updatedTableTagAndDescription = useSelector(updatedTagArray);
 
-    console.log(updatedTableTagAndDescription, "updatedTableTagAndDescription")
     const updatedColumnTagsAndDescription = useSelector(updatedColumnTagArray);
 
-    console.log(updatedColumnTagsAndDescription, "updatedColumnTagsAndDescription")
     const [description, setDescription] = useState('');
     const [tags, setTags] = useState<String[]>([]);
 
@@ -96,7 +94,7 @@ export default function SchemaContent() {
                 <DisplaySchemaBox
                     text={columnData[column] ?.name}
                     attribute={columnData[column] ?.metadata ?.type}
-                    icon={columnData[column] ?.metadata.isPrimary ? <Image preview={false} src="/primarykey-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} /> : <Image preview={false} src="/column-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} />}
+                    icon={columnData[column] ?.metadata.isPrimary ? <Image alt="" preview={false} src="/primarykey-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} /> : <Image alt="" preview={false} src="/column-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} />}
                     uid={""}
                     handleRemove={() => ({})}
                     lengthOfColums={""}

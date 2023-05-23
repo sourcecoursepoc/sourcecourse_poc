@@ -16,7 +16,7 @@ const Schemas = () => {
 
   useEffect(() => {
     dispatch(fetchDataBaseInfoAction());
-  }, []);
+  }, [dispatch]);
 
   const { Content } = Layout;
   return (

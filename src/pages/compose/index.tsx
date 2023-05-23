@@ -58,7 +58,7 @@ const Compose = () => {
     setDescription(projectData.description)
 
 
-  }, [projectData.name, projectData.description]);
+  }, [projectData.name, projectData.description,dispatch]);
 
   const handleSaveProjectInfo = async () => {
     setSaveModalVisible(false);

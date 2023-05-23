@@ -2,9 +2,8 @@ import {
   FETCH_SCHEMA_SCHEMADATA,
   FETCH_SCHEMA_SCHEMADATA_FAILURE,
   FETCH_SCHEMA_SCHEMADATA_SUCCESS,
-  
 } from "../actions/schemaActionTypes";
-import { SchemaState, SchemaActions,SchemaData,projectSchemaInfoState } from "../actions/schemaTypes";
+import { SchemaState, SchemaActions } from "../actions/schemaTypes";
 
 const initialState: SchemaState = {
   pending: false,
@@ -12,13 +11,7 @@ const initialState: SchemaState = {
   error: null,
 };
 
-/* const initialStateSchema: SchemaData = {
-  data: [],
-  loading: false,
-  error: null,
-}; */
-
-export default (state = initialState, action: SchemaActions) => {
+const schemaReducer = (state = initialState, action: SchemaActions) => {
   switch (action.type) {
     case FETCH_SCHEMA_SCHEMADATA:
       return {
@@ -45,3 +38,5 @@ export default (state = initialState, action: SchemaActions) => {
       };
   }
 };
+
+export default schemaReducer;

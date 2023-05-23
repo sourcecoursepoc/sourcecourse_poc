@@ -18,6 +18,8 @@ const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipel
 const getUpdatedTagsArray = (state: AppState) => state.postTagsAndDescription.postTableData;
 const getUpdatedColumnTags = (state: AppState) => state.postColumnTagsAndDescription.postColumnData;
 const getSearchSchemaData = (state: AppState) => state.searchSchemaByTag.searchData;
+const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
+
 
 export const searchSchemaData = createSelector(
   getSearchSchemaData,
@@ -28,7 +30,6 @@ export const updatedTagArray = createSelector(getUpdatedTagsArray, (postTableDat
 export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline);
 export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
-const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
 export const getSelectorTableNodes = createSelector(getLastIndexesArray, (lastIndexes) => lastIndexes)
 export const getComposePipelineSelector = createSelector(getComposePipeline, (composePipeline) => composePipeline);
 export const getlastIndexesArraySelector = createSelector(getSelectedArray, (myArray) => myArray)

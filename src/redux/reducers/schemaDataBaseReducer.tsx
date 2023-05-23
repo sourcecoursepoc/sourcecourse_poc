@@ -29,57 +29,45 @@ const initialDataBaseState: DataBaseState = {
   lastIndexes: [],
 };
 
-export default (state = initialDataBaseState, action: DataBaseActions) => {
+export const dataBaseReducer = (state = initialDataBaseState, action: DataBaseActions) => {
   switch (action.type) {
     case FETCH_SCHEMA_DATABASE_INFO_ACTION:
       return {
         ...state,
-
         pending: true,
       };
-
     case FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS:
       return {
         ...state,
-
         pending: false,
-
         database: action.payload.database,
-
         error: null,
       };
-
     case FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE:
       return {
         ...state,
-
         pending: false,
-
         database: [],
-
         error: action.payload.error,
       };
-
     case ADD_ARRAY:
       if (Array.isArray(action.payload)) {
-
         return {
           ...state,
-
           myArray: [...state.myArray, ...action.payload],
         };
       } else {
-        // Handle non-iterable payload, e.g. throw an error or log a warning
-      };
+        // Handle non-iterable payload, e.g., throw an error or log a warning
+        return state;
+      }
     case REMOVE_NODE:
       const updatedArray = state.myArray.filter(node => node.uid !== action.payload.uid);
-
       return {
         ...state,
         myArray: updatedArray,
       };
     case ADD_LAST_INDEX:
-      const exists = state.lastIndexes.some((node) => node ?.uid === action.payload ?.uid);
+      const exists = state.lastIndexes.some((node) => node?.uid === action.payload?.uid);
       if (!exists) {
         return {
           ...state,
@@ -102,7 +90,6 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
         ...state,
         lastIndexes: [],
       };
-
     default:
       return {
         ...state,

@@ -13,11 +13,11 @@ import { fetchComposeReportsPipelineRequest } from '../../../redux/actions/compo
 export default function ComposeReportsPipeline() {
     const getRecords = useSelector(getRecordSelector);
     const ComposeReportsPipeline=useSelector(getComposeReportsPipelineSelector);
-    console.log(ComposeReportsPipeline,"ComposeReportsPipelineComposeReportsPipeline")
+
     const dispatch=useDispatch();
     useEffect(()=>{
         dispatch(fetchComposeReportsPipelineRequest());
-    },[])
+    },[dispatch])
     const pieDataPipeline = [
         {
             name: "Initial Load",

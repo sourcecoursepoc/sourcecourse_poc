@@ -35,7 +35,7 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       dispatch(addArray([firstNode]));
       setExpandedKeys([firstNode.uid]); // expand the first node by default
     }
-  }, [db]);
+  }, [db,dispatch]);
 
   type KeysType = string[];
 

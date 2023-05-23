@@ -43,7 +43,7 @@ export default function ComposePipeline() {
         } else {
             dispatch(fetchComposePipelineRequest(""));
         }
-    }, [nodeId]);
+    }, [nodeId,dispatch]);
 
     const PipeLineButtonClick = (node: any, showModal: () => void) => {
         if (node.id !== nodeId) {
@@ -70,6 +70,7 @@ export default function ComposePipeline() {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
+                                                key={node.pipelineName}
                                                 icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
                                                 width={"auto"}
@@ -102,6 +103,7 @@ export default function ComposePipeline() {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
+                                                key={node.pipelineName}
                                                 icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
                                                 width={"auto"}
@@ -110,9 +112,7 @@ export default function ComposePipeline() {
                                                     height: "1.5625rem",
                                                     fontSize: "0.5rem",
                                                     backgroundColor: "red"
-                                                    // background: node.status.toLowerCase() === "failed" ? "#ff4d4f" : "#7E60BCs",
                                                 }}
-                                                // color={"red"} onClick={() => PipeLineButtonClick(node)} 
                                                 />}
                                             />
                                         </Col>
