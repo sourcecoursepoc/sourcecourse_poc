@@ -73,7 +73,7 @@ export default function SchemaContent() {
 
     const handleCancelModalOk = () => {
         setCancelModalVisible(false);
-
+        window.location.href = "/";
     };
 
     const handleCancelModalCancel = () => {
