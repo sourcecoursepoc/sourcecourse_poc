@@ -26,17 +26,17 @@ const MainContent = () => {
   const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
   useEffect(() => {
     dispatch(fetchDataBaseInfoAction());
-  }, []);
+  },[dispatch]);
   useEffect(() => {
     dispatch(fetchProjectSchemaInfoAction(3));
-  }, []);
+  }, [dispatch]);
   const handleImport = () => {
     setImportClicked(true);
   };
   //DELETE action
   const handleRemove = (uid: string) => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: 1,
       sourceTableUids: [uid],
     };
     dispatch(
@@ -80,6 +80,7 @@ const MainContent = () => {
                 attribute={"ATTRIBUTES / "}
                 icon={
                   <Image
+                  alt=""
                     preview={false}
                     src="/schemas-icon.png"
                     style={{

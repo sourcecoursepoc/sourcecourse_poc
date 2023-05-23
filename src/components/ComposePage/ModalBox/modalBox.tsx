@@ -39,7 +39,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
     }
-  }, [projectSchemaInfo]);
+  }, [projectSchemaInfo,dispatch]);
 
   const [combinedArray, setCombinedArray] = useState<any[]>([]);
 
@@ -56,7 +56,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   //POST action
   const handleImport = () => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: 1,
       sourceTableUids: tableUidArray,
     };
     dispatch(
@@ -75,7 +75,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
 
   const handleRemove = (uid: string) => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: 1,
       sourceTableUids: [uid],
     };
     setCombinedArray((prevArray) =>
@@ -154,6 +154,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
                           <span>
                             {" "}
                             <Image
+                            alt=""
                               src="/Schemas.png"
                               preview={false}
                               style={{
