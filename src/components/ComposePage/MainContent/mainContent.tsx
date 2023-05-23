@@ -28,7 +28,7 @@ const MainContent = () => {
     dispatch(fetchDataBaseInfoAction());
   },[dispatch]);
   useEffect(() => {
-    dispatch(fetchProjectSchemaInfoAction(3));
+    dispatch(fetchProjectSchemaInfoAction(1));
   }, [dispatch]);
   const handleImport = () => {
     setImportClicked(true);
