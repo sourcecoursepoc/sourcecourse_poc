@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { Transcription } from "./transcriptionFile";
 import {
@@ -41,6 +42,7 @@ const ProjectContent: React.FC<ContentProps> = ({
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
+  
   }, []);
 
   const dummyArray = [<InnerBox title="Initial Load" value={0} key={Math.random()}></InnerBox>,
