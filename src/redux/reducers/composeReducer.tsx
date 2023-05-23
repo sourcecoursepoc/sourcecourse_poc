@@ -9,6 +9,8 @@ import {
   PostProjectSchemaInfoActionTypes,
   DeleteProjectSchemaInfoState,
   DeleteProjectSchemaInfoActionTypes,
+  SearchSchemaByTagInfoState,
+  SearchSchemaByTagActions,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -26,6 +28,9 @@ import {
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -163,9 +168,9 @@ function projectSchemaInfoReducer(
       };
     case DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
       const { schemas } = state;
-      const { sourceTableUids } = action?.payload;
+      const { sourceTableUids } = action ?.payload;
       const newSchemas = schemas.filter(
-        (val) => val?.uid !== sourceTableUids?.[0]
+        (val) => val ?.uid !== sourceTableUids ?.[0]
       );
       return {
         ...state,
@@ -190,4 +195,38 @@ export {
   composeReducer,
   composeReportsPipelineReducer,
   projectSchemaInfoReducer,
+};
+
+const initialSearchSchemaState: SearchSchemaByTagInfoState = {
+  pending: false,
+  searchData: [],
+  error: null,
+};
+
+export const searchSchemaByTag = (state = initialSearchSchemaState, action: SearchSchemaByTagActions) => {
+  switch (action.type) {
+    case SEARCH_SCHEMA_BY_TAG_INFO_ACTION:
+      return {
+        ...state,
+        pending: true,
+      };
+    case SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        searchData: action.payload.searchData,
+        error: null,
+      };
+    case SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        searchData: [],
+        error: action.payload.error,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
 };

@@ -19,7 +19,7 @@ export function Transcription(selectedMetaDataLastItem: any) {
         type: "Type",
     };
 
-    const transcriptObj = {};
+    const transcriptObj:any = {};
     for (const key in selectedMetaDataLastItem) {
         const defaultValue = data[key];
         const value = selectedMetaDataLastItem[key] ?? defaultValue ?? null;

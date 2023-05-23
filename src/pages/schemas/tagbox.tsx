@@ -5,8 +5,8 @@ import styles from "./tagbox.module.css";
 interface Props {
     label: string;
     placeholder: string;
-    tags: string[];
-    setTags: (tags: string[]) => void;
+    tags: String[];
+    setTags: (tags: String[]) => void;
 }
 
 const TagBox = ({ label, placeholder, tags, setTags }: Props) => {
@@ -48,15 +48,15 @@ const TagBox = ({ label, placeholder, tags, setTags }: Props) => {
 
     return (
         <div onBlur={handleBlur} className={styles.floatlabelbox}>
-            {tags &&
+            {Array.isArray(tags) &&
                 tags.map((tag) => (
                     <Tag
                         closable
-                        onClose={() => handleClose(tag)}
-                        key={tag}
+                        onClose={() => handleClose(tag.toString())}
+                        key={tag.toString()}
                         style={{ marginRight: "5px", marginBottom: "5px" }}
                     >
-                        {tag}
+                        {tag.toString()}
                     </Tag>
                 ))}
             <Input

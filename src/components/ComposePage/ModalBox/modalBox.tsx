@@ -16,6 +16,8 @@ import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { postProjectSchemaInfoRequest } from "@/redux/actions/composeAction";
+import { searchSchemaByTagsInfoAction } from "../../../redux/actions/composeAction";
+import { searchSchemaData } from "../../../redux/selector";
 
 interface MyModalProps {
   visible: boolean;
@@ -26,22 +28,22 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  
+
   const projectSchemaInfo = useSelector(projectSchemaInfoSelector);//tables in the database
   const selectedTableArray = useSelector(getSelectorTableNodes);//selected tables from the tree
 
   useEffect(() => {
-    if (projectSchemaInfo?.length > 0) {
+    if (projectSchemaInfo ?.length > 0) {
       dispatch(clearLastIndex());
     }
   }, [projectSchemaInfo]);
 
   const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
 
-  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid)); //taking uid's of selected tables
+  const tableUidArray = combinedArray.map((table: any) => parseInt(table.uid)); //taking uid's of selected tables
 
   //POST action
-    const handleImport = () => {
+  const handleImport = () => {
     const requestBody = {
       projectUid: 3,
       sourceTableUids: tableUidArray,
@@ -49,12 +51,12 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
     dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
     onExport();
   };
-  
+
   const handleImportButton = () => {
     handleImport();
     onCancel();
   };
- 
+
   const handleRemove = async (uid: string) => {
     const requestBody = {
       projectUid: 3,
@@ -69,7 +71,10 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
       console.error(error);
     }
   };
-
+  useEffect(() => {
+    dispatch(searchSchemaByTagsInfoAction("tag"));
+  }, []);
+  const searchData = useSelector(searchSchemaData);
   return (
     <>
       <Modal
@@ -127,7 +132,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
             }}
           >
             {combinedArray &&
-              combinedArray?.map((node: any) => (
+              combinedArray ?.map((node: any) => (
                 <>
                   {" "}
                   <Row align={"middle"}>
@@ -136,7 +141,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
                       key={node.tableName}
                       className={styles.rowTextStyle}
                     >
-                      {node && node?.tableName && (
+                      {node && node ?.tableName && (
                         <p>
                           <span>
                             {" "}
@@ -151,7 +156,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
                               }}
                             ></Image>{" "}
                           </span>
-                          {node?.tableName}
+                          {node ?.tableName}
                         </p>
                       )}
                     </Col>
@@ -165,7 +170,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
                           width: "1rem",
                           fontSize: "0.7rem",
                         }}
-                        onClick={() => handleRemove(node?.uid)}
+                        onClick={() => handleRemove(node ?.uid)}
                       >
                         Remove
                       </Button>

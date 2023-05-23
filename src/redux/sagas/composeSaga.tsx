@@ -4,6 +4,7 @@ import {
   ICOMPOSEREPORTSPIPELINE,
   FetchSchemaComposeRequest,
   projectSchemaInfo,
+  SearchSchemaByTagInfoAction,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -13,6 +14,7 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -26,6 +28,8 @@ import {
   deleteProjectSchemaInfoSuccess,
   deleteProjectSchemaInfoFailure,
   deleteProjectSchemaInfoRequest,
+  searchSchemaByTagsInfoSuccessAction,
+  searchSchemaByTagsInfoFailureAction,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -193,5 +197,36 @@ function* deleteProjectSchemaInfoSaga(
 export function* deleteSchemaRequestSaga() {
   yield all([
     takeLatest(DELETE_PROJECT_SCHEMA_INFO_ACTION, deleteProjectSchemaInfoSaga),
+  ]);
+}
+
+
+const getSearchSchemaByTag = (searchValue: any) =>
+  axios.get<[]>("http://localhost:8080/sourcecourse/db/table/search/" + searchValue.searchValue);
+
+/*
+  Worker Saga: Fired on FETCH_SCHEMA_REQUEST action
+*/
+function* fetchSearchSchemaByTagSaga(searchValue: SearchSchemaByTagInfoAction) {
+
+  try {
+    const response = yield call(() => getSearchSchemaByTag(searchValue));
+    yield put(
+      searchSchemaByTagsInfoSuccessAction({
+        searchData: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(
+      searchSchemaByTagsInfoFailureAction({
+        error: e.message,
+      })
+    );
+  }
+}
+
+export function* searchSchemaByTagRequestSaga() {
+  yield all([
+    takeLatest(SEARCH_SCHEMA_BY_TAG_INFO_ACTION, fetchSearchSchemaByTagSaga),
   ]);
 }

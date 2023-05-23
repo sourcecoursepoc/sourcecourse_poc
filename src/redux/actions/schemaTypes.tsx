@@ -282,19 +282,15 @@ export type PostGroupDataActionTypes =
 
 // post tags and description for table
 
-export interface PostTagsAndDescriptionInfo {
-    tags: any;
-    description: any;
-}
 
 export interface PostTagsAndDescriptionInfoState {
     pending: boolean;
-    postTableData: PostTagsAndDescriptionInfo[];
+    postTableData: any[];
     error: string | null;
 }
 
 export interface PostTagsAndDescriptionInfoActionSuccessPayload {
-    postTableData: PostTagsAndDescriptionInfo[];
+    postTableData: any[];
 }
 
 export interface PostTagsAndDescriptionInfoActionFailurePayload {
@@ -326,19 +322,14 @@ export type PostTagsAndDescriptionActions =
 
 // post tags and description for column
 
-export interface PostColumnTagsAndDescriptionInfo {
-    tags: any;
-    description: any;
-}
-
 export interface PostColumnTagsAndDescriptionInfoState {
     pending: boolean;
-    postColumnData: PostColumnTagsAndDescriptionInfo[];
+    postColumnData: any[];
     error: string | null;
 }
 
 export interface PostColumnTagsAndDescriptionInfoActionSuccessPayload {
-    postColumnData: PostColumnTagsAndDescriptionInfo[];
+    postColumnData: any[];
 }
 
 export interface PostColumnTagsAndDescriptionInfoActionFailurePayload {

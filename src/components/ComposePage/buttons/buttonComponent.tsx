@@ -14,8 +14,7 @@ import styles from "./buttonStyle.module.css";
 import Buttons from "./buttons";
 
 import ConfirmationModal from "../GroupsPage/ModalBox/ConfirmationModal";
-import { getSelectorTableNodes } from "@/redux/selector";
-import { clearLastIndex } from "@/redux/actions/schemasaction";
+import { getSelectorTableNodes } from "../../../redux/selector";
 import { useDispatch } from "react-redux";
 
 const ButtonComponent = ({
@@ -32,7 +31,7 @@ const ButtonComponent = ({
 }) => {
   const dispatch = useDispatch();
   const [exitModalVisible, setExitModalVisible] = useState(false);
-  const selectedTableArray= useSelector(getSelectorTableNodes);
+  const selectedTableArray = useSelector(getSelectorTableNodes);
 
   const handleExitClick = () => {
     setExitModalVisible(true);
@@ -48,19 +47,6 @@ const ButtonComponent = ({
     setExitModalVisible(false);
   };
 
- 
-
-/*   const handleDeleteModalOk = () => {
-    setDeleteModalVisible(false);
-    // dispatch(clearLastIndex());
-
-  };
- */
- 
- /*  const handleDeleteModalCancel = () => {
-    setDeleteModalVisible(false);
-  }; */
-
   return (
     <Col span={7} className={styles.buttonAreaBorder}>
       <Row>
@@ -69,7 +55,10 @@ const ButtonComponent = ({
           icon={<DeleteFilled className={styles.icon} />}
           size={"middle"}
           onClick={handleDeleteClick}
-        />
+          href=""
+          color=""
+          disabled={false}        
+          />
 
         <ConfirmationModal
           visible={deleteModalVisible}
@@ -85,7 +74,10 @@ const ButtonComponent = ({
           text="Clone"
           icon={<CopyFilled className={styles.icon} />}
           size={"middle"}
-          onClick={() => {}}
+          onClick={() => { }}
+          href=""
+          color=""
+          disabled={false} 
         />
       </Row>
 
@@ -94,7 +86,10 @@ const ButtonComponent = ({
           text="Save"
           icon={<SaveFilled className={styles.icon} />}
           size={"middle"}
-          onClick={handleSaveClick} /* href={""} */
+          onClick={handleSaveClick} 
+          href=""
+          color=""
+          disabled={false} 
         />
 
         <ConfirmationModal
@@ -111,6 +106,9 @@ const ButtonComponent = ({
           icon={<CloseOutlined className={styles.icon} />}
           size={"middle"}
           onClick={handleExitClick}
+          href=""
+          color=""
+          disabled={false} 
         />
 
         <ConfirmationModal

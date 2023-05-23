@@ -52,7 +52,6 @@ const ProjectContent: React.FC<ContentProps> = ({
   );
 
   for (const item in transcriptList) {
-    // console.log(`${item}: ${transcriptList[item]}`);
     if((item === "Groups") || (item === "Tables")){
     listItems.push(
       <InnerBox title={item} value={transcriptList[item]}></InnerBox>

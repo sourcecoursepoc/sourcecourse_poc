@@ -5,7 +5,7 @@ import DescriptionBox from './descriptionbox';
 import DisplayBox from './displaybox';
 import TagBox from './tagbox';
 import { useSelector, useDispatch } from 'react-redux';
-import { SelectedTreeNodeInfo } from '../../redux/selector';
+import { SelectedTreeNodeInfo, updatedTagArray, updatedColumnTagArray } from '../../redux/selector';
 import { Transcription } from './transcriptionFile';
 import Buttons from '../../components/ComposePage/buttons/buttons';
 import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
@@ -34,9 +34,14 @@ export default function SchemaContent() {
     const [selectedUid, setSelectedUid] = useState(null);
     const [selectedValueName, setSelectedValueName] = useState("");
 
+    const updatedTableTagAndDescription = useSelector(updatedTagArray);
 
+    console.log(updatedTableTagAndDescription, "updatedTableTagAndDescription")
+    const updatedColumnTagsAndDescription = useSelector(updatedColumnTagArray);
+
+    console.log(updatedColumnTagsAndDescription, "updatedColumnTagsAndDescription")
     const [description, setDescription] = useState('');
-    const [tags, setTags] = useState<string[]>([]);
+    const [tags, setTags] = useState<String[]>([]);
 
     const dispatch = useDispatch();
     const handleSaveClick = () => {
@@ -47,12 +52,17 @@ export default function SchemaContent() {
         setSaveModalVisible(false);
         if ('tableName' in selcectedDataLastElement) {
             await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
+            if (updatedTableTagAndDescription && updatedTableTagAndDescription.length > 0) {
+                setTags(updatedTableTagAndDescription);
+            }
         } else if ('name' in selcectedDataLastElement) {
             await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
+            setTags([...updatedColumnTagsAndDescription]);
         }
         showSuccessToast("saved successfully");
-        // dispatch(fetchDataBaseInfoAction());
+
     };
+
     const handleSaveModalCancel = () => {
         setSaveModalVisible(false);
     };
@@ -84,14 +94,17 @@ export default function SchemaContent() {
         if (Array.isArray(columnData) && columnData.length > 0) {
             selectedColumnData.push(
                 <DisplaySchemaBox
-                    text={columnData[column].name}
-                    attribute={columnData[column].metadata.type}
-                    icon={columnData[column].metadata.isPrimary ? <Image preview={false} src="/primarykey-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} /> : <Image preview={false} src="/column-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} />}
+                    text={columnData[column] ?.name}
+                    attribute={columnData[column] ?.metadata ?.type}
+                    icon={columnData[column] ?.metadata.isPrimary ? <Image preview={false} src="/primarykey-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} /> : <Image preview={false} src="/column-icon1.png" style={{ width: "2rem", height: "2rem", marginRight: "0.5rem", marginBottom: "0.5rem" }} />}
                     uid={""}
                     handleRemove={() => ({})}
                     lengthOfColums={""}
                     minWidth={170}
                     width={"auto"}
+                    paddingLeft=""
+                    deleteIcon=""
+                    status=""
                 />
             );
         }
@@ -134,6 +147,7 @@ export default function SchemaContent() {
         setDescription(descriptionLastItem);
         setTags(selcectedTagsLastElement);
     }, [descriptionLastItem, selcectedTagsLastElement]);
+
     const handleOk = () => {
         setDescription('');
         setTags([]);
@@ -146,23 +160,26 @@ export default function SchemaContent() {
                     <Row className={styles.pinkbar} >
                         <Col span={17} className={styles.headerText}>{selectedValueName}</Col>
                         <Col style={{ marginTop: "8px", marginLeft: "16px" }}>
-                            <Buttons text="Save" icon={<SaveFilled />} size={"middle"} onClick={handleSaveClick} />
+                            <Buttons text="Save" icon={<SaveFilled />} size={"middle"} onClick={handleSaveClick} href="" color="" disabled={false} />
                             <ConfirmationModal
                                 visible={saveModalVisible}
                                 onOk={handleSaveModalOk}
                                 onCancel={handleSaveModalCancel}
                                 title="Save Confirmation"
                                 message="Are you sure you want to save?"
+                                buttonsDisabled={false}
                             />
                         </Col>
                         <Col style={{ marginTop: "8px" }}>
-                            <Buttons text="Cancel" icon={<CloseOutlined />} size={"middle"} onClick={handleCancelClick} />
+                            <Buttons text="Cancel" icon={<CloseOutlined />} size={"middle"} onClick={handleCancelClick} href="" color="" disabled={false} />
                             <ConfirmationModal
                                 visible={cancelModalVisible}
                                 onOk={handleOkButtonClick}
                                 onCancel={handleCancelModalCancel}
                                 title="Cancel Confirmation"
                                 message="Are you sure you want to cancel?"
+                                buttonsDisabled={false}
+
                             />
                         </Col>
                     </Row>

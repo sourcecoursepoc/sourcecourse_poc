@@ -35,18 +35,6 @@ function* fetchProjectSaga(): any {
 
 // delete project saga
 
-// const URL = 'http://localhost:8080/sourcecourse/project';
-
-// function* deleteProject(action: DeleteProjectInfoAction) {
-//   try {
-//     const { id } = action.payload;
-//     yield call(axios.delete, `${URL}/${id}`);
-//     yield put(deleteProjectInfoActionSuccess(id));
-//   } catch (error) {
-//     yield put(deleteProjectInfoActionFailure(error.message));
-//   }
-// }
-
 const deleteProject = (requestParams: any) =>
   axios.delete("http://localhost:8080/sourcecourse/project/" + requestParams);
 

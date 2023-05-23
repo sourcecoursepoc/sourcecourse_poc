@@ -27,6 +27,7 @@ import { useSelector } from "react-redux";
 import { getProjectByIdSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { deleteProjectInfoAction, deleteProjectGroupsInfoAction } from "../../redux/actions/fetchProjectAction";
+import { DELETE_PROJECT_SUCCESS_TOAST, SAVE_PROJECT_SUCCESS_TOAST } from "../../components/ComposePage/Constants";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -45,23 +46,23 @@ const Compose = () => {
 
   const dispatch = useDispatch();
 
-  const {projectById : projectData, pending} = useSelector(getProjectByIdSelector);
+  const { projectById: projectData, pending } = useSelector(getProjectByIdSelector);
 
-   const [name, setName] = useState(projectData.name);
- const [description, setDescription] = useState(projectData.description);
+  const [name, setName] = useState(projectData.name);
+  const [description, setDescription] = useState(projectData.description);
 
   useEffect(() => {
-    
+
     dispatch(fetchProjectByIdRequest(id));
     setName(projectData.name)
     setDescription(projectData.description)
-    
-    
-  }, [projectData.name,projectData.description]);
 
-  const handleSaveProjectInfo = async () => { 
+
+  }, [projectData.name, projectData.description]);
+
+  const handleSaveProjectInfo = async () => {
     setSaveModalVisible(false);
-    showSuccessToast("Project Saved Successfully")
+    showSuccessToast(SAVE_PROJECT_SUCCESS_TOAST);
     /* dispatch(clearLastIndex());
     setName(""); */
     try {
@@ -95,7 +96,7 @@ const Compose = () => {
 
     setSaveModalVisible(true);
   };
-  const handleIconClick = (icon:any) => {
+  const handleIconClick = (icon: any) => {
     setSelectedIcon(icon);
 
   };
@@ -106,10 +107,11 @@ const Compose = () => {
     setName("");
     setDescription("");
     dispatch(deleteProjectInfoAction(id));
-    // dispatch(deleteProjectGroupsInfoAction(5));
-    showSuccessToast("Project Deleted Successfully");
-    setProjectId("");
-    window.location.href = "/";
+    showSuccessToast(DELETE_PROJECT_SUCCESS_TOAST);
+    setTimeout(() => {
+      setProjectId("");
+      window.location.href = "/";
+    }, 3000);
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
@@ -127,8 +129,8 @@ const Compose = () => {
           return <MainContent />;
         case "ContainerFilled":
           return <GroupsMainContent />;
-          case "Reports":
-            return <ReportMainContent />;
+        case "Reports":
+          return <ReportMainContent />;
         case "ComposePipeline":
           return <ComposePipeline />
         // add additional cases for each icon
@@ -140,138 +142,138 @@ const Compose = () => {
 
   return (
     <>
-    <Space direction="vertical" className={styles.space} size={[0, 48]}>
-      <Layout className={styles.layout}>
-        <Header />
-        <Content style={{ marginTop: "1rem" }}>
-          <Row>
-            <TextAreaComponent
-              onNameChange={setName}
-              nameValue={name}
-              onDescriptionChange={setDescription}
-              descriptionValue={description}
-              nameError={nameError}
-              descriptionError={descriptionError}
-              className={nameError ? "textAreaError" : ""}
-            />
-            <Col
-              span={1}
-              className={styles.textAreaBorder}
-              style={{ borderRight: "1px solid #ccc" }}
-            ></Col>
-            <ButtonComponent
-              saveModalVisible={saveModalVisible}
-              handleSaveModalOk={handleSaveProjectInfo}
-              handleSaveModalCancel={handleSaveModalCancel}
-              handleSaveClick={handleSaveClick}
-              handleDeleteClick={handleDeleteClick}
-              handleDeleteModalOk={handleDeleteModalOk}
-              handleDeleteModalCancel={handleDeleteModalCancel}
-              deleteModalVisible={deleteModalVisible}
-              saveBoxMessage={
-                nameError ? (
-                  "name can not be empty"
-                ) : descriptionError ? (
-                  "description can not be empty"
-                ) : nameError && descriptionError ? (
-                  "name and description can not be empty"
-                ) : (
-                        ""
-                      )
-              }
-              buttonsDisabled = {(nameError || descriptionError )? true : false}
-            />
-          </Row>
-
-          <Row>
-            <Col className={styles.sideButtons}>
-              <Image
-                preview={false}
-                src="/schemas-icon.png"
-                style={{
-                  width: "3.5rem",
-                  height: "3.5rem",
-                  marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
-                  padding:"0.5rem",
-                  opacity: projectId ? 1 : 0.5
-                }}
-                onClick={projectId ? () => handleIconClick("HddFilled") : () => {} }
-                alt=""
-              />{" "}
-              <br />
-
-              <Image
-                preview={false}
-                src="/groups-icon.png"
-                style={{
-                  width: "3.5rem",
-                  height: "3.5rem",
-                  marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
-                  padding:"0.5rem",
-                  opacity: projectId ? 1 : 0.5
-                }}
-                alt=""
-                onClick={projectId ? () => handleIconClick("ContainerFilled"): () => {}}
+      <Space direction="vertical" className={styles.space} size={[0, 48]}>
+        <Layout className={styles.layout}>
+          <Header />
+          <Content style={{ marginTop: "1rem" }}>
+            <Row>
+              <TextAreaComponent
+                onNameChange={setName}
+                nameValue={name}
+                onDescriptionChange={setDescription}
+                descriptionValue={description}
+                nameError={nameError}
+                descriptionError={descriptionError}
+                className={nameError ? "textAreaError" : ""}
               />
-              <br />
-
-              <Image
-                preview={false}
-                src="/compose-pipeline.png"
-                style={{
-                  width: "3.5rem",
-                  height: "3.5rem",
-                  marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
-                  padding:"0.3rem",
-                  opacity: projectId ? 1 : 0.5
-                }}
-                alt=""
-                onClick={projectId ? () => handleIconClick("ComposePipeline"): () => {}}
+              <Col
+                span={1}
+                className={styles.textAreaBorder}
+                style={{ borderRight: "1px solid #ccc" }}
+              ></Col>
+              <ButtonComponent
+                saveModalVisible={saveModalVisible}
+                handleSaveModalOk={handleSaveProjectInfo}
+                handleSaveModalCancel={handleSaveModalCancel}
+                handleSaveClick={handleSaveClick}
+                handleDeleteClick={handleDeleteClick}
+                handleDeleteModalOk={handleDeleteModalOk}
+                handleDeleteModalCancel={handleDeleteModalCancel}
+                deleteModalVisible={deleteModalVisible}
+                saveBoxMessage={
+                  nameError ? (
+                    "name can not be empty"
+                  ) : descriptionError ? (
+                    "description can not be empty"
+                  ) : nameError && descriptionError ? (
+                    "name and description can not be empty"
+                  ) : (
+                          ""
+                        )
+                }
+                buttonsDisabled={(nameError || descriptionError) ? true : false}
               />
-              <br />
+            </Row>
 
-              <Image
-                preview={false}
-                src="/reports-icon.png"
-                style={{
-                  width: "3.5rem",
-                  height: "3.5rem",
-                  marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
-                  padding:"0.3rem",
-                  opacity: projectId ? 1 : 0.5
-                }}
-                alt=""
-                onClick={projectId ? () => handleIconClick("Reports"): () => {}}
-              />
-              <br />
+            <Row>
+              <Col className={styles.sideButtons}>
+                <Image
+                  preview={false}
+                  src="/schemas-icon.png"
+                  style={{
+                    width: "3.5rem",
+                    height: "3.5rem",
+                    marginLeft: "6rem",
+                    borderBottom: "1px solid #ccc",
+                    padding: "0.5rem",
+                    opacity: projectId ? 1 : 0.5
+                  }}
+                  onClick={projectId ? () => handleIconClick("HddFilled") : () => { }}
+                  alt=""
+                />{" "}
+                <br />
 
-              <Image
-                preview={false}
-                src="/users-Icon1.png"
-                style={{
-                  width: "3.5rem",
-                  height: "3.5rem",
-                  marginLeft: "6rem",
-                  borderBottom: "1px solid #ccc",
-                  padding:"0.3rem",
-                  opacity: projectId ? 1 : 0.5
-                }}
-                alt=""
-                onClick={projectId ? () => handleIconClick("Reports"): () => {}}
-              />
-         
-            </Col>
+                <Image
+                  preview={false}
+                  src="/groups-icon.png"
+                  style={{
+                    width: "3.5rem",
+                    height: "3.5rem",
+                    marginLeft: "6rem",
+                    borderBottom: "1px solid #ccc",
+                    padding: "0.5rem",
+                    opacity: projectId ? 1 : 0.5
+                  }}
+                  alt=""
+                  onClick={projectId ? () => handleIconClick("ContainerFilled") : () => { }}
+                />
+                <br />
 
-            <Col span={18}>{renderSelectedComponent()}</Col>
-          </Row>
-          <Toast/>       
-           </Content>
-      </Layout>
-    </Space>
+                <Image
+                  preview={false}
+                  src="/compose-pipeline.png"
+                  style={{
+                    width: "3.5rem",
+                    height: "3.5rem",
+                    marginLeft: "6rem",
+                    borderBottom: "1px solid #ccc",
+                    padding: "0.3rem",
+                    opacity: projectId ? 1 : 0.5
+                  }}
+                  alt=""
+                  onClick={projectId ? () => handleIconClick("ComposePipeline") : () => { }}
+                />
+                <br />
+
+                <Image
+                  preview={false}
+                  src="/reports-icon.png"
+                  style={{
+                    width: "3.5rem",
+                    height: "3.5rem",
+                    marginLeft: "6rem",
+                    borderBottom: "1px solid #ccc",
+                    padding: "0.3rem",
+                    opacity: projectId ? 1 : 0.5
+                  }}
+                  alt=""
+                  onClick={projectId ? () => handleIconClick("Reports") : () => { }}
+                />
+                <br />
+
+                <Image
+                  preview={false}
+                  src="/users-Icon1.png"
+                  style={{
+                    width: "3.5rem",
+                    height: "3.5rem",
+                    marginLeft: "6rem",
+                    borderBottom: "1px solid #ccc",
+                    padding: "0.3rem",
+                    opacity: projectId ? 1 : 0.5
+                  }}
+                  alt=""
+                  onClick={projectId ? () => handleIconClick("Reports") : () => { }}
+                />
+
+              </Col>
+
+              <Col span={18}>{renderSelectedComponent()}</Col>
+            </Row>
+            <Toast />
+          </Content>
+        </Layout>
+      </Space>
     </>
   );
 };
