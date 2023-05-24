@@ -24,7 +24,7 @@ function ConditionalDataSelection({index,name,arrayLength,onDeleteClick}:Conditi
       const [orStyle, setOrStyle] = useState({borderColor : "#ccc", padding: "5px", backgroundColor: "white", height:"3rem", borderInlineStart: "1px solid #d9d9d9",borderStartEndRadius: "2px", borderEndEndRadius: "2px"})
 
 
-      const onChange3 = (event) => {
+      const onChange3 = (event: RadioChangeEvent) => {
           const {value, checked} = event.target
         console.log('radio3 checked', value,checked);
         setRadioValue(value)
