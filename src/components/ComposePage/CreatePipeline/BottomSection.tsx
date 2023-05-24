@@ -4,15 +4,18 @@ import React, { useState } from 'react'
 import OutputType from './OutputType';
 import Schedule from './Schedule';
 
-const BottomSection = ({ cardSelected }) => {
+interface BottomSectionProps {
+  cardSelected: string;
+}
+
+const BottomSection: React.FC<BottomSectionProps> = ({ cardSelected }) => {
   const [isScheduleActive, setIsScheduleActive] = useState(true);
 
   return (
     <>
-      <Row type="flex" justify="center" align="middle">
+      <Row justify="center" align="middle">
         <div
           onClick={() => setIsScheduleActive(true)}
-          // icon={<CalendarOutlined />}
           style={{
             paddingRight: "0.5rem",
             paddingLeft: "0.1rem",
@@ -33,7 +36,6 @@ const BottomSection = ({ cardSelected }) => {
         <div
 
           onClick={() => setIsScheduleActive(false)}
-          icon={<ExportOutlined />}
           style={{
             paddingRight: "0.5rem",
             paddingLeft: "0.1rem",
