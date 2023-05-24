@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Layout, Space, Col, Row, Image } from "antd";
 import Header from "../../components/header/header";
-import axios from 'axios';
+import axios from "axios";
 import { Divider } from "antd";
 import styles from "./index.module.css";
 import {
@@ -28,21 +28,21 @@ import { getProjectByIdSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { deleteProjectInfoAction, deleteProjectGroupsInfoAction } from "../../redux/actions/fetchProjectAction";
 import { DELETE_PROJECT_SUCCESS_TOAST, SAVE_PROJECT_SUCCESS_TOAST } from "../../components/ComposePage/Constants";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
 
 const Compose = () => {
   const { Content } = Layout;
-  const [selectedIcon, setSelectedIcon] = useState(null);
+  const [selectedIcon, setSelectedIcon] = useState("HddFilled");
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [projectId, setProjectId] = useState(1);
 
-
-  const router = useRouter()
+  const router = useRouter();
   const {
-    query: { id }
-  } = router
+    query: { id },
+  } = router;
 
   const dispatch = useDispatch();
 
@@ -66,13 +66,16 @@ const Compose = () => {
     /* dispatch(clearLastIndex());
     setName(""); */
     try {
-      const response = await axios.post('http://localhost:8080/sourcecourse/project', {
-        name: name,
-        description: description
-      });
+      const response = await axios.post(
+        "http://localhost:8080/sourcecourse/project",
+        {
+          name: name,
+          description: description,
+        }
+      );
       if (response.data !== -1) {
-        setProjectId(response.data.uid); // Update the state with the uid
-        handleIconClick("HddFilled") //toggles schema
+        setProjectId(response.data.uid);
+        handleIconClick("HddFilled");
       }
     } catch (error) {
       console.error(error);
@@ -98,9 +101,18 @@ const Compose = () => {
   };
   const handleIconClick = (icon: any) => {
     setSelectedIcon(icon);
-
   };
-
+  const getIconStyle = (icon) => {
+    if (selectedIcon === icon) {
+      return {
+        borderBottom: "2px solid #7E60BC",
+      };
+    } else {
+      return {
+        borderBottom: "1px solid #ccc",
+      };
+    }
+  };
   const handleDeleteModalOk = () => {
     setDeleteModalVisible(false);
     dispatch(clearLastIndex());
@@ -112,6 +124,7 @@ const Compose = () => {
       setProjectId("");
       window.location.href = "/";
     }, 3000);
+    showSuccessToast(DELETE_TOAST);
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
@@ -121,9 +134,8 @@ const Compose = () => {
   };
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
-      return null; // or handle this case however is appropriate for your application
-    }
-    else {
+      return <MainContent />;
+    } else {
       switch (selectedIcon) {
         case "HddFilled":
           return <MainContent />;
@@ -132,8 +144,7 @@ const Compose = () => {
         case "Reports":
           return <ReportMainContent />;
         case "ComposePipeline":
-          return <ComposePipeline />
-        // add additional cases for each icon
+          return <ComposePipeline />;
         default:
           return null;
       }
@@ -154,7 +165,7 @@ const Compose = () => {
                 descriptionValue={description}
                 nameError={nameError}
                 descriptionError={descriptionError}
-                className={nameError ? "textAreaError" : ""}
+                className={nameError ? TEXTAREA_ERROR : ""}
               />
               <Col
                 span={1}
@@ -171,101 +182,108 @@ const Compose = () => {
                 handleDeleteModalCancel={handleDeleteModalCancel}
                 deleteModalVisible={deleteModalVisible}
                 saveBoxMessage={
-                  nameError ? (
-                    "name can not be empty"
-                  ) : descriptionError ? (
-                    "description can not be empty"
-                  ) : nameError && descriptionError ? (
-                    "name and description can not be empty"
-                  ) : (
-                          ""
-                        )
+                  nameError
+                    ? NAME_ERROR
+                    : descriptionError
+                    ? DESCRIPTION_ERROR
+                    : nameError && descriptionError
+                    ? NAME_DESCRIPTION_ERROR
+                    : ""
                 }
-                buttonsDisabled={(nameError || descriptionError) ? true : false}
+                buttonsDisabled={nameError || descriptionError ? true : false}
               />
             </Row>
-
             <Row>
               <Col className={styles.sideButtons}>
                 <Image
                   preview={false}
                   src="/schemas-icon.png"
                   style={{
+                    ...getIconStyle("HddFilled"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.5rem",
-                    opacity: projectId ? 1 : 0.5
+                    opacity: projectId ? 1 : 0.5,
                   }}
-                  onClick={projectId ? () => handleIconClick("HddFilled") : () => { }}
+                  onClick={
+                    projectId ? () => handleIconClick("HddFilled") : () => {}
+                  }
                   alt=""
                 />{" "}
                 <br />
-
                 <Image
                   preview={false}
                   src="/groups-icon.png"
                   style={{
+                    ...getIconStyle("ContainerFilled"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.5rem",
-                    opacity: projectId ? 1 : 0.5
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
-                  onClick={projectId ? () => handleIconClick("ContainerFilled") : () => { }}
+                  onClick={
+                    projectId
+                      ? () => handleIconClick("ContainerFilled")
+                      : () => {}
+                  }
                 />
                 <br />
-
                 <Image
                   preview={false}
                   src="/compose-pipeline.png"
                   style={{
+                    ...getIconStyle("ComposePipeline"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
+
                     padding: "0.3rem",
-                    opacity: projectId ? 1 : 0.5
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
-                  onClick={projectId ? () => handleIconClick("ComposePipeline") : () => { }}
+                  onClick={
+                    projectId
+                      ? () => handleIconClick("ComposePipeline")
+                      : () => {}
+                  }
                 />
                 <br />
-
                 <Image
                   preview={false}
                   src="/reports-icon.png"
                   style={{
+                    ...getIconStyle("Reports"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.3rem",
-                    opacity: projectId ? 1 : 0.5
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
-                  onClick={projectId ? () => handleIconClick("Reports") : () => { }}
+                  onClick={
+                    projectId ? () => handleIconClick("Reports") : () => {}
+                  }
                 />
                 <br />
-
                 <Image
                   preview={false}
                   src="/users-Icon1.png"
                   style={{
+                    ...getIconStyle("Users"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.3rem",
-                    opacity: projectId ? 1 : 0.5
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
-                  onClick={projectId ? () => handleIconClick("Reports") : () => { }}
+                  onClick={
+                    projectId ? () => handleIconClick("Users") : () => {}
+                  }
                 />
-
               </Col>
 
               <Col span={18}>{renderSelectedComponent()}</Col>

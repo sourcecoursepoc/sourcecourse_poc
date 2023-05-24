@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import OutputType from './OutputType';
 import Schedule from './Schedule';
 
-const BottomSection = () => {
+const BottomSection = ({ cardSelected }) => {
   const [isScheduleActive, setIsScheduleActive] = useState(true);
 
   return (
@@ -26,7 +26,7 @@ const BottomSection = () => {
             boxShadow: 'none',
           }}
         >
-          <Image src="/schedule-icon.png" preview={false} style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
+          <Image src="/schedule-icon.png" preview={false} alt="schedule" style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
 
           Schedule
         </div>
@@ -48,14 +48,14 @@ const BottomSection = () => {
             boxShadow: 'none',
           }}
         >
-          <Image src="/output-icon.png" preview={false} style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
+          <Image src="/output-icon.png" preview={false} alt="output" style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
           Output Type
         </div>
       </Row>
 
 
       {isScheduleActive ? (
-        <Schedule />
+        <Schedule cardSelected={cardSelected} />
       ) : (
         <OutputType />
       )}

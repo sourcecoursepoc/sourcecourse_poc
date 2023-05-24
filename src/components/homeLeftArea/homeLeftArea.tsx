@@ -1,3 +1,4 @@
+
 import React from "react";
 import styles from "./homeLeftArea.module.css";
 import TopBox from "./topBox";
@@ -20,7 +21,7 @@ const HomeLeftArea: React.FunctionComponent = () => {
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
-  }, []);
+  }, [dispatch]);
 
   const handleArrayChange = (array: string[], isClicked: boolean) => {
     setIsSearch(isClicked);
