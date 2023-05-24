@@ -1,3 +1,4 @@
+
 import React from "react";
 import { Row, Col, Divider, Statistic, Button, Image } from "antd";
 import styles from "./topBoxRight.module.css";
@@ -8,11 +9,11 @@ const TopBoxRight: React.FC = () => {
       <div className={styles.outerbox}>
         <div className={styles.innerrightTop}>
           <Image
+          alt=""
            preview={false}
             src="./compose-Icon2.png"
            style={{
-              
-              marginLeft: "2rem",
+            marginLeft: "2rem",
               width: "4rem",
             }} 
           ></Image>
