@@ -7,10 +7,14 @@ import type { RadioChangeEvent } from 'antd';
 import { Radio } from 'antd';
 import { InfoCircleOutlined,PlusCircleOutlined,DeleteFilled } from "@ant-design/icons";
 
-
-function ConditionalDataSelection({index,name,arrayLength,onDeleteClick}) {
-
-    const options = [
+interface ConditionalDataSelectionProps {
+  index: number;
+  name: string;
+  arrayLength: number;
+  onDeleteClick: () => void;
+}
+function ConditionalDataSelection({index,name,arrayLength,onDeleteClick}:ConditionalDataSelectionProps) {
+  const options = [
         { label: 'AND', value: 'AND' },
         { label: 'OR', value: 'OR' }
       ];
