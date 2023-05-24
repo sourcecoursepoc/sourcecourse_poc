@@ -18,7 +18,7 @@ const QueuePage: React.FunctionComponent = () => {
   console.log(pipelineList, "projectDataaaaaaaaaaaaa");
   useEffect(() => {
     dispatch(fetchPipeline());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Layout className={styles.layout}>

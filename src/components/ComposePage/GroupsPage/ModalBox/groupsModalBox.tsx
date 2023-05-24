@@ -1,26 +1,25 @@
 import {
-  addAttributeDetails,
-  fetchDataBaseRequest,
-  fetchGroupDataRequest,
+  addAttributeDetails, fetchGroupDataRequest, removeNode
 } from "@/redux/actions/schemasaction";
 import {
   getDataBaseSelector,
-  getGroupdataDataBaseSelector,
-  getSelectedArraySelector,
-  getSelectedGroupdataArraySelector,
+  getGroupdataDataBaseSelector, getSelectedGroupdataArraySelector
 } from "@/redux/selector";
+import { PlusOutlined } from "@ant-design/icons";
 import { Col, Input, Modal, Row } from "antd";
-import React, { useEffect, useState, SetStateAction, Dispatch } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TreeView from "../../../../pages/schemas/treeview";
+import { fetchDataBaseInfoAction } from "../../../../redux/actions/schemasaction";
+import { SelectedTreeNodeInfo } from "../../../../redux/selector";
 import styles from "../ModalBox/groupsModalBox.module.css";
 import AttributeButton from "./attributeButton";
 import GroupsModalBoxButtons from "./groupsModalBoxButtons";
 import GroupsThirdSide from "./groupsThirdSide";
 import MiddleIcons from "./middleIcons";
-import { removeNode } from "@/redux/actions/schemasaction";
 import NewAttributeContent from "./newAttributeContent";
 import { PlusOutlined } from "@ant-design/icons";
+
 
 interface MyModalProps {
   visible?: boolean;
@@ -69,7 +68,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
     // dispatch(fetchGroupDataRequest());
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     if (lastIndexGroup && "name" in lastIndexGroup) {
       const exists =
@@ -85,8 +84,9 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
         ]);
       }
     }
-  }, [selectGroupdataData, attrName]);
-  console.log("lastIndiceslastIndices", lastIndices);
+
+  }, [lastIndexGroup, lastIndices, setLastIndices,selectGroupdataData,attrName]);
+console.log("lastIndiceslastIndices",lastIndices)
   const handleExport = () => {
     onExport(lastIndices);
   };

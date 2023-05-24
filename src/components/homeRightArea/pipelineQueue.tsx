@@ -17,7 +17,7 @@ const PipelineQueues: React.FC = () => {
   const pipelineList = useSelector(getPipelineSelector);
   useEffect(() => {
     dispatch(fetchPipeline());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       {pipelineList.map((pipeline) => (
@@ -33,13 +33,17 @@ const PipelineQueues: React.FC = () => {
                <Image
                preview={false}
                src="/InitialLoad-Icon4.png"
+               alt="Initial Load"
              style={{
                  maxWidth: "1.3rem"
                 
                }} 
              />
             ) : (
-              <Image preview={false} src="/Sync-Icon-1.png"  style={{
+              <Image preview={false}
+               src="/Sync-Icon-1.png" 
+               alt="Sync Icon"
+               style={{
                 maxWidth: "1.3rem",
               }}  />
             )}

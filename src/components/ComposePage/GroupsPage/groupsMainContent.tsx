@@ -59,7 +59,7 @@ const GroupsMainContent = () => {
   console.log("groupData", data);
   useEffect(() => {
     dispatch(fetchGroupRequest());
-  }, []);
+  }, [dispatch]);
   const dispatch = useDispatch();
   // page for calling the whole content of groups
   const lastIndicesText = lastIndices?.map((node: any) => node.name).join(", ");
@@ -80,6 +80,7 @@ const GroupsMainContent = () => {
                 <Image
                   preview={false}
                   src="/groups-icon.png"
+                  alt="Groups Icon"
                   style={{
                     width: "2rem",
                     height: "2rem",
