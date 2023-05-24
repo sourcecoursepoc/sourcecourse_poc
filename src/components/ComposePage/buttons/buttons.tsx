@@ -8,7 +8,7 @@ interface MyComponentProps {
   icon: ReactNode;
   size: SizeType;
   href?: string;
-  onClick: () => void;
+  onClick?: () => void;
   style?: React.CSSProperties;
   color?: any;
   disabled?: boolean;
