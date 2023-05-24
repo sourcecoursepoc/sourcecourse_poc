@@ -5,7 +5,12 @@ import { PlayCircleFilled } from "@ant-design/icons";
 import CardDisplay from './CardDisplay';
 import styles from '../buttons/buttonStyle.module.css'
 
-const UpperSection = ({ onSelectInitial, onSelectSync, cardSelected }) => {
+interface UpperSectionProps {
+    onSelectInitial: () => void;
+    onSelectSync: () => void;
+    cardSelected: string;
+  }
+const UpperSection: React.FC<UpperSectionProps>= ({ onSelectInitial, onSelectSync, cardSelected }) => {
     return (
         <>
             <Row justify="space-between" style={{ borderBottom: "1px solid #ccc" }}>
