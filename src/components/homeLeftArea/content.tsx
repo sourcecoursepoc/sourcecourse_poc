@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { Transcription } from "./transcriptionFile";
 import {
@@ -19,16 +20,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
+import Link from "next/link";
 const { Content } = Layout;
 
 interface ContentProps {
   heading: string;
   projectDescription: string;
+  uid: number;
 }
 
 const ProjectContent: React.FC<ContentProps> = ({
   heading,
   projectDescription,
+  uid
 }) => {
   const dispatch = useDispatch();
   const projectListData = useSelector(getProjectsSelector);
@@ -38,6 +42,7 @@ const ProjectContent: React.FC<ContentProps> = ({
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
+  
   }, []);
 
   const dummyArray = [<InnerBox title="Initial Load" value={0} key={Math.random()}></InnerBox>,
@@ -70,13 +75,17 @@ const ProjectContent: React.FC<ContentProps> = ({
         </div>
 
         <div className={styles.bottomDivider}>
-          <Button
+          <Link
             type="link"
-            href="/compose"
+            
+            href={{
+              pathname: "/compose",
+              query: { id: uid }
+            }}
             style={{ color: "#9179ca", marginLeft: "90%", fontWeight: "600" }}
           >
             More
-          </Button>
+          </Link>
         </div>
       </Content>
     </Layout>

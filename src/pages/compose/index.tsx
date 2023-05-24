@@ -36,6 +36,15 @@ const Compose = () => {
   const [name, setName] = useState("");
   const [saveClicked, setSaveClicked] = useState(false);
   const [description, setDescription] = useState("");
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { getProjectByIdSelector } from "@/redux/selector";
+import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
+
+const Compose = () => {
+  const { Content } = Layout;
+  const [selectedIcon, setSelectedIcon] = useState("HddFilled");
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
@@ -65,6 +74,42 @@ const Compose = () => {
       console.log("Saved data:", data);
       if (data) {
         setSavedData(data);
+  const [projectId, setProjectId] = useState(1);
+
+  const router = useRouter();
+  const {
+    query: { id },
+  } = router;
+
+  const dispatch = useDispatch();
+
+  const { projectById: projectData, pending } = useSelector(
+    getProjectByIdSelector
+  );
+
+  const [name, setName] = useState(projectData.name);
+  const [description, setDescription] = useState(projectData.description);
+
+  useEffect(() => {
+    dispatch(fetchProjectByIdRequest(id));
+    setName(projectData.name);
+    setDescription(projectData.description);
+  }, [projectData.name, projectData.description]);
+
+  const handleSaveProjectInfo = async () => {
+    setSaveModalVisible(false);
+    showSuccessToast("Saved Successfully");
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/sourcecourse/project",
+        {
+          name: name,
+          description: description,
+        }
+      );
+      if (response.data !== -1) {
+        setProjectId(response.data.uid);
+        handleIconClick("HddFilled");
       }
       setSaveClicked(false);
     }
@@ -124,7 +169,17 @@ setName(""); */
   const handleIconClick = (icon) => {
     setSelectedIcon(icon);
   };
-
+  const getIconStyle = (icon) => {
+    if (selectedIcon === icon) {
+      return {
+        borderBottom: "2px solid #7E60BC",
+      };
+    } else {
+      return {
+        borderBottom: "1px solid #ccc",
+      };
+    }
+  };
   const handleDeleteModalOk = () => {
     setDeleteModalVisible(false);
 
@@ -133,8 +188,7 @@ setName(""); */
     setName("");
 
     setDescription("");
-
-    showSuccessToast("Deleted Successfully");
+    showSuccessToast(DELETE_TOAST);
   };
 
   const handleDeleteClick = () => {
@@ -147,7 +201,7 @@ setName(""); */
 
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
-      return null; // or handle this case however is appropriate for your application
+      return <MainContent />;
     } else {
       switch (selectedIcon) {
         case "HddFilled":
@@ -155,15 +209,10 @@ setName(""); */
 
         case "ContainerFilled":
           return <GroupsMainContent />;
-
         case "Reports":
           return <ReportMainContent />;
-
         case "ComposePipeline":
           return <ComposePipeline />;
-
-        // add additional cases for each icon
-
         default:
           return null;
       }
@@ -175,7 +224,6 @@ setName(""); */
       <Space direction="vertical" className={styles.space} size={[0, 48]}>
         <Layout className={styles.layout}>
           <Header />
-
           <Content style={{ marginTop: "1rem" }}>
             <Row>
               <TextAreaComponent
@@ -185,9 +233,8 @@ setName(""); */
                 descriptionValue={description}
                 nameError={nameError}
                 descriptionError={descriptionError}
-                className={nameError ? "textAreaError" : ""}
+                className={nameError ? TEXTAREA_ERROR : ""}
               />
-
               <Col
                 span={1}
                 className={styles.textAreaBorder}
@@ -205,33 +252,31 @@ setName(""); */
                 deleteModalVisible={deleteModalVisible}
                 saveBoxMessage={
                   nameError
-                    ? "name can not be empty"
+                    ? NAME_ERROR
                     : descriptionError
-                    ? "description can not be empty"
+                    ? DESCRIPTION_ERROR
                     : nameError && descriptionError
-                    ? "name and description can not be empty"
+                    ? NAME_DESCRIPTION_ERROR
                     : ""
                 }
                 buttonsDisabled={nameError || descriptionError ? true : false}
               />
             </Row>
-
             <Row>
               <Col className={styles.sideButtons}>
                 <Image
                   preview={false}
                   src="/schemas-icon.png"
                   style={{
+                    ...getIconStyle("HddFilled"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.5rem",
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   onClick={
-                    isSidebutonClickable
-                      ? () => handleIconClick("HddFilled")
-                      : () => {}
+                    projectId ? () => handleIconClick("HddFilled") : () => {}
                   }
                   alt=""
                 />{" "}
@@ -240,15 +285,16 @@ setName(""); */
                   preview={false}
                   src="/groups-icon.png"
                   style={{
+                    ...getIconStyle("ContainerFilled"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.5rem",
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
                   onClick={
-                    isSidebutonClickable
+                    projectId
                       ? () => handleIconClick("ContainerFilled")
                       : () => {}
                   }
@@ -258,15 +304,17 @@ setName(""); */
                   preview={false}
                   src="/compose-pipeline.png"
                   style={{
+                    ...getIconStyle("ComposePipeline"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
+
                     padding: "0.3rem",
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
                   onClick={
-                    isSidebutonClickable
+                    projectId
                       ? () => handleIconClick("ComposePipeline")
                       : () => {}
                   }
@@ -276,17 +324,16 @@ setName(""); */
                   preview={false}
                   src="/reports-icon.png"
                   style={{
+                    ...getIconStyle("Reports"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.3rem",
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
                   onClick={
-                    isSidebutonClickable
-                      ? () => handleIconClick("Reports")
-                      : () => {}
+                    projectId ? () => handleIconClick("Reports") : () => {}
                   }
                 />
                 <br />
@@ -294,20 +341,20 @@ setName(""); */
                   preview={false}
                   src="/users-Icon1.png"
                   style={{
+                    ...getIconStyle("Users"),
                     width: "3.5rem",
                     height: "3.5rem",
                     marginLeft: "6rem",
-                    borderBottom: "1px solid #ccc",
                     padding: "0.3rem",
+                    opacity: projectId ? 1 : 0.5,
                   }}
                   alt=""
                   onClick={
-                    isSidebutonClickable
-                      ? () => handleIconClick("Reports")
-                      : () => {}
+                    projectId ? () => handleIconClick("Users") : () => {}
                   }
                 />
               </Col>
+
               <Col span={18}>{renderSelectedComponent()}</Col>
             </Row>
             <Toast />

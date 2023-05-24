@@ -1,4 +1,15 @@
-import { ComposePipelineState, ComposePipelineActions, ComposeReportsPipelineActions, ComposeReportsPipelineState, ComposeNameDescState, ComposeNameDescActions, GetComposeNameDescState, GetComposeNameDescActions } from "../actions/composeTypes";
+import {
+  ComposePipelineState,
+  ComposePipelineActions,
+  ComposeReportsPipelineActions,
+  ComposeReportsPipelineState,
+  projectSchemaInfoActions,
+  projectSchemaInfoState,
+  PostProjectSchemaInfoState,
+  PostProjectSchemaInfoActionTypes,
+  DeleteProjectSchemaInfoState,
+  DeleteProjectSchemaInfoActionTypes,
+} from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
   FETCH_COMPOSE_PIPELINE_SUCCESS,
@@ -14,6 +25,15 @@ import {
   GET_COMPOSE_NAME_DESC_SUCCESS,
   GET_COMPOSE_NAME_DESC_FAILURE,
   ADD_NAME_DESC_ARRAY,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  POST_PROJECT_SCHEMA_INFO_ACTION,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -21,20 +41,22 @@ const initialState: ComposePipelineState = {
   composePipeline: [],
   error: null,
 };
-
+interface ProjectTablesState {
+  loading: boolean;
+  error: string | null;
+  // Define any state properties you need
+}
 function composeReducer(
   state = initialState,
   action: ComposePipelineActions
 ): ComposePipelineState {
   switch (action.type) {
     case FETCH_COMPOSE_PIPELINE:
-      console.log("FETCH_COMPOSE_PIPELINE action dispatched.");
       return {
         ...state,
         pending: true,
       };
     case FETCH_COMPOSE_PIPELINE_SUCCESS:
-      console.log("FETCH_COMPOSE_PIPELINE_SUCCESS action dispatched.");
       return {
         ...state,
         pending: false,
@@ -42,7 +64,6 @@ function composeReducer(
         error: null,
       };
     case FETCH_COMPOSE_PIPELINE_FAILURE:
-      console.log("FETCH_COMPOSE_PIPELINE_FAILURE action dispatched.");
       return {
         ...state,
         pending: false,
@@ -54,28 +75,23 @@ function composeReducer(
   }
 }
 
-
 // compose reports pipeline
-
 const initialReportsState: ComposeReportsPipelineState = {
   pending: false,
   composeReportsPipeline: [],
   error: null,
 };
-
 function composeReportsPipelineReducer(
   state = initialReportsState,
   action: ComposeReportsPipelineActions
 ): ComposeReportsPipelineState {
   switch (action.type) {
     case FETCH_REPORTS_PIPELINE:
-      console.log("FETCH_COMPOSE_PIPELINE action dispatched.");
       return {
         ...state,
         pending: true,
       };
     case FETCH_REPORTS_PIPELINE_SUCCESS:
-      console.log("FETCH_COMPOSE_PIPELINE_SUCCESS action dispatched.");
       return {
         ...state,
         pending: false,
@@ -83,7 +99,6 @@ function composeReportsPipelineReducer(
         error: null,
       };
     case FETCH_REPORTS_PIPELINE_FAILURE:
-      console.log("FETCH_COMPOSE_PIPELINE_FAILURE action dispatched.");
       return {
         ...state,
         pending: false,
@@ -128,6 +143,83 @@ function composeNameDescReducer(
         ...state,
         pending: false,
         postData: [],
+//GET,POST and DELETE Schema Compose
+const initialStateCompose: projectSchemaInfoState = {
+  isFetching: false,
+  schemas: [],
+  error: null,
+  postData: [],
+  isDelete: false,
+};
+function projectSchemaInfoReducer(
+  state = initialStateCompose,
+  action:
+    | projectSchemaInfoActions
+    | PostProjectSchemaInfoActionTypes
+    | DeleteProjectSchemaInfoActionTypes
+): projectSchemaInfoState {
+  switch (action.type) {
+    case FETCH_PROJECT_SCHEMA_INFO_ACTION:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case FETCH_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        schemas: action.payload.schemas,
+        error: null,
+      };
+    case FETCH_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        schemas: [],
+        error: action.payload.error,
+      };
+    case POST_PROJECT_SCHEMA_INFO_ACTION:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        isFetching: false,
+        schemas: action.payload.postData,
+        error: null,
+      };
+    case POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        schemas: [],
+        error: action.payload.error,
+      };
+    case DELETE_PROJECT_SCHEMA_INFO_ACTION:
+      return {
+        ...state,
+        isFetching: true,
+      };
+    case DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
+      const { schemas } = state;
+      const { sourceTableUids } = action?.payload;
+      const newSchemas = schemas.filter(
+        (val) => val?.uid !== sourceTableUids?.[0]
+      );
+      return {
+        ...state,
+        schemas: newSchemas,
+        isFetching: false,
+        isDelete: action.payload.isDelete,
+        error: null,
+      };
+    case DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        isFetching: false,
+        isDelete: false,
         error: action.payload.error,
       };
     default:
@@ -188,3 +280,8 @@ function getComposeNameDescReducer(
 
 
 export { composeReducer, composeReportsPipelineReducer,composeNameDescReducer,getComposeNameDescReducer };
+export {
+  composeReducer,
+  composeReportsPipelineReducer,
+  projectSchemaInfoReducer,
+};

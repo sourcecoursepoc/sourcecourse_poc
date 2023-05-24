@@ -2,6 +2,7 @@ import {
   FETCH_SCHEMA_DATABASE,
   FETCH_SCHEMA_DATABASE_FAILURE,
   FETCH_SCHEMA_DATABASE_SUCCESS,
+  
   ADD_ARRAY,
   POST_GROUPDATA_DATABASE_FAILURE,
   POST_GROUPDATA_DATABASE_SUCCESS,
@@ -9,16 +10,19 @@ import {
   ADD_LAST_INDEX,
   REMOVE_LAST_INDEX,
   CLEAR_LAST_INDEXES,
-
+  FETCH_SCHEMA_DATABASE_INFO_ACTION,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE,
+  POST_TAGS_DESCRIPTION_INFO_ACTION,
+  POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+  
   // CLEAR_LAST_INDEXES,
 } from "../actions/schemaActionTypes";
-
-import {
-  DataBaseState,
-  DataBaseActions,
-  PostDataActionTypes,
-  PostDataState,
-} from "../actions/schemaTypes";
+import { DataBaseState, DataBaseActions, PostDataActionTypes, PostDataState, UpdatePostAction, postTagsAndDescriptionState, postTagsAndDescriptionActions, PostColumnTagsAndDescriptionState, PostColumnTagsAndDescriptionActions, PostTagsAndDescriptionInfoState, PostColumnTagsAndDescriptionInfoState } from "../actions/schemaTypes";
 
 const initialDataBaseState: DataBaseState = {
   pending: false,
@@ -34,14 +38,14 @@ const initialDataBaseState: DataBaseState = {
 
 export default (state = initialDataBaseState, action: DataBaseActions) => {
   switch (action.type) {
-    case FETCH_SCHEMA_DATABASE:
+    case FETCH_SCHEMA_DATABASE_INFO_ACTION:
       return {
         ...state,
 
         pending: true,
       };
 
-    case FETCH_SCHEMA_DATABASE_SUCCESS:
+    case FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS:
       return {
         ...state,
 
@@ -52,7 +56,7 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
         error: null,
       };
 
-    case FETCH_SCHEMA_DATABASE_FAILURE:
+    case FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE:
       return {
         ...state,
 
@@ -65,7 +69,6 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
 
     case ADD_ARRAY:
       if (Array.isArray(action.payload)) {
-        console.log(action.payload, "payload");
 
         return {
           ...state,
@@ -86,41 +89,35 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
 
         myArray: updatedArray,
       };
+    case REMOVE_NODE:
+      const updatedArray = state.myArray.filter(node => node.uid !== action.payload.uid);
 
+      return {
+        ...state,
+        myArray: updatedArray,
+      };
     case ADD_LAST_INDEX:
-      const exists = state.lastIndexes.some(
-        (node) => node?.uid === action.payload?.uid
-      );
-
+      const exists = state.lastIndexes.some((node) => node ?.uid === action.payload ?.uid);
       if (!exists) {
         return {
           ...state,
-
           lastIndexes: [...state.lastIndexes, action.payload],
         };
       } else {
         return state;
       }
-
     case REMOVE_LAST_INDEX:
-      const index = state.lastIndexes.findIndex(
-        (node) => node.uid === action.payload
-      );
-
+      const index = state.lastIndexes.findIndex((node) => node.uid === action.payload);
       if (index !== -1) {
         state.lastIndexes.splice(index, 1);
       }
-
       return {
         ...state,
-
         lastIndexes: [...state.lastIndexes],
       };
-
     case CLEAR_LAST_INDEXES:
       return {
         ...state,
-
         lastIndexes: [],
       };
 
@@ -135,19 +132,96 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
 
 const initialState: PostDataState = {
   loading: false,
-
   success: false,
-
   error: null,
 };
 
-export const postDataReducer = (
-  state = initialState,
-  action: PostDataActionTypes
-): PostDataState => {
+export const postDataReducer = (state = initialState, action: PostDataActionTypes): PostDataState => {
   switch (action.type) {
     case POST_GROUPDATA_DATABASE_FAILURE:
       return { ...state, loading: true };
+    case POST_GROUPDATA_DATABASE_SUCCESS:
+      return { ...state, loading: false, success: true };
+    case POST_GROUPDATA_DATABASE_FAILURE:
+      return { ...state, loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+
+// reducer for posting tags and description
+
+const initialPostState: postTagsAndDescriptionState = {
+  pending: false,
+  postTableData: [],
+  error: null,
+};
+
+export const postTagsAndDescriptionReducer = (
+  state = initialPostState,
+  action: postTagsAndDescriptionActions
+): PostTagsAndDescriptionInfoState => {
+  switch (action.type) {
+    case POST_TAGS_DESCRIPTION_INFO_ACTION:
+      return {
+        ...state,
+        pending: true,
+      };
+    case POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        postTableData: action.payload.postTableData,
+        error: null,
+      };
+    case POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        postTableData: [],
+        error: action.payload.error,
+      };
+    default:
+      return state;
+  }
+};
+
+// post column description and tags
+const initialColumnPostState: PostColumnTagsAndDescriptionInfoState = {
+  pending: false,
+  postColumnData: [],
+  error: null,
+};
+
+export const postColumnTagsAndDescriptionReducer = (
+  state = initialColumnPostState,
+  action: PostColumnTagsAndDescriptionActions
+): PostColumnTagsAndDescriptionInfoState => {
+  switch (action.type) {
+    case POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION:
+      return {
+        ...state,
+        pending: true,
+      };
+    case POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        postColumnData: action.payload.postColumnData,
+        error: null,
+      };
+    case POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        postColumnData: [],
+        error: action.payload.error,
+      };
+    default:
+      return state;
+  }
+};
 
     case POST_GROUPDATA_DATABASE_SUCCESS:
       return { ...state, loading: false, success: true };

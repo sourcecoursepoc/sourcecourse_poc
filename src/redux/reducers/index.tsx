@@ -3,14 +3,17 @@ import fetchPipelineReducer from "./fetchDataReducer";
 import fetchRecordReducer from "./fetchRecordsReducer";
 import schemaReducer from "./schemaReducer";
 import projectReducer from "./projectReducer";
-import schemaDataBaseReducer from "./schemaDataBaseReducer";
+import schemaDataBaseReducer, { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
-import { composeNameDescReducer, composeReducer, composeReportsPipelineReducer, getComposeNameDescReducer, saveComposeNameDescReducer } from "./composeReducer";
+import {
+  composeReducer,
+  composeReportsPipelineReducer,
+  projectSchemaInfoReducer,
+} from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
 import groupReducer from "./groupReducer";
-
-console.log("Creating root reducer...");
+import projectByIdReducer from "./projectByIdReducer";
 
 const rootReducer = combineReducers({
   pipeline: fetchPipelineReducer,
@@ -18,13 +21,16 @@ const rootReducer = combineReducers({
   database: schemaDataBaseReducer,
   groupdataDatabase: groupdataDatabaseReducer,
   project: projectReducer,
+  projectById: projectByIdReducer,
   composePipeline: composeReducer,
   record: fetchRecordsReducer,
   group: groupReducer,
   composeReportsPipeline: composeReportsPipelineReducer,
   composeNameDesc:composeNameDescReducer,
   getComposeNameDesc:getComposeNameDescReducer,
-
+  schemaComposeData: projectSchemaInfoReducer,
+  postTagsAndDescription: postTagsAndDescriptionReducer,
+  postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer
 });
 
 

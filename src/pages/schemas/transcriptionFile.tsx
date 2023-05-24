@@ -30,7 +30,9 @@ export function Transcription(selectedMetaDataLastItem: any) {
                 ? t(`data.${key}`, { defaultValue: value.toString() })
                 : value instanceof Date
                     ? t(`data.${key}`, { defaultValue: value.toISOString() })
-                    : t(`data.${key}`, { defaultValue: value });
+                    : value === null // added this line to check for null values
+                        ? null
+                        : t(`data.${key}`, { defaultValue: value });
     }
 
     return transcriptObj;

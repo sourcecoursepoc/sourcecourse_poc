@@ -10,7 +10,10 @@ import {
   FETCH_RECORDS_FAILURE,
   FETCH_ALLGROUP_DATA_REQUEST,
   FETCH_ALLGROUP_DATA_SUCCESS,
-  FETCH_ALLGROUP_DATA_FAILURE
+  FETCH_ALLGROUP_DATA_FAILURE,
+  FETCH_PROJECT_BYID_REQUEST,
+  FETCH_PROJECT_BYID_SUCCESS,
+  FETCH_PROJECT_BYID_FAILURE
 } from "../actions/actionTypes";
 import {
   FETCH_SCHEMA_DATA,
@@ -171,36 +174,71 @@ export type SchemaActions =
       uid: number;
     projectName: string;
     description: string;
-   
+    uid:number;
     }
+
+  export interface IPROJECTBYID {
+     uid: number, 
+     name: string,
+     description: string
+     }
     
     export interface ProjectState {
       pending: boolean;
       projects: IPROJECT[];
       error: string | null;
     }
+
+    export interface ProjectByIdState {
+      pending: boolean;
+      projectById: IPROJECTBYID;
+      error: string | null;
+      }
     
     export interface FetchProjectSuccessPayload {
       projects: IPROJECT[];
     }
     
+    export interface FetchProjectByIdSuccessPayload {
+       projectById: IPROJECTBYID;
+      }
+
     export interface FetchProjectFailurePayload {
       error: string;
     }
+
+    export interface FetchProjectByIdFailurePayload {
+       error: string;
+       }
     
     export interface FetchProjectRequest {
       type: typeof FETCH_ALLPROJECTS_REQUEST;
     }
+
+    export interface FetchProjectByIdRequest {
+       type: typeof FETCH_PROJECT_BYID_REQUEST;
+       params: number;
+      }
     
     export type FetchProjectSuccess = {
       type: typeof FETCH_ALLPROJECTS_SUCCESS;
       payload: FetchProjectSuccessPayload;
     };
+
+    export type FetchProjectByIdSuccess = {
+      type: typeof FETCH_PROJECT_BYID_SUCCESS;
+       payload: FetchProjectByIdSuccessPayload;
+        };
     
     export type FetchProjectFailure = {
       type: typeof FETCH_ALLPROJECTS_FAILURE;
       payload: FetchProjectFailurePayload;
     };
+
+    export type FetchProjectByIdFailure = {
+      type: typeof FETCH_PROJECT_BYID_FAILURE;
+       payload: FetchProjectByIdFailurePayload;
+       };
     
     export type ProjectActions =
       | FetchProjectRequest
@@ -252,3 +290,8 @@ export type SchemaActions =
         | FetchGroupRequest
         | FetchGroupSuccess
         | FetchGroupFailure;
+
+      export type ProjectByIdActions =
+                | FetchProjectByIdRequest
+                | FetchProjectByIdSuccess
+                | FetchProjectByIdFailure;

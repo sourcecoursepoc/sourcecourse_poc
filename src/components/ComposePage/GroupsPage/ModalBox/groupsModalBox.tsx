@@ -21,6 +21,8 @@ import MiddleIcons from "./middleIcons";
 import { removeNode } from "@/redux/actions/schemasaction";
 import NewAttributeContent from "./newAttributeContent";
 import { PlusOutlined } from "@ant-design/icons";
+import { fetchDataBaseInfoAction } from "../../../../redux/actions/schemasaction";
+import { SelectedTreeNodeInfo } from "../../../../redux/selector";
 
 interface MyModalProps {
   visible?: boolean;
@@ -59,7 +61,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   console.log(tableData,"tableData")
   console.log(tablesAndColumns,"tablesAndColumns")
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
-  const selcectData = useSelector(getSelectedArraySelector);
+  const selcectData = useSelector(SelectedTreeNodeInfo);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
   const lastIndexGroup = selectGroupdataData.slice(-1)[0];
   const [attrName, setAttrName] = useState("Attribute Name");
@@ -69,6 +71,8 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
     // dispatch(fetchGroupDataRequest());
+    dispatch(fetchDataBaseInfoAction());
+    dispatch(fetchGroupDataRequest());
   }, []);
   useEffect(() => {
     if (lastIndexGroup && "name" in lastIndexGroup) {

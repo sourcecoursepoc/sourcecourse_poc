@@ -1,3 +1,9 @@
+.selectedIcon {
+  border-bottom: "1px solid #000";
+}
+.icon {
+  border-bottom: "1px solid #ccc";
+}
 .space {
   width: 100%;
   height: 100%;
@@ -10,7 +16,6 @@
   height: 100%;
   background-color: white;
 }
-
 .buttonAreaBorder {
   color: rgb(133, 130, 130);
   border-bottom: 1px solid #ccc;
@@ -30,7 +35,6 @@
   background-color: #fff;
   margin-bottom: 1rem;
 }
-
 .contentStyle {
   text-align: center;
   min-height: 500px;
@@ -50,24 +54,27 @@
   border-right: 1px solid #ccc;
   background-color: #fff;
   padding-right: 10px;
-  
 }
 .icon {
   font-size: small;
 }
-.custom{
-  border: 1px solid grey ;
-border-radius: 1px;
-height: 2rem;
+.custom {
+  border: 1px solid grey;
+  border-radius: 1px;
+  height: 2rem;
 }
-.red{
-  border: 1px solid red ;
+.red {
+  border: 1px solid red;
 }
-.buttonImage
-{
+.buttonImage {
   width: 3rem;
-   height: 3.5rem;
-   margin-left: 6rem;
-   border-bottom: 1px solid #ccc;
-   padding:0.5rem;
+  height: 3.5rem;
+  margin-left: 6rem;
+  border-bottom: 1px solid #ccc;
+  padding: 0.5rem;
+}
+.imageStyle {
+  width: 3.5rem;
+  height: 3.5rem;
+  padding: 0.5rem;
 }

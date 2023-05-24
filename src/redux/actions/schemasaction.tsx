@@ -1,10 +1,5 @@
 import {
-  FETCH_SCHEMA_SCHEMADATA,
-  FETCH_SCHEMA_SCHEMADATA_SUCCESS,
-  FETCH_SCHEMA_SCHEMADATA_FAILURE,
-  FETCH_SCHEMA_DATABASE,
-  FETCH_SCHEMA_DATABASE_SUCCESS,
-  FETCH_SCHEMA_DATABASE_FAILURE,
+
   ADD_ARRAY,
   REMOVE_NODE,
   FETCH_GROUPDATA_DATABASE,
@@ -20,6 +15,19 @@ import {
   ADD_ATTRIBUTE_DETAILS,
   DELETE_GROUP_MODAL,
   DELETE_GROUP_MODAL_BOX,
+  FETCH_SCHEMA_SCHEMADATA_INFO_ACTION,
+  FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_SUCCESS,
+  FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_FAILURE,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS,
+  FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+  POST_TAGS_DESCRIPTION_INFO_ACTION,
+  POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+
 } from "./schemaActionTypes";
 
 import {
@@ -28,11 +36,7 @@ import {
   FetchSchemaSuccess,
   FetchSchemaFailurePayload,
   FetchSchemaFailure,
-  FetchDataBaseRequest,
-  FetchDataBaseSuccessPayload,
-  FetchDataBaseSuccess,
-  FetchDataBaseFailurePayload,
-  FetchDataBaseFailure,
+  
   FetchGroupdataDataBaseRequest,
   FetchGroupdataDataBaseSuccessPayload,
   FetchGroupdataDataBaseSuccess,
@@ -48,18 +52,33 @@ import {
   AddAttributeDetailsAction,
   deleteGroupModalAction,
   deleteGroupModalBoxAction,
+  UpdatePostAction,
+  FetchDataBaseInfoAction,
+  FetchDataBaseInfoActionSuccessPayload,
+  FetchDataBaseInfoActionSuccess,
+  FetchDataBaseInfoActionFailurePayload,
+  FetchDataBaseInfoActionFailure,
+  
+  PostColumnTagsAndDescriptionInfoActionSuccess,
+  PostColumnTagsAndDescriptionInfoActionFailure,
+  PostTagsAndDescriptionActions,
+  PostTagsAndDescriptionInfoActionSuccess,
+  PostTagsAndDescriptionInfoActionFailure,
+  PostTagsAndDescriptionInfoActions,
+  PostColumnTagsAndDescriptionInfoActions,
+  PostColumnTagsAndDescriptionActions,
+  
 } from "./schemaTypes";
 
 export const fetchSchemaRequest = (params: number): FetchSchemaRequest => ({
-  type: FETCH_SCHEMA_SCHEMADATA,
-
+  type: FETCH_SCHEMA_SCHEMADATA_INFO_ACTION,
   params,
 });
 
 export const fetchSchemaSuccess = (
   payload: FetchSchemaSuccessPayload
 ): FetchSchemaSuccess => ({
-  type: FETCH_SCHEMA_SCHEMADATA_SUCCESS,
+  type: FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_SUCCESS,
 
   payload,
 });
@@ -67,27 +86,28 @@ export const fetchSchemaSuccess = (
 export const fetchSchemaFailure = (
   payload: FetchSchemaFailurePayload
 ): FetchSchemaFailure => ({
-  type: FETCH_SCHEMA_SCHEMADATA_FAILURE,
+  type: FETCH_SCHEMA_SCHEMADATA_INFO_ACTION_FAILURE,
+
+  payload,
+});
+// ******************************************
+
+export const fetchDataBaseInfoAction = (): FetchDataBaseInfoAction => ({
+  type: FETCH_SCHEMA_DATABASE_INFO_ACTION,
+});
+
+export const fetchDataBaseInfoActionSuccess = (
+  payload: FetchDataBaseInfoActionSuccessPayload
+): FetchDataBaseInfoActionSuccess => ({
+  type: FETCH_SCHEMA_DATABASE_INFO_ACTION_SUCCESS,
 
   payload,
 });
 
-export const fetchDataBaseRequest = (): FetchDataBaseRequest => ({
-  type: FETCH_SCHEMA_DATABASE,
-});
-
-export const fetchDataBaseSuccess = (
-  payload: FetchDataBaseSuccessPayload
-): FetchDataBaseSuccess => ({
-  type: FETCH_SCHEMA_DATABASE_SUCCESS,
-
-  payload,
-});
-
-export const fetchDataBaseFailure = (
-  payload: FetchDataBaseFailurePayload
-): FetchDataBaseFailure => ({
-  type: FETCH_SCHEMA_DATABASE_FAILURE,
+export const fetchDataBaseInfoActionFailure = (
+  payload: FetchDataBaseInfoActionFailurePayload
+): FetchDataBaseInfoActionFailure => ({
+  type: FETCH_SCHEMA_DATABASE_INFO_ACTION_FAILURE,
 
   payload,
 });
@@ -125,10 +145,7 @@ export const addGroupdataArray = (payload: any): AddGroupArrayAction => ({
 });
 
 //action for adding attribute details to an array
-
-export const addAttributeDetails = (
-  lastIndices: any
-): AddAttributeDetailsAction => {
+export const addAttributeDetails = (lastIndices: any): AddAttributeDetailsAction => {
   console.log("Received data in addAttributeDetails ---- action:", lastIndices);
 
   return {
@@ -151,7 +168,6 @@ export function removeNode(uid: string): RemoveNodeAction {
 export const addLastIndex = (lastIndex: any): AddLastIndexAction => {
   return {
     type: ADD_LAST_INDEX,
-
     payload: lastIndex,
   };
 };
@@ -159,7 +175,6 @@ export const addLastIndex = (lastIndex: any): AddLastIndexAction => {
 export const removeLastIndex = (uid: string): RemoveLastIndexAction => {
   return {
     type: REMOVE_LAST_INDEX,
-
     payload: uid,
   };
 };
@@ -196,4 +211,46 @@ export const postDataFailure = (error: string): PostDataActionTypes => ({
   type: POST_GROUPDATA_DATABASE_FAILURE,
 
   payload: error,
+});
+
+
+// post tags and description for column
+
+export const postColumnTagsAndDescriptionInfoAction = (uid: any, tags: string[], description: string): PostColumnTagsAndDescriptionActions => ({
+  type: POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION,
+  uid,
+  tags,
+  description,
+
+});
+
+export const postColumnTagsAndDescriptionInfoActionSuccess = (postColumnData: any): PostColumnTagsAndDescriptionInfoActionSuccess => ({
+  type: POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  payload: { postColumnData },
+});
+
+export const postColumnTagsAndDescriptionInfoActionFailure = (error: any): PostColumnTagsAndDescriptionInfoActionFailure => ({
+  type: POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+  payload: { error },
+});
+
+
+// post tags and description for table
+
+export const postTagsAndDescriptionInfoAction = (uid: any, tags: string[], description: string): PostTagsAndDescriptionActions => ({
+  type: POST_TAGS_DESCRIPTION_INFO_ACTION,
+  uid,
+  tags,
+  description,
+
+});
+
+export const postTagsAndDescriptionInfoActionSuccess = (postTableData: any): PostTagsAndDescriptionInfoActionSuccess => ({
+  type: POST_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
+  payload: { postTableData },
+});
+
+export const postTagsAndDescriptionInfoActionFailure = (error: any): PostTagsAndDescriptionInfoActionFailure => ({
+  type: POST_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
+  payload: { error },
 });
