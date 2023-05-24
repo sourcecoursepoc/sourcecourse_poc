@@ -5,11 +5,11 @@ import Buttons from "../../buttons/buttons";
 
 interface ConfirmationModalProps {
   visible: boolean;
-  title: string;
-  message: string;
+  title?: string;
+  message?: string;
   onOk: () => void;
-  onCancel: () => void;
-  buttonsDisabled: boolean;
+  onCancel?: () => void;
+  buttonsDisabled?: boolean;
 }
 
 const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
