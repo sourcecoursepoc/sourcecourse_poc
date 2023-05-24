@@ -66,15 +66,18 @@ export default function ComposePipeline() {
                             </div>
                         } key="1">
                             <Row >
-                                {selectedComposePipeline && selectedComposePipeline.map((node) => {
+                                {selectedComposePipeline && selectedComposePipeline.map((node,index) => {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
-                                                key={node.pipelineName}
+                                            uid=""
+                                            paddingLeft=""
+                                            // handleRemove={}
+                                                key={index}
                                                 icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
                                                 width={"auto"}
-                                                deleteIcon={<Buttons text={node.status} onClick={() => PipeLineButtonClick(node, showModal)} style={{
+                                                deleteIcon={<Buttons text={node.status} icon="" size={"small"} disabled={false} href ="" onClick={() => PipeLineButtonClick(node, showModal)} style={{
                                                     width: "3.75rem", height: "1.5625rem", fontSize: "0.5rem"
                                                 }} color={node.status && node.status.toLowerCase() === "failed" ? "#ff4d4f" : "#7E60BCs"}
                                                 />}
@@ -99,11 +102,11 @@ export default function ComposePipeline() {
                             </div>
                         } key="2">
                             <Row >
-                                {selectedComposePipeline && selectedComposePipeline.map((node) => {
+                                {selectedComposePipeline && selectedComposePipeline.map((node,index) => {
                                     return (
                                         <Col>
                                             <DisplaySchemaBox
-                                                key={node.pipelineName}
+                                                key={index}
                                                 icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
                                                 width={"auto"}
