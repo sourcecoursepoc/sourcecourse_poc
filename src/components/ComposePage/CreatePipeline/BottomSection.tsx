@@ -26,7 +26,7 @@ const BottomSection = ({ cardSelected }) => {
             boxShadow: 'none',
           }}
         >
-          <Image src="/schedule-icon.png" preview={false} style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
+          <Image src="/schedule-icon.png" preview={false} alt="schedule" style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
 
           Schedule
         </div>
@@ -48,7 +48,7 @@ const BottomSection = ({ cardSelected }) => {
             boxShadow: 'none',
           }}
         >
-          <Image src="/output-icon.png" preview={false} style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
+          <Image src="/output-icon.png" preview={false} alt="output" style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
           Output Type
         </div>
       </Row>

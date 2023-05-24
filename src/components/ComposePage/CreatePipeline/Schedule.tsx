@@ -5,7 +5,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import styles from "./Schedule.module.css"
 import ScheduleTimePicker from './ScheduleTimePicker';
 
-const schedule = ({ cardSelected }) => {
+const Schedule = ({ cardSelected }) => {
 
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [secondSelectedOption, setSecondSelectedOption] = useState<string | null>(null);
@@ -149,4 +149,4 @@ const schedule = ({ cardSelected }) => {
     )
 }
 
-export default schedule
+export default Schedule
