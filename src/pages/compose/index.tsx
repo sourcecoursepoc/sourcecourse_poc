@@ -26,6 +26,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { getProjectByIdSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -112,7 +113,7 @@ const Compose = () => {
     dispatch(clearLastIndex());
     setName("");
     setDescription("");
-    showSuccessToast("Deleted Successfully");
+    showSuccessToast(DELETE_TOAST);
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
@@ -153,7 +154,7 @@ const Compose = () => {
                 descriptionValue={description}
                 nameError={nameError}
                 descriptionError={descriptionError}
-                className={nameError ? "textAreaError" : ""}
+                className={nameError ? TEXTAREA_ERROR : ""}
               />
               <Col
                 span={1}
@@ -171,11 +172,11 @@ const Compose = () => {
                 deleteModalVisible={deleteModalVisible}
                 saveBoxMessage={
                   nameError
-                    ? "name can not be empty"
+                    ? NAME_ERROR
                     : descriptionError
-                    ? "description can not be empty"
+                    ? DESCRIPTION_ERROR
                     : nameError && descriptionError
-                    ? "name and description can not be empty"
+                    ? NAME_DESCRIPTION_ERROR
                     : ""
                 }
                 buttonsDisabled={nameError || descriptionError ? true : false}
