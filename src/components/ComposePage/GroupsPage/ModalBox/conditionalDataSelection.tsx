@@ -8,7 +8,7 @@ import { Radio } from 'antd';
 import { InfoCircleOutlined,PlusCircleOutlined,DeleteFilled } from "@ant-design/icons";
 
 
-function conditionalDataSelection({index,name,arrayLength,onDeleteClick}) {
+function ConditionalDataSelection({index,name,arrayLength,onDeleteClick}) {
 
     const options = [
         { label: 'AND', value: 'AND' },
@@ -105,4 +105,4 @@ function conditionalDataSelection({index,name,arrayLength,onDeleteClick}) {
   )
 }
 
-export default conditionalDataSelection
+export default ConditionalDataSelection
