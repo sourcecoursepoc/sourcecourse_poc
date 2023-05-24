@@ -5,10 +5,10 @@ import styles from "../../../styles/floatInput.module.css";
 interface FloatNumberInputProps {
   label: string;
   placeholder?: string;
-  type: string;
+  type?: string;
   required?: boolean;
   dataValue?: number;
-  onChange: (value: number | null) => void;
+  onChange?: (value: number | null) => void;
   min?: number;
   max?: number;
 }
