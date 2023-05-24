@@ -5,7 +5,7 @@ import { CheckOutlined } from '@ant-design/icons';
 import styles from '../buttons/buttonStyle.module.css';
 
 interface MyComponentProps {
-    type: string
+    type: "link" | "text" | "dashed" | "ghost" | "default" | "primary" | undefined;
     text: string; 
     size:SizeType;
     onClick: () => void;
