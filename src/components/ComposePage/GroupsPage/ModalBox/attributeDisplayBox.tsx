@@ -12,7 +12,7 @@ interface MyComponentProps {
   attribute: string;
   icon: ReactNode;
   uid: string;
-  handleRemove: (uid: string) => void;
+  handleRemove?: (uid: string) => void;
   lengthOfColums: any;
   desc:string
 }
