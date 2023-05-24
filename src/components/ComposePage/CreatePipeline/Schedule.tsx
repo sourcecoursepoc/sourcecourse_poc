@@ -5,7 +5,11 @@ import { CheckOutlined } from '@ant-design/icons';
 import styles from "./Schedule.module.css"
 import ScheduleTimePicker from './ScheduleTimePicker';
 
-const Schedule = ({ cardSelected }) => {
+interface ScheduleProps {
+    cardSelected: string;
+  }
+
+const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
 
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [secondSelectedOption, setSecondSelectedOption] = useState<string | null>(null);
