@@ -19,6 +19,10 @@
     border: 0.0825rem solid #c3428d;
 }
 
+.outerboxSelected {
+    border: 0.0825rem solid #c3428d;
+  }
+
 .innerright {
     height: fit-content;
     width: fit-content;

@@ -21,6 +21,7 @@ function SearchBar(props: ChildProps) {
  
 useEffect(() => {
     dispatch(fetchProjectRequest());
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSearchItems = (searchValue: string) => {

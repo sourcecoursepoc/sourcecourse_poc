@@ -5,7 +5,7 @@ import { PlayCircleFilled } from "@ant-design/icons";
 import CardDisplay from './CardDisplay';
 import styles from '../buttons/buttonStyle.module.css'
 
-const UpperSection = () => {
+const UpperSection = ({ onSelectInitial, onSelectSync, cardSelected }) => {
     return (
         <>
             <Row justify="space-between" style={{ borderBottom: "1px solid #ccc" }}>
@@ -13,13 +13,13 @@ const UpperSection = () => {
                 <Col
                     flex={3}
                     style={{
-                        display:'flex',
+                        display: 'flex',
                         marginBottom: "1rem",
                         marginTop: "0.5rem",
                     }}
                 >
-                    <CardDisplay alt="initial load" src="/Schemas.png" title="Initial Load"/>
-                    <CardDisplay alt="Sync" src="/Sync-Icon-1.png" title="Sync"/>
+                    <CardDisplay isThisCardSelected={cardSelected === "initial" ? true : false} onSelectCard={onSelectInitial} alt="initial load" src="/Schemas.png" title="Initial Load" />
+                    <CardDisplay isThisCardSelected={cardSelected === "sync" ? true : false } onSelectCard={onSelectSync} alt="Sync" src="/Sync-Icon-1.png" title="Sync" />
                 </Col>
 
 
@@ -34,9 +34,9 @@ const UpperSection = () => {
                 >
                     <Buttons
                         text="Execute"
-                        icon={<PlayCircleFilled /> }
+                        icon={<PlayCircleFilled />}
                         size={"large"}
-                        style={{minWidth: "8rem"}}
+                        style={{ minWidth: "8rem" }}
                         onClick={() => { }}
                         href={"/"}
                     />
