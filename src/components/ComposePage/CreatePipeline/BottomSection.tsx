@@ -13,10 +13,9 @@ const BottomSection: React.FC<BottomSectionProps> = ({ cardSelected }) => {
 
   return (
     <>
-      <Row type="flex" justify="center" align="middle">
+      <Row justify="center" align="middle">
         <div
           onClick={() => setIsScheduleActive(true)}
-          // icon={<CalendarOutlined />}
           style={{
             paddingRight: "0.5rem",
             paddingLeft: "0.1rem",
@@ -37,7 +36,6 @@ const BottomSection: React.FC<BottomSectionProps> = ({ cardSelected }) => {
         <div
 
           onClick={() => setIsScheduleActive(false)}
-          icon={<ExportOutlined />}
           style={{
             paddingRight: "0.5rem",
             paddingLeft: "0.1rem",

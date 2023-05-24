@@ -21,7 +21,7 @@
 
 .outerboxSelected {
     border: 0.0825rem solid #c3428d;
-  }
+}
 
 .innerright {
     height: fit-content;
@@ -37,7 +37,7 @@
 
 .image {
     margin-left: 0.5rem;
-    margin-right: 0.5rem;   
+    margin-right: 0.5rem;
     height: 4.5rem;
     align-content: center;
     padding: 0.3rem
