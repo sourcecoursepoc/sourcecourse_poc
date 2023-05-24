@@ -1,8 +1,14 @@
 import { Col, Row, Image } from 'antd'
 import React from 'react'
 import styles from "./CardDisplay.module.css";
-
-const CardDisplay = ({ alt, src, title, onSelectCard, isThisCardSelected }) => {
+interface CardDisplayProps {
+  alt: string;
+  src: string;
+  title: string;
+  onSelectCard: () => void;
+  isThisCardSelected: boolean;
+}
+const CardDisplay: React.FC<CardDisplayProps> = ({ alt, src, title, onSelectCard, isThisCardSelected }) => {
   return (
     <>
       <div className={`${styles.outerbox} ${isThisCardSelected ? styles.outerboxSelected : ''}`} onClick={onSelectCard}>
