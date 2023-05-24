@@ -4,7 +4,11 @@ import React, { useState } from 'react'
 import OutputType from './OutputType';
 import Schedule from './Schedule';
 
-const BottomSection = ({ cardSelected }) => {
+interface BottomSectionProps {
+  cardSelected: string;
+}
+
+const BottomSection: React.FC<BottomSectionProps> = ({ cardSelected }) => {
   const [isScheduleActive, setIsScheduleActive] = useState(true);
 
   return (
