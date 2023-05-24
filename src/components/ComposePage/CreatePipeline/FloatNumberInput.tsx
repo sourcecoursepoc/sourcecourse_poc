@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState ,ChangeEvent } from "react";
 import { Input, InputNumber } from "antd";
 
 import styles from "../../../styles/floatInput.module.css";
-
-const FloatNumberInput = (props) => {
+interface FloatNumberInputProps {
+  label: string;
+  placeholder?: string;
+  type: string;
+  required?: boolean;
+  dataValue?: number;
+  onChange: (value: number) => void;
+  min?: number;
+  max?: number;
+}
+const FloatNumberInput: React.FC<FloatNumberInputProps> =(props) => {
   const [focus, setFocus] = useState(false);
   let { label, placeholder, type, required,dataValue } = props;
 
@@ -17,7 +26,7 @@ const FloatNumberInput = (props) => {
 
   const requiredMark = required ? <span className="text-danger">*</span> : null;
 
-  const handleBlur = e => {
+  const handleBlur = (e: ChangeEvent<HTMLInputElement>) => {
     console.log("value:::",value)
     setFocus(false)
     setValue("0");
