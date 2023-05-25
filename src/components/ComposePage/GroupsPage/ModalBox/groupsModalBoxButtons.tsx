@@ -20,7 +20,7 @@ interface GroupsModalBoxuttonsProps {
   handleSaveModalOk: () => void;
   saveModalVisible: boolean;
   handleSaveClick: () => void;
-  onCreatePipeline: () => void;
+  onCreatePipeline?: () => void;
 }
 const GroupsModalBoxuttons = ({
   handleSaveModalCancel,
