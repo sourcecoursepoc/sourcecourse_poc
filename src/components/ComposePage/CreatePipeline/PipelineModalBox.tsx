@@ -10,7 +10,7 @@ interface MyModalProps {
 
 const PipelineModalBox: React.FC<MyModalProps> = ({ showCreatePipeline, onCancel }) => {
 
-  const [cardSelected, setCardSelected] = useState("initial");
+  const [cardSelected, setCardSelected] = useState<"initial" | "sync">("initial");
 
   const handleSyncCardSelect = () => {
     setCardSelected("sync");
