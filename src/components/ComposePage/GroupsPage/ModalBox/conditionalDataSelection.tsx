@@ -7,10 +7,14 @@ import type { RadioChangeEvent } from 'antd';
 import { Radio } from 'antd';
 import { InfoCircleOutlined,PlusCircleOutlined,DeleteFilled } from "@ant-design/icons";
 
-
-function conditionalDataSelection({index,name,arrayLength,onDeleteClick}) {
-
-    const options = [
+interface ConditionalDataSelectionProps {
+  index: number;
+  name: string;
+  arrayLength: number;
+  onDeleteClick: () => void;
+}
+function ConditionalDataSelection({index,name,arrayLength,onDeleteClick}:ConditionalDataSelectionProps) {
+  const options = [
         { label: 'AND', value: 'AND' },
         { label: 'OR', value: 'OR' }
       ];
@@ -20,7 +24,7 @@ function conditionalDataSelection({index,name,arrayLength,onDeleteClick}) {
       const [orStyle, setOrStyle] = useState({borderColor : "#ccc", padding: "5px", backgroundColor: "white", height:"3rem", borderInlineStart: "1px solid #d9d9d9",borderStartEndRadius: "2px", borderEndEndRadius: "2px"})
 
 
-      const onChange3 = (event) => {
+      const onChange3 = (event: RadioChangeEvent) => {
           const {value, checked} = event.target
         console.log('radio3 checked', value,checked);
         setRadioValue(value)
@@ -105,4 +109,4 @@ function conditionalDataSelection({index,name,arrayLength,onDeleteClick}) {
   )
 }
 
-export default conditionalDataSelection
+export default ConditionalDataSelection

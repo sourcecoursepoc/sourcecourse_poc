@@ -45,7 +45,7 @@ const IntimationListInputBox = ({ tags, setTags, label, placeholder }: Props) =>
 
   const isOccupied = (focus || (value && value.length !== 0)) && tags.length !== 0 ;
 
-  const handleBlur = e => {
+  const handleBlur =  (e: React.FocusEvent<HTMLInputElement>) =>  {
     console.log("value:::",value)
     setFocus(false)
     setValue(e.target.value);

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react'
 import ReportsFirstContent from "../ReportPage/reportsFirstContent"
 import { useSelector } from 'react-redux';
