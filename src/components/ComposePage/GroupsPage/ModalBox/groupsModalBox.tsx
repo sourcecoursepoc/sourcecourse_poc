@@ -23,6 +23,7 @@ import NewAttributeContent from "./newAttributeContent";
 import { PlusOutlined } from "@ant-design/icons";
 import { fetchDataBaseInfoAction } from "../../../../redux/actions/schemasaction";
 import { SelectedTreeNodeInfo } from "../../../../redux/selector";
+import { projectSchemaInfoSelector } from "@/redux/selector";
 
 interface MyModalProps {
   visible?: boolean;
@@ -64,9 +65,18 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const selcectData = useSelector(SelectedTreeNodeInfo);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
   const lastIndexGroup = selectGroupdataData.slice(-1)[0];
-  const [attrName, setAttrName] = useState("Attribute Name");
-  const [datatype, setDatatype] = useState("VARCHAR");
-  const [render, setRender] = useState(false);
+  const [attrName,setAttrName] = useState('Attribute Name')
+  const [datatype,setDatatype] = useState('VARCHAR')
+  const [render,setRender] = useState(false)
+  const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
+  const [treeArray,setTreeArray] = useState([]);
+
+  useEffect(()=>{
+      if(fetchProjectSchemaInfo && fetchProjectSchemaInfo.length > 0){
+        const treeArrayData= [{dbName: '', description:'', tables:fetchProjectSchemaInfo}]
+        setTreeArray(treeArrayData);
+      }
+    },[fetchProjectSchemaInfo]);
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
@@ -269,9 +279,9 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-              {database && (
+              {fetchProjectSchemaInfo && (
                 <TreeView
-                  db={database}
+                  db={treeArray}
                   setGroupModalBoxTreeView={setGroupModalBoxTreeView}
                   groupModalBoxTreeView={groupModalBoxTreeView}
                   iconImage={
