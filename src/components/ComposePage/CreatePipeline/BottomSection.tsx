@@ -1,12 +1,11 @@
-import { CalendarOutlined, ExportOutlined } from '@ant-design/icons';
-import { Button, Row, Image } from 'antd'
+import { Row, Image } from 'antd'
 import React, { useState } from 'react'
 import OutputType from './OutputType';
 import Schedule from './Schedule';
 interface BottomSectionProps {
   cardSelected: any;
 }
-const  BottomSection: React.FC<BottomSectionProps> =  ({ cardSelected }) => {
+const BottomSection: React.FC<BottomSectionProps> = ({ cardSelected }) => {
   const [isScheduleActive, setIsScheduleActive] = useState(true);
 
   return (
@@ -34,7 +33,7 @@ const  BottomSection: React.FC<BottomSectionProps> =  ({ cardSelected }) => {
         <div
 
           onClick={() => setIsScheduleActive(false)}
-          
+
           style={{
             paddingRight: "0.5rem",
             paddingLeft: "0.1rem",
