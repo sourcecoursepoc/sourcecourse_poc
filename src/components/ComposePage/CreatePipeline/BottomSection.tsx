@@ -14,7 +14,6 @@ const  BottomSection: React.FC<BottomSectionProps> =  ({ cardSelected }) => {
       <Row justify="center" align="middle">
         <div
           onClick={() => setIsScheduleActive(true)}
-          // icon={<CalendarOutlined />}
           style={{
             paddingRight: "0.5rem",
             paddingLeft: "0.1rem",
