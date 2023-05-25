@@ -14,8 +14,8 @@ import MigrationPiechart from "./migrationPiechart";
 import styles from "./migration.module.css";
 
 type DataItem = {
-  name: string;
-  value: number;
+  name?: string;
+  value?: number;
 }
 interface reportGraphComp {
   data: DataItem[];

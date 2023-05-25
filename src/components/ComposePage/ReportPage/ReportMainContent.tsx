@@ -38,7 +38,7 @@ const ReportMainContent = () => {
         <Row className={styles.pinkbar}>
           <p className={styles.text}>Reports</p>
         </Row>
-        <Row type="flex">
+        <Row>
     <div
       onClick={() => setActiveTab('Summary')}
       style={{

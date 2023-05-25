@@ -1,8 +1,13 @@
 import { Col, Input, Row } from "antd";
 import React from "react";
 import styles from "./textArea.module.css";
-
-const TextAreaComponent = (props) => {
+interface TextAreaProps {
+  nameValue: string;
+  descriptionValue: string;
+  onNameChange: (value: string) => void;
+  onDescriptionChange: (value: string) => void;
+}
+const TextAreaComponent: React.FC<TextAreaProps> = (props) =>{
   return (
     <Col
       span={15}

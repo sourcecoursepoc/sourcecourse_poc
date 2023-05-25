@@ -57,7 +57,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [datatype,setDatatype] = useState('VARCHAR')
   const [render,setRender] = useState(false)
   const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
-  const [treeArray,setTreeArray] = useState([]);
+  const [treeArray,setTreeArray] = useState<any[]>([]);
 
   useEffect(()=>{
       if(fetchProjectSchemaInfo && fetchProjectSchemaInfo.length > 0){
