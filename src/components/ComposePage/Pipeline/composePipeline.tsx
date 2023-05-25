@@ -68,7 +68,7 @@ export default function ComposePipeline() {
                             <Row >
                                 {selectedComposePipeline && selectedComposePipeline.map((node) => {
                                     return (
-                                        <Col>
+                                        <Col key={node.id}>
                                             <DisplaySchemaBox
                                                 icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}
@@ -100,7 +100,7 @@ export default function ComposePipeline() {
                             <Row >
                                 {selectedComposePipeline && selectedComposePipeline.map((node) => {
                                     return (
-                                        <Col>
+                                        <Col  key={node.id}>
                                             <DisplaySchemaBox
                                                 icon={<Image preview={false} src="InitialLoad-Icon4.png" alt="" style={{ width: "2rem", height: "2rem", marginRight: "0.3125rem" }} />}
                                                 text={node.pipelineName} attribute={node.type + " / "} lengthOfColums={node.recordsExported} status={node.time} padding={0.2875}

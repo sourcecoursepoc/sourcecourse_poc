@@ -17,8 +17,19 @@ import ConfirmationModal from "../GroupsPage/ModalBox/ConfirmationModal";
 import { getSelectorTableNodes } from "@/redux/selector";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { useDispatch } from "react-redux";
-
-const ButtonComponent = ({
+interface ButtonComponentProps {
+  saveModalVisible: boolean;
+  handleSaveModalOk: () => void;
+  handleSaveModalCancel: () => void;
+  handleSaveClick: () => void;
+  saveBoxMessage: string;
+  handleDeleteClick: () => void;
+  deleteModalVisible: boolean;
+  handleDeleteModalOk: () => void;
+  handleDeleteModalCancel: () => void;
+  buttonsDisabled: boolean;
+}
+const  ButtonComponent: React.FC<ButtonComponentProps> =  ({
   saveModalVisible,
   handleSaveModalOk,
   handleSaveModalCancel,
@@ -29,6 +40,7 @@ const ButtonComponent = ({
   handleDeleteModalOk,
   handleDeleteModalCancel,
   buttonsDisabled,
+  
 }) => {
   const dispatch = useDispatch();
   const [exitModalVisible, setExitModalVisible] = useState(false);
