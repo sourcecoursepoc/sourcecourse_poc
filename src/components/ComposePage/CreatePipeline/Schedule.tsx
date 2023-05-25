@@ -7,7 +7,7 @@ import ScheduleTimePicker from './ScheduleTimePicker';
 
 interface ScheduleProps {
     cardSelected: string;
-  }
+}
 
 const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
 
@@ -16,11 +16,7 @@ const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
     const [thirdSelectedOption, setThirdSelectedOption] = useState<number>(0);
 
     const handleOptionClick = (option: string) => {
-        if (option === selectedOption) {
-            setSelectedOption(null);
-        } else {
-            setSelectedOption(option);
-        }
+        setSelectedOption(option);
     };
 
     const handleSecondOptionClick = (option: string) => {
@@ -45,27 +41,28 @@ const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
             {cardSelected === "initial" && (
                 <Col span={24}>
                     <Button className={styles.buttonCalender}
-                        icon={<CheckOutlined />}
+                        icon={selectedOption === "Now" ? <CheckOutlined /> : undefined}
                         onClick={() => handleOptionClick("Now")}
-                        type={"primary"}
-                        style={{ backgroundColor: "#7E60BC" }}
+                        type={selectedOption === "Now" ? "primary" : undefined}
+                        style={{ backgroundColor: selectedOption === "Now" ? "#7E60BC" : undefined }}
+                    >
+                        Now
+                    </Button>
+                    <Button className={styles.buttonCalender}
+                        icon={selectedOption === "Today" ? <CheckOutlined /> : undefined}
+                        onClick={() => handleOptionClick("Today")}
+                        type={selectedOption === "Today" ? "primary" : undefined}
+                        style={{ backgroundColor: selectedOption === "Today" ? "#7E60BC" : undefined }}
                     >
                         Today
                     </Button>
+
                 </Col>
             )}
             {cardSelected === "sync" && (
                 <>
 
                     <Col span={24}>
-                        <Button className={styles.buttonCalender}
-                            icon={selectedOption === "Now" ? <CheckOutlined /> : undefined}
-                            onClick={() => handleOptionClick("Now")}
-                            type={selectedOption === "Now" ? "primary" : undefined}
-                            style={{ backgroundColor: selectedOption === "Now" ? "#7E60BC" : undefined }}
-                        >
-                            Now
-                        </Button>
                         <Button className={styles.buttonCalender}
                             icon={selectedOption === "Daily" ? <CheckOutlined /> : undefined}
                             onClick={() => handleOptionClick("Daily")}
@@ -148,7 +145,7 @@ const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
                     )}
                 </>
             )}
-            <ScheduleTimePicker />
+            {selectedOption !== "Now" ? <ScheduleTimePicker /> : undefined}
         </Row>
     )
 }
