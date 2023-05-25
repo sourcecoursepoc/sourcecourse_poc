@@ -1,12 +1,10 @@
 import {
   addAttributeDetails,
-  fetchDataBaseRequest,
   fetchGroupDataRequest,
 } from "@/redux/actions/schemasaction";
 import {
   getDataBaseSelector,
   getGroupdataDataBaseSelector,
-  getSelectedArraySelector,
   getSelectedGroupdataArraySelector,
 } from "@/redux/selector";
 import { Col, Input, Modal, Row } from "antd";
@@ -145,7 +143,7 @@ console.log("lastIndiceslastIndices",lastIndices)
     console.log("Getting outttttttt");
   };
 
-  const swapElements = (array: array, index1: number, index2: number) => {
+  const swapElements = (array: Array<any>, index1: number, index2: number) => {
     const newArray = [...array];
     const temp = newArray[index1];
     newArray[index1] = newArray[index2];

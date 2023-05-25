@@ -3,7 +3,17 @@ import { Input } from "antd";
 
 import styles from "../../../../styles/floatInput.module.css";
 
-const FloatInput = (props) => {
+interface FloatInputProps {
+  label: string;
+  placeholder: string;
+  type?: string;
+  required?: boolean;
+  dataValue?: string;
+  style?: React.CSSProperties;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  name?:string;
+}
+const FloatInput: React.FC<FloatInputProps> = (props) =>  {
   const [focus, setFocus] = useState(false);
   let { label, placeholder, type, required,dataValue,style } = props;
 
@@ -17,7 +27,7 @@ const FloatInput = (props) => {
 
   const requiredMark = required ? <span className="text-danger">*</span> : null;
 
-  const handleBlur = e => {
+  const handleBlur =(e: React.FocusEvent<HTMLInputElement>) =>{
     console.log("value:::",value)
     setFocus(false)
     setValue(e.target.value);
