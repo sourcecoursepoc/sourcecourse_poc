@@ -7,8 +7,11 @@ import { Radio,Select,Space } from 'antd';
 import type { SelectProps, RadioChangeEvent } from 'antd';
 import FloatInput from "./floatInput";
 
-
-const NewAttributeContent = (props) => {
+interface NewAttributeContentProps {
+  reRender?: boolean;
+  attributeValues: (attributeName: string, selectedValue: string) => void;
+}
+const  NewAttributeContent: React.FC<NewAttributeContentProps> = (props) =>{
     const { Option } = Select;
     const { TextArea } = Input;
     const attributeOptions = ['id', 'name', 'status', 'company', 'supplier_id'];

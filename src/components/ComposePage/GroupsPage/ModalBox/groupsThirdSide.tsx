@@ -11,9 +11,7 @@ import ConvertValues from "./convertValues"
 
 interface MyModalProps {
   selectedNodeDetails: any[];
-  setSelectedNodeDetails:(details: Array<any>) => void;
-  // setSelectedNodeDetails: Array<any>;
-  // setSelectedNodeDetails: (selectedNodeDetails: any[]) => void;
+  setSelectedNodeDetails: (details: any[]) => void;
 }
 
 const GroupsThirdSide: React.FC<MyModalProps> = ({
