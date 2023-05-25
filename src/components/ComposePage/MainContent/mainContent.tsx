@@ -41,8 +41,8 @@ const MainContent = () => {
     };
     dispatch(
       deleteProjectSchemaInfoRequest(
-        requestBody.projectUid,
-        requestBody.sourceTableUids
+        requestBody?.projectUid,
+        requestBody?.sourceTableUids
       )
     );
   };

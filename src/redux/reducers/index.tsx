@@ -1,7 +1,8 @@
 import { combineReducers } from "redux";
 import fetchPipelineReducer from "./fetchDataReducer";
 import fetchRecordReducer from "./fetchRecordsReducer";
-import schemaReducer from "./schemaReducer";
+import {schemaReducer} from "./schemaReducer";
+
 import projectReducer from "./projectReducer";
 import { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer, schemaDataBaseReducers } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";

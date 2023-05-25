@@ -45,13 +45,13 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
 
   useEffect(() => {
     const uniqueValues = [...projectSchemaInfo, ...selectedTableArray].filter(
-      (item, index, self) => index === self.findIndex((t) => t.uid === item.uid)
+      (item, index, self) => index === self?.findIndex((t) => t?.uid === item?.uid)
     );
 
     setCombinedArray(uniqueValues);
   }, [projectSchemaInfo, selectedTableArray]);
 
-  const tableUidArray = combinedArray.map((table: any) => parseInt(table.uid)); //taking uid's of selected tables
+  const tableUidArray = combinedArray.map((table: any) => parseInt(table?.uid)); //taking uid's of selected tables
 
   //POST action
   const handleImport = () => {
@@ -79,7 +79,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
       sourceTableUids: [uid],
     };
     setCombinedArray((prevArray) =>
-      prevArray.filter((item) => item.uid !== uid)
+      prevArray?.filter((item) => item?.uid !== uid)
     );
   };
 
