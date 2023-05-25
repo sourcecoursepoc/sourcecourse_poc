@@ -18,7 +18,7 @@ import { AppState } from "@/redux/reducers";
 import { fetchDataBaseInfoAction } from "../../../redux/actions/schemasaction";
 import Toast, { showSuccessToast } from "../../../pages/schemas/toast";
 
-const MainContent = () => {
+const MainContent = (projectUid:any) => {
   const { Content } = Layout;
   const [visible, setVisible] = useState(false);
   const [importClicked, setImportClicked] = useState(false);
@@ -28,7 +28,7 @@ const MainContent = () => {
     dispatch(fetchDataBaseInfoAction());
   }, []);
   useEffect(() => {
-    dispatch(fetchProjectSchemaInfoAction(2));
+    dispatch(fetchProjectSchemaInfoAction(projectUid?.projectUid));
   }, []);
   const handleImport = () => {
     setImportClicked(true);
@@ -36,7 +36,7 @@ const MainContent = () => {
   //DELETE action
   const handleRemove = (uid: string) => {
     const requestBody = {
-      projectUid: 2,
+      projectUid: projectUid?.projectUid,
       sourceTableUids: [uid],
     };
     dispatch(
@@ -64,6 +64,7 @@ const MainContent = () => {
             visible={visible}
             onCancel={handleCancel}
             onExport={handleImport}
+            projectUid={projectUid?.projectUid}
           />
           <Row>
             {fetchProjectSchemaInfo.map((node: any) => (
