@@ -13,6 +13,7 @@ import { fetchComposePipelineRequest } from '../../../redux/actions/composeActio
 interface ModalBoxProps {
     isModalVisible: boolean;
     handleCancel: () => void;
+    handleOk:() => void;
 }
 
 const PipelineModalBox = (props: ModalBoxProps) => {

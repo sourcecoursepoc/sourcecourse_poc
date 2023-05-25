@@ -9,7 +9,6 @@ import {
   getDataBaseSelector,
   getlastIndexesArraySelector,
   projectSchemaInfoSelector,
-  getSelectedArraySelector,
   getSelectorTableNodes,
 } from "@/redux/selector";
 import { clearLastIndex } from "@/redux/actions/schemasaction";

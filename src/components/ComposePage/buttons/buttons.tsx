@@ -5,8 +5,8 @@ import styles from './buttonStyle.module.css';
 
 interface MyComponentProps {
   text: string;
-  icon: ReactNode;
-  size: SizeType;
+  icon?: ReactNode;
+  size?: SizeType;
   href?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
