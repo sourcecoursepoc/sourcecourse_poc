@@ -22,6 +22,7 @@ import {
   FETCH_ALLGROUP_DATA,
  
 } from "./schemaActionTypes";
+import { DELETE_PROJECTS_INFO_ACTION, DELETE_PROJECTS_INFO_ACTION_SUCCESS, DELETE_PROJECTS_INFO_ACTION_FAILURE } from "./projectActionTypes";
 
 export interface IPIPELINE {
   id: number;
@@ -295,3 +296,27 @@ export type SchemaActions =
                 | FetchProjectByIdRequest
                 | FetchProjectByIdSuccess
                 | FetchProjectByIdFailure;
+
+
+
+// delete project 
+
+export interface DeleteProjectInfoAction {
+  type: typeof DELETE_PROJECTS_INFO_ACTION;
+  payload: any;
+}
+
+export interface DeleteProjectInfoActionSuccess {
+  type: typeof DELETE_PROJECTS_INFO_ACTION_SUCCESS;
+  payload: { id: any };
+}
+
+export interface DeleteProjectInfoActionFailure {
+  type: typeof DELETE_PROJECTS_INFO_ACTION_FAILURE;
+  payload: { error: string };
+}
+
+export type DeleteProjectActions =
+  | DeleteProjectInfoAction
+  | DeleteProjectInfoActionSuccess
+  | DeleteProjectInfoActionFailure;
