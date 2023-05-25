@@ -4,7 +4,7 @@ import FloatInput from "./floatInput";
 import { SwapOutlined } from '@ant-design/icons';
 import { InfoCircleOutlined,PlusCircleOutlined,DeleteFilled } from "@ant-design/icons";
 
-function convertValues({index,name,arrayLength,onConvertDeleteClick}: { index: number; name: string; arrayLength: number; onConvertDeleteClick: () => void }) {
+function convertValues({index,name,arrayLength,onConvertDeleteClick}: { index?: number; name?: string; arrayLength?: number; onConvertDeleteClick?: () => void }) {
   return (
     <div>
                       <Row>

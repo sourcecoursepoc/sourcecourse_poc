@@ -45,7 +45,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
-  const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
+  const [selectedNodeDetails, setSelectedNodeDetails] = useState<any[]>([]);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
@@ -134,9 +134,9 @@ console.log("lastIndiceslastIndices",lastIndices)
         lastIndices[lastIndices.length-1] = {name: attributeName, type: selectedDataType}
        }
 
-  const handleRowClick = (node:any) => {
+  const handleRowClick = (node:any[]) => {
     console.log("Getting innnnnn");
-    setSelectedNodeDetails([node]);
+    setSelectedNodeDetails([node]); 
     handleAddAttributeDetails(lastIndices);
     console.log("Data getting printed on clicking the attribute", lastIndices);
     console.log("selectedNodeDetails", selectedNodeDetails);

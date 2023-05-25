@@ -1,11 +1,11 @@
-import React, { useState, KeyboardEvent, CSSProperties } from "react";
+import React, { useState, KeyboardEvent, CSSProperties, ChangeEvent } from "react";
 import { Input } from "antd";
 import styles from "../../styles/floatInput.module.css";
 const { TextArea } = Input;
 
 interface DescriptionBoxProps {
     value: string;
-    onChange: (value: string) => void;
+    onChange?: (value: string) => void;
     placeholder?: string;
     required?: boolean;
     style?:CSSProperties;

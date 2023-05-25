@@ -5,7 +5,7 @@ import styles from "../../../../styles/floatInput.module.css";
 
 interface FloatInputProps {
   label: string;
-  placeholder: string;
+  placeholder?: string;
   type?: string;
   required?: boolean;
   dataValue?: string;

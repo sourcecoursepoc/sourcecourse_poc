@@ -18,6 +18,8 @@ const { TreeNode } = Tree;
 interface IconImage {
   onSelect: () => void;
   iconImage: ReactNode;
+  setGroupModalBoxTreeView:object;
+  groupModalBoxTreeView:boolean
 }
 
 const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
