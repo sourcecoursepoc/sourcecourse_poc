@@ -43,14 +43,16 @@ const Compose = () => {
 
   //useSelector to take posted - compose page name and desc
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  console.log("postComposeNameDescDatapostComposeNameDescData", postComposeNameDescData)
+  console.log("postComposeNameDescDatapostComposeNameDescData", postComposeNameDescData);
+  const uidFromComposePage = postComposeNameDescData.uid;
+  console.log("uidFromComposePage", uidFromComposePage);
 
   const router = useRouter();
   const {
     query: { id },
   } = router;
 
- 
+
   const { projectById: projectData, pending } = useSelector(
     getProjectByIdSelector
   );
@@ -67,8 +69,16 @@ const Compose = () => {
   const handleSaveProjectInfo = async () => {
     setSaveModalVisible(false);
     //dispatch done to post compose page name and desc to db
-    dispatch(postComposeNameDescRequest(name, description));
-    showSuccessToast("Saved Successfully");
+    const success = await dispatch(postComposeNameDescRequest(name, description));
+    if (success) {
+      showSuccessToast("Saved Successfully");
+      setProjectId(uidFromComposePage);
+    }
+    else {
+      showSuccessToast("Failed!");
+    }
+    // dispatch(postComposeNameDescRequest(name, description));
+    // showSuccessToast("Saved Successfully");
   };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
