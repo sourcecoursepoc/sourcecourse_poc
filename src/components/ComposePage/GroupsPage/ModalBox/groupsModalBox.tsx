@@ -63,7 +63,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
 
   useEffect(()=>{
       if(fetchProjectSchemaInfo && fetchProjectSchemaInfo.length > 0){
-        console.log('Its getting changed')
         const treeArrayData= [{dbName: '', description:'', tables:fetchProjectSchemaInfo}]
         setTreeArray(treeArrayData);
       }
