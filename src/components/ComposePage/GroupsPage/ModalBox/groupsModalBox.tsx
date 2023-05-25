@@ -23,6 +23,7 @@ import NewAttributeContent from "./newAttributeContent";
 import { PlusOutlined } from "@ant-design/icons";
 import { fetchDataBaseInfoAction } from "../../../../redux/actions/schemasaction";
 import { SelectedTreeNodeInfo } from "../../../../redux/selector";
+import { projectSchemaInfoSelector } from "@/redux/selector";
 
 interface MyModalProps {
   visible?: boolean;
@@ -57,6 +58,15 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [attrName,setAttrName] = useState('Attribute Name')
   const [datatype,setDatatype] = useState('VARCHAR')
   const [render,setRender] = useState(false)
+  const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
+  const [treeArray,setTreeArray] = useState([]);
+
+  useEffect(()=>{
+      if(fetchProjectSchemaInfo && fetchProjectSchemaInfo.length > 0){
+        const treeArrayData= [{dbName: '', description:'', tables:fetchProjectSchemaInfo}]
+        setTreeArray(treeArrayData);
+      }
+    },[fetchProjectSchemaInfo]);
 
   useEffect(() => {
     dispatch(fetchDataBaseInfoAction());
@@ -234,9 +244,9 @@ console.log("lastIndiceslastIndices",lastIndices)
           </Row>
           <Row style={{ marginTop: "1rem" }}>
             <Col span={24} className={styles.treeview}>
-              {groupdataDatabaseSelector && (
+              {fetchProjectSchemaInfo && (
                 <TreeView
-                  db={groupdataDatabaseSelector}
+                  db={treeArray}
                   setGroupModalBoxTreeView={setGroupModalBoxTreeView}
                   groupModalBoxTreeView={groupModalBoxTreeView}
                   iconImage={<PlusOutlined style={{width:'3rem',fontSize:'0.8rem',color:'#7E60BC',strokeWidth: '2' }}/>}
