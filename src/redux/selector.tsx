@@ -16,12 +16,13 @@ const getComposePipeline = (state: AppState) => state.composePipeline.composePip
 const getGroups = (state: AppState) => state.group.groups;
 const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipeline.composeReportsPipeline;
 const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
-const getComposePageNameDesc = (state: AppState) => state.getComposeNameDesc.saveData;
+//const getComposePageNameDesc = (state: AppState) => state.getComposeNameDesc.saveData;
+const postComposePageNameDesc = (state: AppState) => state.postComposeNameDesc.postData;
 
-export const getComposeNameDescSelector = createSelector(getComposePageNameDesc, (saveData) => saveData)
+
+export const postComposeNameDescSelector = createSelector(postComposePageNameDesc, (postData) => postData)
+//export const getComposeNameDescSelector = createSelector(getComposePageNameDesc, (saveData) => saveData)
 export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
-
-
 export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedArraySelector = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)

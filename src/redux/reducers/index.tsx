@@ -8,6 +8,8 @@ import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import {
   composeReducer,
   composeReportsPipelineReducer,
+  getComposeNameDescReducer,
+  postComposeNameDescReducer,
   projectSchemaInfoReducer,
 } from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
@@ -26,8 +28,9 @@ const rootReducer = combineReducers({
   record: fetchRecordsReducer,
   group: groupReducer,
   composeReportsPipeline: composeReportsPipelineReducer,
-  composeNameDesc:composeNameDescReducer,
-  getComposeNameDesc:getComposeNameDescReducer,
+  // composeNameDesc:getComposeNameDescReducer,
+  // getComposeNameDesc:getComposeNameDescReducer,
+  postComposeNameDesc:postComposeNameDescReducer,
   schemaComposeData: projectSchemaInfoReducer,
   postTagsAndDescription: postTagsAndDescriptionReducer,
   postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer

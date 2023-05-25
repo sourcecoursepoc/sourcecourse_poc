@@ -126,12 +126,12 @@ export type ComposeReportsPipelineActions =
   | FetchComposeReportsPipelineSuccess
   | FetchComposeReportsPipelineFailure;
 
+
 //compose page name & desc action
 
 export interface ICOMPOSENAMEDESC {
-    uid:any[];
-  name: any[];
-  description: any[];
+  name: any;
+  description: any;
 }
 
 export interface ComposeNameDescState {
@@ -150,7 +150,8 @@ export interface PostComposeNameDescFailurePayload {
 
 export interface PostComposeNameDescRequest {
   type: typeof POST_COMPOSE_NAME_DESC;
-  params: any;
+    name: any,
+    description: any
 }
 
 export type PostComposeNameDescSuccess = {
@@ -175,7 +176,7 @@ console.log(
 //save id,name,desc of project to the redux object
 
 export interface IGETCOMPOSENAMEDESC {
-    uid:any[],
+  uid: any[],
   name: any[];
   description: any[];
 }
@@ -196,7 +197,7 @@ export interface GetComposeNameDescFailurePayload {
 
 export interface GetComposeNameDescRequest {
   type: typeof GET_COMPOSE_NAME_DESC;
-//   params: any;
+  //   params: any;
 }
 
 export type GetComposeNameDescSuccess = {
@@ -211,15 +212,15 @@ export type GetComposeNameDescFailure = {
 
 //to add uid,name,desc to an array 
 export interface AddNameDescArrayAction {
-    type: typeof ADD_NAME_DESC_ARRAY;
-    payload: any;
-  }
+  type: typeof ADD_NAME_DESC_ARRAY;
+  payload: any;
+}
 
 export type GetComposeNameDescActions =
   | GetComposeNameDescRequest
   | GetComposeNameDescSuccess
   | GetComposeNameDescFailure
-  |AddNameDescArrayAction;
+  | AddNameDescArrayAction;
 export interface projectSchemaInfo {
   uid: any;
   projectUid: any;

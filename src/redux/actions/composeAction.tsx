@@ -118,32 +118,32 @@ export const fetchComposeReportsPipelineFailure = (
 };
 
 // POST COMPOSE NAME AND DESC
+console.log("getting into action page");
 
 export const postComposeNameDescRequest = (
-  name: any[],
-  description: any[]
-): PostComposeNameDescRequest => {
-  console.log("postComposeNameDescRequest action creator called");
-  return {
+  name:any,
+  description:any
+): PostComposeNameDescRequest => ({
     type: POST_COMPOSE_NAME_DESC,
     name,
     description,
-  };
-};
+});
 
 export const postComposeNameDescRequestSuccess = (
   postData: any
 ): PostComposeNameDescSuccess => ({
-  type: POST_COMPOSE_NAME_DESC_SUCCESS,
-  payload: { postData },
+    type: POST_COMPOSE_NAME_DESC_SUCCESS,
+    payload: { postData },
+
 });
 
 export const postComposeNameDescRequestFailure = (
   error: any
 ): PostComposeNameDescFailure => ({
-  type: POST_COMPOSE_NAME_DESC_FAILURE,
-  payload: { error },
+    type: POST_COMPOSE_NAME_DESC_FAILURE,
+    payload: { error },
 });
+
 
 // GET COMPOSE NAME AND DESC
 
@@ -180,6 +180,8 @@ export const addNameDescArray = (payload: any): AddNameDescArrayAction => ({
   type: ADD_NAME_DESC_ARRAY,
   payload,
 });
+
+
 // GET schema compose action
 
 export const fetchProjectSchemaInfoAction = (

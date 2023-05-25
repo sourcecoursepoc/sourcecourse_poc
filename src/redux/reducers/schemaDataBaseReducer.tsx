@@ -2,7 +2,6 @@ import {
   FETCH_SCHEMA_DATABASE,
   FETCH_SCHEMA_DATABASE_FAILURE,
   FETCH_SCHEMA_DATABASE_SUCCESS,
-  
   ADD_ARRAY,
   POST_GROUPDATA_DATABASE_FAILURE,
   POST_GROUPDATA_DATABASE_SUCCESS,
@@ -79,16 +78,6 @@ export default (state = initialDataBaseState, action: DataBaseActions) => {
         // Handle non-iterable payload, e.g. throw an error or log a warning
       }
 
-    case REMOVE_NODE:
-      const updatedArray = state.myArray.filter(
-        (node) => node.uid !== action.payload.uid
-      );
-
-      return {
-        ...state,
-
-        myArray: updatedArray,
-      };
     case REMOVE_NODE:
       const updatedArray = state.myArray.filter(node => node.uid !== action.payload.uid);
 
@@ -223,13 +212,3 @@ export const postColumnTagsAndDescriptionReducer = (
   }
 };
 
-    case POST_GROUPDATA_DATABASE_SUCCESS:
-      return { ...state, loading: false, success: true };
-
-    case POST_GROUPDATA_DATABASE_FAILURE:
-      return { ...state, loading: false, error: action.payload };
-
-    default:
-      return state;
-  }
-};

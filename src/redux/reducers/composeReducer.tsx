@@ -11,6 +11,8 @@ import {
   DeleteProjectSchemaInfoActionTypes,
   GetComposeNameDescState,
   GetComposeNameDescActions,
+  ComposeNameDescActions,
+  ComposeNameDescState,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -108,46 +110,45 @@ function composeReportsPipelineReducer(
   }
 }
 
-const initialNameDescState: GetComposeNameDescState = {
+//reducer for posting compose page name and description
+const initialPostNameDescState: ComposeNameDescState = {
   pending: false,
-  saveData: [],
+  postData: [],
   error: null,
-  nameDescArray: [],
 };
 
-function getComposeNameDescReducer(
-  state = initialNameDescState,
-  action: GetComposeNameDescActions
-): GetComposeNameDescState {
+export const postComposeNameDescReducer = (
+  state = initialPostNameDescState,
+  action: ComposeNameDescActions
+): ComposeNameDescState => {
   switch (action.type) {
-    case GET_COMPOSE_NAME_DESC:
+    case POST_COMPOSE_NAME_DESC:
+      console.log('POST_COMPOSE_NAME_DESC action triggered');
       return {
         ...state,
         pending: true,
       };
-    case GET_COMPOSE_NAME_DESC_SUCCESS:
+    case POST_COMPOSE_NAME_DESC_SUCCESS:
+      console.log('POST_COMPOSE_NAME_DESC_SUCCESS action triggered');
       return {
         ...state,
         pending: false,
-        saveData: action.payload.saveData,
+        postData: action.payload.postData,
         error: null,
       };
-    case GET_COMPOSE_NAME_DESC_FAILURE:
+    case POST_COMPOSE_NAME_DESC_FAILURE:
+      console.log('POST_COMPOSE_NAME_DESC_FAILURE action triggered');
       return {
         ...state,
         pending: false,
-        saveData: [],
+        postData: [],
         error: action.payload.error,
-      };
-    case ADD_NAME_DESC_ARRAY:
-      return {
-        ...state,
-        nameDescArray: [...state.nameDescArray, action.payload],
       };
     default:
       return state;
   }
-}
+};
+
 
 const initialStateCompose: projectSchemaInfoState = {
   isFetching: false,
@@ -236,6 +237,5 @@ function projectSchemaInfoReducer(
 export {
   composeReducer,
   composeReportsPipelineReducer,
-  getComposeNameDescReducer,
   projectSchemaInfoReducer,
 };

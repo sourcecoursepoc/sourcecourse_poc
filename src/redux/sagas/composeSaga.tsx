@@ -5,10 +5,6 @@ import {
   ICOMPOSENAMEDESC,
 } from "../actions/composeTypes";
 import {
-  POST_COMPOSE_NAME_DESC,
-  FETCH_COMPOSE_PIPELINE,
-  FETCH_REPORTS_PIPELINE,
-  GET_COMPOSE_NAME_DESC,
   FetchSchemaComposeRequest,
   projectSchemaInfo,
 } from "../actions/composeTypes";
@@ -20,6 +16,8 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
+  POST_COMPOSE_NAME_DESC,
+  GET_COMPOSE_NAME_DESC,
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -46,7 +44,7 @@ import { BASE_URL } from "@/constants/config";
 
 const fetchProjectSchemaInfo = (requestParams: any) =>
   axios.get<projectSchemaInfo[]>(
-   BASE_URL+ "/project-tables/" + requestParams
+    BASE_URL + "/project-tables/" + requestParams
   );
 
 /*
@@ -79,7 +77,7 @@ export function* schemaComposeSaga() {
 const getComposePipelines = (requestParams?: any) =>
   axios.get<ICOMPOSEPIPELINE[]>(
     "http://localhost:8000/composepipeline" +
-      (requestParams ? `?id=${requestParams}` : "")
+    (requestParams ? `?id=${requestParams}` : "")
   );
 
 function* fetchComposePipelineSaga(requestParams: FetchComposePipelineRequest) {
@@ -131,7 +129,7 @@ export function* ComposeReportsPipelineSaga() {
 
 //posting schemas in compose
 const postProjectSchemaInfoAPI =
-  BASE_URL+"/project-tables";
+  BASE_URL + "/project-tables";
 
 function postProjectSchemaInfocall(
   projectUid: any[],
@@ -169,7 +167,7 @@ export function* PostSchemaRequestSaga() {
 
 //DELETE SCHEMA SAGA
 
-const deleteProjectSchemaInfoAPI =BASE_URL+ "/project-tables";
+const deleteProjectSchemaInfoAPI = BASE_URL + "/project-tables";
 
 function deleteProjectSchemaInfoCall(
   projectUid: any,
@@ -210,31 +208,19 @@ export function* deleteSchemaRequestSaga() {
 }
 
 //saga for posting compose page name and description
-
-const postNameAndDescriptionAPI = "http://localhost:8080/sourcecourse/project";
-
-function postNameAndDescriptionAPIcall(
-  name: any[],
-  description: any[]
-): Promise<AxiosResponse<any, any>> {
-  return axios.post(`${postNameAndDescriptionAPI}`, {
-    name,
-    description,
-  });
+const postNameAndDescriptionAPI = BASE_URL + "/project";
+function postNameAndDescriptionAPIcall(name:any,description:any): Promise<AxiosResponse<any, any>> {
+  return axios.post(`${postNameAndDescriptionAPI}`,{ 
+  name:name,
+  description:description
 }
-
-function* postNameAndDescriptionSaga(
-  action: ReturnType<typeof postComposeNameDescRequest>
-) {
+  );
+}
+//console.log("postNameAndDescriptionAPIcall---saga",postNameAndDescriptionAPIcall())
+function* postNameAndDescriptionSaga(action: ReturnType<typeof postComposeNameDescRequest>) {
   try {
     const { name, description } = action;
-
-    const response = yield call(
-      { fn: postNameAndDescriptionAPIcall, context: null },
-      name,
-      description
-    );
-
+    const response = yield call({ fn: postNameAndDescriptionAPIcall, context: null }, name, description);
     yield put(postComposeNameDescRequestSuccess(response.data));
   } catch (error) {
     yield put(postComposeNameDescRequestFailure({ error }));
@@ -245,37 +231,3 @@ export function* PostNameAndDescSaga() {
   yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)]);
 }
 
-//saga for getting compose page name,description, id
-
-const getNameAndDescriptionAPI = "http://localhost:8080/sourcecourse/project";
-console.log(getNameAndDescriptionAPI, "getNameAndDescriptionAPI");
-
-function getNameAndDescriptionAPIcall(): Promise<AxiosResponse<any, any>> {
-// uid:any[],
-// name: any[],
-// description: any[]
-  return axios.get(getNameAndDescriptionAPI);
-}
-
-function* getNameAndDescriptionSaga(
-  action: ReturnType<typeof getComposeNameDescRequest>
-) {
-  try {
-    // const { uid,name, description } = action;
-
-    const response = yield call(
-      { fn: getNameAndDescriptionAPIcall, context: null }
-      //   uid,
-      //  name,
-      //   description
-    );
-    console.log("response.data", response.data);
-    yield put(getComposeNameDescRequestSuccess(response.data));
-  } catch (error) {
-    yield put(getComposeNameDescRequestFailure({ error }));
-  }
-}
-
-export function* GetNameAndDescSaga() {
-  yield all([takeLatest(GET_COMPOSE_NAME_DESC, getNameAndDescriptionSaga)]);
-}
