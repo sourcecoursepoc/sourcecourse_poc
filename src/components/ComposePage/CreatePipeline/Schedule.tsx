@@ -4,6 +4,7 @@ import { Row, Col, Button } from "antd";
 import { CheckOutlined } from '@ant-design/icons';
 import styles from "./Schedule.module.css"
 import ScheduleTimePicker from './ScheduleTimePicker';
+import { DAILY, FRIDAY, INITIAL, MONDAY, MONTHLY, NOW, SATURDAY, SUNDAY, SYNC, THURSDAY, TODAY, TUESDAY, WEDNESDAY, WEEKLY } from '@/constants/constants';
 
 interface ScheduleProps {
     cardSelected: string;
@@ -38,98 +39,98 @@ const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
     return (
         <Row gutter={[16, 16]} align="middle" style={{ marginTop: "2.5rem" }} >
 
-            {cardSelected === "initial" && (
+            {cardSelected === INITIAL && (
                 <Col span={24}>
                     <Button className={styles.buttonCalender}
-                        icon={selectedOption === "Now" ? <CheckOutlined /> : undefined}
-                        onClick={() => handleOptionClick("Now")}
-                        type={selectedOption === "Now" ? "primary" : undefined}
-                        style={{ backgroundColor: selectedOption === "Now" ? "#7E60BC" : undefined }}
+                        icon={selectedOption === NOW ? <CheckOutlined /> : undefined}
+                        onClick={() => handleOptionClick(NOW)}
+                        type={selectedOption === NOW ? "primary" : undefined}
+                        style={{ backgroundColor: selectedOption === NOW ? "#7E60BC" : undefined }}
                     >
-                        Now
+                        {NOW}
                     </Button>
                     <Button className={styles.buttonCalender}
-                        icon={selectedOption === "Today" ? <CheckOutlined /> : undefined}
-                        onClick={() => handleOptionClick("Today")}
-                        type={selectedOption === "Today" ? "primary" : undefined}
-                        style={{ backgroundColor: selectedOption === "Today" ? "#7E60BC" : undefined }}
+                        icon={selectedOption === TODAY ? <CheckOutlined /> : undefined}
+                        onClick={() => handleOptionClick(TODAY)}
+                        type={selectedOption === TODAY ? "primary" : undefined}
+                        style={{ backgroundColor: selectedOption === TODAY ? "#7E60BC" : undefined }}
                     >
-                        Today
+                        {TODAY}
                     </Button>
 
                 </Col>
             )}
-            {cardSelected === "sync" && (
+            {cardSelected === SYNC && (
                 <>
 
                     <Col span={24}>
                         <Button className={styles.buttonCalender}
-                            icon={selectedOption === "Daily" ? <CheckOutlined /> : undefined}
-                            onClick={() => handleOptionClick("Daily")}
-                            type={selectedOption === "Daily" ? "primary" : undefined}
-                            style={{ backgroundColor: selectedOption === "Daily" ? "#7E60BC" : undefined }}
+                            icon={selectedOption === DAILY ? <CheckOutlined /> : undefined}
+                            onClick={() => handleOptionClick(DAILY)}
+                            type={selectedOption === DAILY ? "primary" : undefined}
+                            style={{ backgroundColor: selectedOption === DAILY ? "#7E60BC" : undefined }}
                         >
-                            Daily
+                            {DAILY}
                         </Button>
                         <Button className={styles.buttonCalender}
-                            icon={selectedOption === "Weekly" ? <CheckOutlined /> : undefined}
-                            onClick={() => handleOptionClick("Weekly")}
-                            type={selectedOption === "Weekly" ? "primary" : undefined}
-                            style={{ backgroundColor: selectedOption === "Weekly" ? "#7E60BC" : undefined }}
+                            icon={selectedOption === WEEKLY ? <CheckOutlined /> : undefined}
+                            onClick={() => handleOptionClick(WEEKLY)}
+                            type={selectedOption === WEEKLY ? "primary" : undefined}
+                            style={{ backgroundColor: selectedOption === WEEKLY ? "#7E60BC" : undefined }}
                         >
-                            Weekly
+                            {WEEKLY}
                         </Button>
                         <Button className={styles.buttonCalender}
-                            icon={selectedOption === "Monthly" ? <CheckOutlined /> : undefined}
-                            onClick={() => handleOptionClick("Monthly")}
-                            type={selectedOption === "Monthly" ? "primary" : undefined}
-                            style={{ backgroundColor: selectedOption === "Monthly" ? "#7E60BC" : undefined }}
+                            icon={selectedOption === MONTHLY ? <CheckOutlined /> : undefined}
+                            onClick={() => handleOptionClick(MONTHLY)}
+                            type={selectedOption === MONTHLY ? "primary" : undefined}
+                            style={{ backgroundColor: selectedOption === MONTHLY ? "#7E60BC" : undefined }}
                         >
-                            Monthly
+                            {MONTHLY}
                         </Button>
                     </Col>
 
-                    {selectedOption === "Weekly" && (
+                    {selectedOption === WEEKLY && (
                         <Col span={24}>
-                            <Button icon={secondSelectedOption === "Monday" ? <CheckOutlined /> : undefined}
-                                onClick={() => handleSecondOptionClick("Monday")}
-                                type={secondSelectedOption === "Monday" ? "primary" : undefined} className={styles.buttonCalender}
-                                style={{ backgroundColor: secondSelectedOption === "Monday" ? "#7E60BC" : undefined }}
-                            >Monday</Button>
-                            <Button icon={secondSelectedOption === "Tuesday" ? <CheckOutlined /> : undefined}
-                                onClick={() => handleSecondOptionClick("Tuesday")}
-                                type={secondSelectedOption === "Tuesday" ? "primary" : undefined} className={styles.buttonCalender}
-                                style={{ backgroundColor: secondSelectedOption === "Tuesday" ? "#7E60BC" : undefined }}
-                            >Tuesday</Button>
-                            <Button icon={secondSelectedOption === "Wednesday" ? <CheckOutlined /> : undefined}
-                                onClick={() => handleSecondOptionClick("Wednesday")}
-                                type={secondSelectedOption === "Wednesday" ? "primary" : undefined} className={styles.buttonCalender}
-                                style={{ backgroundColor: secondSelectedOption === "Wednesday" ? "#7E60BC" : undefined }}
-                            >Wednesday</Button>
-                            <Button icon={secondSelectedOption === "Thursday" ? <CheckOutlined /> : undefined}
-                                onClick={() => handleSecondOptionClick("Thursday")}
-                                type={secondSelectedOption === "Thursday" ? "primary" : undefined} className={styles.buttonCalender}
-                                style={{ backgroundColor: secondSelectedOption === "Thursday" ? "#7E60BC" : undefined }}
-                            >Thursday</Button>
-                            <Button icon={secondSelectedOption === "Friday" ? <CheckOutlined /> : undefined}
-                                onClick={() => handleSecondOptionClick("Friday")}
-                                type={secondSelectedOption === "Friday" ? "primary" : undefined} className={styles.buttonCalender}
-                                style={{ backgroundColor: secondSelectedOption === "Friday" ? "#7E60BC" : undefined }}
-                            >Friday</Button>
-                            <Button icon={secondSelectedOption === "Saturday" ? <CheckOutlined /> : undefined}
-                                onClick={() => handleSecondOptionClick("Saturday")}
-                                type={secondSelectedOption === "Saturday" ? "primary" : undefined} className={styles.buttonCalender}
-                                style={{ backgroundColor: secondSelectedOption === "Saturday" ? "#7E60BC" : undefined }}
-                            >Saturday</Button>
-                            <Button icon={secondSelectedOption === "Sunday" ? <CheckOutlined /> : undefined}
-                                onClick={() => handleSecondOptionClick("Sunday")}
-                                type={secondSelectedOption === "Sunday" ? "primary" : undefined} className={styles.buttonCalender}
-                                style={{ backgroundColor: secondSelectedOption === "Sunday" ? "#7E60BC" : undefined }}
-                            >Sunday</Button>
+                            <Button icon={secondSelectedOption === MONDAY ? <CheckOutlined /> : undefined}
+                                onClick={() => handleSecondOptionClick(MONDAY)}
+                                type={secondSelectedOption === MONDAY ? "primary" : undefined} className={styles.buttonCalender}
+                                style={{ backgroundColor: secondSelectedOption === MONDAY ? "#7E60BC" : undefined }}
+                            >{MONDAY}</Button>
+                            <Button icon={secondSelectedOption === TUESDAY ? <CheckOutlined /> : undefined}
+                                onClick={() => handleSecondOptionClick(TUESDAY)}
+                                type={secondSelectedOption === TUESDAY ? "primary" : undefined} className={styles.buttonCalender}
+                                style={{ backgroundColor: secondSelectedOption === TUESDAY ? "#7E60BC" : undefined }}
+                            >{TUESDAY}</Button>
+                            <Button icon={secondSelectedOption === WEDNESDAY ? <CheckOutlined /> : undefined}
+                                onClick={() => handleSecondOptionClick(WEDNESDAY)}
+                                type={secondSelectedOption === WEDNESDAY ? "primary" : undefined} className={styles.buttonCalender}
+                                style={{ backgroundColor: secondSelectedOption === WEDNESDAY ? "#7E60BC" : undefined }}
+                            >{WEDNESDAY}</Button>
+                            <Button icon={secondSelectedOption === THURSDAY ? <CheckOutlined /> : undefined}
+                                onClick={() => handleSecondOptionClick(THURSDAY)}
+                                type={secondSelectedOption === THURSDAY ? "primary" : undefined} className={styles.buttonCalender}
+                                style={{ backgroundColor: secondSelectedOption === THURSDAY ? "#7E60BC" : undefined }}
+                            >{THURSDAY}</Button>
+                            <Button icon={secondSelectedOption === FRIDAY ? <CheckOutlined /> : undefined}
+                                onClick={() => handleSecondOptionClick(FRIDAY)}
+                                type={secondSelectedOption === FRIDAY ? "primary" : undefined} className={styles.buttonCalender}
+                                style={{ backgroundColor: secondSelectedOption === FRIDAY ? "#7E60BC" : undefined }}
+                            >{FRIDAY}</Button>
+                            <Button icon={secondSelectedOption === SATURDAY ? <CheckOutlined /> : undefined}
+                                onClick={() => handleSecondOptionClick(SATURDAY)}
+                                type={secondSelectedOption === SATURDAY ? "primary" : undefined} className={styles.buttonCalender}
+                                style={{ backgroundColor: secondSelectedOption === SATURDAY ? "#7E60BC" : undefined }}
+                            >{SATURDAY}</Button>
+                            <Button icon={secondSelectedOption === SUNDAY ? <CheckOutlined /> : undefined}
+                                onClick={() => handleSecondOptionClick(SUNDAY)}
+                                type={secondSelectedOption === SUNDAY ? "primary" : undefined} className={styles.buttonCalender}
+                                style={{ backgroundColor: secondSelectedOption === SUNDAY ? "#7E60BC" : undefined }}
+                            >{SUNDAY}</Button>
                         </Col>
                     )}
 
-                    {selectedOption === "Monthly" && (
+                    {selectedOption === MONTHLY && (
                         <Col span={24} >
                             <div style={{ display: "flex", flexWrap: "wrap", flexDirection: "row" }}>
                                 {[...Array(31)].map((_, index) => (
@@ -145,7 +146,7 @@ const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
                     )}
                 </>
             )}
-            {selectedOption !== "Now" ? <ScheduleTimePicker /> : undefined}
+            {selectedOption !== NOW ? <ScheduleTimePicker /> : undefined}
         </Row>
     )
 }
