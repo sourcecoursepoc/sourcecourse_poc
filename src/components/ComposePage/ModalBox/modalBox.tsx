@@ -21,9 +21,10 @@ interface MyModalProps {
   visible: boolean;
   onCancel: () => void;
   onExport: () => void;
+  projectUid: number;
 }
 
-const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
+const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, projectUid }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   
@@ -43,7 +44,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   //POST action
     const handleImport = () => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: projectUid,
       sourceTableUids: tableUidArray,
     };
     dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
@@ -57,7 +58,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
  
   const handleRemove = async (uid: string) => {
     const requestBody = {
-      projectUid: 3,
+      projectUid: projectUid,
       sourceTableUids: [uid],
     };
     try {
