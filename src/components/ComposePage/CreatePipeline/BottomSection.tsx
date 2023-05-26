@@ -27,13 +27,10 @@ const BottomSection: React.FC<BottomSectionProps> = ({ cardSelected }) => {
           }}
         >
           <Image src="/schedule-icon.png" preview={false} alt="schedule" style={{ width: "1rem", height: "1rem", margin: "0.3rem" }} />
-
           Schedule
         </div>
         <div
-
           onClick={() => setIsScheduleActive(false)}
-
           style={{
             paddingRight: "0.5rem",
             paddingLeft: "0.1rem",
@@ -53,13 +50,11 @@ const BottomSection: React.FC<BottomSectionProps> = ({ cardSelected }) => {
         </div>
       </Row>
 
-
       {isScheduleActive ? (
         <Schedule cardSelected={cardSelected} />
       ) : (
         <OutputType />
       )}
-
 
     </>
   )
