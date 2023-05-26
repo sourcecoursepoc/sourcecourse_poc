@@ -4,7 +4,7 @@ import styles from "../../styles/floatInput.module.css";
 const { TextArea } = Input;
 
 interface DescriptionBoxProps {
-    value: string;
+    value?: string;
     onChange?: (value: string) => void;
     placeholder?: string;
     required?: boolean;

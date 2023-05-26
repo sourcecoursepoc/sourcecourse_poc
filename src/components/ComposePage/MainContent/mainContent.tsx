@@ -82,6 +82,7 @@ const MainContent = (projectUid:any) => {
                 icon={
                   <Image
                     preview={false}
+                    alt="schema"
                     src="/schemas-icon.png"
                     style={{
                       width: "2rem",
