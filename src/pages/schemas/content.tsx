@@ -6,19 +6,19 @@ import DisplayBox from './displaybox';
 import TagBox from './tagbox';
 import { useSelector, useDispatch } from 'react-redux';
 import { SelectedTreeNodeInfo } from '../../redux/selector';
-import { Transcription } from './transcriptionFile';
 import Buttons from '../../components/ComposePage/buttons/buttons';
 import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
 import ConfirmationModal from '../../components/ComposePage/GroupsPage/ModalBox/ConfirmationModal';
 import { CloseOutlined, SaveFilled } from '@ant-design/icons';
 import { showSuccessToast, showErrorToast } from './toast';
 import { postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoAction, fetchDataBaseInfoAction } from '../../redux/actions/schemasaction';
+import Transcription from './transcriptionFile';
 
 const { Content } = Layout;
 
 export default function SchemaContent() {
 
-    const selectedTreeData :any[] =useSelector(SelectedTreeNodeInfo);
+    const selectedTreeData = useSelector(SelectedTreeNodeInfo);
     const selectedMetaData = selectedTreeData.map(node => node ?.metadata);
     const selectedTags = selectedTreeData.map((node) => node.tags);
     const selcectedTagsLastElement = selectedTags.slice(-1)[0];
