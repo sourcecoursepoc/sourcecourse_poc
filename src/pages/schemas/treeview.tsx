@@ -60,7 +60,6 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     }
     if (element) {
       dispatch(addArray([element]));
-      // dispatch(addGroupdataArray([element]));
     }
   };
 
