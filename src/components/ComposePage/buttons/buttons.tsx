@@ -10,7 +10,7 @@ interface MyComponentProps {
   href?: string;
   onClick?: () => void;
   style?: React.CSSProperties;
-  color?: any;
+  color?: string;
   disabled?: boolean;
   //buttonLabels: string[];
 }

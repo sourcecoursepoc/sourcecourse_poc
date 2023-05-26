@@ -70,3 +70,6 @@ type DBProps = {
 type Props = {
   db: DBProps[];
 }
+export default function Home1() {
+  return <>{/* nothing */}</>;
+}

@@ -145,12 +145,8 @@ console.log("lastIndiceslastIndices",lastIndices)
        }
 
   const handleRowClick = (node:any[]) => {
-    console.log("Getting innnnnn");
     setSelectedNodeDetails([node]); 
     handleAddAttributeDetails(lastIndices);
-    console.log("Data getting printed on clicking the attribute", lastIndices);
-    console.log("selectedNodeDetails", selectedNodeDetails);
-    console.log("Getting outttttttt");
   };
 
   const swapElements = (array: Array<any>, index1: number, index2: number) => {
@@ -298,7 +294,7 @@ console.log("lastIndiceslastIndices",lastIndices)
         </Col>
         {/* third partition area */}
         {displayAttributeSection ? (
-          <NewAttributeContent attributeValues={getValues} reRender={render} key={render}/>
+          <NewAttributeContent attributeValues={getValues} reRender={render} key='attribute_content'/>
         ) : (
           <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails}/>
         )}
