@@ -52,7 +52,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
     setCombinedArray(uniqueValues);
   }, [projectSchemaInfo, selectedTableArray]);
 
-  const tableUidArray = combinedArray.map((table: any) => parseInt(table?.uid)); //taking uid's of selected tables
+  const tableUidArray = combinedArray?.map((table: any) => parseInt(table?.uid)); //taking uid's of selected tables
 
   //POST action
   const handleImport = () => {
@@ -62,8 +62,8 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
     };
     dispatch(
       postProjectSchemaInfoRequest(
-        requestBody.projectUid,
-        requestBody.sourceTableUids
+        requestBody?.projectUid,
+        requestBody?.sourceTableUids
       )
     );
     onExport();
