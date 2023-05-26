@@ -80,6 +80,7 @@ const GroupsMainContent = () => {
                 <Image
                   preview={false}
                   src="/groups-icon.png"
+                  alt="groupIcon"
                   style={{
                     width: "2rem",
                     height: "2rem",

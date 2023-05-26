@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 
-export function Transcription(selectedMetaDataLastItem: any) {
+export default function Transcription(selectedMetaDataLastItem: any) {
     const { t } = useTranslation();
     const data = {
         status: "Status",
