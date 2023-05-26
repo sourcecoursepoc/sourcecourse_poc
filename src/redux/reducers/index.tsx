@@ -9,6 +9,7 @@ import {
   composeReducer,
   composeReportsPipelineReducer,
   projectSchemaInfoReducer,
+  searchSchemaByTagReducer,
 } from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
@@ -30,7 +31,7 @@ const rootReducer = combineReducers({
   postTagsAndDescription: postTagsAndDescriptionReducer,
   postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer,
   deleteProject: deleteProjectReducer,
-
+  searchSchemaByTag:searchSchemaByTagReducer,
 
 });
 
