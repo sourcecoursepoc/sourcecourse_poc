@@ -14,7 +14,7 @@ interface MyGroupsThirdProps {
   selectedNodeDetails: any[];
   setSelectedNodeDetails: () => void;
   lastIndices: any[];
-  setLastIndices:any[];
+  setLastIndices: any[];
 }
 
 const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
@@ -26,78 +26,37 @@ const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
   const { Option } = Select;
   const { TextArea } = Input;
   const dispatch = useDispatch();
-  //////////////////////////////////////////////////
- const handleInputChange = (
-  e: React.ChangeEvent<HTMLInputElement>,
-  value: string | undefined,
-  key: string
-) => {
-  setSelectedNodeDetails((selectedNodeDetails) => {
-    const updatedSelectedNodeDetails = selectedNodeDetails.map((node) => {
-      if (node?.metadata?.[key] === value) {
-        return {
-          ...node,
-          metadata: {
-            ...node.metadata,
-            [key]: e.target.value
-          }
-        };
-      } else {
-        return node;
-      }
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    value: string | undefined,
+    key: string
+  ) => {
+    setSelectedNodeDetails((selectedNodeDetails) => {
+      const updatedSelectedNodeDetails = selectedNodeDetails.map((node) => {
+        if (node?.metadata?.[key] === value) {
+          return {
+            ...node,
+            metadata: {
+              ...node.metadata,
+              [key]: e.target.value
+            }
+          };
+        } else {
+          return node;
+        }
+      });
+
+      // Update the selected node directly in lastIndices
+      const nodeIndexInLastIndices = lastIndices.findIndex(
+        (selectedNode) => selectedNode?.id === updatedSelectedNodeDetails[0]?.id
+      );
+      const updatedLastIndices = [...lastIndices];
+      updatedLastIndices[nodeIndexInLastIndices] = updatedSelectedNodeDetails[0];
+      setLastIndices(updatedLastIndices);
+
+      return updatedSelectedNodeDetails;
     });
-
-    // Update the selected node directly in lastIndices
-    const nodeIndexInLastIndices = lastIndices.findIndex(
-      (selectedNode) => selectedNode.id === updatedSelectedNodeDetails[0].id
-    );
-    const updatedLastIndices = [...lastIndices];
-    updatedLastIndices[nodeIndexInLastIndices] = updatedSelectedNodeDetails[0];
-    setLastIndices(updatedLastIndices);
-
-    return updatedSelectedNodeDetails;
-  });
-};
-
-  
-  
-  // console.log(selectedNodeDetails, "--out--selectedNodeDetails--selectedNodeDetails");
-  
-  /////////////////////////////////////////////////////////////////////////
-
-
-  // const { Panel } = Collapse;
-
-  // const conList = [{id: Math.random(),
-  //   component : <ConditionalDataSelection key={Math.random()}/>}]
-    
-  //   const convList = [{id: Math.random(),
-  //     component : <ConvertValues key={Math.random()}/>}]
-    
-  //   const [conditionalList, setConditionalList] = useState(conList)
-  //   const [convertList, setConvertList] = useState(convList)
-    
-  //   function addCondition(id:number) {
-  //     setConditionalList(conditionalList.concat({id:id, component: <ConditionalDataSelection key={id}/>}))
-  //   }
-    
-  //   function addConvertValues(id:number) {
-  //     setConvertList(convertList.concat({id:id, component:<ConvertValues key={id} />}))
-  //   }
-    
-  //   const onDeleteClick = (index: number) => {
-  //     console.log("deleted index",index)
-  //     const newConditionalList = [...conditionalList];
-  //     newConditionalList.splice(index, 1);
-  //     setConditionalList(newConditionalList);
-  //   };
-    
-  //   const onConvertDeleteClick = (index: number) => {
-  //     const newConvertList = [...convertList];
-  //     newConvertList.splice(index, 1);
-  //     setConvertList(newConvertList);
-  //   };
-    
+  };
 
   return (
     <>
@@ -138,7 +97,7 @@ const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
                         width: "10rem",
                       }}
                       onChange={(e) =>
-                        handleInputChange(e, node?.metadata?.alias,'alias')
+                        handleInputChange(e, node?.metadata?.alias, 'alias')
                       }
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
@@ -165,7 +124,7 @@ const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
                         height: "3rem",
                         width: "10rem",
                       }}
-                      onChange={(e) => handleInputChange(e, node?.metadata?.prefixValue,'prefixValue')}
+                      onChange={(e) => handleInputChange(e, node?.metadata?.prefixValue, 'prefixValue')}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
                       {
@@ -195,7 +154,7 @@ const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
                         height: "3rem",
                         width: "10rem",
                       }}
-                      onChange={(e) => handleInputChange(e, node?.metadata?.defaultValue,'defaultValue')}
+                      onChange={(e) => handleInputChange(e, node?.metadata?.defaultValue, 'defaultValue')}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
                       {
@@ -223,7 +182,7 @@ const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
                         height: "3rem",
                         width: "10rem",
                       }}
-                      onChange={(e) => handleInputChange(e, node?.metadata?.suffixValue,'suffixValue')}
+                      onChange={(e) => handleInputChange(e, node?.metadata?.suffixValue, 'suffixValue')}
                     />
                     <div style={{ position: "absolute", top: 10, right: 50 }}>
                       {
@@ -240,77 +199,6 @@ const GroupsThirdSide: React.FC<MyGroupsThirdProps> = ({
               </Row>
             </Col>
           </Row>
-          {/* <Row style={{ marginTop: "1rem" }}>
-          <Collapse style={{ width: "100%", height: "50%" }} expandIconPosition="right">
-      <Panel header={<span><span style={{ fontSize: "12px", fontWeight: "bold" }}>Conditional Data Selection
-          </span><InfoCircleOutlinedFunction
-                          value={""}
-                          tooltipTitle={
-                            "This information is about suffix value"
-                          }
-                        /></span>} key="1" >
-                          
-
-        {conditionalList.map((node, index) => (
-
-              <div key={node.id}>
-                <ConditionalDataSelection
-                  index={index}
-                  arrayLength={conditionalList.length - 1}
-                  name=""
-                  onDeleteClick={() => onDeleteClick(index)}
-                />
-                 
-</div>
- ))
-              }
-
-
-<Row>
-        <Col span={24}  type="flex" align="middle" >
-        <PlusCircleFilled
-                          value={"+"}
-                          style ={{color:"#7e60bc", fontSize:"20px"}}
-                          onClick={()=>addCondition(Math.random())}
-                        />
-    </Col>
-        
-                        </Row>
-      </Panel>
-    </Collapse>
-          </Row>
-          <Row style={{ marginTop: "1rem" }}>
-          <Collapse style={{ width: "100%", height: "50%" }} expandIconPosition="right">
-      <Panel header={<span><span style={{ fontSize: "12px", fontWeight: "bold" }}>Convert Values
-          </span><InfoCircleOutlinedFunction
-                          value={""}
-                          tooltipTitle={
-                            "This information is about converting values"
-                          }
-                        /></span>} key="1" >
-         {convertList?.map((node, index) => (
-             <div key={node.id}>
-                <ConvertValues
-                  index={index}
-                  arrayLength={convertList.length - 1}
-                  name=""
-                  onConvertDeleteClick={() => onConvertDeleteClick(index)}
-                /></div>))
-               }
-
-<Row>
-        <Col span={24}  type="flex" align="middle" >
-        <PlusCircleFilled
-                          value={"+"}
-                          style ={{color:"#7e60bc", fontSize:"20px"}}
-                          onClick={()=>addConvertValues(Math.random())}
-                        />
-    </Col>
-        
-                        </Row>
-      </Panel>
-    </Collapse>
-          </Row> */}
         </Col>
       ))}
     </>

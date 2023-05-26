@@ -50,17 +50,13 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
-  console.log(selectedNodeDetails, "groupmodalBox--selectedNodeDetails");
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  console.log(database, "databasedatabasedatabase");
   const tablesAndColumns = database.map((node) => node.tables);
   useEffect(() => {
     setTableData(tablesAndColumns);
   }, []);
   
-  console.log(tableData,"tableData")
-  console.log(tablesAndColumns,"tablesAndColumns")
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
   const selcectData = useSelector(SelectedTreeNodeInfo);
   const selectGroupdataData = useSelector(getSelectedGroupdataArraySelector);
@@ -80,7 +76,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
 
   useEffect(() => {
     dispatch(fetchDataBaseRequest());
-    // dispatch(fetchGroupDataRequest());
     dispatch(fetchDataBaseInfoAction());
     dispatch(fetchGroupDataRequest());
   }, []);
@@ -100,7 +95,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
       }
     }
   }, [selectGroupdataData, attrName]);
-  console.log("lastIndiceslastIndices", lastIndices);
   const handleExport = () => {
     onExport(lastIndices);
   };
@@ -108,7 +102,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
     handleExport();
   };
   const handleSaveClick = () => {
-    // setSaveModalVisible(true);
     handleExportButton();
     setVisible(false);
   };
@@ -116,7 +109,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const handleSaveModalOk = () => {
     handleExportButton();
     setVisible(false);
-    // setSaveModalVisible(false);
   };
 
   const handleSaveModalCancel = () => {
@@ -127,7 +119,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
     dispatch(removeNode(uid));
   };
   const handleAddAttributeDetails = (lastIndices: any) => {
-    console.log("Received data in handleAddAttributeDetails:", lastIndices);
     dispatch(addAttributeDetails(lastIndices));
   };
 
@@ -154,11 +145,11 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   function getValues(attributeName: string, selectedDataType: string) {
     setAttrName(attributeName);
     setDatatype(selectedDataType);
-    selectGroupdataData.slice(-1)[0] = {
+    selectGroupdataData?.slice(-1)[0] = {
       name: attributeName,
       type: selectedDataType,
     };
-    lastIndices[lastIndices.length - 1] = {
+    lastIndices[lastIndices?.length - 1] = {
       name: attributeName,
       type: selectedDataType,
     };
@@ -266,7 +257,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
         >
           <Row style={{ marginTop: "1rem", width: "14rem" }}>
             <Col span={24} style={{ marginLeft: "0.15rem" }}>
-              {/* <SearchBar /> */}
               <Input
                 placeholder="Search"
                 style={{
@@ -350,7 +340,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
             </>
           ))}
         </Col>
-        {/* third partition area */}
         {displayAttributeSection ? (
           <NewAttributeContent
             attributeValues={getValues}
@@ -365,7 +354,6 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
             setLastIndices={setLastIndices}
           />
         )}
-        {/* {displayAttributeSection} */}
       </Row>
     </Modal>
   );

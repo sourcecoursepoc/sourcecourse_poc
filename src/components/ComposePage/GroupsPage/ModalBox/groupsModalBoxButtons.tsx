@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import ConfirmationModal from "./ConfirmationModal";
 import { deleteGroupModalBox } from "@/redux/actions/schemasaction";
 import { showSuccessToast } from "@/pages/schemas/toast";
+import { DELETE_TOAST } from "@/constants/constants";
 
 
 const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModalVisible,handleSaveClick, onCreatePipeline}) => {
@@ -46,7 +47,7 @@ const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModal
   setDescription("");
   dispatch(deleteGroupModalBox());
   setDeleteModalVisible(false);
-  showSuccessToast("Deleted Successfully");
+  showSuccessToast(DELETE_TOAST);
     
   };
 

@@ -43,9 +43,7 @@ const Compose = () => {
 
   //useSelector to take posted - compose page name and desc
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  console.log("postComposeNameDescDatapostComposeNameDescData", postComposeNameDescData);
   const uidFromComposePage = postComposeNameDescData.uid;
-  console.log("uidFromComposePage", uidFromComposePage);
 
   const router = useRouter();
   const {
@@ -77,8 +75,6 @@ const Compose = () => {
     else {
       showSuccessToast("Failed!");
     }
-    // dispatch(postComposeNameDescRequest(name, description));
-    // showSuccessToast("Saved Successfully");
   };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
