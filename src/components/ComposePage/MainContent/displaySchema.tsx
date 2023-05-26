@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { removeNode } from "@/redux/actions/schemasaction";
 
 interface MyComponentProps {
-  deleteIcon: ReactNode;
+  deleteIcon?: ReactNode;
   text: string;
   attribute: string;
   icon: ReactNode;
