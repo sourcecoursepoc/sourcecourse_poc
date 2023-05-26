@@ -29,10 +29,9 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, projectUid }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-
-  const projectSchemaInfo = useSelector(projectSchemaInfoSelector);//tables in the database
-  const selectedTableArray = useSelector(getSelectorTableNodes);//selected tables from the tree
-  const [searchText, setSearchText] = useState(""); // State to store the search text
+  const projectSchemaInfo = useSelector(projectSchemaInfoSelector);
+  const selectedTableArray = useSelector(getSelectorTableNodes);
+  const [searchText, setSearchText] = useState("");
   const [treeData, setTreeData] = useState([]);
 
   useEffect(() => {
@@ -44,11 +43,10 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   useEffect(() => {
     setTreeData(database)
   }, [database])
+
   const searchData = useSelector(searchSchemaData);
-
   const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
-
-  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid)); //taking uid's of selected tables
+  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid));
 
   //POST action
   const handleImport = () => {
