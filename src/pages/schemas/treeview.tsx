@@ -49,12 +49,12 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
     const treeKeys = keys ?.[0] ?.split("-");
     let element;
     if (treeKeys.length > 2) {
-      const tables = db.find(val => val?.uid?.toString() === treeKeys[0]) ?.tables;
-      const columns = tables.find(val => val?.uid?.toString() === treeKeys[1]) ?.columns;
-      element = columns.find(val => val?.uid?.toString() === treeKeys[2]);
-    } else if (treeKeys.length > 1) {
-      const tables = db.find(val => val?.uid?.toString() === treeKeys[0]) ?.tables;
-      element = tables.find(val => val?.uid?.toString() === treeKeys[1]);
+      const tables = db?.find(val => val?.uid?.toString() === treeKeys[0]) ?.tables;
+      const columns = tables?.find(val => val?.uid?.toString() === treeKeys[1]) ?.columns;
+      element = columns?.find(val => val?.uid?.toString() === treeKeys[2]);
+    } else if (treeKeys?.length > 1) {
+      const tables = db?.find(val => val?.uid?.toString() === treeKeys[0]) ?.tables;
+      element = tables?.find(val => val?.uid?.toString() === treeKeys[1]);
 
       dispatch(addLastIndex(element));
     } else if (treeKeys.length > 0) {
