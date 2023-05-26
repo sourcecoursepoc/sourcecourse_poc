@@ -18,7 +18,7 @@ const { Content } = Layout;
 
 export default function SchemaContent() {
 
-    const selectedTreeData = useSelector(SelectedTreeNodeInfo);
+    const selectedTreeData: any[] = useSelector(SelectedTreeNodeInfo);
     const selectedMetaData = selectedTreeData.map(node => node ?.metadata);
     const selectedTags = selectedTreeData.map((node) => node.tags);
     const selcectedTagsLastElement = selectedTags.slice(-1)[0];
