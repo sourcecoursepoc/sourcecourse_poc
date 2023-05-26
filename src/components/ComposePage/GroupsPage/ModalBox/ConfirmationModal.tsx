@@ -5,7 +5,7 @@ import Buttons from "../../buttons/buttons";
 
 interface ConfirmationModalProps {
   visible: boolean;
-  title?: string;
+  title?: any;
   message?: string;
   onOk: () => void;
   onCancel?: () => void;
@@ -32,7 +32,7 @@ const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
       ]}
     >
       <p>
-        {/* <ExclamationCircleOutlined style={{ color: "#FFA500" }} />  */}{message}
+        {message}
       </p>
     </Modal>
   );
