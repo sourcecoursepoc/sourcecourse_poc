@@ -81,13 +81,13 @@ const Compose = () => {
     setSaveModalVisible(false);
   };
   const handleSaveClick = () => {
-    if (name.trim() === "") {
+    if (name && name.trim() === "") {
       setNameError(true);
     } else {
       setNameError(false);
     }
 
-    if (description.trim() === "") {
+    if (description &&description.trim() === "") {
       setDescriptionError(true);
     } else {
       setDescriptionError(false);
