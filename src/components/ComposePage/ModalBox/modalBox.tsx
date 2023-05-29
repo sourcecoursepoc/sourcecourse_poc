@@ -16,6 +16,8 @@ import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
 import { postProjectSchemaInfoRequest } from "@/redux/actions/composeAction";
+import { searchSchemaByTagsInfoAction } from "../../../redux/actions/composeAction";
+import { searchSchemaData } from "../../../redux/selector";
 
 interface MyModalProps {
   visible: boolean;
@@ -26,22 +28,27 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  
-  const projectSchemaInfo = useSelector(projectSchemaInfoSelector);//tables in the database
-  const selectedTableArray = useSelector(getSelectorTableNodes);//selected tables from the tree
+  const projectSchemaInfo = useSelector(projectSchemaInfoSelector);
+  const selectedTableArray = useSelector(getSelectorTableNodes);
+  const [searchText, setSearchText] = useState("");
+  const [treeData, setTreeData] = useState([]);
 
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
     }
-  }, [projectSchemaInfo]);
+  }, [dispatch, projectSchemaInfo]);
 
+  useEffect(() => {
+    setTreeData(database)
+  }, [database])
+
+  const searchData = useSelector(searchSchemaData);
   const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
-
-  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid)); //taking uid's of selected tables
+  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid));
 
   //POST action
-    const handleImport = () => {
+  const handleImport = () => {
     const requestBody = {
       projectUid: 3,
       sourceTableUids: tableUidArray,
@@ -49,12 +56,31 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
     dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
     onExport();
   };
-  
+
+  // Callback function to update the search text state
+  const handleSearch = (text:string) => {
+    setSearchText(text);
+    if (text) {
+      dispatch(searchSchemaByTagsInfoAction(text));
+    }
+  };
+
+  useEffect(() => {
+    if (searchText) {
+      if (searchData && searchData.length > 0) {
+        const treeArray = [{ dbName: '', description: '', tables: searchData }]
+        setTreeData(treeArray);
+      }
+    } else {
+      setTreeData(database);
+    }
+  }, [searchText, searchData, database]);
+
   const handleImportButton = () => {
     handleImport();
     onCancel();
   };
- 
+
   const handleRemove = async (uid: string) => {
     const requestBody = {
       projectUid: 3,
@@ -86,7 +112,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
       >
         <Row>
           <Col span={12} className={styles.modelBoxBorder}>
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
           </Col>
           <Col span={12} className={styles.modelBorder}>
             <Button
@@ -105,19 +131,23 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
         </Row>
         <Row>
           <Col span={12} className={styles.treeview}>
-            <TreeView
-              db={database}
-              iconImage={
-                <PlusOutlined
-                  style={{
-                    width: "3rem",
-                    fontSize: "0.8rem",
-                    color: "#7E60BC",
-                    strokeWidth: "2",
-                  }}
-                />
-              }
-            />
+            {treeData.length > 0 ? (
+              <TreeView
+                db={treeData}
+                iconImage={
+                  <PlusOutlined
+                    style={{
+                      width: "3rem",
+                      fontSize: "0.8rem",
+                      color: "#7E60BC",
+                      strokeWidth: "2",
+                    }}
+                  />
+                }
+              />
+            ) : (
+                <p>No data </p>
+              )}
           </Col>
           <Col
             span={12}
@@ -141,6 +171,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport }) => {
                           <span>
                             {" "}
                             <Image
+                              atl=""
                               src="/Schemas.png"
                               preview={false}
                               style={{

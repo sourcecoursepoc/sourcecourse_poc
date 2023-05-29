@@ -13,6 +13,8 @@ import {
   GetComposeNameDescActions,
   ComposeNameDescActions,
   ComposeNameDescState,
+  SearchSchemaByTagInfoState,
+  SearchSchemaByTagActions,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -38,6 +40,9 @@ import {
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -233,6 +238,41 @@ function projectSchemaInfoReducer(
       return state;
   }
 }
+
+
+const initialSearchSchemaState: SearchSchemaByTagInfoState = {
+  pending: false,
+  searchData: [],
+  error: null,
+};
+
+export const searchSchemaByTagReducer = (state = initialSearchSchemaState, action: SearchSchemaByTagActions) => {
+  switch (action.type) {
+    case SEARCH_SCHEMA_BY_TAG_INFO_ACTION:
+      return {
+        ...state,
+        pending: true,
+      };
+    case SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        searchData: action.payload.searchData,
+        error: null,
+      };
+    case SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        searchData: [],
+        error: action.payload.error,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
 
 export {
   composeReducer,

@@ -24,6 +24,9 @@ import {
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
 } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
@@ -330,3 +333,43 @@ export type DeleteProjectSchemaInfoActionTypes =
   | DeleteProjectSchemaInfoAction
   | DeleteProjectSchemaInfoSuccessAction
   | DeleteProjectSchemaInfoFailureAction;
+
+
+
+// search schema by tag
+
+export interface SearchSchemaByTagInfoState {
+  pending: boolean;
+  searchData: any[];
+  error: any | null
+}
+
+export interface SearchSchemaByTagInfoActionSuccessPayload {
+  searchData: any;
+}
+
+export interface SearchSchemaByTagInfoActionFailurePayload {
+  error: any;
+}
+
+export interface SearchSchemaByTagInfoAction {
+  type: typeof SEARCH_SCHEMA_BY_TAG_INFO_ACTION;
+  searchValue: any;
+
+};
+
+export interface SearchSchemaByTagInfoSuccessAction {
+  type: typeof SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS;
+  payload: SearchSchemaByTagInfoActionSuccessPayload
+};
+
+export interface SearchSchemaByTagInfoFailureAction {
+  type: typeof SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE;
+  payload: SearchSchemaByTagInfoActionFailurePayload;
+}
+
+
+export type SearchSchemaByTagActions =
+  |SearchSchemaByTagInfoAction
+  | SearchSchemaByTagInfoSuccessAction
+  | SearchSchemaByTagInfoFailureAction;

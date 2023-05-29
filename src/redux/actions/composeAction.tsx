@@ -33,6 +33,11 @@ import {
   /* DELETESCHEMAREQUEST, */
   DeleteProjectSchemaInfoSuccessPayload,
   DeleteProjectSchemaInfoFailurePayload,
+  SearchSchemaByTagInfoAction,
+  SearchSchemaByTagInfoActionSuccessPayload,
+  SearchSchemaByTagInfoSuccessAction,
+  SearchSchemaByTagInfoActionFailurePayload,
+  SearchSchemaByTagInfoFailureAction,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -57,6 +62,9 @@ import {
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
@@ -252,4 +260,26 @@ export const deleteProjectSchemaInfoFailure = (
 ): DeleteProjectSchemaInfoFailureAction => ({
   type: DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   payload: { error },
+});
+
+
+// search by tag in compose schema
+
+export const searchSchemaByTagsInfoAction = (searchValue: any): SearchSchemaByTagInfoAction => ({
+  type: SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  searchValue,
+});
+
+export const searchSchemaByTagsInfoSuccessAction = (
+  payload: SearchSchemaByTagInfoActionSuccessPayload
+): SearchSchemaByTagInfoSuccessAction => ({
+  type: SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  payload,
+});
+
+export const searchSchemaByTagsInfoFailureAction = (
+  payload: SearchSchemaByTagInfoActionFailurePayload
+): SearchSchemaByTagInfoFailureAction => ({
+  type: SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
+  payload,
 });

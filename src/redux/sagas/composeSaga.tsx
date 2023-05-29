@@ -7,6 +7,7 @@ import {
 import {
   FetchSchemaComposeRequest,
   projectSchemaInfo,
+  SearchSchemaByTagInfoAction,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -18,6 +19,7 @@ import {
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   POST_COMPOSE_NAME_DESC,
   GET_COMPOSE_NAME_DESC,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -37,6 +39,8 @@ import {
   deleteProjectSchemaInfoSuccess,
   deleteProjectSchemaInfoFailure,
   deleteProjectSchemaInfoRequest,
+  searchSchemaByTagsInfoSuccessAction,
+  searchSchemaByTagsInfoFailureAction,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -231,3 +235,31 @@ export function* PostNameAndDescSaga() {
   yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)]);
 }
 
+// search compose schema page
+const getSearchSchemaByTag = (searchValue: any) =>
+  axios.get<[]>(BASE_URL+"/db/table/search/" + searchValue.searchValue);
+
+/*
+  Worker Saga: Fired on FETCH_SCHEMA_REQUEST action
+*/
+function* fetchSearchSchemaByTagSaga(searchValue: SearchSchemaByTagInfoAction) {
+
+  try {
+    const response = yield call(() => getSearchSchemaByTag(searchValue));
+    yield put(searchSchemaByTagsInfoSuccessAction({
+        searchData: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(searchSchemaByTagsInfoFailureAction({
+        error: e.message,
+      })
+    );
+  }
+}
+
+export function* searchSchemaByTagRequestSaga() {
+  yield all([
+    takeLatest(SEARCH_SCHEMA_BY_TAG_INFO_ACTION, fetchSearchSchemaByTagSaga),
+  ]);
+}

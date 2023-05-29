@@ -28,6 +28,7 @@ import { getComposeNameDescSelector, getProjectByIdSelector, postComposeNameDesc
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
 import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
+import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -114,6 +115,9 @@ const Compose = () => {
     setName("");
     setDescription("");
     showSuccessToast(DELETE_TOAST);
+    dispatch(deleteProjectInfoAction(id))
+    setProjectId("");
+    window.location.href = "/";
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
