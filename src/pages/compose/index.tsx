@@ -27,7 +27,11 @@ import { useSelector } from "react-redux";
 import { getComposeNameDescSelector, getProjectByIdSelector, postComposeNameDescSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
+<<<<<<< HEAD
 import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
+=======
+import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
+>>>>>>> 00424be4443597f4720e53aa0aa057844cecc343
 
 const Compose = () => {
   const { Content } = Layout;
@@ -114,6 +118,9 @@ const Compose = () => {
     setName("");
     setDescription("");
     showSuccessToast(DELETE_TOAST);
+    dispatch(deleteProjectInfoAction(id))
+    setProjectId("");
+    window.location.href = "/";
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);

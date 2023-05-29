@@ -26,7 +26,7 @@ const MainContent = () => {
   const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
   useEffect(() => {
     dispatch(fetchDataBaseInfoAction());
-  }, []);
+  },[dispatch]);
   useEffect(() => {
     dispatch(fetchProjectSchemaInfoAction(3));
   }, []);
@@ -41,8 +41,8 @@ const MainContent = () => {
     };
     dispatch(
       deleteProjectSchemaInfoRequest(
-        requestBody.projectUid,
-        requestBody.sourceTableUids
+        requestBody?.projectUid,
+        requestBody?.sourceTableUids
       )
     );
   };
@@ -80,6 +80,7 @@ const MainContent = () => {
                 attribute={"ATTRIBUTES / "}
                 icon={
                   <Image
+                  alt=""
                     preview={false}
                     src="/schemas-icon.png"
                     style={{

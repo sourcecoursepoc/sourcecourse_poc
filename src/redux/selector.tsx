@@ -15,6 +15,18 @@ const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.m
 const getComposePipeline = (state: AppState) => state.composePipeline.composePipeline;
 const getGroups = (state: AppState) => state.group.groups;
 const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipeline.composeReportsPipeline;
+<<<<<<< HEAD
+=======
+const getSearchSchemaData = (state: AppState) => state.searchSchemaByTag.searchData;
+
+export const searchSchemaData = createSelector(
+  getSearchSchemaData,
+  (searchData) => searchData
+);
+export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
+export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)
+export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
+>>>>>>> 00424be4443597f4720e53aa0aa057844cecc343
 const getLastIndexesArray = (state: AppState) => state.database.lastIndexes;
 //const getComposePageNameDesc = (state: AppState) => state.getComposeNameDesc.saveData;
 const postComposePageNameDesc = (state: AppState) => state.postComposeNameDesc.postData;

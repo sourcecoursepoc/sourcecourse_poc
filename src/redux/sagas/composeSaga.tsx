@@ -7,6 +7,7 @@ import {
 import {
   FetchSchemaComposeRequest,
   projectSchemaInfo,
+  SearchSchemaByTagInfoAction,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -16,8 +17,12 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
+<<<<<<< HEAD
   POST_COMPOSE_NAME_DESC,
   GET_COMPOSE_NAME_DESC,
+=======
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+>>>>>>> 00424be4443597f4720e53aa0aa057844cecc343
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -37,6 +42,8 @@ import {
   deleteProjectSchemaInfoSuccess,
   deleteProjectSchemaInfoFailure,
   deleteProjectSchemaInfoRequest,
+  searchSchemaByTagsInfoSuccessAction,
+  searchSchemaByTagsInfoFailureAction,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -207,6 +214,7 @@ export function* deleteSchemaRequestSaga() {
   ]);
 }
 
+<<<<<<< HEAD
 //saga for posting compose page name and description
 const postNameAndDescriptionAPI = BASE_URL + "/project";
 function postNameAndDescriptionAPIcall(name:any,description:any): Promise<AxiosResponse<any, any>> {
@@ -231,3 +239,33 @@ export function* PostNameAndDescSaga() {
   yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)]);
 }
 
+=======
+// search compose schema page
+const getSearchSchemaByTag = (searchValue: any) =>
+  axios.get<[]>(BASE_URL+"/db/table/search/" + searchValue.searchValue);
+
+/*
+  Worker Saga: Fired on FETCH_SCHEMA_REQUEST action
+*/
+function* fetchSearchSchemaByTagSaga(searchValue: SearchSchemaByTagInfoAction) {
+
+  try {
+    const response = yield call(() => getSearchSchemaByTag(searchValue));
+    yield put(searchSchemaByTagsInfoSuccessAction({
+        searchData: response.data,
+      })
+    );
+  } catch (e) {
+    yield put(searchSchemaByTagsInfoFailureAction({
+        error: e.message,
+      })
+    );
+  }
+}
+
+export function* searchSchemaByTagRequestSaga() {
+  yield all([
+    takeLatest(SEARCH_SCHEMA_BY_TAG_INFO_ACTION, fetchSearchSchemaByTagSaga),
+  ]);
+}
+>>>>>>> 00424be4443597f4720e53aa0aa057844cecc343

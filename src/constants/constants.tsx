@@ -8,8 +8,11 @@ export const SAVE_CONFIRMATION = "Save Confirmation"
 export const SAVE_CONFIRMATION_MESSAGE = "Are you sure you want to save?"
 export const CANCEL_CONFIRMATION = "Cancel Confirmation"
 export const CANCEL_CONFIRMATION_MESSAGE = "Are you sure you want to cancel?"
+<<<<<<< HEAD
 export const EXIT_CONFIRMATION_MESSAGE = "Are you sure you want to exit?"
 export const DELETE_CONFIRMATION_MESSAGE = "Are you sure you want to delete?"
+=======
+>>>>>>> 00424be4443597f4720e53aa0aa057844cecc343
 export const INITIAL = "initial"
 export const SYNC = "sync"
 export const NOW = "Now"
