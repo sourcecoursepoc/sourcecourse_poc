@@ -13,6 +13,7 @@ import { CloseOutlined, SaveFilled } from '@ant-design/icons';
 import { showSuccessToast, showErrorToast } from './toast';
 import { postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoAction, fetchDataBaseInfoAction } from '../../redux/actions/schemasaction';
 import Transcription from './transcriptionFile';
+import { SUCCESSTOAST, SAVE_CONFIRMATION_MESSAGE, SAVE_CONFIRMATION, CANCEL_CONFIRMATION_MESSAGE, CANCEL_CONFIRMATION } from '../../constants/constants';
 
 const { Content } = Layout;
 
@@ -50,8 +51,7 @@ export default function SchemaContent() {
         } else if ('name' in selcectedDataLastElement) {
             await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
         }
-        showSuccessToast("saved successfully");
-        dispatch(fetchDataBaseInfoAction());
+    showSuccessToast(SUCCESSTOAST);
     };
     const handleSaveModalCancel = () => {
         setSaveModalVisible(false);
@@ -151,8 +151,8 @@ export default function SchemaContent() {
                                 visible={saveModalVisible}
                                 onOk={handleSaveModalOk}
                                 onCancel={handleSaveModalCancel}
-                                title="Save Confirmation"
-                                message="Are you sure you want to save?"
+                                title={SAVE_CONFIRMATION}
+                                message={SAVE_CONFIRMATION_MESSAGE}
                             />
                         </Col>
                         <Col style={{ marginTop: "8px" }}>
@@ -161,8 +161,8 @@ export default function SchemaContent() {
                                 visible={cancelModalVisible}
                                 onOk={handleOkButtonClick}
                                 onCancel={handleCancelModalCancel}
-                                title="Cancel Confirmation"
-                                message="Are you sure you want to cancel?"
+                                title={CANCEL_CONFIRMATION}
+                                message={CANCEL_CONFIRMATION_MESSAGE}
                             />
                         </Col>
                     </Row>
