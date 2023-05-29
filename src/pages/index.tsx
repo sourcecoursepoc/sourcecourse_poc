@@ -6,7 +6,6 @@ import HomeRightArea from "../components/homeRightArea/homeRightArea";
 import styles from "./index.module.css";
 
 import { useEffect } from "react";
-import Schemas from "./schemas";
 
 const Home: React.FunctionComponent = () => {
   const { Content } = Layout;
