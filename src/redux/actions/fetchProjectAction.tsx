@@ -16,8 +16,12 @@ import {
   FetchProjectByIdFailure,
   FetchProjectFailurePayload,
   FetchProjectByIdSuccess,
-  FetchProjectByIdFailurePayload
+  FetchProjectByIdFailurePayload,
+  DeleteProjectInfoAction,
+  DeleteProjectInfoActionSuccess,
+  DeleteProjectInfoActionFailure
 } from "../actions/types";
+import { DELETE_PROJECTS_INFO_ACTION, DELETE_PROJECTS_INFO_ACTION_SUCCESS, DELETE_PROJECTS_INFO_ACTION_FAILURE } from "./projectActionTypes";
 
 export const fetchProjectRequest = (): FetchProjectRequest => ({
   type: FETCH_ALLPROJECTS_REQUEST,
@@ -56,3 +60,27 @@ export const fetchProjectByIdFailure = (
     payload,
   });
   
+
+
+  // delete project action
+
+export const deleteProjectInfoAction = (id: any): DeleteProjectInfoAction => {
+  return {
+    type: DELETE_PROJECTS_INFO_ACTION,
+    payload: id,
+  };
+};
+
+export const deleteProjectInfoActionSuccess = (id: any): DeleteProjectInfoActionSuccess => {
+  return {
+    type: DELETE_PROJECTS_INFO_ACTION_SUCCESS,
+    payload: { id },
+  };
+};
+
+export const deleteProjectInfoActionFailure = (error: any): DeleteProjectInfoActionFailure => {
+  return {
+    type: DELETE_PROJECTS_INFO_ACTION_FAILURE,
+    payload: { error },
+  };
+};
