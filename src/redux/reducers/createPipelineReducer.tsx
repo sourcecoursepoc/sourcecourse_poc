@@ -13,13 +13,19 @@ const initialPostState: PostGroupPipelineInfoState = {
     state = initialPostState,
     action: PostGroupPipelineActions
   ): PostGroupPipelineInfoState => {
+    console.log('postGroupPipelineReducer - Action:', action);
+  
     switch (action.type) {
       case POST_GROUP_PIPELINE_ACTION:
+        console.log('postGroupPipelineReducer - POST_GROUP_PIPELINE_ACTION');
         return {
           ...state,
           pending: true,
         };
       case POST_GROUP_PIPELINE_ACTION_SUCCESS:
+        console.log('postGroupPipelineReducer - POST_GROUP_PIPELINE_ACTION_SUCCESS');
+        console.log('postGroupPipelineReducer - Payload:', action.payload);
+  
         return {
           ...state,
           pending: false,
@@ -27,6 +33,9 @@ const initialPostState: PostGroupPipelineInfoState = {
           error: null,
         };
       case POST_GROUP_PIPELINE_ACTION_FAILURE:
+        console.log('postGroupPipelineReducer - POST_GROUP_PIPELINE_ACTION_FAILURE');
+        console.log('postGroupPipelineReducer - Error:', action.payload.error);
+  
         return {
           ...state,
           pending: false,
@@ -37,4 +46,3 @@ const initialPostState: PostGroupPipelineInfoState = {
         return state;
     }
   };
-  

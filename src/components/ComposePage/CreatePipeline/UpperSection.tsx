@@ -4,13 +4,21 @@ import Buttons from '../buttons/buttons';
 import { PlayCircleFilled } from "@ant-design/icons";
 import CardDisplay from './CardDisplay';
 import styles from '../buttons/buttonStyle.module.css'
+import { postGroupPipelineInfoAction } from '@/redux/actions/createPipeline';
+import { useSelector, useDispatch } from 'react-redux';;
 
 interface UpperSectionProps {
     onSelectInitial: () => void;
     onSelectSync: () => void;
     cardSelected: string;
   }
+  
+ 
 const UpperSection: React.FC<UpperSectionProps>= ({ onSelectInitial, onSelectSync, cardSelected }) => {
+    const dispatch = useDispatch();
+     const handleExecute = async () => {
+    dispatch(postGroupPipelineInfoAction(3,"a","g","gy","g",["g"],"dgsf",["d"],[0]));
+};
     return (
         <>
             <Row justify="space-between" style={{ borderBottom: "1px solid #ccc" }}>
@@ -42,8 +50,8 @@ const UpperSection: React.FC<UpperSectionProps>= ({ onSelectInitial, onSelectSyn
                         icon={<PlayCircleFilled />}
                         size={"large"}
                         style={{ minWidth: "8rem" }}
-                        onClick={() => { }}
-                        href={"/"}
+                        onClick={handleExecute}
+                        
                     />
 
                 </Col>
