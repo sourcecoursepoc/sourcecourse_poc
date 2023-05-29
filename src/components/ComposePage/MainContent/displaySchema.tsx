@@ -12,7 +12,7 @@ interface MyComponentProps {
   text: string;
   attribute: string;
   icon: ReactNode;
-  uid: string; // new prop for the uid of the node
+  uid: string; 
   handleRemove: (uid: string) => void;
   lengthOfColums: any;
   minWidth?: any;
@@ -38,8 +38,6 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, u
           </Col>
             <Col style={{ paddingLeft: '6.5px' }}>
               {deleteIcon}
-              {/* <DeleteFilled style={{color:"red",height:'auto'}} */}
-              {/* onClick={() => handleRemove(uid)}/> */}
             </Col>
           </Row>
           <Row className={styles.imageName}>

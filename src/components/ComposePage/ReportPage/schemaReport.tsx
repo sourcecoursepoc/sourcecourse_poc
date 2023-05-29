@@ -13,7 +13,7 @@ const SchemaReport = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchRecord());
-  }, []);
+  }, [dispatch]);
   const data = [
     {
       name: "Item",

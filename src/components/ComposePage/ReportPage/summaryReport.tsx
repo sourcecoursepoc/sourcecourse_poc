@@ -13,7 +13,7 @@ const SummaryReport = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchRecord());
-  }, []);
+  }, [dispatch]);
 
   const pieDataRecord = [
     { name: "Migrated", value: getRecords[0]?.RecordsDetails[0]?.migrated },
