@@ -5,7 +5,7 @@ import DescriptionBox from './descriptionbox';
 import DisplayBox from './displaybox';
 import TagBox from './tagbox';
 import { useSelector, useDispatch } from 'react-redux';
-import { SelectedTreeNodeInfo } from '../../redux/selector';
+import { SelectedTreeNodeInfo, updatedTagArray, updatedColumnTagArray } from '../../redux/selector';
 import { Transcription } from './transcriptionFile';
 import Buttons from '../../components/ComposePage/buttons/buttons';
 import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
@@ -34,12 +34,16 @@ export default function SchemaContent() {
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [selectedUid, setSelectedUid] = useState(null);
     const [selectedValueName, setSelectedValueName] = useState("");
-
-
     const [description, setDescription] = useState('');
     const [tags, setTags] = useState<string[]>([]);
-
     const dispatch = useDispatch();
+
+    const updatedTableTagAndDescription = useSelector(updatedTagArray);
+    console.log(updatedTableTagAndDescription, "updatedTableTagAndDescription")
+
+    const updatedColumnTagsAndDescription = useSelector(updatedColumnTagArray);
+    console.log(updatedColumnTagsAndDescription, "updatedColumnTagsAndDescription")
+
     const handleSaveClick = () => {
         setSaveModalVisible(true);
     };
@@ -51,8 +55,9 @@ export default function SchemaContent() {
         } else if ('name' in selcectedDataLastElement) {
             await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
         }
-    showSuccessToast(SUCCESSTOAST);
+        showSuccessToast(SUCCESSTOAST);
     };
+    
     const handleSaveModalCancel = () => {
         setSaveModalVisible(false);
     };
