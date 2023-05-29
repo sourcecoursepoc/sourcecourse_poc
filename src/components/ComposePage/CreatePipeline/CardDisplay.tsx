@@ -20,7 +20,7 @@ const CardDisplay: React.FC<CardDisplayProps> = ({ alt, src, title, onSelectCard
           </Row>
         </div>
         <div className={styles.innerleft}>
-          <Row className={styles.items}><Col style={{ width: "100%", /* textAlign: "-webkit-center" */ }}><p className={styles.styeText}>{title}</p></Col></Row>
+          <Row className={styles.items}><Col style={{ width: "100%" }}><p className={styles.styeText}>{title}</p></Col></Row>
         </div>
       </div>
 
