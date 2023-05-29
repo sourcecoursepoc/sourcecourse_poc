@@ -15,9 +15,15 @@ import {
 import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
 import axios from "axios";
-import { postProjectSchemaInfoRequest } from "@/redux/actions/composeAction";
+import {
+  deleteProjectSchemaInfoRequest,
+  fetchProjectSchemaInfoAction,
+  postProjectSchemaInfoRequest,
+} from "@/redux/actions/composeAction";
 import { searchSchemaByTagsInfoAction } from "../../../redux/actions/composeAction";
 import { searchSchemaData } from "../../../redux/selector";
+import { AppState } from "@/redux/reducers";
+import { showSuccessToast } from "@/pages/schemas/toast";
 
 interface MyModalProps {
   visible: boolean;
@@ -29,32 +35,45 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, projectUid }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-  const projectSchemaInfo = useSelector(projectSchemaInfoSelector);
-  const selectedTableArray = useSelector(getSelectorTableNodes);
-  const [searchText, setSearchText] = useState("");
-  const [treeData, setTreeData] = useState([]);
 
+  const projectSchemaInfo = useSelector(projectSchemaInfoSelector); //tables in the database
+  const selectedTableArray = useSelector(getSelectorTableNodes); 
+  const [searchText, setSearchText] = useState("");
+  const [treeData, setTreeData] = useState([]);//selected tables from the tree
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
     }
-  }, [dispatch, projectSchemaInfo]);
+  }, [projectSchemaInfo,dispatch]);
 
+  const [combinedArray, setCombinedArray] = useState<any[]>([]);
+
+  useEffect(() => {
+    const uniqueValues = [...projectSchemaInfo, ...selectedTableArray].filter(
+      (item, index, self) => index === self?.findIndex((t) => t?.uid === item?.uid)
+    );
+
+    setCombinedArray(uniqueValues);
+  }, [projectSchemaInfo, selectedTableArray]);
+
+  const tableUidArray = combinedArray?.map((table: any) => parseInt(table?.uid)); //taking uid's of selected tables
   useEffect(() => {
     setTreeData(database)
   }, [database])
 
   const searchData = useSelector(searchSchemaData);
-  const combinedArray: any = [...projectSchemaInfo, ...selectedTableArray];
-  const tableUidArray = combinedArray.map((table:any) => parseInt(table.uid));
-
   //POST action
   const handleImport = () => {
     const requestBody = {
       projectUid: projectUid,
       sourceTableUids: tableUidArray,
     };
-    dispatch(postProjectSchemaInfoRequest(requestBody.projectUid, requestBody.sourceTableUids));
+    dispatch(
+      postProjectSchemaInfoRequest(
+        requestBody?.projectUid,
+        requestBody?.sourceTableUids
+      )
+    );
     onExport();
   };
 
@@ -82,19 +101,14 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
     onCancel();
   };
 
-  const handleRemove = async (uid: string) => {
+  const handleRemove = (uid: string) => {
     const requestBody = {
       projectUid: projectUid,
       sourceTableUids: [uid],
     };
-    try {
-      const response = await axios.delete(
-        "http://localhost:8080/sourcecourse/project-tables",
-        { data: requestBody }
-      );
-    } catch (error) {
-      console.error(error);
-    }
+    setCombinedArray((prevArray) =>
+      prevArray?.filter((item) => item?.uid !== uid)
+    );
   };
 
   return (
@@ -172,7 +186,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
                           <span>
                             {" "}
                             <Image
-                              atl=""
+                            alt=""
                               src="/Schemas.png"
                               preview={false}
                               style={{
