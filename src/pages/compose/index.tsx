@@ -27,6 +27,7 @@ import { useSelector } from "react-redux";
 import { getProjectByIdSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
+import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -114,6 +115,9 @@ const Compose = () => {
     setName("");
     setDescription("");
     showSuccessToast(DELETE_TOAST);
+    dispatch(deleteProjectInfoAction(id))
+    setProjectId("");
+    window.location.href = "/";
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
@@ -174,10 +178,10 @@ const Compose = () => {
                   nameError
                     ? NAME_ERROR
                     : descriptionError
-                    ? DESCRIPTION_ERROR
-                    : nameError && descriptionError
-                    ? NAME_DESCRIPTION_ERROR
-                    : ""
+                      ? DESCRIPTION_ERROR
+                      : nameError && descriptionError
+                        ? NAME_DESCRIPTION_ERROR
+                        : ""
                 }
                 buttonsDisabled={nameError || descriptionError ? true : false}
               />
@@ -196,7 +200,7 @@ const Compose = () => {
                     opacity: projectId ? 1 : 0.5,
                   }}
                   onClick={
-                    projectId ? () => handleIconClick("HddFilled") : () => {}
+                    projectId ? () => handleIconClick("HddFilled") : () => { }
                   }
                   alt=""
                 />{" "}
@@ -216,7 +220,7 @@ const Compose = () => {
                   onClick={
                     projectId
                       ? () => handleIconClick("ContainerFilled")
-                      : () => {}
+                      : () => { }
                   }
                 />
                 <br />
@@ -236,7 +240,7 @@ const Compose = () => {
                   onClick={
                     projectId
                       ? () => handleIconClick("ComposePipeline")
-                      : () => {}
+                      : () => { }
                   }
                 />
                 <br />
@@ -253,7 +257,7 @@ const Compose = () => {
                   }}
                   alt=""
                   onClick={
-                    projectId ? () => handleIconClick("Reports") : () => {}
+                    projectId ? () => handleIconClick("Reports") : () => { }
                   }
                 />
                 <br />
@@ -270,7 +274,7 @@ const Compose = () => {
                   }}
                   alt=""
                   onClick={
-                    projectId ? () => handleIconClick("Users") : () => {}
+                    projectId ? () => handleIconClick("Users") : () => { }
                   }
                 />
               </Col>

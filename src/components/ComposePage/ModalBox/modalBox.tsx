@@ -20,6 +20,8 @@ import {
   fetchProjectSchemaInfoAction,
   postProjectSchemaInfoRequest,
 } from "@/redux/actions/composeAction";
+import { searchSchemaByTagsInfoAction } from "../../../redux/actions/composeAction";
+import { searchSchemaData } from "../../../redux/selector";
 import { AppState } from "@/redux/reducers";
 import { showSuccessToast } from "@/pages/schemas/toast";
 
@@ -35,7 +37,9 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   const database = useSelector(getDataBaseSelector);
 
   const projectSchemaInfo = useSelector(projectSchemaInfoSelector); //tables in the database
-  const selectedTableArray = useSelector(getSelectorTableNodes); //selected tables from the tree
+  const selectedTableArray = useSelector(getSelectorTableNodes); 
+  const [searchText, setSearchText] = useState("");
+  const [treeData, setTreeData] = useState([]);//selected tables from the tree
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
@@ -53,7 +57,11 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   }, [projectSchemaInfo, selectedTableArray]);
 
   const tableUidArray = combinedArray?.map((table: any) => parseInt(table?.uid)); //taking uid's of selected tables
+  useEffect(() => {
+    setTreeData(database)
+  }, [database])
 
+  const searchData = useSelector(searchSchemaData);
   //POST action
   const handleImport = () => {
     const requestBody = {
@@ -68,6 +76,25 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
     );
     onExport();
   };
+
+  // Callback function to update the search text state
+  const handleSearch = (text:string) => {
+    setSearchText(text);
+    if (text) {
+      dispatch(searchSchemaByTagsInfoAction(text));
+    }
+  };
+
+  useEffect(() => {
+    if (searchText) {
+      if (searchData && searchData.length > 0) {
+        const treeArray = [{ dbName: '', description: '', tables: searchData }]
+        setTreeData(treeArray);
+      }
+    } else {
+      setTreeData(database);
+    }
+  }, [searchText, searchData, database]);
 
   const handleImportButton = () => {
     handleImport();
@@ -100,7 +127,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
       >
         <Row>
           <Col span={12} className={styles.modelBoxBorder}>
-            <SearchBar />
+            <SearchBar onSearch={handleSearch} />
           </Col>
           <Col span={12} className={styles.modelBorder}>
             <Button
@@ -119,19 +146,23 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
         </Row>
         <Row>
           <Col span={12} className={styles.treeview}>
-            <TreeView
-              db={database}
-              iconImage={
-                <PlusOutlined
-                  style={{
-                    width: "3rem",
-                    fontSize: "0.8rem",
-                    color: "#7E60BC",
-                    strokeWidth: "2",
-                  }}
-                />
-              }
-            />
+            {treeData.length > 0 ? (
+              <TreeView
+                db={treeData}
+                iconImage={
+                  <PlusOutlined
+                    style={{
+                      width: "3rem",
+                      fontSize: "0.8rem",
+                      color: "#7E60BC",
+                      strokeWidth: "2",
+                    }}
+                  />
+                }
+              />
+            ) : (
+                <p>No data </p>
+              )}
           </Col>
           <Col
             span={12}
