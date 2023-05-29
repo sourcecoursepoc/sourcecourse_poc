@@ -17,6 +17,7 @@ import ConfirmationModal from "../GroupsPage/ModalBox/ConfirmationModal";
 import { getSelectorTableNodes } from "@/redux/selector";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { useDispatch } from "react-redux";
+import { DELETE_CONFIRMATION_MESSAGE, EXIT_CONFIRMATION_MESSAGE, SAVE_CONFIRMATION_MESSAGE } from "@/constants/constants";
 
 const ButtonComponent = ({
   saveModalVisible,
@@ -75,8 +76,7 @@ const ButtonComponent = ({
           visible={deleteModalVisible}
           onOk={handleDeleteModalOk}
           onCancel={handleDeleteModalCancel}
-          title="Delete Confirmation"
-          message="are you sure want to delete"
+          title={DELETE_CONFIRMATION_MESSAGE}
         />
 
         <Buttons
@@ -99,7 +99,7 @@ const ButtonComponent = ({
           visible={saveModalVisible}
           onOk={handleSaveModalOk}
           onCancel={handleSaveModalCancel}
-          title="Save Confirmation"
+          title={SAVE_CONFIRMATION_MESSAGE}
           message={saveBoxMessage}
           buttonsDisabled={buttonsDisabled}
         />
@@ -115,8 +115,7 @@ const ButtonComponent = ({
           visible={exitModalVisible}
           onOk={handleExitModalOk}
           onCancel={handleExitModalCancel}
-          title="Exit Confirmation"
-          message="Are you sure you want to Exit?"
+          title={EXIT_CONFIRMATION_MESSAGE}
         />
       </Row>
     </Col>

@@ -14,7 +14,7 @@ const CardDisplay = ({ alt, src, title, onSelectCard, isThisCardSelected }) => {
           </Row>
         </div>
         <div className={styles.innerleft}>
-          <Row className={styles.items}><Col style={{ width: "100%", textAlign: "-webkit-center" }}><p className={styles.styeText}>{title}</p></Col></Row>
+          <Row className={styles.items}><Col style={{ width: "100%" }}><p className={styles.styeText}>{title}</p></Col></Row>
         </div>
       </div>
 
