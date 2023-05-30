@@ -243,16 +243,10 @@ export const searchSchemaByTagsInfoFailureAction = (
   // GET COMPOSE NAME AND DESC
   
   export const getComposeNameDescRequest = (
-    // uid: any,
-    // name: any,
-    // description: any
   ): GetComposeNameDescRequest => {
     console.log("getComposeNameDescRequest action creator called");
     return {
       type: GET_COMPOSE_NAME_DESC,
-      // uid,
-      // name,
-      // description,
     };
   };
   

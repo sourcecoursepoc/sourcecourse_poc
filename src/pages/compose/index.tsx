@@ -26,7 +26,7 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { getComposeNameDescSelector, getProjectByIdSelector, postComposeNameDescSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
-import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR } from "@/constants/constants";
 import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
 
 const Compose = () => {
@@ -43,9 +43,7 @@ const Compose = () => {
 
   //useSelector to take posted - compose page name and desc
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  console.log("postComposeNameDescData",postComposeNameDescData)
   const uidFromComposePage = postComposeNameDescData.uid;
-  console.log("uidFromComposePage",uidFromComposePage)
 
   const router = useRouter();
   const {
@@ -71,11 +69,8 @@ const Compose = () => {
     //dispatch done to post compose page name and desc to db
     const success = await dispatch(postComposeNameDescRequest(name, description));
     if (success) {
-      showSuccessToast("Saved Successfully");
+      showSuccessToast({SUCCESSTOAST});
       setProjectId(uidFromComposePage);
-    }
-    else {
-      showSuccessToast("Failed!");
     }
   };
   const handleSaveModalCancel = () => {

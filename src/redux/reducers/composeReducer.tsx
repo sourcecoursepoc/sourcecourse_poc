@@ -245,13 +245,11 @@ export const postComposeNameDescReducer = (
 ): ComposeNameDescState => {
   switch (action.type) {
     case POST_COMPOSE_NAME_DESC:
-      console.log('POST_COMPOSE_NAME_DESC action triggered');
       return {
         ...state,
         pending: true,
       };
     case POST_COMPOSE_NAME_DESC_SUCCESS:
-      console.log('POST_COMPOSE_NAME_DESC_SUCCESS action triggered');
       return {
         ...state,
         pending: false,
@@ -259,7 +257,6 @@ export const postComposeNameDescReducer = (
         error: null,
       };
     case POST_COMPOSE_NAME_DESC_FAILURE:
-      console.log('POST_COMPOSE_NAME_DESC_FAILURE action triggered');
       return {
         ...state,
         pending: false,
