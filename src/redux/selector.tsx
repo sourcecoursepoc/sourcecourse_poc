@@ -21,6 +21,8 @@ export const searchSchemaData = createSelector(
   getSearchSchemaData,
   (searchData) => searchData
 );
+const postComposePageNameDesc = (state: AppState) => state.postComposeNameDesc.postData;
+export const postComposeNameDescSelector = createSelector(postComposePageNameDesc, (postData) => postData)
 export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
 export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)
 export const getSelectedGroupdataArraySelector = createSelector(getSelectedGroupdataArray, (myGroupdataArray) => myGroupdataArray)
