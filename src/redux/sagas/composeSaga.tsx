@@ -15,6 +15,7 @@ import {
   POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  POST_COMPOSE_NAME_DESC,
 } from "../actions/composeActionTypes";
 import {
   fetchComposePipelineSuccess,
@@ -30,6 +31,9 @@ import {
   deleteProjectSchemaInfoRequest,
   searchSchemaByTagsInfoSuccessAction,
   searchSchemaByTagsInfoFailureAction,
+  postComposeNameDescRequest,
+  postComposeNameDescRequestSuccess,
+  postComposeNameDescRequestFailure,
 } from "../actions/composeAction";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -227,4 +231,28 @@ export function* searchSchemaByTagRequestSaga() {
   yield all([
     takeLatest(SEARCH_SCHEMA_BY_TAG_INFO_ACTION, fetchSearchSchemaByTagSaga),
   ]);
+}
+
+//saga for posting compose page name and description
+const postNameAndDescriptionAPI = BASE_URL + "/project";
+function postNameAndDescriptionAPIcall(name:any,description:any): Promise<AxiosResponse<any, any>> {
+  return axios.post(`${postNameAndDescriptionAPI}`,{ 
+  name:name,
+  description:description
+}
+  );
+}
+//console.log("postNameAndDescriptionAPIcall---saga",postNameAndDescriptionAPIcall())
+function* postNameAndDescriptionSaga(action: ReturnType<typeof postComposeNameDescRequest>) {
+  try {
+    const { name, description } = action;
+    const response = yield call({ fn: postNameAndDescriptionAPIcall, context: null }, name, description);
+    yield put(postComposeNameDescRequestSuccess(response.data));
+  } catch (error) {
+    yield put(postComposeNameDescRequestFailure({ error }));
+  }
+}
+
+export function* PostNameAndDescSaga() {
+  yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)]);
 }

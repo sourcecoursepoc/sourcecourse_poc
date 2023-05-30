@@ -11,6 +11,8 @@ import {
   DeleteProjectSchemaInfoActionTypes,
   SearchSchemaByTagInfoState,
   SearchSchemaByTagActions,
+  ComposeNameDescActions,
+  ComposeNameDescState,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -31,6 +33,9 @@ import {
   SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
   SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
   SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
+  POST_COMPOSE_NAME_DESC,
+  POST_COMPOSE_NAME_DESC_SUCCESS,
+  POST_COMPOSE_NAME_DESC_FAILURE,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -223,6 +228,46 @@ export const searchSchemaByTagReducer = (state = initialSearchSchemaState, actio
       return {
         ...state,
       };
+  }
+};
+
+
+//reducer for posting compose page name and description
+const initialPostNameDescState: ComposeNameDescState = {
+  pending: false,
+  postData: [],
+  error: null,
+};
+
+export const postComposeNameDescReducer = (
+  state = initialPostNameDescState,
+  action: ComposeNameDescActions
+): ComposeNameDescState => {
+  switch (action.type) {
+    case POST_COMPOSE_NAME_DESC:
+      console.log('POST_COMPOSE_NAME_DESC action triggered');
+      return {
+        ...state,
+        pending: true,
+      };
+    case POST_COMPOSE_NAME_DESC_SUCCESS:
+      console.log('POST_COMPOSE_NAME_DESC_SUCCESS action triggered');
+      return {
+        ...state,
+        pending: false,
+        postData: action.payload.postData,
+        error: null,
+      };
+    case POST_COMPOSE_NAME_DESC_FAILURE:
+      console.log('POST_COMPOSE_NAME_DESC_FAILURE action triggered');
+      return {
+        ...state,
+        pending: false,
+        postData: [],
+        error: action.payload.error,
+      };
+    default:
+      return state;
   }
 };
 
