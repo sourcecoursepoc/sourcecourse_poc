@@ -37,8 +37,6 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, u
           </Col>
             <Col style={{ paddingLeft: '6.5px' }}>
               {deleteIcon}
-              {/* <DeleteFilled style={{color:"red",height:'auto'}} */}
-              {/* onClick={() => handleRemove(uid)}/> */}
             </Col>
           </Row>
           <Row className={styles.imageName}>

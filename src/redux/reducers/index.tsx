@@ -1,9 +1,10 @@
 import { combineReducers } from "redux";
 import fetchPipelineReducer from "./fetchDataReducer";
 import fetchRecordReducer from "./fetchRecordsReducer";
-import schemaReducer from "./schemaReducer";
+import {schemaReducer} from "./schemaReducer";
+
 import projectReducer, { deleteProjectReducer } from "./projectReducer";
-import schemaDataBaseReducer, { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer } from "./schemaDataBaseReducer";
+import { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer, schemaDataBaseReducers } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import {
   composeReducer,
@@ -19,8 +20,8 @@ import { postGroupPipelineReducer } from "./createPipelineReducer";
 
 const rootReducer = combineReducers({
   pipeline: fetchPipelineReducer,
-
-  database: schemaDataBaseReducer,
+  schema: schemaReducer,
+  database: schemaDataBaseReducers,
   groupdataDatabase: groupdataDatabaseReducer,
   project: projectReducer,
   projectById: projectByIdReducer,
