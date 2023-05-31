@@ -42,7 +42,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   const [searchText, setSearchText] = useState("");
   const [treeData, setTreeData] = useState([]);
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  const uidFromComposePage = postComposeNameDescData.uid;//selected tables from the tree
+  const uidFromComposePage = postComposeNameDescData?.uid;//selected tables from the tree
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
