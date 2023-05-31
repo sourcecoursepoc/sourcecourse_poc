@@ -120,11 +120,11 @@ const Compose = () => {
   };
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
-      return <MainContent />;
+      return <MainContent  projectUid={id}/>;
     } else {
       switch (selectedIcon) {
         case "HddFilled":
-          return <MainContent />;
+          return <MainContent projectUid={id} />;
         case "ContainerFilled":
           return <GroupsMainContent />;
         case "Reports":

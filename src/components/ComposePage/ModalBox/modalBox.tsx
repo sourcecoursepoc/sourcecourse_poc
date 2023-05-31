@@ -11,6 +11,7 @@ import {
   projectSchemaInfoSelector,
   getSelectedArraySelector,
   getSelectorTableNodes,
+  postComposeNameDescSelector,
 } from "@/redux/selector";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
@@ -39,7 +40,9 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   const projectSchemaInfo = useSelector(projectSchemaInfoSelector); //tables in the database
   const selectedTableArray = useSelector(getSelectorTableNodes); 
   const [searchText, setSearchText] = useState("");
-  const [treeData, setTreeData] = useState([]);//selected tables from the tree
+  const [treeData, setTreeData] = useState([]);
+  const postComposeNameDescData = useSelector(postComposeNameDescSelector);
+  const uidFromComposePage = postComposeNameDescData.uid;//selected tables from the tree
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
@@ -65,7 +68,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   //POST action
   const handleImport = () => {
     const requestBody = {
-      projectUid: projectUid,
+      projectUid: uidFromComposePage?uidFromComposePage:projectUid,
       sourceTableUids: tableUidArray,
     };
     dispatch(
