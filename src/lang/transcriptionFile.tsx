@@ -2,7 +2,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function Transcription(selectedMetaDataLastItem: any) {
     const { t } = useTranslation();
-    const data: { [key: string]: string } = {
+    const data : { [key: string]: string }= {
         status: "Status",
         region: "Region",
         totalTables: "Total Tables",

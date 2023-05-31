@@ -6,13 +6,13 @@ import DisplayBox from './displaybox';
 import TagBox from './tagbox';
 import { useSelector, useDispatch } from 'react-redux';
 import { SelectedTreeNodeInfo } from '../../redux/selector';
+import Transcription from '../../lang/transcriptionFile';
 import Buttons from '../../components/ComposePage/buttons/buttons';
 import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
 import ConfirmationModal from '../../components/ComposePage/GroupsPage/ModalBox/ConfirmationModal';
 import { CloseOutlined, SaveFilled } from '@ant-design/icons';
 import { showSuccessToast, showErrorToast } from './toast';
 import { postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoAction, fetchDataBaseInfoAction } from '../../redux/actions/schemasaction';
-import Transcription from './transcriptionFile';
 import { SUCCESSTOAST, SAVE_CONFIRMATION_MESSAGE, SAVE_CONFIRMATION, CANCEL_CONFIRMATION_MESSAGE, CANCEL_CONFIRMATION } from '../../constants/constants';
 
 const { Content } = Layout;

@@ -9,6 +9,7 @@ import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import {
   composeReducer,
   composeReportsPipelineReducer,
+  postComposeNameDescReducer,
   projectSchemaInfoReducer,
   searchSchemaByTagReducer,
 } from "./composeReducer";
@@ -32,6 +33,7 @@ const rootReducer = combineReducers({
   schemaComposeData: projectSchemaInfoReducer,
   postTagsAndDescription: postTagsAndDescriptionReducer,
   postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer,
+  postComposeNameDesc:postComposeNameDescReducer,
   deleteProject: deleteProjectReducer,
   searchSchemaByTag:searchSchemaByTagReducer,
 
