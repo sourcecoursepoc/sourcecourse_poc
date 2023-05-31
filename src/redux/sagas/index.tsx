@@ -12,7 +12,8 @@ import {
   schemaComposeSaga,
   PostSchemaRequestSaga,
   deleteSchemaRequestSaga,
-  searchSchemaByTagRequestSaga
+  searchSchemaByTagRequestSaga,
+  PostNameAndDescSaga
 } from "./composeSaga";
 import groupSaga from "./groupSaga";
 import recordSaga from "../sagas/fetchRecordActionSaga";
@@ -23,6 +24,6 @@ export function* rootSaga() {
 
     yield all([(schemaSaga()), (pipelineSaga()), (DataBaseSaga()), (groupdataDataBaseSaga()), (recordSaga()), (projectSaga()), (ComposePipelineSaga()), (groupSaga()), (ComposeReportsPipelineSaga()), (PostTableTagsAndDescriptionSaga()), (PostColumnTagsSaga()),
       schemaComposeSaga(),
-      PostSchemaRequestSaga(), projectByIdSaga(),deleteSchemaRequestSaga(),(searchSchemaByTagRequestSaga())]);
+      PostSchemaRequestSaga(), projectByIdSaga(),deleteSchemaRequestSaga(),(searchSchemaByTagRequestSaga()),(PostNameAndDescSaga())]);
 
 }
