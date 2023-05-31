@@ -9,7 +9,6 @@ import {
   getDataBaseSelector,
   getlastIndexesArraySelector,
   projectSchemaInfoSelector,
-  getSelectedArraySelector,
   getSelectorTableNodes,
   postComposeNameDescSelector,
 } from "@/redux/selector";
@@ -37,12 +36,12 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
 
-  const projectSchemaInfo = useSelector(projectSchemaInfoSelector); //tables in the database
+  const projectSchemaInfo = useSelector(projectSchemaInfoSelector); 
   const selectedTableArray = useSelector(getSelectorTableNodes); 
   const [searchText, setSearchText] = useState("");
-  const [treeData, setTreeData] = useState([]);
+  const [treeData, setTreeData] = useState<any>([]);
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  const uidFromComposePage = postComposeNameDescData?.uid;//selected tables from the tree
+  const uidFromComposePage = postComposeNameDescData[0]?.uid;
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());

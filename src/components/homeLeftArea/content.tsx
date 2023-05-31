@@ -40,7 +40,7 @@ const ProjectContent: React.FC<ContentProps> = ({
   const projectArray = projectListData[0];
   const transcriptList = Transcription(projectArray);
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  const uidFromComposePage = postComposeNameDescData.uid;
+  const uidFromComposePage = postComposeNameDescData[0]?.uid;
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
