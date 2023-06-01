@@ -14,6 +14,7 @@ import { CloseOutlined, SaveFilled } from '@ant-design/icons';
 import { showSuccessToast, showErrorToast } from './toast';
 import { postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoAction, fetchDataBaseInfoAction } from '../../redux/actions/schemasaction';
 import { SUCCESSTOAST, SAVE_CONFIRMATION_MESSAGE, SAVE_CONFIRMATION, CANCEL_CONFIRMATION_MESSAGE, CANCEL_CONFIRMATION } from '../../constants/constants';
+import { useRouter } from 'next/router';
 
 const { Content } = Layout;
 
@@ -39,25 +40,31 @@ export default function SchemaContent() {
     const dispatch = useDispatch();
 
     const updatedTableTagAndDescription = useSelector(updatedTagArray);
-    console.log(updatedTableTagAndDescription, "updatedTableTagAndDescription")
-
     const updatedColumnTagsAndDescription = useSelector(updatedColumnTagArray);
-    console.log(updatedColumnTagsAndDescription, "updatedColumnTagsAndDescription")
 
     const handleSaveClick = () => {
         setSaveModalVisible(true);
     };
+    const router = useRouter();
 
     const handleSaveModalOk = async () => {
         setSaveModalVisible(false);
-        if ('tableName' in selcectedDataLastElement) {
-            await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
-        } else if ('name' in selcectedDataLastElement) {
-            await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
+        if (selcectedDataLastElement) {
+            if ('tableName' in selcectedDataLastElement) {
+                await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
+                // setTags(updatedTableTagAndDescription);
+            } else if ('name' in selcectedDataLastElement) {
+                await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
+                // setTags(updatedColumnTagsAndDescription)
+            }
+            
+            const selectedDataJSON = JSON.stringify(selcectedDataLastElement);
+            localStorage.setItem('selectedData', selectedDataJSON);
+            showSuccessToast(SUCCESSTOAST);
+            dispatch(fetchDataBaseInfoAction());
         }
-        showSuccessToast(SUCCESSTOAST);
     };
-    
+
     const handleSaveModalCancel = () => {
         setSaveModalVisible(false);
     };
@@ -68,7 +75,7 @@ export default function SchemaContent() {
 
     const handleCancelModalOk = () => {
         setCancelModalVisible(false);
-        window.location.href = "/";
+        // window.location.href = "/";
     };
 
     const handleCancelModalCancel = () => {
