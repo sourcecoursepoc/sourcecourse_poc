@@ -1,8 +1,8 @@
 import { useTranslation } from 'react-i18next';
 
-export function Transcription(selectedMetaDataLastItem: any) {
+export default function Transcription(selectedMetaDataLastItem: any) {
     const { t } = useTranslation();
-    const data = {
+    const data : { [key: string]: string }= {
         status: "Status",
         region: "Region",
         totalTables: "Total Tables",
@@ -19,7 +19,7 @@ export function Transcription(selectedMetaDataLastItem: any) {
         type: "Type",
     };
 
-    const transcriptObj = {};
+    const transcriptObj: { [key: string]: any } = {};
     for (const key in selectedMetaDataLastItem) {
         const defaultValue = data[key];
         const value = selectedMetaDataLastItem[key] ?? defaultValue ?? null;

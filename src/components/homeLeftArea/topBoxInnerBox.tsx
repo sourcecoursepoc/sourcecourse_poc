@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect} from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
+import Link from "next/link";
 
 const TopInnerBox: React.FC = () => {
   const dispatch = useDispatch();
@@ -27,10 +28,9 @@ const TopInnerBox: React.FC = () => {
               style={{ height: "3rem", marginTop: "1.1rem" }}
             ></Image>
           </div>
-          <Button
+           <Link
             type="link"
             href="/schemas"
-            className={styles.Button}
             style={{
               color: "black",
               height: 47,
@@ -38,8 +38,8 @@ const TopInnerBox: React.FC = () => {
               borderTopLeftRadius: "0px",
             }}
           >
-            Discover
-          </Button>
+           Discover
+          </Link>
         </div>
         <div className={styles.innerleft}>
           <div className={styles.innerleft}>

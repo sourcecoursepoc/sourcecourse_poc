@@ -2,6 +2,7 @@
 import React from "react";
 import { Row, Col, Divider, Statistic, Button, Image } from "antd";
 import styles from "./topBoxRight.module.css";
+import Link from "next/link";
 
 const TopBoxRight: React.FC = () => {
   return (
@@ -20,10 +21,10 @@ const TopBoxRight: React.FC = () => {
         </div>
         <div className={styles.innerrightBottom}>
           {" "}
-          <Button
+           <Link
             type="link"
+            
             href="/compose"
-            className={styles.Button}
             style={{
               color: "black",
               width: "8rem",
@@ -32,7 +33,7 @@ const TopBoxRight: React.FC = () => {
             }}
           >
             Compose{" "}
-          </Button>
+          </Link>
         </div>
       </div>
     </>
