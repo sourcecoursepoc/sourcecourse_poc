@@ -24,7 +24,7 @@ import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainCon
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { getComposeNameDescSelector, getProjectByIdSelector, postComposeNameDescSelector } from "@/redux/selector";
+import {  getProjectByIdSelector, postComposeNameDescSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR } from "@/constants/constants";
 import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
@@ -40,10 +40,8 @@ const Compose = () => {
   const [saveClicked, setSaveClicked] = useState(false);
   const [savedData, setSavedData] = useState(null);
   const dispatch = useDispatch();
-
-  //useSelector to take posted - compose page name and desc
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  const uidFromComposePage = postComposeNameDescData.uid;
+  const uidFromComposePage = postComposeNameDescData[0]?.uid;
 
   const router = useRouter();
   const {
@@ -54,14 +52,14 @@ const Compose = () => {
   const { projectById: projectData, pending } = useSelector(
     getProjectByIdSelector
   );
-  const [name, setName] = useState(projectData.name);
-  const [description, setDescription] = useState(projectData.description);
+  const [name, setName] = useState(projectData?.name);
+  const [description, setDescription] = useState(projectData?.description);
 
   useEffect(() => {
     dispatch(fetchProjectByIdRequest(id));
-    setName(projectData.name);
-    setDescription(projectData.description);
-  }, [projectData.name, projectData.description]);
+    setName(projectData?.name);
+    setDescription(projectData?.description);
+  }, [projectData?.name, projectData?.description]);
 
 
   const handleSaveProjectInfo = async () => {
@@ -91,10 +89,10 @@ const Compose = () => {
 
     setSaveModalVisible(true);
   };
-  const handleIconClick = (icon) => {
+  const handleIconClick = (icon:any) => {
     setSelectedIcon(icon);
   };
-  const getIconStyle = (icon) => {
+  const getIconStyle = (icon:any) => {
     if (selectedIcon === icon) {
       return {
         borderBottom: "2px solid #7E60BC",
@@ -120,11 +118,11 @@ const Compose = () => {
   };
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
-      return <MainContent />;
+      return <MainContent  projectUid={id}/>;
     } else {
       switch (selectedIcon) {
         case "HddFilled":
-          return <MainContent />;
+          return <MainContent projectUid={id} />;
         case "ContainerFilled":
           return <GroupsMainContent />;
         case "Reports":
