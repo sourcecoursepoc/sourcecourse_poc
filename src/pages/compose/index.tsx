@@ -14,7 +14,6 @@ import {
 import MainIcons from "../../components/ComposePage/MainContent/mainContentIcons";
 import MainContent from "../../components/ComposePage/MainContent/mainContent";
 import ButtonComponent from "@/components/ComposePage/buttons/buttonComponent";
-
 import GroupsMainContent from "@/components/ComposePage/GroupsPage/groupsMainContent";
 import TextAreaComponent from "@/components/ComposePage/TextArea/textArea";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
@@ -24,10 +23,10 @@ import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainCon
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import {  getProjectByIdSelector, postComposeNameDescSelector } from "@/redux/selector";
+import {  getProjectByIdSelector, postComposeNameDescSelector, postComposeNameDescSelectorInitial } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
-import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR } from "@/constants/constants";
-import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR,ERRORTOAST } from "@/constants/constants";
+import {  postComposeNameDescRequest } from "@/redux/actions/composeAction";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -41,6 +40,7 @@ const Compose = () => {
   const [savedData, setSavedData] = useState(null);
   const dispatch = useDispatch();
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
+  const postComposeNameDescDataInitial = useSelector(postComposeNameDescSelectorInitial);
   const uidFromComposePage = postComposeNameDescData[0]?.uid;
 
   const router = useRouter();
@@ -63,12 +63,15 @@ const Compose = () => {
 
 
   const handleSaveProjectInfo = async () => {
-    setSaveModalVisible(false);
-    //dispatch done to post compose page name and desc to db
-    const success = await dispatch(postComposeNameDescRequest(name, description));
-    if (success) {
-      showSuccessToast({SUCCESSTOAST});
+     setSaveModalVisible(false);
+     dispatch(postComposeNameDescRequest(name, description));
+     if (!postComposeNameDescDataInitial.pending && !postComposeNameDescDataInitial.error ) {
+      showSuccessToast(SUCCESSTOAST);
       setProjectId(uidFromComposePage);
+    }
+    else if(!postComposeNameDescDataInitial.pending && postComposeNameDescDataInitial.error)
+    {
+      showSuccessToast(ERRORTOAST);
     }
   };
   const handleSaveModalCancel = () => {
