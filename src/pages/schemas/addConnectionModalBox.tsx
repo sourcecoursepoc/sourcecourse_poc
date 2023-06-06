@@ -59,7 +59,6 @@ const addConnectionModalBox: React.FC<MyModalProps> = (props) => {
             setconnectionURL('')
             setUsername('')
             setPassword('')
-
             onCancel()
             showSuccessToast(CONNECTION_SUCCESS_MESSAGE)
         } else {

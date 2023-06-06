@@ -4,7 +4,7 @@ import fetchRecordReducer from "./fetchRecordsReducer";
 import {schemaReducer} from "./schemaReducer";
 
 import projectReducer, { deleteProjectReducer } from "./projectReducer";
-import { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer, schemaDataBaseReducers } from "./schemaDataBaseReducer";
+import { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer, schemaDataBaseReducers, dBconnectionReducer } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import {
   composeReducer,
@@ -32,7 +32,7 @@ const rootReducer = combineReducers({
   schemaComposeData: projectSchemaInfoReducer,
   postTagsAndDescription: postTagsAndDescriptionReducer,
   postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer,
-  dBconnection: dBconnectionReducer
+  dBconnection: dBconnectionReducer,
   postComposeNameDesc:postComposeNameDescReducer,
   deleteProject: deleteProjectReducer,
   searchSchemaByTag:searchSchemaByTagReducer,
