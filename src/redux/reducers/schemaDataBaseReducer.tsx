@@ -31,8 +31,8 @@ const initialDataBaseState: DataBaseState = {
   lastIndexes: [],
 };
 
-export default (state = initialDataBaseState, action: DataBaseActions) => {
-  switch (action.type) {
+     export const schemaDataBaseReducers = (state = initialDataBaseState, action: DataBaseActions) => {
+      switch (action.type) { 
     case FETCH_SCHEMA_DATABASE_INFO_ACTION:
       return {
         ...state,

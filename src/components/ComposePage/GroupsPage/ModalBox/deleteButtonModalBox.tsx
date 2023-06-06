@@ -7,7 +7,7 @@ interface DeleteModalProps {
   onCancel: () => void;
 }
 
-const DeleteButtonModalBox: React.FC<>= () => {
+const DeleteButtonModalBox: React.FC<DeleteModalProps>= () => {
   const [isDeleteModalVisible, setIsDeleteModalVisible] = useState(false);
 
   const handleDeleteClick = () => {

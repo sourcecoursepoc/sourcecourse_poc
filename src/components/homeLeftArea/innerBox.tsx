@@ -1,3 +1,6 @@
+/* eslint-disable react/display-name */
+/* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import { Row, Col } from "antd";
 import styles from "./innerBox.module.css";
@@ -13,6 +16,7 @@ interface InnerBoxProps {
   title: string;
   value: number;
 }
+
 
 export default function ({ title, value }: InnerBoxProps) {
   return (

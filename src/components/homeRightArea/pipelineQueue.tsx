@@ -15,6 +15,8 @@ const { Content } = Layout;
 const PipelineQueues: React.FC = () => {
   const dispatch = useDispatch();
   const pipelineList = useSelector(getPipelineSelector);
+  const isDataAvailable = pipelineList?.length > 0;
+
   useEffect(() => {
     dispatch(fetchPipeline());
   }, []);
@@ -68,13 +70,25 @@ const PipelineQueues: React.FC = () => {
         </Row>
       ))}
       <Row className={styles.lowerDivider}></Row>
-      <Button
-        type="link"
-        href="/pipeline"
-        style={{ color: "#7a63a9", marginLeft: "75%", fontWeight: "500" }}
-      >
-        View All
-      </Button>
+      {isDataAvailable && (
+        <Button
+          type="link"
+          href="/pipeline"
+          className={styles.button}
+        >
+          View All
+        </Button>
+      )}
+
+      {!isDataAvailable && (
+        <Button
+          type="link"
+          disabled
+          className={styles.button}
+         
+        >
+          View All
+        </Button>)}
     </>
   );
 };

@@ -11,14 +11,7 @@ const initialState: SchemaState = {
   schemas: [],
   error: null,
 };
-
-/* const initialStateSchema: SchemaData = {
-  data: [],
-  loading: false,
-  error: null,
-}; */
-
-export default (state = initialState, action: SchemaActions) => {
+export const schemaReducer =  (state = initialState, action: SchemaActions) => {
   switch (action.type) {
     case FETCH_SCHEMA_SCHEMADATA:
       return {

@@ -1,4 +1,4 @@
-import { Col, Modal, Row, Card } from "antd";
+import { Modal } from "antd";
 import React, { useState } from "react";
 import BottomSection from "./BottomSection";
 import UpperSection from "./UpperSection";
@@ -10,7 +10,15 @@ interface MyModalProps {
 
 const PipelineModalBox: React.FC<MyModalProps> = ({ showCreatePipeline, onCancel }) => {
 
-   
+  const [cardSelected, setCardSelected] = useState<"initial" | "sync">("initial");
+
+  const handleSyncCardSelect = () => {
+    setCardSelected("sync");
+  };
+
+  const handleInitialCardSelect = () => {
+    setCardSelected("initial");
+  };
 
   return (
     <Modal
@@ -19,12 +27,12 @@ const PipelineModalBox: React.FC<MyModalProps> = ({ showCreatePipeline, onCancel
       footer={null}
       closable={false}
       width={1000}
-      bodyStyle={{ borderRadius: "5px", width: "100%", minHeight: "30rem"}}
+      bodyStyle={{ borderRadius: "5px", width: "100%", minHeight: "30rem" }}
     >
 
-      <UpperSection />
+      <UpperSection cardSelected={cardSelected} onSelectInitial={handleInitialCardSelect} onSelectSync={handleSyncCardSelect} />
 
-      <BottomSection />
+      <BottomSection cardSelected={cardSelected} />
 
     </Modal>
   );

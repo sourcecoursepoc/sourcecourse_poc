@@ -1,22 +1,21 @@
 import axios from "axios";
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { call, put, take, takeLatest } from "redux-saga/effects";
 
-import {  IPROJECT } from "../actions/types";
-import {  FETCH_ALLPROJECTS_REQUEST} from "../actions/actionTypes";
-import { fetchProjectFailure, fetchProjectSuccess } from "../actions/fetchProjectAction";
-
+import { IPROJECT, DeleteProjectInfoAction } from "../actions/types";
+import { FETCH_ALLPROJECTS_REQUEST } from "../actions/actionTypes";
+import { fetchProjectFailure, fetchProjectSuccess, deleteProjectInfoActionSuccess, deleteProjectInfoActionFailure } from "../actions/fetchProjectAction";
+import { BASE_URL } from "../../constants/config";
+import { DELETE_PROJECTS_INFO_ACTION } from "../actions/projectActionTypes";
 
 const getProjects = () =>
-axios.get<IPROJECT[]>("http://localhost:8080/sourcecourse/home");
+  axios.get<IPROJECT[]>(BASE_URL + "/home");
+
 /*
   Worker Saga: Fired on FETCH_TODO_REQUEST action
 */
-function* fetchProjectSaga():any {
-
- 
+function* fetchProjectSaga(): any {
   try {
     const response = yield call(getProjects);
-   
     yield put(
       fetchProjectSuccess({
         projects: response.data,
@@ -32,11 +31,41 @@ function* fetchProjectSaga():any {
 }
 
 /*
-  Starts worker saga on latest dispatched `FETCH_TODO_REQUEST` action.
-  Allows concurrent increments.
+  Worker Saga: Fired on FETCH_SCHEMA_REQUEST action
 */
-function* projectSaga() {
-  yield all([takeLatest(FETCH_ALLPROJECTS_REQUEST, fetchProjectSaga)]);
+function* deleteProjectSaga(requestParams: DeleteProjectInfoAction) {
+  try {
+    const response = yield call(() => deleteProject(requestParams.payload));
+    yield put(deleteProjectInfoActionSuccess(response));
+  } catch (e) {
+    yield put(
+      deleteProjectInfoActionFailure({
+        error: e.message,
+      })
+    );
+  }
+}
+
+/*
+  Starts worker saga on FETCH_ALLPROJECTS_REQUEST action
+  but waits for a take action before actually starting the saga
+*/
+function* projectSaga(): any {
+  let isProjectsFetched = false;
+
+  while (true) {
+    const action = yield take([FETCH_ALLPROJECTS_REQUEST, DELETE_PROJECTS_INFO_ACTION]);
+
+    if (action.type === FETCH_ALLPROJECTS_REQUEST && !isProjectsFetched) {
+      yield call(fetchProjectSaga);
+      isProjectsFetched = true;
+    } else if (action.type === DELETE_PROJECTS_INFO_ACTION) {
+      yield call(deleteProjectSaga, action);
+    } else {
+      // Projects already fetched, do not make the API call again
+      console.log("Projects already fetched");
+    }
+  }
 }
 
 export default projectSaga;

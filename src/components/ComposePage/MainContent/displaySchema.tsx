@@ -8,18 +8,18 @@ import { useDispatch } from "react-redux";
 import { removeNode } from "@/redux/actions/schemasaction";
 
 interface MyComponentProps {
-  deleteIcon: ReactNode;
+  deleteIcon?: ReactNode;
   text: string;
   attribute: string;
   icon: ReactNode;
-  uid: string; // new prop for the uid of the node
-  handleRemove: (uid: string) => void;
+  uid?: string; 
+  handleRemove?: (uid: string) => void;
   lengthOfColums: any;
   minWidth?: any;
   width?:any;
-  status: any;
+  status?: any;
   padding?: any;
-  paddingLeft: any;
+  paddingLeft?: any;
 }
 const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, uid, handleRemove, lengthOfColums, deleteIcon, minWidth, status, padding, paddingLeft,width }) => {
 
@@ -38,8 +38,6 @@ const DisplaySchemaBox: React.FC<MyComponentProps> = ({ text, attribute, icon, u
           </Col>
             <Col style={{ paddingLeft: '6.5px' }}>
               {deleteIcon}
-              {/* <DeleteFilled style={{color:"red",height:'auto'}} */}
-              {/* onClick={() => handleRemove(uid)}/> */}
             </Col>
           </Row>
           <Row className={styles.imageName}>

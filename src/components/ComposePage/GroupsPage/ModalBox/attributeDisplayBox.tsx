@@ -3,7 +3,6 @@ import { Card, Row, Col, Divider } from "antd";
 import styles from "./attributeDisplayBox.module.css";
 import { DeleteFilled } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { getSelectedArraySelector } from "@/redux/selector";
 import { useDispatch } from "react-redux";
 import { removeNode } from "@/redux/actions/schemasaction";
 
@@ -12,7 +11,7 @@ interface MyComponentProps {
   attribute: string;
   icon: ReactNode;
   uid: string;
-  handleRemove: (uid: string) => void;
+  handleRemove?: (uid: string) => void;
   lengthOfColums: any;
   desc:string
 }

@@ -1,6 +1,8 @@
+
 import React from "react";
 import { Row, Col, Divider, Statistic, Button, Image } from "antd";
 import styles from "./topBoxRight.module.css";
+import Link from "next/link";
 
 const TopBoxRight: React.FC = () => {
   return (
@@ -8,21 +10,21 @@ const TopBoxRight: React.FC = () => {
       <div className={styles.outerbox}>
         <div className={styles.innerrightTop}>
           <Image
+          alt=""
            preview={false}
             src="./compose-Icon2.png"
            style={{
-              
-              marginLeft: "2rem",
+            marginLeft: "2rem",
               width: "4rem",
             }} 
           ></Image>
         </div>
         <div className={styles.innerrightBottom}>
           {" "}
-          <Button
+           <Link
             type="link"
+            
             href="/compose"
-            className={styles.Button}
             style={{
               color: "black",
               width: "8rem",
@@ -31,7 +33,7 @@ const TopBoxRight: React.FC = () => {
             }}
           >
             Compose{" "}
-          </Button>
+          </Link>
         </div>
       </div>
     </>

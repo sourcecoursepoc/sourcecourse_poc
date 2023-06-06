@@ -1,14 +1,17 @@
 import { combineReducers } from "redux";
 import fetchPipelineReducer from "./fetchDataReducer";
 import fetchRecordReducer from "./fetchRecordsReducer";
-import schemaReducer from "./schemaReducer";
-import projectReducer from "./projectReducer";
-import schemaDataBaseReducer, { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer, dBconnectionReducer } from "./schemaDataBaseReducer";
+import {schemaReducer} from "./schemaReducer";
+
+import projectReducer, { deleteProjectReducer } from "./projectReducer";
+import { postTagsAndDescriptionReducer, postColumnTagsAndDescriptionReducer, schemaDataBaseReducers } from "./schemaDataBaseReducer";
 import groupdataDatabaseReducer from "./groupdataDatabaseReducer";
 import {
   composeReducer,
   composeReportsPipelineReducer,
+  postComposeNameDescReducer,
   projectSchemaInfoReducer,
+  searchSchemaByTagReducer,
 } from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
@@ -18,7 +21,7 @@ import projectByIdReducer from "./projectByIdReducer";
 const rootReducer = combineReducers({
   pipeline: fetchPipelineReducer,
   schema: schemaReducer,
-  database: schemaDataBaseReducer,
+  database: schemaDataBaseReducers,
   groupdataDatabase: groupdataDatabaseReducer,
   project: projectReducer,
   projectById: projectByIdReducer,
@@ -30,6 +33,10 @@ const rootReducer = combineReducers({
   postTagsAndDescription: postTagsAndDescriptionReducer,
   postColumnTagsAndDescription: postColumnTagsAndDescriptionReducer,
   dBconnection: dBconnectionReducer
+  postComposeNameDesc:postComposeNameDescReducer,
+  deleteProject: deleteProjectReducer,
+  searchSchemaByTag:searchSchemaByTagReducer,
+
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

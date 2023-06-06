@@ -7,11 +7,11 @@ interface MyComponentProps {
   text: string;
   icon: ReactNode;
   size: SizeType;
-  href: string;
-  onClick: () => void;
+  href?: string;
+  onClick?: () => void;
   style?: React.CSSProperties;
-  color: any;
-  disabled: boolean;
+  color?: any;
+  disabled?: boolean;
   //buttonLabels: string[];
 }
 const Buttons: React.FC<MyComponentProps> = ({ text, icon, size, onClick, href, style, color,disabled }) => {

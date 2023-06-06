@@ -1,11 +1,12 @@
+
 import React from "react";
-import { Row, Col, Divider, Statistic, Button, Image } from "antd";
+import {  Button, Image } from "antd";
 import styles from "./topBoxInnerBox.module.css";
-import { icons } from "antd/es/image/PreviewGroup";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
 import { getProjectsSelector } from "@/redux/selector";
+import Link from "next/link";
 
 const TopInnerBox: React.FC = () => {
   const dispatch = useDispatch();
@@ -13,7 +14,7 @@ const TopInnerBox: React.FC = () => {
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
-  }, []);
+  }, [dispatch]);
   
   return (
     <>
@@ -22,14 +23,14 @@ const TopInnerBox: React.FC = () => {
           <div className={styles.innerrightTop}>
             <Image
             preview={false}
+            alt=""
               src="./schemas-icon.png"
               style={{ height: "3rem", marginTop: "1.1rem" }}
             ></Image>
           </div>
-          <Button
+           <Link
             type="link"
             href="/schemas"
-            className={styles.Button}
             style={{
               color: "black",
               height: 47,
@@ -37,8 +38,8 @@ const TopInnerBox: React.FC = () => {
               borderTopLeftRadius: "0px",
             }}
           >
-            Discover
-          </Button>
+           Discover
+          </Link>
         </div>
         <div className={styles.innerleft}>
           <div className={styles.innerleft}>
