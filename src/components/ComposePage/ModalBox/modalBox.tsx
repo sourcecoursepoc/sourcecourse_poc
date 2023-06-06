@@ -43,7 +43,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   const [searchText, setSearchText] = useState("");
   const [treeData, setTreeData] = useState<any>([]);
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  const uidFromComposePage = postComposeNameDescData[0]?.uid;
+  const uidFromComposePage = postComposeNameDescData?.uid;
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
@@ -78,14 +78,14 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
         requestBody?.sourceTableUids
       )
     );
-    if(!projectSchemaComposeInfo.isFetching && !projectSchemaComposeInfo.error )
+    if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error==null && projectSchemaComposeInfo?.schemas!=null )
   {
     showSuccessToast(IMPORTSUCCESS);
   }
-  else if(!projectSchemaComposeInfo.isFetching && projectSchemaComposeInfo.error)
+  else if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error!=null && projectSchemaComposeInfo?.schemas==null)
   {
     showSuccessToast(IMPORTERROR);
-  }
+  } 
     onExport();
   };
 

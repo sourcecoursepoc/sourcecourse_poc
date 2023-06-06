@@ -5,7 +5,7 @@ import ModalBox from "../ModalBox/modalBox";
 import styles from "./mainContent.module.css";
 import DisplaySchemaBox from "./displaySchema";
 import { useSelector } from "react-redux";
-import { projectSchemaComposeInfoSelector, projectSchemaInfoSelector } from "@/redux/selector";
+import { postComposeNameDescSelector, projectSchemaComposeInfoSelector, projectSchemaInfoSelector } from "@/redux/selector";
 import { useDispatch } from "react-redux";
 import { DeleteFilled } from "@ant-design/icons";
 import axios from "axios";
@@ -24,7 +24,9 @@ const MainContent = (projectUid:any) => {
   const [importClicked, setImportClicked] = useState(false);
   const dispatch = useDispatch();
   const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
-  const projectSchemaComposeInfo = useSelector(projectSchemaComposeInfoSelector);//initial data
+  const projectSchemaComposeInfo = useSelector(projectSchemaComposeInfoSelector);
+  const postComposeNameDescData = useSelector(postComposeNameDescSelector);
+  const uidFromComposePage = postComposeNameDescData?.uid;//initial data
   useEffect(() => {
     dispatch(fetchDataBaseInfoAction());
   },[dispatch]);
@@ -37,7 +39,7 @@ const MainContent = (projectUid:any) => {
   //DELETE action
   const handleRemove = (uid: string) => {
     const requestBody = {
-      projectUid: projectUid?.projectUid,
+      projectUid: uidFromComposePage?uidFromComposePage:projectUid?.projectUid,
       sourceTableUids: [uid],
     };
     dispatch(
@@ -46,11 +48,11 @@ const MainContent = (projectUid:any) => {
         requestBody?.sourceTableUids
       )
     );
-    if(!projectSchemaComposeInfo.isFetching && !projectSchemaComposeInfo.error && !projectSchemaComposeInfo.isDelete)
+    if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error==null && !projectSchemaComposeInfo?.isDelete)
   {
     showSuccessToast(DELETESUCCESS)
   }
-  else if(!projectSchemaComposeInfo.isFetching && projectSchemaComposeInfo.error && projectSchemaComposeInfo.isDelete)
+  else if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error!=null && projectSchemaComposeInfo?.isDelete)
   {
     showSuccessToast(DELETEERROR)
   }

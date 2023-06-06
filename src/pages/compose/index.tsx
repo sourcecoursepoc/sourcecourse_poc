@@ -41,13 +41,12 @@ const Compose = () => {
   const dispatch = useDispatch();
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
   const postComposeNameDescDataInitial = useSelector(postComposeNameDescSelectorInitial);
-  const uidFromComposePage = postComposeNameDescData[0]?.uid;
+  const uidFromComposePage = postComposeNameDescData?.uid;
 
   const router = useRouter();
   const {
     query: { id },
   } = router;
-
 
   const { projectById: projectData, pending } = useSelector(
     getProjectByIdSelector
@@ -61,15 +60,14 @@ const Compose = () => {
     setDescription(projectData?.description);
   }, [projectData?.name, projectData?.description]);
 
-
   const handleSaveProjectInfo = async () => {
      setSaveModalVisible(false);
      dispatch(postComposeNameDescRequest(name, description));
-     if (!postComposeNameDescDataInitial.pending && !postComposeNameDescDataInitial.error ) {
+     if (!postComposeNameDescDataInitial?.pending && !postComposeNameDescDataInitial?.error ) {
       showSuccessToast(SUCCESSTOAST);
       setProjectId(uidFromComposePage);
     }
-    else if(!postComposeNameDescDataInitial.pending && postComposeNameDescDataInitial.error)
+    else if(!postComposeNameDescDataInitial?.pending && postComposeNameDescDataInitial?.error)
     {
       showSuccessToast(ERRORTOAST);
     }
@@ -89,7 +87,6 @@ const Compose = () => {
     } else {
       setDescriptionError(false);
     }
-
     setSaveModalVisible(true);
   };
   const handleIconClick = (icon:any) => {
