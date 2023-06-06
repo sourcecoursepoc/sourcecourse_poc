@@ -27,6 +27,10 @@ import {
   GET_COMPOSE_NAME_DESC,
   GET_COMPOSE_NAME_DESC_FAILURE,
   ADD_NAME_DESC_ARRAY,
+  GET_COMPOSE_NAME_DESC_SUCCESS,
+  ADD_NAME_DESC_ARRAY,
+  GET_COMPOSE_NAME_DESC_FAILURE,
+  GET_COMPOSE_NAME_DESC,
 } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
@@ -284,6 +288,7 @@ export type SearchSchemaByTagActions =
 export interface ICOMPOSENAMEDESC {
   name: any;
   description: any;
+  uid:any;
 }
 
 export interface ComposeNameDescState {

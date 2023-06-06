@@ -47,18 +47,18 @@ const Schemas = ({ handleTagsAndDescriptionSave }: componentProps) => {
     );
   }, [dispatch]);
 
-  useEffect(() => {
-    // if (tagDescriptionSave) {
-      updateDatabase();
-    // }
-  // },[])
-  }, [database?.database]);
-
   // useEffect(() => {
-  //   if (!database.pending && database.database !== undefined) {
-  //     setDBData(database.database);
-  //   }
-  // }, [database.database]);
+  //   // if (tagDescriptionSave) {
+  //     updateDatabase();
+  //   // }
+  // // },[])
+  // }, [database?.database]);
+
+  useEffect(() => {
+    if (!database.pending && database.database !== undefined) {
+      setDBData(database.database);
+    }
+  }, [database.database]);
 
 
   const updateDatabase = () => {
