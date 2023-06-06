@@ -14,11 +14,17 @@ import { CloseOutlined, SaveFilled } from '@ant-design/icons';
 import { showSuccessToast, showErrorToast } from './toast';
 import { postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoAction, fetchDataBaseInfoAction } from '../../redux/actions/schemasaction';
 import { SUCCESSTOAST, SAVE_CONFIRMATION_MESSAGE, SAVE_CONFIRMATION, CANCEL_CONFIRMATION_MESSAGE, CANCEL_CONFIRMATION } from '../../constants/constants';
-import { useRouter } from 'next/router';
 
 const { Content } = Layout;
-
-export default function SchemaContent() {
+interface componentProps {
+    tags: any;
+    setTags: any;
+    description: any;
+    setDescription: any
+    updateDatabase: () => void
+    setTagDescriptionSave: any
+}
+export default function SchemaContent({ tags, setTags, description, setDescription, updateDatabase, setTagDescriptionSave }: componentProps) {
 
     const selectedTreeData: any[] = useSelector(SelectedTreeNodeInfo);
     const selectedMetaData = selectedTreeData.map(node => node ?.metadata);
@@ -35,33 +41,37 @@ export default function SchemaContent() {
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [selectedUid, setSelectedUid] = useState(null);
     const [selectedValueName, setSelectedValueName] = useState("");
-    const [description, setDescription] = useState('');
-    const [tags, setTags] = useState<string[]>([]);
+    // const [description, setDescription] = useState('');
+    // const [tags, setTags] = useState<string[]>([]);
     const dispatch = useDispatch();
-
     const updatedTableTagAndDescription = useSelector(updatedTagArray);
     const updatedColumnTagsAndDescription = useSelector(updatedColumnTagArray);
 
     const handleSaveClick = () => {
         setSaveModalVisible(true);
     };
-    const router = useRouter();
+    // useEffect(() => {
+    //     if (updatedTableTagAndDescription.postTableData.length > 0 || updatedColumnTagsAndDescription.postColumnData.length > 0) {
+    //         dispatch(fetchDataBaseInfoAction());
+    //     }
+    // }, [dispatch, updatedTableTagAndDescription])
+
 
     const handleSaveModalOk = async () => {
         setSaveModalVisible(false);
         if (selcectedDataLastElement) {
-            if ('tableName' in selcectedDataLastElement) {
-                await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
-                // setTags(updatedTableTagAndDescription);
-            } else if ('name' in selcectedDataLastElement) {
-                await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
-                // setTags(updatedColumnTagsAndDescription)
+            try {
+                if ('tableName' in selcectedDataLastElement) {
+                    await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
+                } else if ('name' in selcectedDataLastElement) {
+                    await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
+                }
+                // setTagDescriptionSave(true);
+                updateDatabase();
+                showSuccessToast(SUCCESSTOAST);
+            } catch (error) {
+                showErrorToast("saving failed")
             }
-
-            const selectedDataJSON = JSON.stringify(selcectedDataLastElement);
-            localStorage.setItem('selectedData', selectedDataJSON);
-            showSuccessToast(SUCCESSTOAST);
-            dispatch(fetchDataBaseInfoAction());
         }
     };
 
@@ -203,4 +213,5 @@ export default function SchemaContent() {
             </Layout>
         </>
     );
+
 }

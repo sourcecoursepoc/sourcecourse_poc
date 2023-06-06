@@ -8,7 +8,7 @@ const fetchProjectSchemaInfo = (state: AppState) => state?.schemaComposeData?.sc
 const getProjects = (state: AppState) => state.project.projects;
 const getProjectById = (state: AppState) => state.projectById;
 const getError = (state: AppState) => state.schema.error;
-const getDataBase = (state: AppState) => state.database.database;
+const getDataBase = (state: AppState) => state.database;
 const getGroupdataDataBase = (state: AppState) => state.groupdataDatabase.groupdataDatabase;
 const getSelectedArray = (state: AppState) => state.database.myArray;
 const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.myGroupdataArray;
@@ -16,11 +16,11 @@ const getComposePipeline = (state: AppState) => state.composePipeline.composePip
 const getGroups = (state: AppState) => state.group.groups;
 const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipeline.composeReportsPipeline;
 const getSearchSchemaData = (state: AppState) => state.searchSchemaByTag.searchData;
-const getUpdatedTagsArray = (state: AppState) => state.postTagsAndDescription.postTableData;
-const getUpdatedColumnTags = (state: AppState) => state.postColumnTagsAndDescription.postColumnData;
+const getUpdatedTagsArray = (state: AppState) => state.postTagsAndDescription;
+const getUpdatedColumnTags = (state: AppState) => state.postColumnTagsAndDescription;
 
-export const updatedColumnTagArray = createSelector(getUpdatedColumnTags, (postColumnData => postColumnData));
-export const updatedTagArray = createSelector(getUpdatedTagsArray, (postTableData) => postTableData);
+export const updatedColumnTagArray = createSelector(getUpdatedColumnTags, (postColumnTagsAndDescription => postColumnTagsAndDescription));
+export const updatedTagArray = createSelector(getUpdatedTagsArray, (postTagsAndDescription) => postTagsAndDescription);
 export const searchSchemaData = createSelector(getSearchSchemaData,(searchData) => searchData);
 export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
 export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)

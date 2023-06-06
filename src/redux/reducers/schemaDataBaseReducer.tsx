@@ -170,6 +170,7 @@ export const postTagsAndDescriptionReducer = (
 };
 
 // post column description and tags
+
 const initialColumnPostState: PostColumnTagsAndDescriptionInfoState = {
   pending: false,
   postColumnData: [],

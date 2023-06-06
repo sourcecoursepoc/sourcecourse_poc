@@ -12,6 +12,7 @@ import {
   postComposeNameDescReducer,
   projectSchemaInfoReducer,
   searchSchemaByTagReducer,
+  createPipelineReducer,
 } from "./composeReducer";
 import fetchRecordsReducer from "./fetchRecordsReducer";
 
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   postComposeNameDesc:postComposeNameDescReducer,
   deleteProject: deleteProjectReducer,
   searchSchemaByTag:searchSchemaByTagReducer,
+  createPipeline:createPipelineReducer,
 
 });
 

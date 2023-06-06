@@ -1,6 +1,7 @@
 import React, { useState, useEffect, ReactNode } from "react";
 import { Tree, Image } from "antd";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   addArray,
   addLastIndex,
@@ -12,6 +13,7 @@ import {
 import {
   RightOutlined,
 } from "@ant-design/icons";
+import { useRouter } from "next/router";
 const { TreeNode } = Tree;
 
 interface IconImage {
@@ -24,43 +26,16 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   iconImage,
 }) => {
   const dispatch = useDispatch();
-  const selectedTreeData = useSelector(SelectedTreeNodeInfo);
+  const selcectedTreeData = useSelector(SelectedTreeNodeInfo);
   const [expandedKeys, setExpandedKeys] = useState<string[]>([]);
-  const [defaultSelectedKeys, setDefaultSelectedKeys] = useState<string[]>([]);
-
-  const selectedDataJSON = localStorage.getItem('selectedData');
-  const selectedData = JSON.parse(selectedDataJSON);
-  console.log(selectedData, "local");
 
   useEffect(() => {
-    if (selectedData ?.length > 0) {
-
-      // const firstNode = db[0];
+    if (db ?.length > 0) {
+      const firstNode = db[0];
       // dispatch(addArray([firstNode]));
-      // setExpandedKeys([firstNode.uid]);
-      const selectedKeys = getSelectedKeys(selectedData);
-      setDefaultSelectedKeys(selectedKeys);
+      // setExpandedKeys([firstNode.uid]); // expand the first node by default
     }
-  }, [selectedData, db]);
-
-  const getSelectedKeys = (selectedData: any): string[] => {
-    if (!selectedData) {
-      return [];
-    }
-    const keys: string[] = [];
-    const { dbUid, tableUid, columnUid } = selectedData;
-    if (columnUid) {
-      keys.push(`${dbUid}-${tableUid}-${columnUid}`);
-      keys.push(`${dbUid}-${tableUid}`);
-      keys.push(`${dbUid}`);
-    } else if (tableUid) {
-      keys.push(`${dbUid}-${tableUid}`);
-      keys.push(`${dbUid}`);
-    } else if (dbUid) {
-      keys.push(`${dbUid}`);
-    }
-    return keys;
-  };
+  }, [db]);
 
   type KeysType = string[];
 
@@ -70,30 +45,23 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   };
 
   const onSelect = (keys: KeysType, info: InfoType) => {
-    const selectedKey = keys[0]; // Get the selected key
+    const treeKeys = keys ?.[0] ?.split("-");
+    let element;
+    if (treeKeys.length > 2) {
+      const tables = db.find(val => val.uid.toString() === treeKeys[0]) ?.tables;
+      const columns = tables.find(val => val.uid.toString() === treeKeys[1]) ?.columns;
+      element = columns.find(val => val.uid.toString() === treeKeys[2]);
+    } else if (treeKeys.length > 1) {
+      const tables = db.find(val => val.uid.toString() === treeKeys[0]) ?.tables;
+      element = tables.find(val => val.uid.toString() === treeKeys[1]);
 
-    // Dispatch the last selected key
-    if (selectedKey) {
-      const treeKeys = selectedKey.split("-");
-      let element;
-
-      if (treeKeys.length > 2) {
-        const tables = db.find((val) => val.uid.toString() === treeKeys[0]) ?.tables;
-        const columns = tables.find((val) => val.uid.toString() === treeKeys[1]) ?.columns;
-        element = columns.find((val) => val.uid.toString() === treeKeys[2]);
-      } else if (treeKeys.length > 1) {
-        const tables = db.find((val) => val.uid.toString() === treeKeys[0]) ?.tables;
-        element = tables.find((val) => val.uid.toString() === treeKeys[1]);
-      } else if (treeKeys.length > 0) {
-        element = db.find((val) => val.uid.toString() === treeKeys[0]);
-      }
-
-      if (element) {
-        dispatch(addArray([element]));
-      }
+      dispatch(addLastIndex(element));
+    } else if (treeKeys.length > 0) {
+      element = db.find(val => val.uid.toString() === treeKeys[0]);
     }
-
-    setDefaultSelectedKeys([selectedKey]); 
+    if (element) {
+      dispatch(addArray([element]));
+    }
   };
 
 
@@ -220,10 +188,9 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
       style={{ fontSize: "15px", fontWeight: "500", alignText: "left" }}
       showIcon
       expandedKeys={expandedKeys}
-      selectedKeys={selectedTreeData.map((node) => node.uid)}
+      selectedKeys={selcectedTreeData.map((node) => node.uid)}
       onExpand={(keys) => setExpandedKeys(keys)}
-      defaultSelectedKeys={defaultSelectedKeys} 
-
+      defaultSelectedKeys={db ?.[0] ?.uid}
       height={1000}
     >
       {renderDB(db)}
