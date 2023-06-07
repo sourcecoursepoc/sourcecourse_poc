@@ -59,12 +59,13 @@ const Schemas = ({ handleTagsAndDescriptionSave }: componentProps) => {
       setDBData(database.database);
     }
   }, [database.database]);
-
+console.log(dbData,"dbData")
 
   const updateDatabase = () => {
     if (!database.pending && database.database !== undefined) {
-      const updatedDatabase = database.database.map((db) => {
+      const updatedDatabase = dbData.map((db) => {
         if (db?.uid === selcectedDataLastElement?.uid) {
+          // console.o
           const updatedDbWithNewData = { ...db, description: description, tags: tags };
           return updatedDbWithNewData;
         }
@@ -91,10 +92,10 @@ const Schemas = ({ handleTagsAndDescriptionSave }: componentProps) => {
         }
         return db;
       });
-
-      const updatedDatabaseState = { ...database, database: updatedDatabase };
+      console.log(updatedDatabase,'updatedDatabase')
+      // const updatedDatabaseState = { ...database, database: updatedDatabase };
       setDBData(updatedDatabase);
-      console.log(updatedDatabaseState ?.database, "checkingdb");
+      // console.log(updatedDatabaseState ?.database, "checkingdb");
     }
   };
 
