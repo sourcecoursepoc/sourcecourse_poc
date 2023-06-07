@@ -18,6 +18,7 @@ import {
 import groupSaga from "./groupSaga";
 import recordSaga from "../sagas/fetchRecordActionSaga";
 import projectByIdSaga from "../sagas/projectByIdSaga";
+import dBConnectionSaga from "./dBConnectionSaga";
 
 export function* rootSaga() {
 
