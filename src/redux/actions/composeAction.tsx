@@ -36,6 +36,11 @@ import {
   GetComposeNameDescSuccess,
   GetComposeNameDescFailure,
   AddNameDescArrayAction,
+  CreatePipelineRequest,
+  CreatePipelineSuccessPayload,
+  CreatePipelineRequestSuccess,
+  CreatePipelineRequestFailure,
+  CreatePipelineErrorPayload,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -63,6 +68,9 @@ import {
   GET_COMPOSE_NAME_DESC_SUCCESS,
   GET_COMPOSE_NAME_DESC_FAILURE,
   ADD_NAME_DESC_ARRAY,
+  POST_CREATE_PIPELINE_INFO_ACTION,
+  POST_CREATE_PIPELINE_INFO_ACTION_SUCCESS,
+  POST_CREATE_PIPELINE_INFO_ACTION_FAILURE,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
@@ -212,61 +220,80 @@ export const searchSchemaByTagsInfoFailureAction = (
   payload,
 });
 
-  // POST COMPOSE NAME AND DESC
-  console.log("getting into action page");
+// POST COMPOSE NAME AND DESC
+console.log("getting into action page");
 
-  export const postComposeNameDescRequest = (
-    name:any,
-    description:any
-  ): PostComposeNameDescRequest => ({
-      type: POST_COMPOSE_NAME_DESC,
-      name,
-      description,
-  });
-  
-  export const postComposeNameDescRequestSuccess = (
-    postData: any
-  ): PostComposeNameDescSuccess => ({
-      type: POST_COMPOSE_NAME_DESC_SUCCESS,
-      payload: { postData },
-  
-  });
-  
-  export const postComposeNameDescRequestFailure = (
-    error: any
-  ): PostComposeNameDescFailure => ({
-      type: POST_COMPOSE_NAME_DESC_FAILURE,
-      payload: { error },
-  });
-  
-  
-  // GET COMPOSE NAME AND DESC
-  
-  export const getComposeNameDescRequest = (
-  ): GetComposeNameDescRequest => {
-    console.log("getComposeNameDescRequest action creator called");
-    return {
-      type: GET_COMPOSE_NAME_DESC,
-    };
+export const postComposeNameDescRequest = (
+  name: any,
+  description: any
+): PostComposeNameDescRequest => ({
+  type: POST_COMPOSE_NAME_DESC,
+  name,
+  description,
+});
+
+export const postComposeNameDescRequestSuccess = (
+  postData: any
+): PostComposeNameDescSuccess => ({
+  type: POST_COMPOSE_NAME_DESC_SUCCESS,
+  payload: { postData },
+
+});
+
+export const postComposeNameDescRequestFailure = (
+  error: any
+): PostComposeNameDescFailure => ({
+  type: POST_COMPOSE_NAME_DESC_FAILURE,
+  payload: { error },
+});
+
+
+// GET COMPOSE NAME AND DESC
+
+export const getComposeNameDescRequest = (
+): GetComposeNameDescRequest => {
+  console.log("getComposeNameDescRequest action creator called");
+  return {
+    type: GET_COMPOSE_NAME_DESC,
   };
-  
-  export const getComposeNameDescRequestSuccess = (
-    saveData: any
-  ): GetComposeNameDescSuccess => ({
-    type: GET_COMPOSE_NAME_DESC_SUCCESS,
-    payload: { saveData },
-  });
-  
-  export const getComposeNameDescRequestFailure = (
-    error: any
-  ): GetComposeNameDescFailure => ({
-    type: GET_COMPOSE_NAME_DESC_FAILURE,
-    payload: { error },
-  });
-  
-  //action to store the uid,name,desc in a array
-  export const addNameDescArray = (payload: any): AddNameDescArrayAction => ({
-    type: ADD_NAME_DESC_ARRAY,
-    payload,
-  });
-  
+};
+
+export const getComposeNameDescRequestSuccess = (
+  saveData: any
+): GetComposeNameDescSuccess => ({
+  type: GET_COMPOSE_NAME_DESC_SUCCESS,
+  payload: { saveData },
+});
+
+export const getComposeNameDescRequestFailure = (
+  error: any
+): GetComposeNameDescFailure => ({
+  type: GET_COMPOSE_NAME_DESC_FAILURE,
+  payload: { error },
+});
+
+//action to store the uid,name,desc in a array
+export const addNameDescArray = (payload: any): AddNameDescArrayAction => ({
+  type: ADD_NAME_DESC_ARRAY,
+  payload,
+});
+
+// create pipeline action
+export const createPipelineInfoAction = (params: any, payload: any): CreatePipelineRequest => ({
+  type: POST_CREATE_PIPELINE_INFO_ACTION,
+  params,
+  payload
+});
+
+export const createPipelineInfoActionSuccess = (
+  payload: CreatePipelineSuccessPayload
+): CreatePipelineRequestSuccess => ({
+  type: POST_CREATE_PIPELINE_INFO_ACTION_SUCCESS,
+  payload,
+});
+export const createPipelineInfoActionFailure = (
+  payload: CreatePipelineErrorPayload
+): CreatePipelineRequestFailure => ({
+  type: POST_CREATE_PIPELINE_INFO_ACTION_FAILURE,
+  payload,
+});

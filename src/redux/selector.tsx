@@ -9,7 +9,7 @@ const fetchProjectSchemaComposeInfo = (state: AppState) => state?.schemaComposeD
 const getProjects = (state: AppState) => state.project.projects;
 const getProjectById = (state: AppState) => state.projectById;
 const getError = (state: AppState) => state.schema.error;
-const getDataBase = (state: AppState) => state.database.database;
+const getDataBase = (state: AppState) => state.database;
 const getGroupdataDataBase = (state: AppState) => state.groupdataDatabase.groupdataDatabase;
 const getSelectedArray = (state: AppState) => state.database.myArray;
 const getSelectedGroupdataArray = (state: AppState) => state.groupdataDatabase.myGroupdataArray;
@@ -17,11 +17,13 @@ const getComposePipeline = (state: AppState) => state.composePipeline.composePip
 const getGroups = (state: AppState) => state.group.groups;
 const getComposeReportsPipeline = (state: AppState) => state.composeReportsPipeline.composeReportsPipeline;
 const getSearchSchemaData = (state: AppState) => state.searchSchemaByTag.searchData;
+const getUpdatedTagsArray = (state: AppState) => state.postTagsAndDescription;
+const getUpdatedColumnTags = (state: AppState) => state.postColumnTagsAndDescription;
 
-export const searchSchemaData = createSelector(
-  getSearchSchemaData,
-  (searchData) => searchData
-);
+export const updatedColumnTagArray = createSelector(getUpdatedColumnTags, (postColumnTagsAndDescription => postColumnTagsAndDescription));
+export const updatedTagArray = createSelector(getUpdatedTagsArray, (postTagsAndDescription) => postTagsAndDescription);
+export const searchSchemaData = createSelector(getSearchSchemaData,(searchData) => searchData);
+
 const postComposePageNameDesc = (state: AppState) => state.postComposeNameDesc.postData;
 const postComposePageNameDescInitial = (state: AppState) => state.postComposeNameDesc
 export const postComposeNameDescSelectorInitial = createSelector(postComposePageNameDescInitial, (postComposeNameDesc) => postComposeNameDesc)

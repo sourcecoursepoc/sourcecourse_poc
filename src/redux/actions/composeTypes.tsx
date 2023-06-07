@@ -20,6 +20,13 @@ import {
   POST_COMPOSE_NAME_DESC,
   POST_COMPOSE_NAME_DESC_SUCCESS,
   POST_COMPOSE_NAME_DESC_FAILURE,
+  POST_CREATE_PIPELINE_INFO_ACTION,
+  POST_CREATE_PIPELINE_INFO_ACTION_SUCCESS,
+  POST_CREATE_PIPELINE_INFO_ACTION_FAILURE,
+  GET_COMPOSE_NAME_DESC_SUCCESS,
+  GET_COMPOSE_NAME_DESC,
+  GET_COMPOSE_NAME_DESC_FAILURE,
+  ADD_NAME_DESC_ARRAY,
   GET_COMPOSE_NAME_DESC_SUCCESS,
   ADD_NAME_DESC_ARRAY,
   GET_COMPOSE_NAME_DESC_FAILURE,
@@ -275,7 +282,7 @@ export type SearchSchemaByTagActions =
   | SearchSchemaByTagInfoSuccessAction
   | SearchSchemaByTagInfoFailureAction;
 
-  
+
 //compose page name & desc action
 
 export interface ICOMPOSENAMEDESC {
@@ -300,8 +307,8 @@ export interface PostComposeNameDescFailurePayload {
 
 export interface PostComposeNameDescRequest {
   type: typeof POST_COMPOSE_NAME_DESC;
-    name: any,
-    description: any
+  name: any,
+  description: any
 }
 
 export type PostComposeNameDescSuccess = {
@@ -371,3 +378,49 @@ export type GetComposeNameDescActions =
   | GetComposeNameDescSuccess
   | GetComposeNameDescFailure
   | AddNameDescArrayAction
+
+
+export interface ICREATEPIPELINE {
+  groupUid: any;
+  uid: any;
+  exportFileName: string;
+  recurrence: string;
+  exportType: string;
+  loadType: string;
+  weeklyDays: string[];
+  monthlyDays: string[];
+  time: string;
+  intimationList: string[]
+}
+
+export interface CreatePipelineInfoState {
+  pending: false;
+  postData: ICREATEPIPELINE[];
+  error: string | null;
+}
+
+export interface CreatePipelineSuccessPayload {
+  postData: ICREATEPIPELINE[];
+}
+export interface CreatePipelineErrorPayload {
+  error: string;
+}
+
+export interface CreatePipelineRequest {
+  type: typeof POST_CREATE_PIPELINE_INFO_ACTION;
+  params: any;
+  payload: any;
+}
+export interface CreatePipelineRequestSuccess {
+  type: typeof POST_CREATE_PIPELINE_INFO_ACTION_SUCCESS;
+  payload: CreatePipelineSuccessPayload;
+}
+export interface CreatePipelineRequestFailure {
+  type: typeof POST_CREATE_PIPELINE_INFO_ACTION_FAILURE;
+  payload: CreatePipelineErrorPayload;
+}
+
+export type CreatePipelineActions =
+  |CreatePipelineRequest
+  | CreatePipelineRequestSuccess
+  | CreatePipelineRequestFailure

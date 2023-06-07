@@ -5,8 +5,8 @@ import DescriptionBox from './descriptionbox';
 import DisplayBox from './displaybox';
 import TagBox from './tagbox';
 import { useSelector, useDispatch } from 'react-redux';
-import { SelectedTreeNodeInfo } from '../../redux/selector';
-import Transcription from '../../lang/transcriptionFile';
+import { SelectedTreeNodeInfo, updatedTagArray, updatedColumnTagArray } from '../../redux/selector';
+import { Transcription } from '../../components/homeLeftArea/transcriptionFile';
 import Buttons from '../../components/ComposePage/buttons/buttons';
 import DisplaySchemaBox from '../../components/ComposePage/MainContent/displaySchema';
 import ConfirmationModal from '../../components/ComposePage/GroupsPage/ModalBox/ConfirmationModal';
@@ -16,8 +16,15 @@ import { postTagsAndDescriptionInfoAction, postColumnTagsAndDescriptionInfoActio
 import { SUCCESSTOAST, SAVE_CONFIRMATION_MESSAGE, SAVE_CONFIRMATION, CANCEL_CONFIRMATION_MESSAGE, CANCEL_CONFIRMATION } from '../../constants/constants';
 
 const { Content } = Layout;
-
-export default function SchemaContent() {
+interface componentProps {
+    tags: any;
+    setTags: any;
+    description: any;
+    setDescription: any
+    updateDatabase: () => void
+    
+}
+export default function SchemaContent({ tags, setTags, description, setDescription, updateDatabase }: componentProps) {
 
     const selectedTreeData: any[] = useSelector(SelectedTreeNodeInfo);
     const selectedMetaData = selectedTreeData.map(node => node ?.metadata);
@@ -34,25 +41,32 @@ export default function SchemaContent() {
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [selectedUid, setSelectedUid] = useState(null);
     const [selectedValueName, setSelectedValueName] = useState("");
-
-
-    const [description, setDescription] = useState('');
-    const [tags, setTags] = useState<string[]>([]);
-
     const dispatch = useDispatch();
+    const updatedTableTagAndDescription = useSelector(updatedTagArray);
+    const updatedColumnTagsAndDescription = useSelector(updatedColumnTagArray);
+
     const handleSaveClick = () => {
         setSaveModalVisible(true);
     };
+   
 
     const handleSaveModalOk = async () => {
         setSaveModalVisible(false);
-        if ('tableName' in selcectedDataLastElement) {
-            await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
-        } else if ('name' in selcectedDataLastElement) {
-            await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
+        if (selcectedDataLastElement) {
+            try {
+                if ('tableName' in selcectedDataLastElement) {
+                    await dispatch(postTagsAndDescriptionInfoAction(selectedUid, tags, description));
+                } else if ('name' in selcectedDataLastElement) {
+                    await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
+                }
+                updateDatabase();
+                showSuccessToast(SUCCESSTOAST);
+            } catch (error) {
+                showErrorToast("saving failed")
+            }
         }
-    showSuccessToast(SUCCESSTOAST);
     };
+
     const handleSaveModalCancel = () => {
         setSaveModalVisible(false);
     };
@@ -63,7 +77,7 @@ export default function SchemaContent() {
 
     const handleCancelModalOk = () => {
         setCancelModalVisible(false);
-        window.location.href = "/";
+        // window.location.href = "/";
     };
 
     const handleCancelModalCancel = () => {
@@ -191,4 +205,5 @@ export default function SchemaContent() {
             </Layout>
         </>
     );
+
 }
