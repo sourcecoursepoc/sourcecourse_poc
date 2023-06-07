@@ -24,6 +24,18 @@ import {
   /* DELETESCHEMAREQUEST, */
   DeleteProjectSchemaInfoSuccessPayload,
   DeleteProjectSchemaInfoFailurePayload,
+  SearchSchemaByTagInfoAction,
+  SearchSchemaByTagInfoActionSuccessPayload,
+  SearchSchemaByTagInfoSuccessAction,
+  SearchSchemaByTagInfoActionFailurePayload,
+  SearchSchemaByTagInfoFailureAction,
+  PostComposeNameDescRequest,
+  PostComposeNameDescSuccess,
+  PostComposeNameDescFailure,
+  GetComposeNameDescRequest,
+  GetComposeNameDescSuccess,
+  GetComposeNameDescFailure,
+  AddNameDescArrayAction,
 } from "./composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -41,6 +53,16 @@ import {
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
+  POST_COMPOSE_NAME_DESC,
+  POST_COMPOSE_NAME_DESC_SUCCESS,
+  POST_COMPOSE_NAME_DESC_FAILURE,
+  GET_COMPOSE_NAME_DESC,
+  GET_COMPOSE_NAME_DESC_SUCCESS,
+  GET_COMPOSE_NAME_DESC_FAILURE,
+  ADD_NAME_DESC_ARRAY,
 } from "./composeActionTypes";
 
 export const fetchComposePipelineRequest = (
@@ -167,3 +189,84 @@ export const deleteProjectSchemaInfoFailure = (
   type: DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   payload: { error },
 });
+
+
+// search by tag in compose schema
+
+export const searchSchemaByTagsInfoAction = (searchValue: any): SearchSchemaByTagInfoAction => ({
+  type: SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  searchValue,
+});
+
+export const searchSchemaByTagsInfoSuccessAction = (
+  payload: SearchSchemaByTagInfoActionSuccessPayload
+): SearchSchemaByTagInfoSuccessAction => ({
+  type: SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  payload,
+});
+
+export const searchSchemaByTagsInfoFailureAction = (
+  payload: SearchSchemaByTagInfoActionFailurePayload
+): SearchSchemaByTagInfoFailureAction => ({
+  type: SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
+  payload,
+});
+
+  // POST COMPOSE NAME AND DESC
+  console.log("getting into action page");
+
+  export const postComposeNameDescRequest = (
+    name:any,
+    description:any
+  ): PostComposeNameDescRequest => ({
+      type: POST_COMPOSE_NAME_DESC,
+      name,
+      description,
+  });
+  
+  export const postComposeNameDescRequestSuccess = (
+    postData: any
+  ): PostComposeNameDescSuccess => ({
+      type: POST_COMPOSE_NAME_DESC_SUCCESS,
+      payload: { postData },
+  
+  });
+  
+  export const postComposeNameDescRequestFailure = (
+    error: any
+  ): PostComposeNameDescFailure => ({
+      type: POST_COMPOSE_NAME_DESC_FAILURE,
+      payload: { error },
+  });
+  
+  
+  // GET COMPOSE NAME AND DESC
+  
+  export const getComposeNameDescRequest = (
+  ): GetComposeNameDescRequest => {
+    console.log("getComposeNameDescRequest action creator called");
+    return {
+      type: GET_COMPOSE_NAME_DESC,
+    };
+  };
+  
+  export const getComposeNameDescRequestSuccess = (
+    saveData: any
+  ): GetComposeNameDescSuccess => ({
+    type: GET_COMPOSE_NAME_DESC_SUCCESS,
+    payload: { saveData },
+  });
+  
+  export const getComposeNameDescRequestFailure = (
+    error: any
+  ): GetComposeNameDescFailure => ({
+    type: GET_COMPOSE_NAME_DESC_FAILURE,
+    payload: { error },
+  });
+  
+  //action to store the uid,name,desc in a array
+  export const addNameDescArray = (payload: any): AddNameDescArrayAction => ({
+    type: ADD_NAME_DESC_ARRAY,
+    payload,
+  });
+  

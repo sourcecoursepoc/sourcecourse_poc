@@ -19,7 +19,7 @@ import InnerBox from "./innerBox";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchProjectRequest } from "@/redux/actions/fetchProjectAction";
-import { getProjectsSelector } from "@/redux/selector";
+import { getProjectsSelector, postComposeNameDescSelector } from "@/redux/selector";
 import Link from "next/link";
 const { Content } = Layout;
 
@@ -39,6 +39,8 @@ const ProjectContent: React.FC<ContentProps> = ({
   const listItems: any = [];
   const projectArray = projectListData[0];
   const transcriptList = Transcription(projectArray);
+  const postComposeNameDescData = useSelector(postComposeNameDescSelector);
+  const uidFromComposePage = postComposeNameDescData[0]?.uid;
 
   useEffect(() => {
     dispatch(fetchProjectRequest());
@@ -80,7 +82,7 @@ const ProjectContent: React.FC<ContentProps> = ({
             
             href={{
               pathname: "/compose",
-              query: { id: uid }
+              query: { id: uidFromComposePage?uidFromComposePage:uid }
             }}
             style={{ color: "#9179ca", marginLeft: "90%", fontWeight: "600" }}
           >

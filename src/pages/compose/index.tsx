@@ -24,10 +24,10 @@ import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainCon
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { getProjectByIdSelector } from "@/redux/selector";
+import {  getProjectByIdSelector, postComposeNameDescSelector } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
-import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, TEXTAREA_ERROR } from "@/constants/constants";
-import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR } from "@/constants/constants";
+import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -37,57 +37,51 @@ const Compose = () => {
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
   const [projectId, setProjectId] = useState(1);
+  const [saveClicked, setSaveClicked] = useState(false);
+  const [savedData, setSavedData] = useState(null);
+  const dispatch = useDispatch();
+  const postComposeNameDescData = useSelector(postComposeNameDescSelector);
+  const uidFromComposePage = postComposeNameDescData[0]?.uid;
 
   const router = useRouter();
   const {
     query: { id },
   } = router;
 
-  const dispatch = useDispatch();
 
   const { projectById: projectData, pending } = useSelector(
     getProjectByIdSelector
   );
-
-  const [name, setName] = useState(projectData.name);
-  const [description, setDescription] = useState(projectData.description);
+  const [name, setName] = useState(projectData?.name);
+  const [description, setDescription] = useState(projectData?.description);
 
   useEffect(() => {
     dispatch(fetchProjectByIdRequest(id));
-    setName(projectData.name);
-    setDescription(projectData.description);
-  }, [projectData.name, projectData.description]);
+    setName(projectData?.name);
+    setDescription(projectData?.description);
+  }, [projectData?.name, projectData?.description]);
+
 
   const handleSaveProjectInfo = async () => {
     setSaveModalVisible(false);
-    showSuccessToast("Saved Successfully");
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/sourcecourse/project",
-        {
-          name: name,
-          description: description,
-        }
-      );
-      if (response.data !== -1) {
-        setProjectId(response.data.uid);
-        handleIconClick("HddFilled");
-      }
-    } catch (error) {
-      console.error(error);
+    //dispatch done to post compose page name and desc to db
+    const success = await dispatch(postComposeNameDescRequest(name, description));
+    if (success) {
+      showSuccessToast({SUCCESSTOAST});
+      setProjectId(uidFromComposePage);
     }
   };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
   };
   const handleSaveClick = () => {
-    if (name.trim() === "") {
+    if (name?.trim() === "") {
       setNameError(true);
     } else {
       setNameError(false);
     }
 
-    if (description.trim() === "") {
+    if (description?.trim() === "") {
       setDescriptionError(true);
     } else {
       setDescriptionError(false);
@@ -95,10 +89,10 @@ const Compose = () => {
 
     setSaveModalVisible(true);
   };
-  const handleIconClick = (icon) => {
+  const handleIconClick = (icon:any) => {
     setSelectedIcon(icon);
   };
-  const getIconStyle = (icon) => {
+  const getIconStyle = (icon:any) => {
     if (selectedIcon === icon) {
       return {
         borderBottom: "2px solid #7E60BC",
@@ -115,9 +109,6 @@ const Compose = () => {
     setName("");
     setDescription("");
     showSuccessToast(DELETE_TOAST);
-    dispatch(deleteProjectInfoAction(id))
-    setProjectId("");
-    window.location.href = "/";
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
@@ -127,11 +118,11 @@ const Compose = () => {
   };
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
-      return <MainContent projectUid={id}/>;
+      return <MainContent  projectUid={id}/>;
     } else {
       switch (selectedIcon) {
         case "HddFilled":
-          return <MainContent projectUid={id}/>;
+          return <MainContent projectUid={id} />;
         case "ContainerFilled":
           return <GroupsMainContent />;
         case "Reports":

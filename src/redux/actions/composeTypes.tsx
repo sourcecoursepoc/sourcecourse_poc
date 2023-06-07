@@ -14,6 +14,16 @@ import {
   DELETE_PROJECT_SCHEMA_INFO_ACTION,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
   DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS,
+  SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE,
+  POST_COMPOSE_NAME_DESC,
+  POST_COMPOSE_NAME_DESC_SUCCESS,
+  POST_COMPOSE_NAME_DESC_FAILURE,
+  GET_COMPOSE_NAME_DESC_SUCCESS,
+  ADD_NAME_DESC_ARRAY,
+  GET_COMPOSE_NAME_DESC_FAILURE,
+  GET_COMPOSE_NAME_DESC,
 } from "./composeActionTypes";
 
 export interface ICOMPOSEPIPELINE {
@@ -224,3 +234,140 @@ export type DeleteProjectSchemaInfoActionTypes =
   | DeleteProjectSchemaInfoAction
   | DeleteProjectSchemaInfoSuccessAction
   | DeleteProjectSchemaInfoFailureAction;
+
+
+
+// search schema by tag
+
+export interface SearchSchemaByTagInfoState {
+  pending: boolean;
+  searchData: any[];
+  error: any | null
+}
+
+export interface SearchSchemaByTagInfoActionSuccessPayload {
+  searchData: any;
+}
+
+export interface SearchSchemaByTagInfoActionFailurePayload {
+  error: any;
+}
+
+export interface SearchSchemaByTagInfoAction {
+  type: typeof SEARCH_SCHEMA_BY_TAG_INFO_ACTION;
+  searchValue: any;
+
+};
+
+export interface SearchSchemaByTagInfoSuccessAction {
+  type: typeof SEARCH_SCHEMA_BY_TAG_INFO_ACTION_SUCCESS;
+  payload: SearchSchemaByTagInfoActionSuccessPayload
+};
+
+export interface SearchSchemaByTagInfoFailureAction {
+  type: typeof SEARCH_SCHEMA_BY_TAG_INFO_ACTION_FAILURE;
+  payload: SearchSchemaByTagInfoActionFailurePayload;
+}
+
+
+export type SearchSchemaByTagActions =
+  |SearchSchemaByTagInfoAction
+  | SearchSchemaByTagInfoSuccessAction
+  | SearchSchemaByTagInfoFailureAction;
+
+  
+//compose page name & desc action
+
+export interface ICOMPOSENAMEDESC {
+  name: any;
+  description: any;
+  uid:any;
+}
+
+export interface ComposeNameDescState {
+  pending: boolean;
+  postData: ICOMPOSENAMEDESC[];
+  error: string | null;
+}
+
+export interface PostComposeNameDescSuccessPayload {
+  postData: ICOMPOSENAMEDESC[];
+}
+
+export interface PostComposeNameDescFailurePayload {
+  error: string;
+}
+
+export interface PostComposeNameDescRequest {
+  type: typeof POST_COMPOSE_NAME_DESC;
+    name: any,
+    description: any
+}
+
+export type PostComposeNameDescSuccess = {
+  type: typeof POST_COMPOSE_NAME_DESC_SUCCESS;
+  payload: PostComposeNameDescSuccessPayload;
+};
+
+export type PostComposeNameDescFailure = {
+  type: typeof POST_COMPOSE_NAME_DESC_FAILURE;
+  payload: PostComposeNameDescFailurePayload;
+};
+
+export type ComposeNameDescActions =
+  | PostComposeNameDescRequest
+  | PostComposeNameDescSuccess
+  | PostComposeNameDescFailure;
+
+console.log(
+  "composeActionTypes: action types defined for fetching name and description"
+);
+
+//save id,name,desc of project to the redux object
+
+export interface IGETCOMPOSENAMEDESC {
+  uid: any[],
+  name: any[];
+  description: any[];
+}
+
+export interface GetComposeNameDescState {
+  pending: boolean;
+  saveData: IGETCOMPOSENAMEDESC[];
+  error: string | null;
+}
+
+export interface GetComposeNameDescSuccessPayload {
+  saveData: ICOMPOSENAMEDESC[];
+}
+
+export interface GetComposeNameDescFailurePayload {
+  error: string;
+}
+
+export interface GetComposeNameDescRequest {
+  type: typeof GET_COMPOSE_NAME_DESC;
+  //   params: any;
+}
+
+export type GetComposeNameDescSuccess = {
+  type: typeof GET_COMPOSE_NAME_DESC_SUCCESS;
+  payload: GetComposeNameDescSuccessPayload;
+};
+
+export type GetComposeNameDescFailure = {
+  type: typeof GET_COMPOSE_NAME_DESC_FAILURE;
+  payload: GetComposeNameDescFailurePayload;
+};
+
+//to add uid,name,desc to an array 
+export interface AddNameDescArrayAction {
+  type: typeof ADD_NAME_DESC_ARRAY;
+  payload: any;
+}
+
+export type GetComposeNameDescActions =
+  | GetComposeNameDescRequest
+  | GetComposeNameDescSuccess
+  | GetComposeNameDescFailure
+  | AddNameDescArrayAction

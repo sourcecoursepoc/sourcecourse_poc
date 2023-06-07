@@ -1,44 +1,25 @@
-import {
-  ICOMPOSEPIPELINE,
-  FetchComposePipelineRequest,
-  ICOMPOSEREPORTSPIPELINE,
-  FetchSchemaComposeRequest,
-  projectSchemaInfo,
-} from "../actions/composeTypes";
-import {
-  FETCH_COMPOSE_PIPELINE,
-  FETCH_REPORTS_PIPELINE,
-  FETCH_PROJECT_SCHEMA_INFO_ACTION,
-  POST_PROJECT_SCHEMA_INFO_ACTION,
-  POST_PROJECT_SCHEMA_INFO_ACTION_FAILURE,
-  POST_PROJECT_SCHEMA_INFO_ACTION_SUCCESS,
-  DELETE_PROJECT_SCHEMA_INFO_ACTION,
-} from "../actions/composeActionTypes";
-import {
-  fetchComposePipelineSuccess,
-  fetchComposePipelineFailure,
-  fetchComposeReportsPipelineRequestSuccess,
-  fetchSchemaComposeSuccess,
-  fetchSchemaComposeFailure,
-  postProjectSchemaInfoFailure,
-  postProjectSchemaInfoRequest,
-  postProjectSchemaInfoSuccess,
-  deleteProjectSchemaInfoSuccess,
-  deleteProjectSchemaInfoFailure,
-  deleteProjectSchemaInfoRequest,
-} from "../actions/composeAction";
+import { BASE_URL } from "@/constants/config";
 import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
-import { BASE_URL } from "@/constants/config";
+import {
+  deleteProjectSchemaInfoFailure,
+  deleteProjectSchemaInfoRequest, deleteProjectSchemaInfoSuccess, fetchComposePipelineFailure, fetchComposePipelineSuccess, fetchComposeReportsPipelineRequestSuccess, fetchSchemaComposeFailure, fetchSchemaComposeSuccess, postComposeNameDescRequest, postComposeNameDescRequestFailure, postComposeNameDescRequestSuccess, postProjectSchemaInfoFailure,
+  postProjectSchemaInfoRequest,
+  postProjectSchemaInfoSuccess, searchSchemaByTagsInfoFailureAction, searchSchemaByTagsInfoSuccessAction
+} from "../actions/composeAction";
+import {
+  DELETE_PROJECT_SCHEMA_INFO_ACTION, FETCH_COMPOSE_PIPELINE, FETCH_PROJECT_SCHEMA_INFO_ACTION, FETCH_REPORTS_PIPELINE, POST_COMPOSE_NAME_DESC, POST_PROJECT_SCHEMA_INFO_ACTION, SEARCH_SCHEMA_BY_TAG_INFO_ACTION
+} from "../actions/composeActionTypes";
+import {
+  FetchComposePipelineRequest, FetchSchemaComposeRequest, ICOMPOSEPIPELINE, ICOMPOSEREPORTSPIPELINE, projectSchemaInfo,
+  SearchSchemaByTagInfoAction
+} from "../actions/composeTypes";
 
 const fetchProjectSchemaInfo = (requestParams: any) =>
   axios.get<projectSchemaInfo[]>(
-   BASE_URL+ "/project-tables/" + requestParams
+    BASE_URL + "/project-tables/" + requestParams
   );
 
-/*
-  Worker Saga: Fired on FETCH_PROJECT_SCHEMA_INFO_ACTION action
-*/
 function* fetchProjectSchemaInfoSaga(requestParams: FetchSchemaComposeRequest) {
   try {
     const response = yield call(() =>
@@ -66,7 +47,7 @@ export function* schemaComposeSaga() {
 const getComposePipelines = (requestParams?: any) =>
   axios.get<ICOMPOSEPIPELINE[]>(
     "http://localhost:8000/composepipeline" +
-      (requestParams ? `?id=${requestParams}` : "")
+    (requestParams ? `?id=${requestParams}` : "")
   );
 
 function* fetchComposePipelineSaga(requestParams: FetchComposePipelineRequest) {
@@ -118,7 +99,7 @@ export function* ComposeReportsPipelineSaga() {
 
 //posting schemas in compose
 const postProjectSchemaInfoAPI =
-  BASE_URL+"/project-tables";
+  BASE_URL + "/project-tables";
 
 function postProjectSchemaInfocall(
   projectUid: any[],
@@ -156,7 +137,7 @@ export function* PostSchemaRequestSaga() {
 
 //DELETE SCHEMA SAGA
 
-const deleteProjectSchemaInfoAPI =BASE_URL+ "/project-tables";
+const deleteProjectSchemaInfoAPI = BASE_URL + "/project-tables";
 
 function deleteProjectSchemaInfoCall(
   projectUid: any,
@@ -194,4 +175,53 @@ export function* deleteSchemaRequestSaga() {
   yield all([
     takeLatest(DELETE_PROJECT_SCHEMA_INFO_ACTION, deleteProjectSchemaInfoSaga),
   ]);
+}
+
+// search compose schema page
+const getSearchSchemaByTag = (searchValue: any) =>
+  axios.get<[]>(BASE_URL + "/db/table/search/" + searchValue.searchValue);
+
+function* fetchSearchSchemaByTagSaga(searchValue: SearchSchemaByTagInfoAction) {
+
+  try {
+    const response = yield call(() => getSearchSchemaByTag(searchValue));
+    yield put(searchSchemaByTagsInfoSuccessAction({
+      searchData: response.data,
+    })
+    );
+  } catch (e) {
+    yield put(searchSchemaByTagsInfoFailureAction({
+      error: e.message,
+    })
+    );
+  }
+}
+
+export function* searchSchemaByTagRequestSaga() {
+  yield all([
+    takeLatest(SEARCH_SCHEMA_BY_TAG_INFO_ACTION, fetchSearchSchemaByTagSaga),
+  ]);
+}
+
+//saga for posting compose page name and description
+const postNameAndDescriptionAPI = BASE_URL + "/project";
+function postNameAndDescriptionAPIcall(name: any, description: any): Promise<AxiosResponse<any, any>> {
+  return axios.post(`${postNameAndDescriptionAPI}`, {
+    name: name,
+    description: description
+  }
+  );
+}
+function* postNameAndDescriptionSaga(action: ReturnType<typeof postComposeNameDescRequest>) {
+  try {
+    const { name, description } = action;
+    const response = yield call({ fn: postNameAndDescriptionAPIcall, context: null }, name, description);
+    yield put(postComposeNameDescRequestSuccess(response.data));
+  } catch (error) {
+    yield put(postComposeNameDescRequestFailure({ error }));
+  }
+}
+
+export function* PostNameAndDescSaga() {
+  yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)]);
 }
