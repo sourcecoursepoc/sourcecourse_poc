@@ -22,9 +22,9 @@ interface componentProps {
     description: any;
     setDescription: any
     updateDatabase: () => void
-    setTagDescriptionSave: any
+    
 }
-export default function SchemaContent({ tags, setTags, description, setDescription, updateDatabase, setTagDescriptionSave }: componentProps) {
+export default function SchemaContent({ tags, setTags, description, setDescription, updateDatabase }: componentProps) {
 
     const selectedTreeData: any[] = useSelector(SelectedTreeNodeInfo);
     const selectedMetaData = selectedTreeData.map(node => node ?.metadata);
@@ -41,8 +41,6 @@ export default function SchemaContent({ tags, setTags, description, setDescripti
     const [cancelModalVisible, setCancelModalVisible] = useState(false);
     const [selectedUid, setSelectedUid] = useState(null);
     const [selectedValueName, setSelectedValueName] = useState("");
-    // const [description, setDescription] = useState('');
-    // const [tags, setTags] = useState<string[]>([]);
     const dispatch = useDispatch();
     const updatedTableTagAndDescription = useSelector(updatedTagArray);
     const updatedColumnTagsAndDescription = useSelector(updatedColumnTagArray);
@@ -50,12 +48,7 @@ export default function SchemaContent({ tags, setTags, description, setDescripti
     const handleSaveClick = () => {
         setSaveModalVisible(true);
     };
-    // useEffect(() => {
-    //     if (updatedTableTagAndDescription.postTableData.length > 0 || updatedColumnTagsAndDescription.postColumnData.length > 0) {
-    //         dispatch(fetchDataBaseInfoAction());
-    //     }
-    // }, [dispatch, updatedTableTagAndDescription])
-
+   
 
     const handleSaveModalOk = async () => {
         setSaveModalVisible(false);
@@ -66,7 +59,6 @@ export default function SchemaContent({ tags, setTags, description, setDescripti
                 } else if ('name' in selcectedDataLastElement) {
                     await dispatch(postColumnTagsAndDescriptionInfoAction(selectedUid, tags, description));
                 }
-                // setTagDescriptionSave(true);
                 updateDatabase();
                 showSuccessToast(SUCCESSTOAST);
             } catch (error) {

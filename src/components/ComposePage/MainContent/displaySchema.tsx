@@ -3,7 +3,6 @@ import { Card, Row, Col, Divider } from "antd";
 import styles from "./displaySchema.module.css";
 import { DeleteFilled } from "@ant-design/icons";
 import { useSelector } from "react-redux";
-import { getSelectedArraySelector } from "@/redux/selector";
 import { useDispatch } from "react-redux";
 import { removeNode } from "@/redux/actions/schemasaction";
 

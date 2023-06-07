@@ -1,5 +1,6 @@
+import { DB_CONNECTION_FAILURE, DB_CONNECTION_REQUEST, DB_CONNECTION_SUCCESS } from "../actions/actionTypes";
 import {
-  
+
   ADD_ARRAY,
   POST_GROUPDATA_DATABASE_FAILURE,
   POST_GROUPDATA_DATABASE_SUCCESS,
@@ -16,10 +17,11 @@ import {
   POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION,
   POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_SUCCESS,
   POST_COLUMN_TAGS_DESCRIPTION_INFO_ACTION_FAILURE,
-  
-  // CLEAR_LAST_INDEXES,
+
+
 } from "../actions/schemaActionTypes";
 import { DataBaseState, DataBaseActions, PostDataActionTypes, PostDataState, UpdatePostAction, postTagsAndDescriptionState, postTagsAndDescriptionActions, PostColumnTagsAndDescriptionState, PostColumnTagsAndDescriptionActions, PostTagsAndDescriptionInfoState, PostColumnTagsAndDescriptionInfoState } from "../actions/schemaTypes";
+import { dbConnecionActions, IDBState } from '../actions/types'
 
 const initialDataBaseState: DataBaseState = {
   pending: false,
@@ -79,7 +81,7 @@ const initialDataBaseState: DataBaseState = {
         myArray: updatedArray,
       };
     case ADD_LAST_INDEX:
-      const exists = state.lastIndexes.some((node) => node ?.uid === action.payload ?.uid);
+      const exists = state.lastIndexes.some((node) => node?.uid === action.payload?.uid);
       if (!exists) {
         return {
           ...state,
@@ -205,4 +207,45 @@ export const postColumnTagsAndDescriptionReducer = (
       return state;
   }
 };
+
+
+const dBConnectionState: IDBState = {
+  pending: false,
+  dataConnection: [],
+  error: null,
+};
+
+export const dBconnectionReducer = (
+  state = dBConnectionState,
+  action: dbConnecionActions
+): IDBState => {
+  console.log('reducer', action.type); // add this line to log the action type
+  switch (action.type) {
+    case DB_CONNECTION_REQUEST:
+      return {
+        ...state,
+        pending: true,
+      };
+    case DB_CONNECTION_SUCCESS:
+      console.log("Payload of DB_CONNECTION_SUCCESS: ", action.payload);
+      return {
+        ...state,
+        pending: false,
+        dataConnection: action.payload.response,
+        error: null
+      };
+    case DB_CONNECTION_FAILURE:
+      console.log("Payload of DB_CONNECTION_FAILURE: ", action.payload);
+      return {
+        ...state,
+        dataConnection: [],
+        error: action.payload.error
+      };
+    default:
+      return state;
+  }
+}
+
+
+
 
