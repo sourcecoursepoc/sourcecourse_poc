@@ -4,7 +4,8 @@ import { AppState } from "./reducers/index";
 
 const getPending = (state: AppState) => state.schema.pending;
 const getSchemas = (state: AppState) => state.schema.schemas;
-const fetchProjectSchemaInfo = (state: AppState) => state?.schemaComposeData?.schemas;
+const fetchProjectSchemaInfo = (state: AppState) => state?.schemaComposeData.schemas;
+const fetchProjectSchemaComposeInfo = (state: AppState) => state?.schemaComposeData;
 const getProjects = (state: AppState) => state.project.projects;
 const getProjectById = (state: AppState) => state.projectById;
 const getError = (state: AppState) => state.schema.error;
@@ -22,6 +23,8 @@ export const searchSchemaData = createSelector(
   (searchData) => searchData
 );
 const postComposePageNameDesc = (state: AppState) => state.postComposeNameDesc.postData;
+const postComposePageNameDescInitial = (state: AppState) => state.postComposeNameDesc
+export const postComposeNameDescSelectorInitial = createSelector(postComposePageNameDescInitial, (postComposeNameDesc) => postComposeNameDesc)
 export const postComposeNameDescSelector = createSelector(postComposePageNameDesc, (postData) => postData)
 export const getComposeReportsPipelineSelector = createSelector(getComposeReportsPipeline, (composeReportsPipeline) => composeReportsPipeline)
 export const SelectedTreeNodeInfo = createSelector(getSelectedArray, (myArray) => myArray)
@@ -34,6 +37,7 @@ export const getDataBaseSelector = createSelector(getDataBase, (database) => dat
 export const getGroupdataDataBaseSelector = createSelector(getGroupdataDataBase, (groupdataDatabase) => groupdataDatabase)
 export const getSchemasSelector = createSelector(getSchemas, (schemas) => schemas);
 export const projectSchemaInfoSelector = createSelector(fetchProjectSchemaInfo, (schemas) => schemas);
+export const projectSchemaComposeInfoSelector = createSelector(fetchProjectSchemaComposeInfo, (schemaComposeData) => schemaComposeData);
 export const getProjectsSelector = createSelector(getProjects, (projects) => projects);
 export const getProjectByIdSelector = createSelector(getProjectById, (projectById) => projectById);
 export const getGroupSelector = createSelector(getGroups, (groups) => groups);

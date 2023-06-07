@@ -1,4 +1,3 @@
-import { fetchDataBaseRequest } from "@/redux/actions/schemasaction";
 import { PlusCircleFilled } from "@ant-design/icons";
 import { Button, Image, Layout, Row } from "antd";
 import React, { useEffect, useState } from "react";
@@ -6,7 +5,7 @@ import ModalBox from "../ModalBox/modalBox";
 import styles from "./mainContent.module.css";
 import DisplaySchemaBox from "./displaySchema";
 import { useSelector } from "react-redux";
-import { projectSchemaInfoSelector } from "@/redux/selector";
+import { postComposeNameDescSelector, projectSchemaComposeInfoSelector, projectSchemaInfoSelector } from "@/redux/selector";
 import { useDispatch } from "react-redux";
 import { DeleteFilled } from "@ant-design/icons";
 import axios from "axios";
@@ -17,6 +16,7 @@ import {
 import { AppState } from "@/redux/reducers";
 import { fetchDataBaseInfoAction } from "../../../redux/actions/schemasaction";
 import Toast, { showSuccessToast } from "../../../pages/schemas/toast";
+import { DELETEERROR, DELETESUCCESS, SCHEMA } from "@/constants/constants";
 
 const MainContent = (projectUid:any) => {
   const { Content } = Layout;
@@ -24,6 +24,9 @@ const MainContent = (projectUid:any) => {
   const [importClicked, setImportClicked] = useState(false);
   const dispatch = useDispatch();
   const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
+  const projectSchemaComposeInfo = useSelector(projectSchemaComposeInfoSelector);
+  const postComposeNameDescData = useSelector(postComposeNameDescSelector);
+  const uidFromComposePage = postComposeNameDescData?.uid;//initial data
   useEffect(() => {
     dispatch(fetchDataBaseInfoAction());
   },[dispatch]);
@@ -36,7 +39,7 @@ const MainContent = (projectUid:any) => {
   //DELETE action
   const handleRemove = (uid: string) => {
     const requestBody = {
-      projectUid: projectUid?.projectUid,
+      projectUid: uidFromComposePage?uidFromComposePage:projectUid?.projectUid,
       sourceTableUids: [uid],
     };
     dispatch(
@@ -45,6 +48,14 @@ const MainContent = (projectUid:any) => {
         requestBody?.sourceTableUids
       )
     );
+    if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error==null && !projectSchemaComposeInfo?.isDelete)
+  {
+    showSuccessToast(DELETESUCCESS)
+  }
+  else if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error!=null && projectSchemaComposeInfo?.isDelete)
+  {
+    showSuccessToast(DELETEERROR)
+  }
   };
   const showModal = () => {
     setVisible(true);
@@ -58,7 +69,7 @@ const MainContent = (projectUid:any) => {
       <Layout className={styles.layout}>
         <Content className={styles.content}>
           <Row className={styles.pinkbar}>
-            <p className={styles.text}>Schema</p>
+            <p className={styles.text}>{SCHEMA}</p>
           </Row>
           <ModalBox
             visible={visible}
