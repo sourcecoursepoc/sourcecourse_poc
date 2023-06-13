@@ -1,9 +1,9 @@
 import axios from "axios";
-import { call, put, take, takeLatest } from "redux-saga/effects";
+import { call, put, take, takeLatest, all } from "redux-saga/effects";
 
 import { IPROJECT, DeleteProjectInfoAction } from "../actions/types";
 import { FETCH_ALLPROJECTS_REQUEST } from "../actions/actionTypes";
-import { fetchProjectFailure, fetchProjectSuccess, deleteProjectInfoActionSuccess, deleteProjectInfoActionFailure } from "../actions/fetchProjectAction";
+import { fetchProjectFailure, fetchProjectSuccess, deleteProjectInfoActionSuccess, deleteProjectInfoActionFailure, deleteProjectInfoAction } from "../actions/fetchProjectAction";
 import { BASE_URL } from "../../constants/config";
 import { DELETE_PROJECTS_INFO_ACTION } from "../actions/projectActionTypes";
 
@@ -33,16 +33,15 @@ function* fetchProjectSaga(): any {
 /*
   Worker Saga: Fired on FETCH_SCHEMA_REQUEST action
 */
+const deleteProjects = (requestParams: any) =>
+  axios.delete<any>(`${BASE_URL}/project/${requestParams}`);
+
 function* deleteProjectSaga(requestParams: DeleteProjectInfoAction) {
   try {
-    const response = yield call(() => deleteProject(requestParams.payload));
+    const response = yield call(deleteProjects, requestParams.payload);
     yield put(deleteProjectInfoActionSuccess(response));
   } catch (e) {
-    yield put(
-      deleteProjectInfoActionFailure({
-        error: e.message,
-      })
-    );
+    yield put(deleteProjectInfoActionFailure({ error: e.message }));
   }
 }
 
@@ -51,7 +50,7 @@ function* deleteProjectSaga(requestParams: DeleteProjectInfoAction) {
   but waits for a take action before actually starting the saga
 */
 function* projectSaga(): any {
-  let isProjectsFetched = false;
+    let isProjectsFetched = false;
 
   while (true) {
     const action = yield take([FETCH_ALLPROJECTS_REQUEST, DELETE_PROJECTS_INFO_ACTION]);
