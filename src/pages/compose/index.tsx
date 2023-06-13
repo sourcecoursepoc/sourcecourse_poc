@@ -18,7 +18,7 @@ import GroupsMainContent from "@/components/ComposePage/GroupsPage/groupsMainCon
 import TextAreaComponent from "@/components/ComposePage/TextArea/textArea";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { useDispatch } from "react-redux";
-import Toast, { showSuccessToast } from "../schemas/toast";
+import Toast, { showSuccessToast, showErrorToast } from "../schemas/toast";
 import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 import { useRouter } from "next/router";
@@ -27,6 +27,8 @@ import {  getProjectByIdSelector, postComposeNameDescSelector, postComposeNameDe
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
 import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR,ERRORTOAST } from "@/constants/constants";
 import {  postComposeNameDescRequest } from "@/redux/actions/composeAction";
+import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
+import { DELETE_ERROR_TOAST } from "../../constants/constants";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -103,12 +105,19 @@ const Compose = () => {
       };
     }
   };
-  const handleDeleteModalOk = () => {
+  const handleDeleteModalOk = async () => {
     setDeleteModalVisible(false);
     dispatch(clearLastIndex());
-    setName("");
-    setDescription("");
-    showSuccessToast(DELETE_TOAST);
+  
+    try {
+      await dispatch(deleteProjectInfoAction(id));
+      setName("");
+      setDescription("");
+      showSuccessToast(DELETE_TOAST);
+      window.location.href = "/";
+    } catch (error) {
+      showErrorToast(DELETE_ERROR_TOAST)
+    }
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
