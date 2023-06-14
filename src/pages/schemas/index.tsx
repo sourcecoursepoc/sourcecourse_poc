@@ -1,4 +1,4 @@
-import { Layout, Space, Col, Row } from "antd";
+import { Layout, Space, Col, Row, Spin } from "antd";
 import Header from "../../components/header/header";
 import styles from "./schemas.module.css";
 import TreeView from "./treeview";
@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { fetchDataBaseInfoAction } from "../../redux/actions/schemasaction";
 import Toast from "./toast";
 import { createPipelineInfoAction } from "../../redux/actions/composeAction";
-
+import styles1 from "../index.module.css";
 
 const Schemas = () => {
   const { Content } = Layout;
@@ -22,6 +22,15 @@ const Schemas = () => {
   const [dbData, setDBData] = useState<any>([]);
   const selectedTreeData: any[] = useSelector(SelectedTreeNodeInfo);
   const selcectedDataLastElement = selectedTreeData.slice(-1)[0];
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     dispatch(fetchDataBaseInfoAction());
@@ -85,6 +94,14 @@ const Schemas = () => {
         <Header />
         <SchemaMenu />
         <Content>
+        {loading ? (
+            <div className={styles1.loader}>
+              <div className={styles1.spinnerContainer}>
+                <Spin size="large" className={styles1.spinner} />
+              </div>
+            </div>
+          ) : (
+            <>
           <Row>
             <Col span={6} className={styles.treeview}>
               {database.pending && database.database !== undefined ? (
@@ -100,6 +117,8 @@ const Schemas = () => {
             </Col>
           </Row>
           <Toast />
+          </>
+          )}
         </Content>
       </Layout>
     </Space>

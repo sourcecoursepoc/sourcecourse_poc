@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Layout, Space, Col, Row, Image } from "antd";
+import { Layout, Space, Col, Row, Image, Spin } from "antd";
 import Header from "../../components/header/header";
 import axios from "axios";
 import { Divider } from "antd";
@@ -29,6 +29,7 @@ import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SU
 import {  postComposeNameDescRequest } from "@/redux/actions/composeAction";
 import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
 import { DELETE_ERROR_TOAST } from "../../constants/constants";
+import styles1 from "../index.module.css";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -44,7 +45,7 @@ const Compose = () => {
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
   const postComposeNameDescDataInitial = useSelector(postComposeNameDescSelectorInitial);
   const uidFromComposePage = postComposeNameDescData?.uid;
-
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const {
     query: { id },
@@ -56,6 +57,12 @@ const Compose = () => {
   const [name, setName] = useState(projectData?.name);
   const [description, setDescription] = useState(projectData?.description);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
   useEffect(() => {
     dispatch(fetchProjectByIdRequest(id));
     setName(projectData?.name);
@@ -150,6 +157,15 @@ const Compose = () => {
         <Layout className={styles.layout}>
           <Header />
           <Content style={{ marginTop: "1rem" }}>
+
+          {loading ? (
+            <div className={styles1.loader}>
+              <div className={styles1.spinnerContainer}>
+                <Spin size="large" className={styles1.spinner} />
+              </div>
+            </div>
+          ) : (
+            <>
             <Row>
               <TextAreaComponent
                 onNameChange={setName}
@@ -282,6 +298,8 @@ const Compose = () => {
               <Col span={18}>{renderSelectedComponent()}</Col>
             </Row>
             <Toast />
+            </>
+          )}
           </Content>
         </Layout>
       </Space>

@@ -11,7 +11,6 @@ const Home: React.FunctionComponent = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Simulating a delay of 2 seconds for demonstration purposes
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
