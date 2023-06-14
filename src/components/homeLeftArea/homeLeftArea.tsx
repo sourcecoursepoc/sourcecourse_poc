@@ -59,7 +59,7 @@ const HomeLeftArea: React.FunctionComponent = () => {
           : []}
 
         {isTabClicked && !isSearch
-          ? projectListData?.map((item) => (
+          ? projectListData&&projectListData?.map((item) => (
               <Row className={styles.contentStyle} key={item.projectName}>
                 <ProjectContent
                   heading={item.projectName}

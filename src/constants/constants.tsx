@@ -3,6 +3,7 @@ export const DESCRIPTION_ERROR = 'description can not be empty'
 export const NAME_DESCRIPTION_ERROR = "name and description can not be empty"
 export const TEXTAREA_ERROR = "textAreaError"
 export const DELETE_TOAST = "Deleted Successfully"
+export const DELETE_ERROR_TOAST="Failed to delete"
 export const SUCCESSTOAST = "Saved Successfully"
 export const ERRORTOAST = "Failed to Save"
 export const SAVE_CONFIRMATION = "Save Confirmation"
