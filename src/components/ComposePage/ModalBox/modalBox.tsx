@@ -10,6 +10,8 @@ import {
   getlastIndexesArraySelector,
   projectSchemaInfoSelector,
   getSelectorTableNodes,
+  postComposeNameDescSelector,
+  projectSchemaComposeInfoSelector,
 } from "@/redux/selector";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { PlusOutlined } from "@ant-design/icons";
@@ -23,6 +25,7 @@ import { searchSchemaByTagsInfoAction } from "../../../redux/actions/composeActi
 import { searchSchemaData } from "../../../redux/selector";
 import { AppState } from "@/redux/reducers";
 import { showSuccessToast } from "@/pages/schemas/toast";
+import { IMPORT, IMPORTERROR, IMPORTSUCCESS, NO_DATA, REMOVE } from "@/constants/constants";
 
 interface MyModalProps {
   visible: boolean;
@@ -34,11 +37,13 @@ interface MyModalProps {
 const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, projectUid }) => {
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
-
-  const projectSchemaInfo = useSelector(projectSchemaInfoSelector); //tables in the database
+  const projectSchemaInfo = useSelector(projectSchemaInfoSelector); //schema data
+  const projectSchemaComposeInfo = useSelector(projectSchemaComposeInfoSelector);//initial data
   const selectedTableArray = useSelector(getSelectorTableNodes); 
   const [searchText, setSearchText] = useState("");
-  const [treeData, setTreeData] = useState([]);//selected tables from the tree
+  const [treeData, setTreeData] = useState<any>([]);
+  const postComposeNameDescData = useSelector(postComposeNameDescSelector);
+  const uidFromComposePage = postComposeNameDescData?.uid;
   useEffect(() => {
     if (projectSchemaInfo?.length > 0) {
       dispatch(clearLastIndex());
@@ -64,7 +69,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
   //POST action
   const handleImport = () => {
     const requestBody = {
-      projectUid: projectUid,
+      projectUid: uidFromComposePage?uidFromComposePage:projectUid,
       sourceTableUids: tableUidArray,
     };
     dispatch(
@@ -73,6 +78,14 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
         requestBody?.sourceTableUids
       )
     );
+    if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error==null && projectSchemaComposeInfo?.schemas!=null )
+  {
+    showSuccessToast(IMPORTSUCCESS);
+  }
+  else if(!projectSchemaComposeInfo?.isFetching && projectSchemaComposeInfo?.error!=null && projectSchemaComposeInfo?.schemas==null)
+  {
+    showSuccessToast(IMPORTERROR);
+  } 
     onExport();
   };
 
@@ -139,7 +152,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
               }}
               onClick={handleImportButton}
             >
-              Import
+             {IMPORT}
             </Button>
           </Col>
         </Row>
@@ -160,7 +173,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
                 }
               />
             ) : (
-                <p>No data </p>
+                <p>{NO_DATA} </p>
               )}
           </Col>
           <Col
@@ -212,7 +225,7 @@ const ModalBox: React.FC<MyModalProps> = ({ visible, onCancel, onExport, project
                         }}
                         onClick={() => handleRemove(node.uid)}
                       >
-                        Remove
+                       {REMOVE}
                       </Button>
                     </Col>{" "}
                   </Row>

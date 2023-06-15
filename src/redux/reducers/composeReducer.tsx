@@ -13,6 +13,8 @@ import {
   SearchSchemaByTagActions,
   ComposeNameDescActions,
   ComposeNameDescState,
+  CreatePipelineInfoState,
+  CreatePipelineActions,
 } from "../actions/composeTypes";
 import {
   FETCH_COMPOSE_PIPELINE,
@@ -36,6 +38,9 @@ import {
   POST_COMPOSE_NAME_DESC,
   POST_COMPOSE_NAME_DESC_SUCCESS,
   POST_COMPOSE_NAME_DESC_FAILURE,
+  POST_CREATE_PIPELINE_INFO_ACTION,
+  POST_CREATE_PIPELINE_INFO_ACTION_SUCCESS,
+  POST_CREATE_PIPELINE_INFO_ACTION_FAILURE,
 } from "../actions/composeActionTypes";
 
 const initialState: ComposePipelineState = {
@@ -173,9 +178,9 @@ function projectSchemaInfoReducer(
       };
     case DELETE_PROJECT_SCHEMA_INFO_ACTION_SUCCESS:
       const { schemas } = state;
-      const { sourceTableUids } = action?.payload;
+      const { sourceTableUids } = action ?.payload;
       const newSchemas = schemas.filter(
-        (val) => val?.uid !== sourceTableUids?.[0]
+        (val) => val ?.uid !== sourceTableUids ?.[0]
       );
       return {
         ...state,
@@ -268,8 +273,39 @@ export const postComposeNameDescReducer = (
   }
 };
 
+const initialCreatePipelineState: CreatePipelineInfoState = {
+  pending: false,
+  postData: [],
+  error: null,
+};
+
+const createPipelineReducer = (state = initialState, action: CreatePipelineActions) => {
+  switch (action.type) {
+    case POST_CREATE_PIPELINE_INFO_ACTION:
+      return {
+        ...state,
+        pending: true,
+        error: null
+      };
+    case POST_CREATE_PIPELINE_INFO_ACTION_SUCCESS:
+      return {
+        ...state,
+        pending: false,
+        postData: action.payload.postData
+      };
+    case POST_CREATE_PIPELINE_INFO_ACTION_FAILURE:
+      return {
+        ...state,
+        pending: false,
+        error: action.payload.error
+      };
+    default:
+      return state;
+  }
+};
 export {
   composeReducer,
   composeReportsPipelineReducer,
   projectSchemaInfoReducer,
+  createPipelineReducer,
 };

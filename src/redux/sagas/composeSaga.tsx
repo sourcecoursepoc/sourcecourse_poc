@@ -5,10 +5,10 @@ import {
   deleteProjectSchemaInfoFailure,
   deleteProjectSchemaInfoRequest, deleteProjectSchemaInfoSuccess, fetchComposePipelineFailure, fetchComposePipelineSuccess, fetchComposeReportsPipelineRequestSuccess, fetchSchemaComposeFailure, fetchSchemaComposeSuccess, postComposeNameDescRequest, postComposeNameDescRequestFailure, postComposeNameDescRequestSuccess, postProjectSchemaInfoFailure,
   postProjectSchemaInfoRequest,
-  postProjectSchemaInfoSuccess, searchSchemaByTagsInfoFailureAction, searchSchemaByTagsInfoSuccessAction
+  postProjectSchemaInfoSuccess, searchSchemaByTagsInfoFailureAction, searchSchemaByTagsInfoSuccessAction, createPipelineInfoAction, createPipelineInfoActionSuccess, createPipelineInfoActionFailure
 } from "../actions/composeAction";
 import {
-  DELETE_PROJECT_SCHEMA_INFO_ACTION, FETCH_COMPOSE_PIPELINE, FETCH_PROJECT_SCHEMA_INFO_ACTION, FETCH_REPORTS_PIPELINE, POST_COMPOSE_NAME_DESC, POST_PROJECT_SCHEMA_INFO_ACTION, SEARCH_SCHEMA_BY_TAG_INFO_ACTION
+  DELETE_PROJECT_SCHEMA_INFO_ACTION, FETCH_COMPOSE_PIPELINE, FETCH_PROJECT_SCHEMA_INFO_ACTION, FETCH_REPORTS_PIPELINE, POST_COMPOSE_NAME_DESC, POST_PROJECT_SCHEMA_INFO_ACTION, SEARCH_SCHEMA_BY_TAG_INFO_ACTION, POST_CREATE_PIPELINE_INFO_ACTION
 } from "../actions/composeActionTypes";
 import {
   FetchComposePipelineRequest, FetchSchemaComposeRequest, ICOMPOSEPIPELINE, ICOMPOSEREPORTSPIPELINE, projectSchemaInfo,
@@ -224,4 +224,32 @@ function* postNameAndDescriptionSaga(action: ReturnType<typeof postComposeNameDe
 
 export function* PostNameAndDescSaga() {
   yield all([takeLatest(POST_COMPOSE_NAME_DESC, postNameAndDescriptionSaga)]);
+}
+
+
+// saga for create pipeline
+
+const createPipeline = async (params:any, payload:any) => {
+  try {
+    const response = await axios.post(BASE_URL+'/group-pipeline/'+params, {
+      payload
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response.data.message);
+  }
+};
+
+function* createPipelineSaga(action:ReturnType<typeof createPipelineInfoAction>) {
+  try {
+    // Call the API function to create the pipeline
+    const response = yield call(createPipeline, action.params, action.payload);
+    yield put(createPipelineInfoActionSuccess(response));
+  } catch (error) {
+    yield put(createPipelineInfoActionFailure(error.message));
+  }
+}
+
+export function* watchCreatePipelineSaga() {
+  yield takeLatest(POST_CREATE_PIPELINE_INFO_ACTION, createPipelineSaga);
 }

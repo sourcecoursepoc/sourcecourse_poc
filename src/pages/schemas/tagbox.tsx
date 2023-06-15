@@ -24,15 +24,25 @@ const TagBox = ({ label, placeholder, tags, setTags }: Props) => {
         setValue(e.target.value);
     };
 
+    // const handleInputConfirm = () => {
+    //     setFocus(false);
+    //     if (inputValue && (tags ?? []).indexOf(inputValue) === -1) {
+    //         const newTags = [...tags ?? [], inputValue];
+    //         setTags(newTags);
+    //     }
+    //     setInputValue("");
+    //     setValue("");
+    // };
+
     const handleInputConfirm = () => {
         setFocus(false);
-        if (inputValue && (tags ?? []).indexOf(inputValue) === -1) {
-            const newTags = [...tags ?? [], inputValue];
-            setTags(newTags);
+        if (inputValue && (tags ?? []).indexOf(inputValue.toLowerCase()) === -1) {
+          const newTags = [...tags ?? [], inputValue.toLowerCase()];
+          setTags(newTags);
         }
         setInputValue("");
         setValue("");
-    };
+      };
 
     const isOccupied =
         (focus || (value && value.length !== 0)) && tags ?.length !== 0;

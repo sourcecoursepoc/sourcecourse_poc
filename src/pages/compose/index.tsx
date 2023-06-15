@@ -14,20 +14,21 @@ import {
 import MainIcons from "../../components/ComposePage/MainContent/mainContentIcons";
 import MainContent from "../../components/ComposePage/MainContent/mainContent";
 import ButtonComponent from "@/components/ComposePage/buttons/buttonComponent";
-
 import GroupsMainContent from "@/components/ComposePage/GroupsPage/groupsMainContent";
 import TextAreaComponent from "@/components/ComposePage/TextArea/textArea";
 import { clearLastIndex } from "@/redux/actions/schemasaction";
 import { useDispatch } from "react-redux";
-import Toast, { showSuccessToast } from "../schemas/toast";
+import Toast, { showSuccessToast, showErrorToast } from "../schemas/toast";
 import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainContent";
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import { getComposeNameDescSelector, getProjectByIdSelector, postComposeNameDescSelector } from "@/redux/selector";
+import {  getProjectByIdSelector, postComposeNameDescSelector, postComposeNameDescSelectorInitial } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
-import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR } from "@/constants/constants";
-import { getComposeNameDescRequest, postComposeNameDescRequest } from "@/redux/actions/composeAction";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR,ERRORTOAST } from "@/constants/constants";
+import {  postComposeNameDescRequest } from "@/redux/actions/composeAction";
+import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
+import { DELETE_ERROR_TOAST } from "../../constants/constants";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -40,61 +41,60 @@ const Compose = () => {
   const [saveClicked, setSaveClicked] = useState(false);
   const [savedData, setSavedData] = useState(null);
   const dispatch = useDispatch();
-
-  //useSelector to take posted - compose page name and desc
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
-  const uidFromComposePage = postComposeNameDescData.uid;
+  const postComposeNameDescDataInitial = useSelector(postComposeNameDescSelectorInitial);
+  const uidFromComposePage = postComposeNameDescData?.uid;
 
   const router = useRouter();
   const {
     query: { id },
   } = router;
 
-
   const { projectById: projectData, pending } = useSelector(
     getProjectByIdSelector
   );
-  const [name, setName] = useState(projectData.name);
-  const [description, setDescription] = useState(projectData.description);
+  const [name, setName] = useState(projectData?.name);
+  const [description, setDescription] = useState(projectData?.description);
 
   useEffect(() => {
     dispatch(fetchProjectByIdRequest(id));
-    setName(projectData.name);
-    setDescription(projectData.description);
-  }, [projectData.name, projectData.description]);
-
+    setName(projectData?.name);
+    setDescription(projectData?.description);
+  }, [projectData?.name, projectData?.description]);
 
   const handleSaveProjectInfo = async () => {
-    setSaveModalVisible(false);
-    //dispatch done to post compose page name and desc to db
-    const success = await dispatch(postComposeNameDescRequest(name, description));
-    if (success) {
-      showSuccessToast({SUCCESSTOAST});
+     setSaveModalVisible(false);
+     dispatch(postComposeNameDescRequest(name, description));
+     if (!postComposeNameDescDataInitial?.pending && !postComposeNameDescDataInitial?.error ) {
+      showSuccessToast(SUCCESSTOAST);
       setProjectId(uidFromComposePage);
+    }
+    else if(!postComposeNameDescDataInitial?.pending && postComposeNameDescDataInitial?.error)
+    {
+      showSuccessToast(ERRORTOAST);
     }
   };
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
   };
   const handleSaveClick = () => {
-    if (name.trim() === "") {
+    if (name?.trim() === "") {
       setNameError(true);
     } else {
       setNameError(false);
     }
 
-    if (description.trim() === "") {
+    if (description?.trim() === "") {
       setDescriptionError(true);
     } else {
       setDescriptionError(false);
     }
-
     setSaveModalVisible(true);
   };
-  const handleIconClick = (icon) => {
+  const handleIconClick = (icon:any) => {
     setSelectedIcon(icon);
   };
-  const getIconStyle = (icon) => {
+  const getIconStyle = (icon:any) => {
     if (selectedIcon === icon) {
       return {
         borderBottom: "2px solid #7E60BC",
@@ -105,12 +105,19 @@ const Compose = () => {
       };
     }
   };
-  const handleDeleteModalOk = () => {
+  const handleDeleteModalOk = async () => {
     setDeleteModalVisible(false);
     dispatch(clearLastIndex());
-    setName("");
-    setDescription("");
-    showSuccessToast(DELETE_TOAST);
+  
+    try {
+      await dispatch(deleteProjectInfoAction(id));
+      setName("");
+      setDescription("");
+      showSuccessToast(DELETE_TOAST);
+      window.location.href = "/";
+    } catch (error) {
+      showErrorToast(DELETE_ERROR_TOAST)
+    }
   };
   const handleDeleteClick = () => {
     setDeleteModalVisible(true);
@@ -120,11 +127,11 @@ const Compose = () => {
   };
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
-      return <MainContent />;
+      return <MainContent  projectUid={id}/>;
     } else {
       switch (selectedIcon) {
         case "HddFilled":
-          return <MainContent />;
+          return <MainContent projectUid={id} />;
         case "ContainerFilled":
           return <GroupsMainContent />;
         case "Reports":

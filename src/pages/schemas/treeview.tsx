@@ -13,6 +13,7 @@ import {
 import {
   RightOutlined,
 } from "@ant-design/icons";
+import { useRouter } from "next/router";
 const { TreeNode } = Tree;
 
 interface IconImage {
@@ -33,8 +34,8 @@ const TreeView: React.FC<Props | TableProps[] | IconImage> = ({
   useEffect(() => {
     if (db ?.length > 0) {
       const firstNode = db[0];
-      dispatch(addArray([firstNode]));
-      setExpandedKeys([firstNode.uid]); // expand the first node by default
+      // dispatch(addArray([firstNode]));
+      // setExpandedKeys([firstNode.uid]); // expand the first node by default
     }
   }, [db]);
 
