@@ -8,10 +8,10 @@ import { Radio } from 'antd';
 import { InfoCircleOutlined,PlusCircleOutlined,DeleteFilled } from "@ant-design/icons";
 
 interface ConditionalDataSelectionProps {
-  index: number;
-  name: string;
-  arrayLength: number;
-  onDeleteClick: () => void;
+  index?: number;
+  name?: string;
+  arrayLength?: number;
+  onDeleteClick?: () => void;
 }
 function ConditionalDataSelection({index,name,arrayLength,onDeleteClick}:ConditionalDataSelectionProps) {
   const options = [

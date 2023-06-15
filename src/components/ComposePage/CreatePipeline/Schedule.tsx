@@ -8,34 +8,48 @@ import { DAILY, FRIDAY, INITIAL, MONDAY, MONTHLY, NOW, SATURDAY, SUNDAY, SYNC, T
 
 interface ScheduleProps {
     cardSelected: string;
+    onSecondOptionChange: (option: string | null) => void;
+    onThirdOptionChange: (option: number | null) => void;
+    onSelectedOptionChange: (option: string | null) => void;
+    onExportTimeChange:(time:string|null)=>void;
 }
 
-const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
+const Schedule: React.FC<ScheduleProps> = ({ cardSelected,onSecondOptionChange,onThirdOptionChange,onSelectedOptionChange,onExportTimeChange }) => {
 
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [secondSelectedOption, setSecondSelectedOption] = useState<string | null>(null);
     const [thirdSelectedOption, setThirdSelectedOption] = useState<number>(0);
 
+
+
     const handleOptionClick = (option: string) => {
         setSelectedOption(option);
+        onSelectedOptionChange(option);
     };
 
     const handleSecondOptionClick = (option: string) => {
         if (option === secondSelectedOption) {
             setSecondSelectedOption(null);
+            onSecondOptionChange(null);
         } else {
             setSecondSelectedOption(option);
+            onSecondOptionChange(option);
         }
     };
 
     const handleThirdOptionClick = (option: number) => {
         if (option == thirdSelectedOption) {
             setThirdSelectedOption(-1);
+            onThirdOptionChange(0); 
         } else {
             setThirdSelectedOption(option);
+            onThirdOptionChange(option+1); 
         }
     };
-
+    const handleTimeChange = (time:string) => {
+       onExportTimeChange(time)
+      };
+      
     return (
         <Row gutter={[16, 16]} align="middle" style={{ marginTop: "2.5rem" }} >
 
@@ -146,7 +160,7 @@ const Schedule: React.FC<ScheduleProps> = ({ cardSelected }) => {
                     )}
                 </>
             )}
-            {selectedOption !== NOW ? <ScheduleTimePicker /> : undefined}
+            {selectedOption !== NOW ? <ScheduleTimePicker onTimeChange={handleTimeChange}/> : undefined}
         </Row>
     )
 }

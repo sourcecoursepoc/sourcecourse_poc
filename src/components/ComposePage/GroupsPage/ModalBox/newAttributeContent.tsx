@@ -7,8 +7,11 @@ import { Radio,Select,Space } from 'antd';
 import type { SelectProps, RadioChangeEvent } from 'antd';
 import FloatInput from "./floatInput";
 
-
-const NewAttributeContent = (props) => {
+interface NewAttributeContentProps {
+  reRender: boolean;
+  attributeValues: (attributeName: string, selectedValue: string) => void;
+}
+const  NewAttributeContent: React.FC<NewAttributeContentProps> = (props) =>{
     const { Option } = Select;
     const { TextArea } = Input;
     const attributeOptions = ['id', 'name', 'status', 'company', 'supplier_id'];
@@ -21,7 +24,7 @@ const NewAttributeContent = (props) => {
           }, [props.reRender]);
       
           useEffect(() => {
-            const getAttributeName = (e) => {
+            const getAttributeName = (e: React.ChangeEvent<HTMLInputElement>) => {
               const {value} = e.target
               console.log("attributevalue",value)
               props.attributeValues(value,selectedValue)
@@ -35,14 +38,14 @@ const NewAttributeContent = (props) => {
         });
       }
 
-            function getDatatype(e) {
+            function getDatatype(e: React.ChangeEvent<HTMLInputElement>) {
                 const { value } = e.target
                 console.log("nodename::",value)
                 setSelectedValue(value)
                 props.attributeValues(attributeName,value)
               }
         
-              function getAttributeName(e) {
+              function getAttributeName(e: React.ChangeEvent<HTMLInputElement>) {
                 const {value} = e.target
                 console.log("attributevalue",value)
                 setAttributeName(value)
@@ -59,8 +62,8 @@ const NewAttributeContent = (props) => {
       const [attributeName,setAttributeName] = useState('Attribute Name')
 
 
-      function setDisplayAttributes(e) {
-          setDisplayAttributeList(e.target.checked)
+      function setDisplayAttributes(e: React.MouseEvent<HTMLInputElement>) {
+          setDisplayAttributeList(e.currentTarget.checked)
       }
   return (
     <Col span={10} style={{ marginTop: "0.5rem", paddingLeft: "0.5rem" }}>

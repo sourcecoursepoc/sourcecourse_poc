@@ -1,13 +1,25 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Input, InputNumber } from 'antd';
 import styles from "./Schedule.module.css"
 import { CheckOutlined } from '@ant-design/icons';
 import FloatNumberInput from './FloatNumberInput';
 
+interface ScheduleTimePickerProps {
+    onTimeChange: (time: string) => void;
+  }
 
-const ScheduleTimePicker = () => {
+const ScheduleTimePicker: React.FC<ScheduleTimePickerProps> = ({ onTimeChange }) => {
 
     const [timeSelectedAM, settimeSelectedAM] = useState(true);
+    const [hh, setHH] = useState(Number);
+    const [mm, setMM] = useState(Number);
+    const [ss, setSS] = useState(Number);
+  
+   useEffect(() => {
+        const time = `${hh}:${mm}:${ss} ${timeSelectedAM ? "AM" : "PM"}`;
+        onTimeChange(time);
+        console.log("time",time)
+      }, [hh, mm, ss, timeSelectedAM, onTimeChange]); 
 
     return (
         <div style={{ display: "flex", flexDirection: "row", marginLeft:'0.3rem' }}>
@@ -15,18 +27,21 @@ const ScheduleTimePicker = () => {
                 placeholder="HH"
                 min={0}
                 max={12}
+                onChange={setHH}
                 />
             <h2> : </h2>
             <FloatNumberInput label="MM"
                 placeholder="MM"
                 min={0}
                 max={59}
+                onChange={setMM}
                 />
             <h2> : </h2>
             <FloatNumberInput label="SS"
                 placeholder="SS"
                 min={0}
                 max={59}
+                onChange={setSS}
                 />
 
             <div style={{ display: "flex", alignItems: "center" }}>

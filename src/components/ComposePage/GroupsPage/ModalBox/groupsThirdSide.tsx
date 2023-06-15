@@ -11,7 +11,7 @@ import ConvertValues from "./convertValues"
 
 interface MyModalProps {
   selectedNodeDetails: any[];
-  setSelectedNodeDetails: () => void;
+  setSelectedNodeDetails: (details: any[]) => void;
 }
 
 const GroupsThirdSide: React.FC<MyModalProps> = ({
@@ -213,7 +213,7 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
 
 
 <Row>
-        <Col span={24}  type="flex" align="middle" >
+        <Col span={24}>
         <PlusCircleFilled
                           value={"+"}
                           style ={{color:"#7e60bc", fontSize:"20px"}}
@@ -245,7 +245,7 @@ const GroupsThirdSide: React.FC<MyModalProps> = ({
                }
 
 <Row>
-        <Col span={24}  type="flex" align="middle" >
+        <Col span={24} >
         <PlusCircleFilled
                           value={"+"}
                           style ={{color:"#7e60bc", fontSize:"20px"}}
