@@ -12,6 +12,7 @@ interface FloatInputProps {
   style?: React.CSSProperties;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   name?:string;
+  value?:string
 }
 const FloatInput: React.FC<FloatInputProps> = (props) =>  {
   const [focus, setFocus] = useState(false);
@@ -40,7 +41,7 @@ const FloatInput: React.FC<FloatInputProps> = (props) =>  {
       onFocus={() => setFocus(true)}
     >
       <Input onChange={props.onChange} type={type} defaultValue={value} value={dataValue} onBlur={handleBlur}
-      style ={style}/>
+      style ={style}  />
       <label className={labelClass}>
         {isOccupied ? label : placeholder} {requiredMark}
       </label>

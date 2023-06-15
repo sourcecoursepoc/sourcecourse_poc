@@ -3,7 +3,7 @@ import axios, { AxiosResponse } from "axios";
 import { all, call, put, takeLatest } from "redux-saga/effects";
 import { postGroupPipelineInfoAction, postGroupPipelineInfoActionFailure, postGroupPipelineInfoActionSuccess } from "../actions/createPipeline";
 import { POST_GROUP_PIPELINE_ACTION } from "../actions/createPipelineActions";
-const postCreatePipelineAPI = BASE_URL+"/group-pipeline";
+const postCreatePipelineAPI ="http://localhost:8080/sourcecourse/group-pipeline";
 
 function postCreatePipelineAPIcall(groupId: any, loadType: string,
 exportType: string,

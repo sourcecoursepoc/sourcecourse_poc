@@ -4,15 +4,17 @@ import styles from "./EmailTagbox.module.css";
 
 interface Props {
   tags: string[];
+  value:string,
   setTags: (tags: string[]) => void;
   label: string;
   placeholder: string;
+  setValue: (value: string) => void;
 }
 
-const IntimationListInputBox = ({ tags, setTags, label, placeholder }: Props) => {
+const IntimationListInputBox = ({ tags, setTags, label, placeholder,value,setValue }: Props) => {
   const [inputValue, setInputValue] = useState<string>("");
   const [focus, setFocus] = useState(false);
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
 
   const handleClose = (removedTag: string) => {
     const newTags = tags.filter((tag) => tag !== removedTag);
