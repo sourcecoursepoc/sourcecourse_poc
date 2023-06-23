@@ -23,12 +23,13 @@ import ReportMainContent from "@/components/ComposePage/ReportPage/ReportMainCon
 import ComposePipeline from "../../components/ComposePage/Pipeline/composePipeline";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import {  getProjectByIdSelector, postComposeNameDescSelector, postComposeNameDescSelectorInitial } from "@/redux/selector";
+import { getProjectByIdSelector, postComposeNameDescSelector, postComposeNameDescSelectorInitial } from "@/redux/selector";
 import { fetchProjectByIdRequest } from "@/redux/actions/fetchProjectAction";
-import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR,ERRORTOAST } from "@/constants/constants";
-import {  postComposeNameDescRequest } from "@/redux/actions/composeAction";
+import { DELETE_TOAST, DESCRIPTION_ERROR, NAME_DESCRIPTION_ERROR, NAME_ERROR, SUCCESSTOAST, TEXTAREA_ERROR, ERRORTOAST } from "@/constants/constants";
+import { postComposeNameDescRequest } from "@/redux/actions/composeAction";
 import { deleteProjectInfoAction } from "../../redux/actions/fetchProjectAction";
 import { DELETE_ERROR_TOAST } from "../../constants/constants";
+import { deleteProjectReducer } from "../../redux/reducers/projectReducer";
 
 const Compose = () => {
   const { Content } = Layout;
@@ -37,14 +38,13 @@ const Compose = () => {
   const [nameError, setNameError] = useState(false);
   const [descriptionError, setDescriptionError] = useState(false);
   const [deleteModalVisible, setDeleteModalVisible] = useState(false);
-  const [projectId, setProjectId] = useState(1);
+  const [projectId, setProjectId] = useState(null);
   const [saveClicked, setSaveClicked] = useState(false);
   const [savedData, setSavedData] = useState(null);
   const dispatch = useDispatch();
   const postComposeNameDescData = useSelector(postComposeNameDescSelector);
   const postComposeNameDescDataInitial = useSelector(postComposeNameDescSelectorInitial);
-  const uidFromComposePage = postComposeNameDescData?.uid;
-
+ 
   const router = useRouter();
   const {
     query: { id },
@@ -53,27 +53,40 @@ const Compose = () => {
   const { projectById: projectData, pending } = useSelector(
     getProjectByIdSelector
   );
-  const [name, setName] = useState(projectData?.name);
-  const [description, setDescription] = useState(projectData?.description);
+  const [name, setName] = useState(projectData ?.name);
+  const [description, setDescription] = useState(projectData ?.description);
 
   useEffect(() => {
+    setProjectId(id)
     dispatch(fetchProjectByIdRequest(id));
-    setName(projectData?.name);
-    setDescription(projectData?.description);
-  }, [projectData?.name, projectData?.description]);
+    setName(projectData ?.name);
+    setDescription(projectData ?.description);
+  }, [projectData ?.name, projectData ?.description,id]);
+  useEffect(() => {
+    if (!postComposeNameDescDataInitial ?.pending && postComposeNameDescDataInitial ?.postData != undefined) {
+      setProjectId(postComposeNameDescDataInitial ?.postData ?.uid);
+    }else if(id && id!=undefined){
+            setProjectId(id)
+    }
+  }, [postComposeNameDescDataInitial ?.postData,id]);
 
   const handleSaveProjectInfo = async () => {
-     setSaveModalVisible(false);
-     dispatch(postComposeNameDescRequest(name, description));
-     if (!postComposeNameDescDataInitial?.pending && !postComposeNameDescDataInitial?.error ) {
-      showSuccessToast(SUCCESSTOAST);
-      setProjectId(uidFromComposePage);
-    }
-    else if(!postComposeNameDescDataInitial?.pending && postComposeNameDescDataInitial?.error)
-    {
-      showSuccessToast(ERRORTOAST);
+    setSaveModalVisible(false);
+    dispatch(postComposeNameDescRequest(name, description));
+    try {
+      await dispatch(postComposeNameDescRequest(name, description));
+
+      if (!postComposeNameDescDataInitial.pending && !postComposeNameDescDataInitial.error) {
+        showSuccessToast(SUCCESSTOAST);
+        setProjectId(postComposeNameDescDataInitial ?.postData ?.uid);
+      } else {
+        showErrorToast(ERRORTOAST);
+      }
+    } catch (error) {
+      showErrorToast(ERRORTOAST);
     }
   };
+
   const handleSaveModalCancel = () => {
     setSaveModalVisible(false);
   };
@@ -108,9 +121,9 @@ const Compose = () => {
   const handleDeleteModalOk = async () => {
     setDeleteModalVisible(false);
     dispatch(clearLastIndex());
-  
+
     try {
-      await dispatch(deleteProjectInfoAction(id));
+      await dispatch(deleteProjectInfoAction(projectId));
       setName("");
       setDescription("");
       showSuccessToast(DELETE_TOAST);
@@ -119,7 +132,7 @@ const Compose = () => {
       showErrorToast(DELETE_ERROR_TOAST)
     }
   };
-  const handleDeleteClick = () => {
+const handleDeleteClick = () => {
     setDeleteModalVisible(true);
   };
   const handleDeleteModalCancel = () => {
@@ -128,7 +141,7 @@ const Compose = () => {
   const renderSelectedComponent = () => {
     if (selectedIcon === null) {
       return <MainContent  projectUid={id}/>;
-    } else {
+    } else {   
       switch (selectedIcon) {
         case "HddFilled":
           return <MainContent projectUid={id} />;
