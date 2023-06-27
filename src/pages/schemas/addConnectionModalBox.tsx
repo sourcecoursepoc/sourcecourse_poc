@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import styles from './connectionbox.module.css'
 import { showErrorToast, showSuccessToast } from './toast';
+import { fetchDataBaseInfoAction } from '../../redux/actions/schemasaction';
 
 
 interface MyModalProps {
@@ -61,6 +62,7 @@ const addConnectionModalBox: React.FC<MyModalProps> = (props) => {
             setPassword('')
             onCancel()
             showSuccessToast(CONNECTION_SUCCESS_MESSAGE)
+            dispatch(fetchDataBaseInfoAction());
         } else {
             setUsername('')
             setPassword('')
