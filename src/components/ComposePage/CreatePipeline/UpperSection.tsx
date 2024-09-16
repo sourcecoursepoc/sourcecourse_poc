@@ -1,16 +1,22 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Col, Modal, Row, Card } from "antd";
 import Buttons from '../buttons/buttons';
 import { PlayCircleFilled } from "@ant-design/icons";
 import CardDisplay from './CardDisplay';
 import styles from '../buttons/buttonStyle.module.css'
 
+
 interface UpperSectionProps {
     onSelectInitial: () => void;
     onSelectSync: () => void;
     cardSelected: string;
+    onClickExecute:()=>void
+    cardTitle:string
   }
-const UpperSection: React.FC<UpperSectionProps>= ({ onSelectInitial, onSelectSync, cardSelected }) => {
+  
+ 
+const UpperSection: React.FC<UpperSectionProps>= ({ onSelectInitial, onSelectSync, cardSelected,onClickExecute,cardTitle }) => {
+
     return (
         <>
             <Row justify="space-between" style={{ borderBottom: "1px solid #ccc" }}>
@@ -42,8 +48,8 @@ const UpperSection: React.FC<UpperSectionProps>= ({ onSelectInitial, onSelectSyn
                         icon={<PlayCircleFilled />}
                         size={"large"}
                         style={{ minWidth: "8rem" }}
-                        onClick={() => { }}
-                        href={"/"}
+                       onClick={onClickExecute}
+                        
                     />
 
                 </Col>

@@ -25,7 +25,7 @@ const MigrationStatus: React.FC<reportGraphComp> = ( { data } ) => {
   const COLORS = ["#1f94dc", "#f16382"];
   return (
     <>
-      <BarChart width={280} height={150} data={data} layout="vertical" fontSize={10} marginLeft={20}>
+      <BarChart width={280} height={150} data={data} layout="vertical" >
         <XAxis type="number" />
         <YAxis type="category" dataKey="name" />
         <Tooltip />

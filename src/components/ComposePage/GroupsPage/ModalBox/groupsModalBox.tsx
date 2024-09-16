@@ -1,12 +1,10 @@
 import {
   addAttributeDetails,
-  fetchDataBaseRequest,
   fetchGroupDataRequest,
 } from "@/redux/actions/schemasaction";
 import {
   getDataBaseSelector,
   getGroupdataDataBaseSelector,
-  getSelectedArraySelector,
   getSelectedGroupdataArraySelector,
 } from "@/redux/selector";
 import { Col, Input, Modal, Row } from "antd";
@@ -48,7 +46,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [displayAttributeSection, setDisplayAttributeSection] = useState(false);
   const [schema, setSchema] = useState<string | null>(null);
   const [saveModalVisible, setSaveModalVisible] = useState(false);
-  const [selectedNodeDetails, setSelectedNodeDetails] = useState([]);
+  const [selectedNodeDetails, setSelectedNodeDetails] = useState<any[]>([]);
   const dispatch = useDispatch();
   const database = useSelector(getDataBaseSelector);
   const groupdataDatabaseSelector = useSelector(getGroupdataDataBaseSelector);
@@ -59,7 +57,7 @@ const GroupsModalBox: React.FC<MyModalProps> = ({
   const [datatype,setDatatype] = useState('VARCHAR')
   const [render,setRender] = useState(false)
   const fetchProjectSchemaInfo = useSelector(projectSchemaInfoSelector);
-  const [treeArray,setTreeArray] = useState([]);
+  const [treeArray,setTreeArray] = useState<any[]>([]);
 
   useEffect(()=>{
       if(fetchProjectSchemaInfo && fetchProjectSchemaInfo.length > 0){
@@ -146,16 +144,12 @@ console.log("lastIndiceslastIndices",lastIndices)
         lastIndices[lastIndices.length-1] = {name: attributeName, type: selectedDataType}
        }
 
-  const handleRowClick = (node:any) => {
-    console.log("Getting innnnnn");
-    setSelectedNodeDetails([node]);
+  const handleRowClick = (node:any[]) => {
+    setSelectedNodeDetails([node]); 
     handleAddAttributeDetails(lastIndices);
-    console.log("Data getting printed on clicking the attribute", lastIndices);
-    console.log("selectedNodeDetails", selectedNodeDetails);
-    console.log("Getting outttttttt");
   };
 
-  const swapElements = (array: array, index1: number, index2: number) => {
+  const swapElements = (array: Array<any>, index1: number, index2: number) => {
     const newArray = [...array];
     const temp = newArray[index1];
     newArray[index1] = newArray[index2];
@@ -300,7 +294,7 @@ console.log("lastIndiceslastIndices",lastIndices)
         </Col>
         {/* third partition area */}
         {displayAttributeSection ? (
-          <NewAttributeContent attributeValues={getValues} reRender={render} key={render}/>
+          <NewAttributeContent attributeValues={getValues} reRender={render} key='attribute_content'/>
         ) : (
           <GroupsThirdSide selectedNodeDetails={selectedNodeDetails} setSelectedNodeDetails={setSelectedNodeDetails}/>
         )}

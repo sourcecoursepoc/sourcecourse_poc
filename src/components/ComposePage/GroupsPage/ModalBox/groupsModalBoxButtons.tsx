@@ -15,8 +15,20 @@ import ConfirmationModal from "./ConfirmationModal";
 import { deleteGroupModalBox } from "@/redux/actions/schemasaction";
 import { showSuccessToast } from "@/pages/schemas/toast";
 
-
-const GroupsModalBoxuttons = ({handleSaveModalCancel,handleSaveModalOk,saveModalVisible,handleSaveClick, onCreatePipeline}) => {
+interface GroupsModalBoxuttonsProps {
+  handleSaveModalCancel: () => void;
+  handleSaveModalOk: () => void;
+  saveModalVisible: boolean;
+  handleSaveClick: () => void;
+  onCreatePipeline?: () => void;
+}
+const GroupsModalBoxuttons = ({
+  handleSaveModalCancel,
+  handleSaveModalOk,
+  saveModalVisible,
+  handleSaveClick,
+  onCreatePipeline,
+}: GroupsModalBoxuttonsProps) =>  {
   const dispatch = useDispatch();
   // const [saveModalVisible, setSaveModalVisible] = useState(false);
   const [exitModalVisible, setExitModalVisible] = useState(false);

@@ -3,8 +3,8 @@ import { Input, Row, Col, Tooltip } from 'antd';
 import { InfoCircleOutlined } from '@ant-design/icons';
 const { TextArea } = Input;
 interface InfoCircleOutlinedFunctionProps {
-    value: string;
-    tooltipTitle:string;
+    value?: string;
+    tooltipTitle?:string;
 
   }
 const InfoCircleOutlinedFunction: React.FC<InfoCircleOutlinedFunctionProps> = ({value,tooltipTitle}) => (

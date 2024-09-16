@@ -13,6 +13,7 @@ import { fetchComposePipelineRequest } from '../../../redux/actions/composeActio
 interface ModalBoxProps {
     isModalVisible: boolean;
     handleCancel: () => void;
+    handleOk:() => void;
 }
 
 const PipelineModalBox = (props: ModalBoxProps) => {
@@ -20,7 +21,8 @@ const PipelineModalBox = (props: ModalBoxProps) => {
     const handleIconClick = () => {
         props.handleCancel();
     };
-    const status = pipelineLogData ? pipelineLogData.map(item => item ?.Status) : [];
+   
+    const status = pipelineLogData ? pipelineLogData.map((item: any) => item ?.Status) : [];
 
 
     return (
@@ -39,7 +41,7 @@ const PipelineModalBox = (props: ModalBoxProps) => {
                         <div className={styles.LeftContainer} >
                             <Row className={styles.projectInfoContainer}>
                                 <Col className={styles.ImageContainer}>
-                                    <Image src="InitialLoad-Icon4.png" preview={false} style={{ width: "2.5rem", height: "2.5rem", marginTop: "5px" }}></Image>
+                                    <Image src="InitialLoad-Icon4.png" alt="InitialLoad" preview={false} style={{ width: "2.5rem", height: "2.5rem", marginTop: "5px" }}></Image>
                                 </Col>
                                 <Col style={{ flex: 1 }}>
                                     <div>
@@ -51,15 +53,16 @@ const PipelineModalBox = (props: ModalBoxProps) => {
 
                             <Row>
                                 <Buttons
-                                    text={status} icon={<CheckOutlined style={{ marginLeft: "-9px" }} />} style={{ marginTop: "20px", height: "25px", width: "70px" }} color={status && status.some(item => item ?.toLowerCase() === "failed") ? "#ff4d4f" : "#7E60BC"}
+                                 // pipelineLogData.map will give an array. How can you map an array to string?? How can you assign that to text?
+                                    text='' icon={<CheckOutlined style={{ marginLeft: "-9px" }} />} style={{ marginTop: "20px", height: "25px", width: "70px" }} color={status && status.some((item: string) => item?.toLowerCase() === "failed") ? "#ff4d4f" : "#7E60BC"}
                                 />
                             </Row>
                             <div>
                                 <Row>
                                     <Col span={12} style={{ marginLeft: "10px" }}>
-                                        {pipelineLogData && pipelineLogData ?.map((item) => (
+                                        {pipelineLogData && pipelineLogData ?.map((item: any) => (
                                             <div key={item.title} style={{ marginBottom: '20px', marginLeft: "10px" }}>
-                                                {item && item ?.logs ?.map((data, index) => (
+                                                {item && item ?.logs ?.map((data: any, index: number) => (
                                                     <Row gutter={[16, 16]} key={index} className={styles.statusBoxContainer}>
                                                         <Col span={4} style={{
                                                             padding: "0px",
@@ -85,7 +88,7 @@ const PipelineModalBox = (props: ModalBoxProps) => {
                                     </Col>
                                     <Col span={8} style={{ marginLeft: "10px" }}>
                                         <Row gutter={[16, 16]}>
-                                            {pipelineLogData && pipelineLogData.map(item => (
+                                            {pipelineLogData && pipelineLogData.map((item:any) => (
                                                 <>
                                                     <Col span={24} key={item.Triggered}>
                                                         <div style={{ textAlign: 'left', marginLeft: "30px", color: "grey" }}>

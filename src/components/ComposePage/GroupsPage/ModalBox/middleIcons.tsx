@@ -7,7 +7,22 @@ import {
 import { Space } from "antd";
 
 import React from "react";
-const MiddleIcons = ({ index, name, onUpArrowClick, onDownArrowClick ,arrayLength,onDeleteClick}) => {
+interface MiddleIconsProps {
+  index: number;
+  name: string;
+  onUpArrowClick: () => void;
+  onDownArrowClick: () => void;
+  arrayLength: number;
+  onDeleteClick: () => void;
+}
+const MiddleIcons: React.FC<MiddleIconsProps> = ({
+  index,
+  name,
+  onUpArrowClick,
+  onDownArrowClick,
+  arrayLength,
+  onDeleteClick,
+}) => {
   return (
     <Space size={8} style={{ marginRight: "0.5rem" }}>
       {index > 0 && (

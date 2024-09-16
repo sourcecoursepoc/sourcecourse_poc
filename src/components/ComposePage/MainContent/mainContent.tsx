@@ -94,6 +94,7 @@ const MainContent = (projectUid:any) => {
                   <Image
                   alt=""
                     preview={false}
+                    alt="schema"
                     src="/schemas-icon.png"
                     style={{
                       width: "2rem",

@@ -18,6 +18,7 @@ import fetchRecordsReducer from "./fetchRecordsReducer";
 
 import groupReducer from "./groupReducer";
 import projectByIdReducer from "./projectByIdReducer";
+import { postGroupPipelineReducer } from "./createPipelineReducer";
 
 const rootReducer = combineReducers({
   pipeline: fetchPipelineReducer,
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   searchSchemaByTag:searchSchemaByTagReducer,
   createPipeline:createPipelineReducer,
 
+ createPipeline:postGroupPipelineReducer
 });
 
 export type AppState = ReturnType<typeof rootReducer>;

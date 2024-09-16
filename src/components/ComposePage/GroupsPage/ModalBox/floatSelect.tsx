@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import { Input,Select,SelectProps } from "antd";
 import styles from "../../../../styles/floatInput.module.css";
 
-const FloatSelect = (props) => {
+interface FloatSelectProps {
+  label: string;
+  placeholder: string;
+  type?: string;
+  required?: boolean;
+  dataValue?: string;
+}
+const FloatSelect: React.FC<FloatSelectProps> = (props) => {
   const [focus, setFocus] = useState(false);
   let { label, placeholder, type, required,dataValue } = props;
 
@@ -24,7 +31,7 @@ const FloatSelect = (props) => {
     setValue(value);
   };
 
-function handleChange(e) {
+function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
     let {name, value} = e.target;
     console.log(`selected ${value}`);
     setValue(value);

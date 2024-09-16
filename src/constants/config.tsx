@@ -1,2 +1,2 @@
-export const BASE_URL = "http://sourcecourse-config.us-east-1.elasticbeanstalk.com/sourcecourse";
+export const BASE_URL = "http://localhost:8080/sourcecourse";
 
